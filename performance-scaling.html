@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance & Scaling - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .code-block { background: #1a1a1a; border-radius: 8px; padding: 1rem; margin: 1rem 0; overflow-x: auto; }
+        .code-block code { color: #e2e8f0; font-family: 'Monaco', 'Menlo', monospace; }
+        .highlight-box { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-left: 4px solid #3b82f6; }
+        .warning-box { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 4px solid #f59e0b; }
+        .info-box { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-left: 4px solid #2563eb; }
+        .success-box { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border-left: 4px solid #10b981; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-xl font-bold gradient-text">Agentic AI Hub</h1>
+                    </div>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="index.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="topics.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Topics</a>
+                        <a href="visual-editor.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Editor</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 sm:px-0">
+            
+            <!-- Header Section -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold gradient-text mb-4">Performance & Scaling</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Master the art of optimizing AI systems for production-scale performance, from model optimization to distributed computing architectures.
+                </p>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="mb-8">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex space-x-8">
+                        <button onclick="showSection('model-optimization')" class="tab-btn py-2 px-1 border-b-2 border-blue-500 text-blue-600 font-medium text-sm">Model Optimization</button>
+                        <button onclick="showSection('onnx-runtime')" class="tab-btn py-2 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-sm">ONNX Runtime</button>
+                        <button onclick="showSection('distributed-computing')" class="tab-btn py-2 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-sm">Distributed Computing</button>
+                        <button onclick="showSection('caching')" class="tab-btn py-2 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-sm">Caching</button>
+                        <button onclick="showSection('load-balancing')" class="tab-btn py-2 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-sm">Load Balancing</button>
+                        <button onclick="showSection('performance-monitoring')" class="tab-btn py-2 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-sm">Performance Monitoring</button>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Model Optimization Section -->
+            <div id="model-optimization" class="section-content">
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Model Optimization Techniques</h2>
+                    
+                    <div class="highlight-box p-6 rounded-lg mb-8">
+                        <h3 class="text-xl font-semibold mb-3 flex items-center">
+                            <i class="fas fa-lightbulb text-blue-500 mr-2"></i>
+                            Key Optimization Strategies
+                        </h3>
+                        <p class="text-gray-700">
+                            Model optimization is crucial for deploying AI systems in production environments. The goal is to reduce model size, improve inference speed, and maintain accuracy.
+                        </p>
+                    </div>
+
+                    <!-- Quantization -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Quantization</h3>
+                        <p class="text-gray-700 mb-4">
+                            Quantization reduces the precision of model weights and activations, significantly decreasing model size and improving inference speed.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+import torch
+import torch.quantization as quantization
+from transformers import AutoModel
+
+# Load model
+model = AutoModel.from_pretrained("bert-base-uncased")
+model.eval()
+
+# Dynamic quantization (activations quantized at runtime)
+quantized_model = quantization.quantize_dynamic(
+    model, 
+    {torch.nn.Linear}, 
+    dtype=torch.qint8
+)
+
+print(f"Original model size: {model.num_parameters() / 1e6:.1f}M parameters")
+print(f"Quantized model size: {quantized_model.num_parameters() / 1e6:.1f}M parameters")
+
+# Static quantization (more aggressive, better performance)
+def static_quantize_model(model, calibration_data):
+    # Prepare model for quantization
+    model.qconfig = quantization.get_default_qconfig('fbgemm')
+    quantization.prepare(model, inplace=True)
+    
+    # Calibrate with representative data
+    model(calibration_data)
+    
+    # Convert to quantized model
+    quantization.convert(model, inplace=True)
+    return model
+                            </code>
+                        </div>
+
+                        <div class="info-box p-4 rounded-lg mt-4">
+                            <p class="text-sm text-blue-800">
+                                <strong>Best Practice:</strong> Use dynamic quantization for quick deployment gains, static quantization for maximum performance optimization.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pruning -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Model Pruning</h3>
+                        <p class="text-gray-700 mb-4">
+                            Pruning removes unnecessary connections and neurons from neural networks, reducing model complexity while maintaining performance.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+import torch
+import torch.nn.utils.prune as prune
+
+def prune_model(model, pruning_ratio=0.3):
+    """
+    Apply structured pruning to reduce model size
+    """
+    parameters_to_prune = []
+    
+    # Collect all linear and conv layers
+    for name, module in model.named_modules():
+        if isinstance(module, (torch.nn.Linear, torch.nn.Conv2d)):
+            parameters_to_prune.append((module, 'weight'))
+    
+    # Apply global pruning
+    prune.global_unstructured(
+        parameters_to_prune,
+        pruning_method=prune.L1Unstructured,
+        amount=pruning_ratio,
+    )
+    
+    return model
+
+# Example usage
+model = torch.nn.Sequential(
+    torch.nn.Linear(784, 512),
+    torch.nn.ReLU(),
+    torch.nn.Linear(512, 256),
+    torch.nn.ReLU(),
+    torch.nn.Linear(256, 10)
+)
+
+pruned_model = prune_model(model, pruning_ratio=0.5)
+
+# Calculate sparsity
+total_params = 0
+zero_params = 0
+
+for name, module in pruned_model.named_modules():
+    if hasattr(module, 'weight'):
+        total_params += module.weight.nelement()
+        zero_params += torch.sum(module.weight == 0).item()
+
+sparsity = zero_params / total_params
+print(f"Model sparsity: {sparsity:.2%}")
+                            </code>
+                        </div>
+                    </div>
+
+                    <!-- Knowledge Distillation -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Knowledge Distillation</h3>
+                        <p class="text-gray-700 mb-4">
+                            Transfer knowledge from a large, complex teacher model to a smaller, faster student model while maintaining performance.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class DistillationLoss(nn.Module):
+    def __init__(self, temperature=4.0, alpha=0.7):
+        super().__init__()
+        self.temperature = temperature
+        self.alpha = alpha
+        self.criterion = nn.KLDivLoss(reduction='batchmean')
+        
+    def forward(self, student_logits, teacher_logits, labels):
+        # Soft targets from teacher
+        soft_targets = F.softmax(teacher_logits / self.temperature, dim=1)
+        soft_predictions = F.log_softmax(student_logits / self.temperature, dim=1)
+        
+        # Distillation loss
+        distill_loss = self.criterion(soft_predictions, soft_targets) * (self.temperature ** 2)
+        
+        # Hard targets loss
+        hard_loss = F.cross_entropy(student_logits, labels)
+        
+        # Combined loss
+        total_loss = self.alpha * distill_loss + (1 - self.alpha) * hard_loss
+        
+        return total_loss
+
+# Training loop for knowledge distillation
+def train_student_model(teacher_model, student_model, train_loader, epochs=10):
+    teacher_model.eval()  # Teacher is frozen
+    student_model.train()
+    
+    distill_loss = DistillationLoss()
+    optimizer = torch.optim.Adam(student_model.parameters())
+    
+    for epoch in range(epochs):
+        for batch_idx, (data, target) in enumerate(train_loader):
+            optimizer.zero_grad()
+            
+            with torch.no_grad():
+                teacher_output = teacher_model(data)
+            
+            student_output = student_model(data)
+            loss = distill_loss(student_output, teacher_output, target)
+            
+            loss.backward()
+            optimizer.step()
+            
+        print(f'Epoch {epoch+1}/{epochs}, Loss: {loss.item():.4f}')
+    
+    return student_model
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ONNX Runtime Section -->
+            <div id="onnx-runtime" class="section-content hidden">
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">ONNX Runtime Optimization</h2>
+                    
+                    <div class="highlight-box p-6 rounded-lg mb-8">
+                        <h3 class="text-xl font-semibold mb-3 flex items-center">
+                            <i class="fas fa-rocket text-blue-500 mr-2"></i>
+                            High-Performance Inference
+                        </h3>
+                        <p class="text-gray-700">
+                            ONNX Runtime provides cross-platform, high-performance inference for ML models with hardware acceleration and optimization.
+                        </p>
+                    </div>
+
+                    <!-- ONNX Export -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Exporting to ONNX Format</h3>
+                        <p class="text-gray-700 mb-4">
+                            Convert PyTorch and TensorFlow models to ONNX format for optimized inference across platforms.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+import torch
+import torch.onnx
+from transformers import AutoModel, AutoTokenizer
+
+def export_to_onnx(model_name, output_path):
+    """
+    Export Hugging Face model to ONNX format
+    """
+    # Load model and tokenizer
+    model = AutoModel.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    
+    # Create dummy input
+    dummy_input = tokenizer("Hello world", return_tensors="pt")
+    
+    # Export to ONNX
+    torch.onnx.export(
+        model,
+        (dummy_input['input_ids'], dummy_input['attention_mask']),
+        output_path,
+        export_params=True,
+        opset_version=11,
+        do_constant_folding=True,
+        input_names=['input_ids', 'attention_mask'],
+        output_names=['last_hidden_state'],
+        dynamic_axes={
+            'input_ids': {0: 'batch_size', 1: 'sequence_length'},
+            'attention_mask': {0: 'batch_size', 1: 'sequence_length'},
+            'last_hidden_state': {0: 'batch_size', 1: 'sequence_length'}
+        }
+    )
+    
+    print(f"Model exported to {output_path}")
+
+# Example usage
+export_to_onnx("bert-base-uncased", "bert_model.onnx")
+                            </code>
+                        </div>
+                    </div>
+
+                    <!-- ONNX Runtime Inference -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Optimized Inference with ONNX Runtime</h3>
+                        <p class="text-gray-700 mb-4">
+                            Use ONNX Runtime for high-performance inference with automatic optimizations and hardware acceleration.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+import onnxruntime as ort
+import numpy as np
+from transformers import AutoTokenizer
+
+class ONNXInferenceEngine:
+    def __init__(self, model_path, provider='CPUExecutionProvider'):
+        """
+        Initialize ONNX Runtime inference engine
+        """
+        # Configure session options for optimization
+        sess_options = ort.SessionOptions()
+        sess_options.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_ALL
+        sess_options.enable_cpu_mem_arena = False
+        sess_options.enable_mem_pattern = False
+        
+        # Create inference session
+        self.session = ort.InferenceSession(
+            model_path,
+            sess_options,
+            providers=[provider]
+        )
+        
+        # Get input/output names
+        self.input_names = [input.name for input in self.session.get_inputs()]
+        self.output_names = [output.name for output in self.session.get_outputs()]
+        
+    def predict(self, inputs):
+        """
+        Run inference on input data
+        """
+        # Prepare inputs
+        ort_inputs = {}
+        for name, value in inputs.items():
+            if name in self.input_names:
+                ort_inputs[name] = value.astype(np.int64)
+        
+        # Run inference
+        outputs = self.session.run(self.output_names, ort_inputs)
+        
+        return outputs
+    
+    def benchmark(self, input_data, iterations=100):
+        """
+        Benchmark inference performance
+        """
+        import time
+        
+        # Warmup
+        for _ in range(10):
+            self.predict(input_data)
+        
+        # Benchmark
+        start_time = time.time()
+        for _ in range(iterations):
+            self.predict(input_data)
+        end_time = time.time()
+        
+        avg_time = (end_time - start_time) / iterations
+        fps = 1 / avg_time
+        
+        return {
+            'average_time': avg_time,
+            'fps': fps,
+            'iterations': iterations
+        }
+
+# Example usage
+engine = ONNXInferenceEngine("bert_model.onnx")
+
+# Prepare input
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+text = "This is a test sentence"
+encoded = tokenizer(text, return_tensors="np")
+
+# Run inference
+inputs = {
+    'input_ids': encoded['input_ids'],
+    'attention_mask': encoded['attention_mask']
+}
+
+outputs = engine.predict(inputs)
+benchmark_results = engine.benchmark(inputs)
+
+print(f"Inference completed in {benchmark_results['average_time']*1000:.2f}ms")
+print(f"Throughput: {benchmark_results['fps']:.2f} samples/second")
+                            </code>
+                        </div>
+                    </div>
+
+                    <!-- Hardware Acceleration -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Hardware Acceleration Providers</h3>
+                        <p class="text-gray-700 mb-4">
+                            Leverage GPU and specialized hardware for maximum inference performance.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+# Check available providers
+import onnxruntime as ort
+
+print("Available execution providers:")
+for provider in ort.get_available_providers():
+    print(f"  - {provider}")
+
+# GPU inference with CUDA
+if 'CUDAExecutionProvider' in ort.get_available_providers():
+    gpu_engine = ONNXInferenceEngine(
+        "bert_model.onnx",
+        provider='CUDAExecutionProvider'
+    )
+    print("Using GPU acceleration")
+
+# TensorRT for NVIDIA GPUs (maximum performance)
+if 'TensorrtExecutionProvider' in ort.get_available_providers():
+    trt_options = {
+        'trt_fp16_enable': True,  # Enable FP16 precision
+        'trt_int8_enable': False,  # Enable INT8 precision
+        'trt_engine_cache_enable': True,  # Cache engines
+        'trt_engine_cache_path': './trt_cache',
+        'trt_max_workspace_size': 2147483648,  # 2GB workspace
+    }
+    
+    trt_engine = ort.InferenceSession(
+        "bert_model.onnx",
+        providers=['TensorrtExecutionProvider'],
+        provider_options=[trt_options]
+    )
+    print("Using TensorRT acceleration")
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="warning-box p-4 rounded-lg mt-4">
+                        <p class="text-sm text-yellow-800">
+                            <strong>Note:</strong> ONNX Runtime automatically applies graph optimizations, constant folding, and operator fusion for maximum performance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distributed Computing Section -->
+            <div id="distributed-computing" class="section-content hidden">
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Distributed Computing</h2>
+                    
+                    <div class="highlight-box p-6 rounded-lg mb-8">
+                        <h3 class="text-xl font-semibold mb-3 flex items-center">
+                            <i class="fas fa-network-wired text-blue-500 mr-2"></i>
+                            Scale Across Multiple Machines
+                        </h3>
+                        <p class="text-gray-700">
+                            Implement distributed training and inference to handle large-scale AI workloads across multiple GPUs and machines.
+                        </p>
+                    </div>
+
+                    <!-- Distributed Training -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">PyTorch Distributed Training</h3>
+                        <p class="text-gray-700 mb-4">
+                            Scale model training across multiple GPUs and nodes using PyTorch's distributed computing capabilities.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+import torch
+import torch.distributed as dist
+import torch.multiprocessing as mp
+from torch.nn.parallel import DistributedDataParallel as DDP
+import os
+
+def setup_distributed(rank, world_size, backend='nccl'):
+    """
+    Initialize distributed training environment
+    """
+    os.environ['MASTER_ADDR'] = 'localhost'
+    os.environ['MASTER_PORT'] = '12355'
+    
+    # Initialize process group
+    dist.init_process_group(
+        backend=backend,
+        rank=rank,
+        world_size=world_size
+    )
+    
+def cleanup_distributed():
+    """
+    Clean up distributed training environment
+    """
+    dist.destroy_process_group()
+
+def train_distributed_model(rank, world_size, model, dataset):
+    """
+    Training function for distributed setup
+    """
+    setup_distributed(rank, world_size)
+    
+    # Set device for this process
+    device = torch.device(f'cuda:{rank}')
+    torch.cuda.set_device(device)
+    
+    # Move model to device and wrap with DDP
+    model = model.to(device)
+    model = DDP(model, device_ids=[rank])
+    
+    # Create distributed sampler
+    sampler = torch.utils.data.distributed.DistributedSampler(
+        dataset,
+        num_replicas=world_size,
+        rank=rank
+    )
+    
+    # Create data loader
+    dataloader = torch.utils.data.DataLoader(
+        dataset,
+        batch_size=32,
+        sampler=sampler
+    )
+    
+    # Training loop
+    optimizer = torch.optim.Adam(model.parameters())
+    criterion = torch.nn.CrossEntropyLoss()
+    
+    for epoch in range(10):
+        model.train()
+        sampler.set_epoch(epoch)  # Important for shuffling
+        
+        for batch_idx, (data, target) in enumerate(dataloader):
+            data, target = data.to(device), target.to(device)
+            optimizer.zero_grad()
+            output = model(data)
+            loss = criterion(output, target)
+            loss.backward()
+            optimizer.step()
+            
+            if batch_idx % 100 == 0 and rank == 0:
+                print(f'Rank {rank}, Epoch: {epoch}, Batch: {batch_idx}, Loss: {loss.item():.4f}')
+    
+    cleanup_distributed()
+
+# Launch distributed training
+def launch_distributed_training(model, dataset, num_gpus):
+    """
+    Launch distributed training across multiple GPUs
+    """
+    mp.spawn(
+        train_distributed_model,
+        args=(num_gpus, model, dataset),
+        nprocs=num_gpus,
+        join=True
+    )
+                            </code>
+                        </div>
+                    </div>
+
+                    <!-- Ray for Distributed Computing -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Ray for Distributed AI</h3>
+                        <p class="text-gray-700 mb-4">
+                            Use Ray framework for distributed training, hyperparameter tuning, and scalable inference.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+import ray
+from ray import train
+from ray.train import ScalingConfig
+from ray.train.torch import TorchTrainer
+import torch
+import torch.nn as nn
+
+# Initialize Ray cluster
+ray.init(address='auto')  # Connect to existing cluster or start local
+
+@ray.remote
+class ModelServer:
+    """
+    Remote model server for distributed inference
+    """
+    def __init__(self, model_path):
+        self.model = torch.load(model_path)
+        self.model.eval()
+        
+    def predict(self, batch):
+        with torch.no_grad():
+            return self.model(batch)
+
+def distributed_hyperparameter_search():
+    """
+    Distributed hyperparameter tuning with Ray Tune
+    """
+    from ray import tune
+    from ray.tune import Tuner
+    
+    def train_model(config):
+        # Model definition
+        model = nn.Sequential(
+            nn.Linear(784, config["hidden_size"]),
+            nn.ReLU(),
+            nn.Linear(config["hidden_size"], 10)
+        )
+        
+        optimizer = torch.optim.Adam(model.parameters(), lr=config["lr"])
+        criterion = nn.CrossEntropyLoss()
+        
+        # Training loop
+        for epoch in range(10):
+            # ... training code ...
+            loss = 0.1  # Placeholder
+            
+            # Report metrics to Ray Tune
+            train.report({"loss": loss, "epoch": epoch})
+    
+    # Configure search space
+    search_space = {
+        "lr": tune.loguniform(1e-4, 1e-2),
+        "hidden_size": tune.choice([64, 128, 256, 512]),
+        "batch_size": tune.choice([16, 32, 64])
+    }
+    
+    # Run distributed hyperparameter search
+    tuner = Tuner(
+        train_model,
+        param_space=search_space,
+        tune_config=tune.TuneConfig(
+            num_samples=20,  # Total trials
+            max_concurrent_trials=4  # Parallel trials
+        )
+    )
+    
+    results = tuner.fit()
+    return results
+
+# Distributed training with Ray Train
+def train_distributed_with_ray():
+    """
+    Distributed training using Ray Train
+    """
+    def train_func(config):
+        # Setup model and data
+        model = nn.Linear(10, 1)
+        
+        # Get distributed training context
+        model = train.torch.prepare_model(model)
+        
+        # Training loop
+        for epoch in range(10):
+            # ... training code ...
+            train.report({"loss": 0.1})
+    
+    # Configure distributed training
+    trainer = TorchTrainer(
+        train_func,
+        scaling_config=ScalingConfig(
+            num_workers=4,  # Number of distributed workers
+            use_gpu=True
+        )
+    )
+    
+    result = trainer.fit()
+    return result
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="success-box p-4 rounded-lg mt-4">
+                        <p class="text-sm text-green-800">
+                            <strong>Performance Tip:</strong> Distributed computing can provide near-linear scaling for large models and datasets when properly configured.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caching Section -->
+            <div id="caching" class="section-content hidden">
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Caching Strategies</h2>
+                    
+                    <div class="highlight-box p-6 rounded-lg mb-8">
+                        <h3 class="text-xl font-semibold mb-3 flex items-center">
+                            <i class="fas fa-memory text-blue-500 mr-2"></i>
+                            Intelligent Caching for AI Systems
+                        </h3>
+                        <p class="text-gray-700">
+                            Implement multi-level caching strategies to reduce latency and improve throughput for AI inference systems.
+                        </p>
+                    </div>
+
+                    <!-- Redis Caching -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Redis-based Inference Caching</h3>
+                        <p class="text-gray-700 mb-4">
+                            Cache inference results and preprocessed data using Redis for sub-millisecond response times.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+import redis
+import hashlib
+import json
+import pickle
+from typing import Any, Optional
+import time
+
+class AICache:
+    """
+    Intelligent caching layer for AI inference
+    """
+    def __init__(self, redis_host='localhost', redis_port=6379, ttl=3600):
+        self.redis_client = redis.Redis(host=redis_host, port=redis_port, decode_responses=False)
+        self.ttl = ttl  # Time to live in seconds
+        
+    def _generate_key(self, data: Any) -> str:
+        """
+        Generate cache key from input data
+        """
+        # Create hash from input data
+        if isinstance(data, str):
+            data_str = data
+        elif isinstance(data, (dict, list)):
+            data_str = json.dumps(data, sort_keys=True)
+        else:
+            data_str = str(data)
+            
+        return hashlib.md5(data_str.encode()).hexdigest()
+    
+    def get(self, key: str) -> Optional[Any]:
+        """
+        Get cached result
+        """
+        try:
+            cached_data = self.redis_client.get(key)
+            if cached_data:
+                return pickle.loads(cached_data)
+            return None
+        except Exception as e:
+            print(f"Cache get error: {e}")
+            return None
+    
+    def set(self, key: str, value: Any, ttl: Optional[int] = None) -> bool:
+        """
+        Set cache with TTL
+        """
+        try:
+            ttl = ttl or self.ttl
+            serialized = pickle.dumps(value)
+            return self.redis_client.setex(key, ttl, serialized)
+        except Exception as e:
+            print(f"Cache set error: {e}")
+            return False
+    
+    def invalidate_pattern(self, pattern: str) -> int:
+        """
+        Invalidate cache entries matching pattern
+        """
+        keys = self.redis_client.keys(pattern)
+        if keys:
+            return self.redis_client.delete(*keys)
+        return 0
+
+class CachedInferenceModel:
+    """
+    Wrapper for AI models with intelligent caching
+    """
+    def __init__(self, model, cache: AICache, cache_ttl=3600):
+        self.model = model
+        self.cache = cache
+        self.cache_ttl = cache_ttl
+        self.stats = {
+            'cache_hits': 0,
+            'cache_misses': 0,
+            'total_requests': 0
+        }
+    
+    def predict(self, input_data: Any, use_cache: bool = True) -> Any:
+        """
+        Make prediction with caching
+        """
+        self.stats['total_requests'] += 1
+        
+        if use_cache:
+            cache_key = self.cache._generate_key(input_data)
+            cached_result = self.cache.get(cache_key)
+            
+            if cached_result is not None:
+                self.stats['cache_hits'] += 1
+                return cached_result
+            
+            self.stats['cache_misses'] += 1
+        
+        # Make actual prediction
+        result = self.model.predict(input_data)
+        
+        # Cache the result
+        if use_cache:
+            cache_key = self.cache._generate_key(input_data)
+            self.cache.set(cache_key, result, self.cache_ttl)
+        
+        return result
+    
+    def get_cache_stats(self) -> dict:
+        """
+        Get cache performance statistics
+        """
+        hit_rate = (self.stats['cache_hits'] / self.stats['total_requests']) * 100 if self.stats['total_requests'] > 0 else 0
+        return {
+            **self.stats,
+            'cache_hit_rate': hit_rate
+        }
+
+# Example usage
+cache = AICache(ttl=7200)  # 2 hour TTL
+
+# Wrap your model
+cached_model = CachedInferenceModel(
+    model=your_ai_model,
+    cache=cache,
+    cache_ttl=3600
+)
+
+# Make predictions with automatic caching
+result = cached_model.predict(input_data)
+stats = cached_model.get_cache_stats()
+print(f"Cache hit rate: {stats['cache_hit_rate']:.2f}%")
+                            </code>
+                        </div>
+                    </div>
+
+                    <!-- Multi-level Caching -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Multi-level Cache Architecture</h3>
+                        <p class="text-gray-700 mb-4">
+                            Implement L1 (in-memory), L2 (Redis), and L3 (persistent) caching for optimal performance.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+from collections import OrderedDict
+import sqlite3
+from typing import Any, Optional
+import threading
+import time
+
+class L1Cache:
+    """
+    In-memory LRU cache (Level 1)
+    """
+    def __init__(self, max_size=1000):
+        self.cache = OrderedDict()
+        self.max_size = max_size
+        self.lock = threading.Lock()
+    
+    def get(self, key: str) -> Optional[Any]:
+        with self.lock:
+            if key in self.cache:
+                # Move to end (most recently used)
+                self.cache.move_to_end(key)
+                return self.cache[key]
+            return None
+    
+    def set(self, key: str, value: Any) -> None:
+        with self.lock:
+            if key in self.cache:
+                self.cache.move_to_end(key)
+            else:
+                if len(self.cache) >= self.max_size:
+                    # Remove least recently used
+                    self.cache.popitem(last=False)
+                self.cache[key] = value
+
+class L3Cache:
+    """
+    Persistent cache using SQLite (Level 3)
+    """
+    def __init__(self, db_path='l3_cache.db'):
+        self.db_path = db_path
+        self._init_db()
+    
+    def _init_db(self):
+        conn = sqlite3.connect(self.db_path)
+        conn.execute('''
+            CREATE TABLE IF NOT EXISTS cache (
+                key TEXT PRIMARY KEY,
+                value BLOB,
+                timestamp REAL,
+                ttl INTEGER
+            )
+        ''')
+        conn.close()
+    
+    def get(self, key: str) -> Optional[Any]:
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.execute(
+            'SELECT value, timestamp, ttl FROM cache WHERE key = ?',
+            (key,)
+        )
+        result = cursor.fetchone()
+        conn.close()
+        
+        if result:
+            value, timestamp, ttl = result
+            if ttl == 0 or time.time() - timestamp < ttl:
+                return pickle.loads(value)
+            else:
+                # TTL expired
+                self.delete(key)
+        
+        return None
+    
+    def set(self, key: str, value: Any, ttl: int = 0) -> None:
+        conn = sqlite3.connect(self.db_path)
+        serialized = pickle.dumps(value)
+        conn.execute('''
+            INSERT OR REPLACE INTO cache (key, value, timestamp, ttl)
+            VALUES (?, ?, ?, ?)
+        ''', (key, serialized, time.time(), ttl))
+        conn.commit()
+        conn.close()
+    
+    def delete(self, key: str) -> None:
+        conn = sqlite3.connect(self.db_path)
+        conn.execute('DELETE FROM cache WHERE key = ?', (key,))
+        conn.commit()
+        conn.close()
+
+class MultiLevelCache:
+    """
+    L1 (memory) -> L2 (Redis) -> L3 (SQLite) cache
+    """
+    def __init__(self, l1_size=1000, redis_config=None):
+        self.l1 = L1Cache(max_size=l1_size)
+        self.l2 = AICache(**(redis_config or {})) if redis_config else None
+        self.l3 = L3Cache()
+    
+    def get(self, key: str) -> Optional[Any]:
+        # Try L1 cache first
+        value = self.l1.get(key)
+        if value is not None:
+            return value
+        
+        # Try L2 cache
+        if self.l2:
+            value = self.l2.get(key)
+            if value is not None:
+                # Promote to L1
+                self.l1.set(key, value)
+                return value
+        
+        # Try L3 cache
+        value = self.l3.get(key)
+        if value is not None:
+            # Promote to L1 and L2
+            self.l1.set(key, value)
+            if self.l2:
+                self.l2.set(key, value)
+            return value
+        
+        return None
+    
+    def set(self, key: str, value: Any, ttl: Optional[int] = None) -> None:
+        # Set in all cache levels
+        self.l1.set(key, value)
+        if self.l2:
+            self.l2.set(key, value, ttl)
+        self.l3.set(key, value, ttl)
+    
+    def invalidate(self, key: str) -> None:
+        # Invalidate across all levels
+        self.l1.cache.pop(key, None)
+        if self.l2:
+            self.l2.redis_client.delete(key)
+        self.l3.delete(key)
+
+# Example usage
+ml_cache = MultiLevelCache(
+    l1_size=1000,
+    redis_config={'redis_host': 'localhost', 'redis_port': 6379}
+)
+
+# The cache will automatically handle the multi-level lookup
+result = ml_cache.get("user_query_123")
+if result is None:
+    result = expensive_computation()
+    ml_cache.set("user_query_123", result, ttl=3600)
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="info-box p-4 rounded-lg mt-4">
+                        <p class="text-sm text-blue-800">
+                            <strong>Cache Strategy:</strong> Use L1 for hot data, L2 for session data, L3 for persistent caching across application restarts.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load Balancing Section -->
+            <div id="load-balancing" class="section-content hidden">
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Load Balancing</h2>
+                    
+                    <div class="highlight-box p-6 rounded-lg mb-8">
+                        <h3 class="text-xl font-semibold mb-3 flex items-center">
+                            <i class="fas fa-balance-scale text-blue-500 mr-2"></i>
+                            Distribute AI Workloads Efficiently
+                        </h3>
+                        <p class="text-gray-700">
+                            Implement intelligent load balancing strategies to distribute inference requests across multiple model instances and servers.
+                        </p>
+                    </div>
+
+                    <!-- Model-based Load Balancing -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Intelligent Model Routing</h3>
+                        <p class="text-gray-700 mb-4">
+                            Route requests to different model variants based on complexity, latency requirements, and resource availability.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+import asyncio
+import random
+from typing import List, Dict, Any
+import time
+from dataclasses import dataclass
+from enum import Enum
+
+class ModelSize(Enum):
+    SMALL = "small"
+    MEDIUM = "medium"
+    LARGE = "large"
+
+@dataclass
+class ModelInstance:
+    """
+    Represents a model instance with performance metrics
+    """
+    model_id: str
+    model_size: ModelSize
+    current_load: int = 0
+    total_requests: int = 0
+    avg_latency: float = 0.0
+    error_rate: float = 0.0
+    last_health_check: float = 0.0
+    is_healthy: bool = True
+
+class IntelligentLoadBalancer:
+    """
+    Load balancer that routes based on model capabilities and performance
+    """
+    def __init__(self):
+        self.models: Dict[str, ModelInstance] = {}
+        self.routing_history: List[Dict] = []
+        
+    def register_model(self, model: ModelInstance):
+        """
+        Register a new model instance
+        """
+        self.models[model.model_id] = model
+        
+    def update_model_metrics(self, model_id: str, latency: float, success: bool):
+        """
+        Update model performance metrics
+        """
+        if model_id in self.models:
+            model = self.models[model_id]
+            model.total_requests += 1
+            model.current_load += 1
+            
+            # Update average latency (exponential moving average)
+            alpha = 0.1
+            model.avg_latency = alpha * latency + (1 - alpha) * model.avg_latency
+            
+            # Update error rate
+            if not success:
+                model.error_rate = ((model.total_requests - 1) * model.error_rate + 1) / model.total_requests
+            else:
+                model.error_rate = ((model.total_requests - 1) * model.error_rate) / model.total_requests
+            
+            model.last_health_check = time.time()
+            
+    def route_request(self, request_complexity: str, latency_sla: float) -> str:
+        """
+        Route request to appropriate model based on complexity and SLA
+        """
+        available_models = [
+            model for model in self.models.values()
+            if model.is_healthy and model.current_load < 100  # Load threshold
+        ]
+        
+        if not available_models:
+            raise Exception("No healthy models available")
+        
+        # Score each model based on multiple factors
+        model_scores = []
+        for model in available_models:
+            score = 0
+            
+            # Latency score (lower is better)
+            latency_score = max(0, 1 - (model.avg_latency / latency_sla))
+            score += latency_score * 0.4
+            
+            # Load score (lower current load is better)
+            load_score = 1 - (model.current_load / 100)
+            score += load_score * 0.3
+            
+            # Error rate score (lower is better)
+            error_score = 1 - model.error_rate
+            score += error_score * 0.2
+            
+            # Model size appropriateness
+            complexity_scores = {
+                'low': {'small': 1.0, 'medium': 0.7, 'large': 0.3},
+                'medium': {'small': 0.5, 'medium': 1.0, 'large': 0.7},
+                'high': {'small': 0.2, 'medium': 0.6, 'large': 1.0}
+            }
+            
+            size_score = complexity_scores.get(request_complexity, {}).get(model.model_size.value, 0.5)
+            score += size_score * 0.1
+            
+            model_scores.append((model, score))
+        
+        # Select best model
+        best_model = max(model_scores, key=lambda x: x[1])[0]
+        
+        # Log routing decision
+        self.routing_history.append({
+            'timestamp': time.time(),
+            'complexity': request_complexity,
+            'sla': latency_sla,
+            'selected_model': best_model.model_id,
+            'available_models': len(available_models)
+        })
+        
+        return best_model.model_id
+    
+    def get_routing_stats(self) -> Dict:
+        """
+        Get load balancing statistics
+        """
+        if not self.routing_history:
+            return {}
+        
+        recent_routes = [r for r in self.routing_history if time.time() - r['timestamp'] < 3600]
+        
+        return {
+            'total_routes': len(self.routing_history),
+            'recent_routes': len(recent_routes),
+            'model_distribution': {
+                model_id: sum(1 for r in recent_routes if r['selected_model'] == model_id)
+                for model_id in self.models.keys()
+            },
+            'avg_satisfaction': sum(
+                1 for r in recent_routes 
+                if self.models[r['selected_model']].avg_latency <= r['sla']
+            ) / len(recent_routes) if recent_routes else 0
+        }
+
+# Example usage
+load_balancer = IntelligentLoadBalancer()
+
+# Register model instances
+load_balancer.register_model(ModelInstance("bert-small-01", ModelSize.SMALL))
+load_balancer.register_model(ModelInstance("bert-medium-01", ModelSize.MEDIUM))
+load_balancer.register_model(ModelInstance("bert-large-01", ModelSize.LARGE))
+
+# Route requests
+model_id = load_balancer.route_request(request_complexity="medium", latency_sla=0.1)
+print(f"Routed to model: {model_id}")
+                            </code>
+                        </div>
+                    </div>
+
+                    <!-- Auto-scaling -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Auto-scaling Controller</h3>
+                        <p class="text-gray-700 mb-4">
+                            Automatically scale model instances based on load, latency, and resource utilization.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+import asyncio
+from typing import List, Dict
+import logging
+from datetime import datetime, timedelta
+
+class AutoScalingController:
+    """
+    Automatically scale model instances based on metrics
+    """
+    def __init__(self, load_balancer: IntelligentLoadBalancer):
+        self.load_balancer = load_balancer
+        self.monitoring_data: List[Dict] = []
+        self.scaling_history: List[Dict] = []
+        self.is_running = False
+        
+        # Scaling thresholds
+        self.scale_up_threshold = 0.8  # 80% load
+        self.scale_down_threshold = 0.3  # 30% load
+        self.latency_threshold = 0.1  # 100ms
+        
+        # Cooldown periods
+        self.scale_up_cooldown = 60  # seconds
+        self.scale_down_cooldown = 300  # seconds
+        
+        self.last_scale_up = 0
+        self.last_scale_down = 0
+    
+    def collect_metrics(self):
+        """
+        Collect current system metrics
+        """
+        current_time = time.time()
+        
+        # Calculate aggregate metrics
+        total_load = sum(model.current_load for model in self.load_balancer.models.values())
+        avg_latency = sum(model.avg_latency for model in self.load_balancer.models.values()) / len(self.load_balancer.models)
+        
+        metrics = {
+            'timestamp': current_time,
+            'total_instances': len(self.load_balancer.models),
+            'total_load': total_load,
+            'avg_latency': avg_latency,
+            'avg_load_percentage': total_load / len(self.load_balancer.models) if self.load_balancer.models else 0
+        }
+        
+        self.monitoring_data.append(metrics)
+        
+        # Keep only last 100 data points
+        if len(self.monitoring_data) > 100:
+            self.monitoring_data = self.monitoring_data[-100:]
+        
+        return metrics
+    
+    def should_scale_up(self, current_metrics: Dict) -> bool:
+        """
+        Determine if scaling up is needed
+        """
+        current_time = time.time()
+        
+        # Check cooldown
+        if current_time - self.last_scale_up < self.scale_up_cooldown:
+            return False
+        
+        # Check load threshold
+        if current_metrics['avg_load_percentage'] > self.scale_up_threshold:
+            return True
+        
+        # Check latency threshold
+        if current_metrics['avg_latency'] > self.latency_threshold:
+            return True
+        
+        return False
+    
+    def should_scale_down(self, current_metrics: Dict) -> bool:
+        """
+        Determine if scaling down is possible
+        """
+        current_time = time.time()
+        
+        # Check cooldown
+        if current_time - self.last_scale_down < self.scale_down_cooldown:
+            return False
+        
+        # Check if load is consistently low
+        recent_data = [m for m in self.monitoring_data if current_time - m['timestamp'] < 300]
+        
+        if len(recent_data) >= 5:  # Need at least 5 data points
+            avg_load = sum(m['avg_load_percentage'] for m in recent_data) / len(recent_data)
+            if avg_load < self.scale_down_threshold:
+                return True
+        
+        return False
+    
+    def scale_up(self):
+        """
+        Add new model instance
+        """
+        # In real implementation, this would provision new instances
+        new_instance_id = f"model-instance-{len(self.load_balancer.models) + 1}"
+        new_instance = ModelInstance(new_instance_id, ModelSize.MEDIUM)
+        
+        self.load_balancer.register_model(new_instance)
+        self.last_scale_up = time.time()
+        
+        self.scaling_history.append({
+            'timestamp': time.time(),
+            'action': 'scale_up',
+            'instance_id': new_instance_id,
+            'reason': 'high_load_or_latency'
+        })
+        
+        logging.info(f"Scaled up: Added instance {new_instance_id}")
+    
+    def scale_down(self):
+        """
+        Remove least loaded instance
+        """
+        if len(self.load_balancer.models) <= 1:
+            return  # Don't scale below 1 instance
+        
+        # Find least loaded instance
+        least_loaded = min(
+            self.load_balancer.models.values(),
+            key=lambda m: m.current_load
+        )
+        
+        # Remove from load balancer
+        del self.load_balancer.models[least_loaded.model_id]
+        self.last_scale_down = time.time()
+        
+        self.scaling_history.append({
+            'timestamp': time.time(),
+            'action': 'scale_down',
+            'instance_id': least_loaded.model_id,
+            'reason': 'low_load'
+        })
+        
+        logging.info(f"Scaled down: Removed instance {least_loaded.model_id}")
+    
+    async def monitor_and_scale(self):
+        """
+        Main monitoring loop
+        """
+        self.is_running = True
+        
+        while self.is_running:
+            try:
+                # Collect metrics
+                metrics = self.collect_metrics()
+                
+                # Check scaling conditions
+                if self.should_scale_up(metrics):
+                    self.scale_up()
+                elif self.should_scale_down(metrics):
+                    self.scale_down()
+                
+                # Wait before next check
+                await asyncio.sleep(30)  # Check every 30 seconds
+                
+            except Exception as e:
+                logging.error(f"Error in monitoring loop: {e}")
+                await asyncio.sleep(60)  # Wait longer on error
+
+# Example usage
+controller = AutoScalingController(load_balancer)
+
+# Start monitoring in background
+asyncio.create_task(controller.monitor_and_scale())
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="info-box p-4 rounded-lg mt-4">
+                        <p class="text-sm text-blue-800">
+                            <strong>Load Balancing Strategy:</strong> Combine intelligent routing with auto-scaling to maintain optimal performance under varying loads while minimizing costs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Monitoring Section -->
+            <div id="performance-monitoring" class="section-content hidden">
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Performance Monitoring</h2>
+                    
+                    <div class="highlight-box p-6 rounded-lg mb-8">
+                        <h3 class="text-xl font-semibold mb-3 flex items-center">
+                            <i class="fas fa-chart-line text-blue-500 mr-2"></i>
+                            Comprehensive Performance Insights
+                        </h3>
+                        <p class="text-gray-700">
+                            Monitor, measure, and optimize AI system performance with real-time metrics, alerting, and performance analysis.
+                        </p>
+                    </div>
+
+                    <!-- Metrics Collection -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Real-time Metrics Collection</h3>
+                        <p class="text-gray-700 mb-4">
+                            Collect comprehensive performance metrics including latency, throughput, error rates, and resource utilization.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+import time
+import psutil
+import threading
+from collections import deque
+from typing import Dict, List, Callable
+import json
+
+class PerformanceMonitor:
+    """
+    Real-time performance monitoring for AI systems
+    """
+    def __init__(self, window_size=1000):
+        self.window_size = window_size
+        self.metrics = {
+            'latency': deque(maxlen=window_size),
+            'throughput': deque(maxlen=window_size),
+            'error_rate': deque(maxlen=window_size),
+            'cpu_usage': deque(maxlen=window_size),
+            'memory_usage': deque(maxlen=window_size),
+            'gpu_usage': deque(maxlen=window_size),
+            'gpu_memory': deque(maxlen=window_size)
+        }
+        
+        self.custom_metrics = {}
+        self.callbacks = []
+        self.is_monitoring = False
+        self.monitor_thread = None
+        
+    def record_metric(self, metric_name: str, value: float, timestamp: float = None):
+        """
+        Record a metric value
+        """
+        if metric_name in self.metrics:
+            self.metrics[metric_name].append({
+                'value': value,
+                'timestamp': timestamp or time.time()
+            })
+        
+        # Check custom metrics
+        if metric_name in self.custom_metrics:
+            self.custom_metrics[metric_name].append({
+                'value': value,
+                'timestamp': timestamp or time.time()
+            })
+        
+        # Trigger callbacks
+        for callback in self.callbacks:
+            try:
+                callback(metric_name, value, timestamp or time.time())
+            except Exception as e:
+                print(f"Callback error: {e}")
+    
+    def add_custom_metric(self, metric_name: str):
+        """
+        Add a custom metric for tracking
+        """
+        self.custom_metrics[metric_name] = deque(maxlen=self.window_size)
+    
+    def add_callback(self, callback: Callable[[str, float, float], None]):
+        """
+        Add callback for real-time metric processing
+        """
+        self.callbacks.append(callback)
+    
+    def start_system_monitoring(self):
+        """
+        Start background monitoring of system resources
+        """
+        self.is_monitoring = True
+        self.monitor_thread = threading.Thread(target=self._monitor_loop)
+        self.monitor_thread.daemon = True
+        self.monitor_thread.start()
+    
+    def stop_system_monitoring(self):
+        """
+        Stop background monitoring
+        """
+        self.is_monitoring = False
+        if self.monitor_thread:
+            self.monitor_thread.join()
+    
+    def _monitor_loop(self):
+        """
+        Background monitoring loop
+        """
+        while self.is_monitoring:
+            try:
+                # CPU and Memory
+                cpu_percent = psutil.cpu_percent(interval=1)
+                memory_percent = psutil.virtual_memory().percent
+                
+                self.record_metric('cpu_usage', cpu_percent)
+                self.record_metric('memory_usage', memory_percent)
+                
+                # GPU metrics (if available)
+                try:
+                    import pynvml
+                    pynvml.nvmlInit()
+                    gpu_count = pynvml.nvmlDeviceGetCount()
+                    
+                    total_gpu_usage = 0
+                    total_gpu_memory = 0
+                    
+                    for i in range(gpu_count):
+                        handle = pynvml.nvmlDeviceGetHandleByIndex(i)
+                        
+                        # GPU utilization
+                        utilization = pynvml.nvmlDeviceGetUtilizationRates(handle)
+                        total_gpu_usage += utilization.gpu
+                        
+                        # GPU memory
+                        memory_info = pynvml.nvmlDeviceGetMemoryInfo(handle)
+                        gpu_memory_percent = (memory_info.used / memory_info.total) * 100
+                        total_gpu_memory += gpu_memory_percent
+                    
+                    if gpu_count > 0:
+                        self.record_metric('gpu_usage', total_gpu_usage / gpu_count)
+                        self.record_metric('gpu_memory', total_gpu_memory / gpu_count)
+                        
+                except ImportError:
+                    pass  # GPU monitoring not available
+                
+                time.sleep(5)  # Monitor every 5 seconds
+                
+            except Exception as e:
+                print(f"Monitoring error: {e}")
+                time.sleep(10)  # Wait longer on error
+    
+    def get_statistics(self, metric_name: str, time_window: int = 300) -> Dict:
+        """
+        Get statistics for a metric over a time window
+        """
+        if metric_name not in self.metrics and metric_name not in self.custom_metrics:
+            return {}
+        
+        data = self.metrics.get(metric_name, self.custom_metrics.get(metric_name, []))
+        
+        # Filter by time window
+        current_time = time.time()
+        filtered_data = [
+            d for d in data
+            if current_time - d['timestamp'] <= time_window
+        ]
+        
+        if not filtered_data:
+            return {}
+        
+        values = [d['value'] for d in filtered_data]
+        
+        return {
+            'count': len(values),
+            'mean': sum(values) / len(values),
+            'min': min(values),
+            'max': max(values),
+            'p50': self._percentile(values, 50),
+            'p95': self._percentile(values, 95),
+            'p99': self._percentile(values, 99),
+            'std': self._standard_deviation(values)
+        }
+    
+    def _percentile(self, data: List[float], percentile: float) -> float:
+        """
+        Calculate percentile
+        """
+        sorted_data = sorted(data)
+        index = (percentile / 100) * (len(sorted_data) - 1)
+        
+        if index.is_integer():
+            return sorted_data[int(index)]
+        else:
+            lower = sorted_data[int(index)]
+            upper = sorted_data[int(index) + 1]
+            return lower + (upper - lower) * (index - int(index))
+    
+    def _standard_deviation(self, data: List[float]) -> float:
+        """
+        Calculate standard deviation
+        """
+        mean = sum(data) / len(data)
+        variance = sum((x - mean) ** 2 for x in data) / len(data)
+        return variance ** 0.5
+    
+    def export_metrics(self, filename: str):
+        """
+        Export all metrics to JSON file
+        """
+        export_data = {
+            'timestamp': time.time(),
+            'metrics': {},
+            'custom_metrics': {}
+        }
+        
+        for metric_name, data in self.metrics.items():
+            export_data['metrics'][metric_name] = list(data)
+        
+        for metric_name, data in self.custom_metrics.items():
+            export_data['custom_metrics'][metric_name] = list(data)
+        
+        with open(filename, 'w') as f:
+            json.dump(export_data, f, indent=2)
+
+# Example usage
+monitor = PerformanceMonitor()
+
+# Add custom metrics
+monitor.add_custom_metric('model_inference_time')
+monitor.add_custom_metric('cache_hit_rate')
+
+# Add real-time alert callback
+def alert_callback(metric_name: str, value: float, timestamp: float):
+    if metric_name == 'latency' and value > 0.1:  # 100ms threshold
+        print(f"ALERT: High latency detected: {value:.3f}s")
+    elif metric_name == 'error_rate' and value > 0.05:  # 5% threshold
+        print(f"ALERT: High error rate detected: {value:.1%}")
+
+monitor.add_callback(alert_callback)
+
+# Start monitoring
+monitor.start_system_monitoring()
+
+# Record some metrics
+monitor.record_metric('latency', 0.05)
+monitor.record_metric('throughput', 100)
+monitor.record_metric('model_inference_time', 0.03)
+
+# Get statistics
+latency_stats = monitor.get_statistics('latency', time_window=600)
+print(f"Latency p95: {latency_stats.get('p95', 0):.3f}s")
+                            </code>
+                        </div>
+                    </div>
+
+                    <!-- Prometheus Integration -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Prometheus Metrics Export</h3>
+                        <p class="text-gray-700 mb-4">
+                            Export performance metrics to Prometheus for monitoring and alerting in production environments.
+                        </p>
+                        
+                        <div class="code-block">
+                            <code>
+from prometheus_client import Counter, Histogram, Gauge, start_http_server
+import time
+import random
+
+class PrometheusMetricsExporter:
+    """
+    Export AI system metrics to Prometheus
+    """
+    def __init__(self, port=8000):
+        # Define Prometheus metrics
+        self.request_count = Counter(
+            'ai_requests_total',
+            'Total number of AI requests',
+            ['model_name', 'status']
+        )
+        
+        self.request_duration = Histogram(
+            'ai_request_duration_seconds',
+            'AI request duration in seconds',
+            ['model_name', 'operation'],
+            buckets=[0.01, 0.05, 0.1, 0.5, 1.0, 2.0, 5.0]
+        )
+        
+        self.model_load = Gauge(
+            'ai_model_current_load',
+            'Current load on model instance',
+            ['model_id', 'model_name']
+        )
+        
+        self.cache_hits = Counter(
+            'ai_cache_hits_total',
+            'Total number of cache hits',
+            ['cache_type', 'model_name']
+        )
+        
+        self.cache_misses = Counter(
+            'ai_cache_misses_total',
+            'Total number of cache misses',
+            ['cache_type', 'model_name']
+        )
+        
+        self.gpu_utilization = Gauge(
+            'ai_gpu_utilization_percent',
+            'GPU utilization percentage',
+            ['gpu_id', 'model_name']
+        )
+        
+        self.memory_usage = Gauge(
+            'ai_memory_usage_bytes',
+            'Memory usage in bytes',
+            ['model_name', 'memory_type']
+        )
+        
+        # Start Prometheus metrics server
+        start_http_server(port)
+        print(f"Prometheus metrics server started on port {port}")
+    
+    def record_request(self, model_name: str, duration: float, status: str = 'success'):
+        """
+        Record a request metric
+        """
+        self.request_count.labels(model_name=model_name, status=status).inc()
+        self.request_duration.labels(model_name=model_name, operation='inference').observe(duration)
+    
+    def record_model_load(self, model_id: str, model_name: str, load: int):
+        """
+        Record current model load
+        """
+        self.model_load.labels(model_id=model_id, model_name=model_name).set(load)
+    
+    def record_cache_operation(self, cache_type: str, model_name: str, is_hit: bool):
+        """
+        Record cache operation
+        """
+        if is_hit:
+            self.cache_hits.labels(cache_type=cache_type, model_name=model_name).inc()
+        else:
+            self.cache_misses.labels(cache_type=cache_type, model_name=model_name).inc()
+    
+    def record_gpu_metrics(self, model_name: str, gpu_stats: Dict):
+        """
+        Record GPU metrics
+        """
+        for gpu_id, utilization in gpu_stats.get('utilization', {}).items():
+            self.gpu_utilization.labels(gpu_id=str(gpu_id), model_name=model_name).set(utilization)
+        
+        for memory_type, usage in gpu_stats.get('memory', {}).items():
+            self.memory_usage.labels(model_name=model_name, memory_type=memory_type).set(usage)
+
+# Example usage with context manager
+class MonitoredAIModel:
+    """
+    AI model with integrated Prometheus monitoring
+    """
+    def __init__(self, model_name: str, exporter: PrometheusMetricsExporter):
+        self.model_name = model_name
+        self.exporter = exporter
+        self.model_id = f"{model_name}_{int(time.time())}"
+        self.current_load = 0
+    
+    def predict(self, input_data):
+        """
+        Make prediction with monitoring
+        """
+        start_time = time.time()
+        self.current_load += 1
+        
+        try:
+            # Update model load metric
+            self.exporter.record_model_load(self.model_id, self.model_name, self.current_load)
+            
+            # Simulate prediction
+            time.sleep(random.uniform(0.01, 0.1))
+            
+            # Record successful request
+            duration = time.time() - start_time
+            self.exporter.record_request(self.model_name, duration, 'success')
+            
+            return {"prediction": "result", "confidence": 0.95}
+            
+        except Exception as e:
+            # Record failed request
+            duration = time.time() - start_time
+            self.exporter.record_request(self.model_name, duration, 'error')
+            raise e
+            
+        finally:
+            self.current_load -= 1
+            self.exporter.record_model_load(self.model_id, self.model_name, self.current_load)
+
+# Initialize monitoring
+prometheus_exporter = PrometheusMetricsExporter(port=8000)
+
+# Create monitored model
+monitored_model = MonitoredAIModel("bert-base", prometheus_exporter)
+
+# Simulate some requests
+for i in range(100):
+    result = monitored_model.predict(f"input_{i}")
+    time.sleep(0.1)
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="success-box p-4 rounded-lg mt-4">
+                        <p class="text-sm text-green-800">
+                            <strong>Monitoring Best Practice:</strong> Combine real-time metrics collection with alerting for proactive performance management and system reliability.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 Agentic AI Knowledge Hub. Empowering AI engineering excellence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section-content');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Update tab styles
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => {
+                tab.classList.remove('border-blue-500', 'text-blue-600');
+                tab.classList.add('border-transparent', 'text-gray-500');
+            });
+            
+            // Highlight active tab
+            event.target.classList.remove('border-transparent', 'text-gray-500');
+            event.target.classList.add('border-blue-500', 'text-blue-600');
+        }
+
+        // Initialize first tab as active
+        document.addEventListener('DOMContentLoaded', function() {
+            // First tab is already active by default
+        });
+    </script>
+</body>
+</html>

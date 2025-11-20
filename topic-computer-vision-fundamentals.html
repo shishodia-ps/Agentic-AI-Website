@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Vision Fundamentals | Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .code-block { background: #1e293b; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .progress-bar { background: linear-gradient(90deg, #10b981 0%, #34d399 100%); }
+        .cv-pipeline { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+        .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+        .image-placeholder { aspect-ratio: 1; background: linear-gradient(135deg, #e2e8f0, #cbd5e1); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-brain text-2xl gradient-text mr-3"></i>
+                    <h1 class="text-xl font-bold text-slate-900">Agentic AI Hub</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors">Home</a>
+                    <a href="topics.html" class="text-slate-600 hover:text-slate-900 transition-colors">Topics</a>
+                    <a href="about.html" class="text-slate-600 hover:text-slate-900 transition-colors">About</a>
+                    <a href="manage.html" class="text-slate-600 hover:text-slate-900 transition-colors">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Computer Vision Fundamentals
+                </h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Discover how AI systems interpret and understand visual information from the world
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+                        <span class="text-white text-sm">Progress: </span>
+                        <div class="inline-block w-32 h-2 bg-white/20 rounded-full ml-2">
+                            <div class="progress-bar h-full rounded-full" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Learning Path</h3>
+                    <nav class="space-y-2">
+                        <a href="topic-what-is-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>What is AI?
+                        </a>
+                        <a href="topic-types-of-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Types of AI
+                        </a>
+                        <a href="topic-machine-learning-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Machine Learning
+                        </a>
+                        <a href="topic-deep-learning-concepts.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Deep Learning
+                        </a>
+                        <a href="topic-neural-networks-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Neural Networks
+                        </a>
+                        <a href="topic-nlp-basics.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>NLP Basics
+                        </a>
+                        <a href="#" class="block px-3 py-2 text-sm bg-blue-50 text-blue-900 rounded-md font-medium">
+                            <i class="fas fa-play-circle text-blue-500 mr-2"></i>Computer Vision
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Introduction -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">What is Computer Vision?</h2>
+                    <p class="text-lg text-slate-700 mb-6">
+                        Computer Vision is a field of artificial intelligence that enables machines to interpret and understand visual information from the world. It involves developing algorithms and systems that can automatically perform tasks that the human visual system can do.
+                    </p>
+                    <div class="bg-gradient-to-r from-purple-50 to-blue-50 border-l-4 border-purple-400 p-6 mb-6 rounded-r-lg">
+                        <p class="text-purple-800">
+                            <strong>Key Insight:</strong> Computer vision systems can analyze images and videos to identify objects, faces, scenes, and activities, enabling applications from autonomous vehicles to medical diagnosis.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Image Representation -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">How Computers See Images</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Digital Image Representation</h3>
+                            <p class="text-slate-700 mb-4">
+                                Computers represent images as multi-dimensional arrays of pixel values. Each pixel contains color information, typically represented in RGB (Red, Green, Blue) format.
+                            </p>
+                            <div class="bg-slate-50 p-4 rounded-lg mb-4">
+                                <h4 class="font-semibold text-slate-900 mb-2">Image Dimensions:</h4>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1">
+                                    <li><strong>Height:</strong> Number of rows of pixels</li>
+                                    <li><strong>Width:</strong> Number of columns of pixels</li>
+                                    <li><strong>Channels:</strong> Color depth (RGB = 3 channels)</li>
+                                </ul>
+                            </div>
+                            <div class="code-block">
+                                <pre class="text-green-400 text-sm"><code># Image as numpy array
+import numpy as np
+from PIL import Image
+
+# Load an image
+img = Image.open('example.jpg')
+img_array = np.array(img)
+
+print(f"Image shape: {img_array.shape}")
+# Output: (height, width, channels) = (224, 224, 3)
+
+# Access pixel values
+pixel = img_array[100, 150]  # RGB values [R, G, B]
+print(f"Pixel at (100, 150): {pixel}")
+# Output: [245, 134, 67]</code></pre>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Sample Image Grid</h3>
+                            <div class="image-grid mb-4">
+                                <div class="image-placeholder">
+                                    <div class="text-center text-slate-600">
+                                        <i class="fas fa-image text-3xl mb-2"></i>
+                                        <p class="text-xs">Pixel<br>[255,0,0]</p>
+                                    </div>
+                                </div>
+                                <div class="image-placeholder">
+                                    <div class="text-center text-slate-600">
+                                        <i class="fas fa-image text-3xl mb-2"></i>
+                                        <p class="text-xs">Pixel<br>[0,255,0]</p>
+                                    </div>
+                                </div>
+                                <div class="image-placeholder">
+                                    <div class="text-center text-slate-600">
+                                        <i class="fas fa-image text-3xl mb-2"></i>
+                                        <p class="text-xs">Pixel<br>[0,0,255]</p>
+                                    </div>
+                                </div>
+                                <div class="image-placeholder">
+                                    <div class="text-center text-slate-600">
+                                        <i class="fas fa-image text-3xl mb-2"></i>
+                                        <p class="text-xs">Pixel<br>[255,255,0]</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-slate-600">Each image is composed of pixels, each with RGB values ranging from 0-255</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Computer Vision Pipeline -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Computer Vision Processing Pipeline</h2>
+                    <div class="cv-pipeline p-6 rounded-lg mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+                            <div class="text-center">
+                                <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-camera text-blue-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-1">Image Capture</h3>
+                                <p class="text-xs text-slate-600">Raw image data</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-adjust text-green-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-1">Preprocessing</h3>
+                                <p class="text-xs text-slate-600">Resize, normalize</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-filter text-purple-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-1">Feature Extraction</h3>
+                                <p class="text-xs text-slate-600">Detect edges, shapes</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-search text-orange-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-1">Object Detection</h3>
+                                <p class="text-xs text-slate-600">Locate objects</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-tag text-red-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-1">Classification</h3>
+                                <p class="text-xs text-slate-600">Identify categories</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-brain text-indigo-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-1">Understanding</h3>
+                                <p class="text-xs text-slate-600">Semantic meaning</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center text-slate-600 text-sm">The computer vision pipeline transforms raw pixel data into meaningful insights</p>
+                </div>
+
+                <!-- Core Computer Vision Tasks -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Core Computer Vision Tasks</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-image text-blue-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Image Classification</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Assigning a single label to an entire image from a predefined set of categories.</p>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <strong>Example:</strong> Is this image a cat, dog, or car?
+                            </div>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-vector-square text-green-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Object Detection</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Locating and classifying multiple objects within an image, drawing bounding boxes around them.</p>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <strong>Example:</strong> Find all cars and pedestrians in a street scene
+                            </div>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-pencil-ruler text-purple-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Semantic Segmentation</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Classifying every pixel in an image, creating a pixel-level understanding of the scene.</p>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <strong>Example:</strong> Which pixels belong to road, buildings, sky?
+                            </div>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-user text-orange-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Face Recognition</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Identifying and verifying individuals based on facial features in images or videos.</p>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <strong>Example:</strong> Unlock phone with face, find person in photos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Convolutional Neural Networks -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Convolutional Neural Networks (CNNs)</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">CNN Architecture</h3>
+                            <p class="text-slate-700 mb-4">
+                                CNNs are specialized neural networks designed for processing grid-like data such as images. They use convolution operations to detect local features and pooling for dimensionality reduction.
+                            </p>
+                            <div class="bg-slate-50 p-4 rounded-lg mb-4">
+                                <h4 class="font-semibold text-slate-900 mb-2">Key Components:</h4>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1">
+                                    <li><strong>Convolutional Layers:</strong> Apply filters to detect features</li>
+                                    <li><strong>Pooling Layers:</strong> Reduce spatial dimensions</li>
+                                    <li><strong>Activation Functions:</strong> Introduce non-linearity</li>
+                                    <li><strong>Fully Connected Layers:</strong> Final classification</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Feature Detection Process</h3>
+                            <div class="space-y-4">
+                                <div class="bg-blue-100 p-3 rounded-lg">
+                                    <h4 class="font-semibold text-slate-900 text-sm">Layer 1: Low-level Features</h4>
+                                    <p class="text-slate-700 text-xs">Edges, corners, color gradients</p>
+                                </div>
+                                <div class="bg-green-100 p-3 rounded-lg">
+                                    <h4 class="font-semibold text-slate-900 text-sm">Layer 2: Mid-level Features</h4>
+                                    <p class="text-slate-700 text-xs">Shapes, textures, patterns</p>
+                                </div>
+                                <div class="bg-purple-100 p-3 rounded-lg">
+                                    <h4 class="font-semibold text-slate-900 text-sm">Layer 3: High-level Features</h4>
+                                    <p class="text-slate-700 text-xs">Object parts, semantic concepts</p>
+                                </div>
+                                <div class="bg-orange-100 p-3 rounded-lg">
+                                    <h4 class="font-semibold text-slate-900 text-sm">Final Layer: Classification</h4>
+                                    <p class="text-slate-700 text-xs">Object categories, scene understanding</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block mt-6">
+                        <pre class="text-green-400 text-sm"><code># Simple CNN Implementation
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class SimpleCNN(nn.Module):
+    def __init__(self, num_classes=10):
+        super(SimpleCNN, self).__init__()
+        # First convolutional block
+        self.conv1 = nn.Conv2d(3, 32, kernel_size=3, padding=1)
+        self.bn1 = nn.BatchNorm2d(32)
+        self.pool1 = nn.MaxPool2d(2, 2)
+        
+        # Second convolutional block
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
+        self.bn2 = nn.BatchNorm2d(64)
+        self.pool2 = nn.MaxPool2d(2, 2)
+        
+        # Third convolutional block
+        self.conv3 = nn.Conv2d(64, 128, kernel_size=3, padding=1)
+        self.bn3 = nn.BatchNorm2d(128)
+        self.pool3 = nn.MaxPool2d(2, 2)
+        
+        # Fully connected layers
+        self.fc1 = nn.Linear(128 * 4 * 4, 512)
+        self.dropout = nn.Dropout(0.5)
+        self.fc2 = nn.Linear(512, num_classes)
+        
+    def forward(self, x):
+        # First block
+        x = self.pool1(F.relu(self.bn1(self.conv1(x))))
+        
+        # Second block
+        x = self.pool2(F.relu(self.bn2(self.conv2(x))))
+        
+        # Third block
+        x = self.pool3(F.relu(self.bn3(self.conv3(x))))
+        
+        # Flatten for fully connected layers
+        x = x.view(-1, 128 * 4 * 4)
+        
+        # Fully connected layers
+        x = F.relu(self.fc1(x))
+        x = self.dropout(x)
+        x = self.fc2(x)
+        
+        return x</code></pre>
+                    </div>
+                </div>
+
+                <!-- Image Preprocessing -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Image Preprocessing Techniques</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Common Preprocessing Steps</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-blue-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Resizing</h4>
+                                    <p class="text-slate-700 text-sm">Standardize image dimensions for model input</p>
+                                </div>
+                                <div class="border-l-4 border-green-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Normalization</h4>
+                                    <p class="text-slate-700 text-sm">Scale pixel values to [0,1] or [-1,1] range</p>
+                                </div>
+                                <div class="border-l-4 border-purple-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Data Augmentation</h4>
+                                    <p class="text-slate-700 text-sm">Artificially expand training data with transformations</p>
+                                </div>
+                                <div class="border-l-4 border-orange-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Color Space Conversion</h4>
+                                    <p class="text-slate-700 text-sm">Convert between RGB, grayscale, HSV formats</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Data Augmentation Techniques</h3>
+                            <div class="bg-slate-50 p-4 rounded-lg">
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <h4 class="font-semibold text-slate-900 mb-2">Geometric:</h4>
+                                        <ul class="space-y-1">
+                                            <li>• Rotation</li>
+                                            <li>• Scaling</li>
+                                            <li>• Translation</li>
+                                            <li>• Flipping</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-slate-900 mb-2">Photometric:</h4>
+                                        <ul class="space-y-1">
+                                            <li>• Brightness</li>
+                                            <li>• Contrast</li>
+                                            <li>• Saturation</li>
+                                            <li>• Hue shifts</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block mt-6">
+                        <pre class="text-green-400 text-sm"><code># Image Preprocessing and Augmentation
+import torchvision.transforms as transforms
+from PIL import Image
+
+# Define preprocessing pipeline
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),  # Resize to 224x224
+    transforms.RandomHorizontalFlip(p=0.5),  # Random horizontal flip
+    transforms.RandomRotation(degrees=15),  # Random rotation ±15 degrees
+    transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2),  # Color adjustments
+    transforms.ToTensor(),  # Convert to tensor
+    transforms.Normalize(mean=[0.485, 0.456, 0.406],  # ImageNet normalization
+                         std=[0.229, 0.224, 0.225])
+])
+
+# Apply transformations
+image = Image.open('example.jpg')
+transformed_image = transform(image)
+
+print(f"Transformed image shape: {transformed_image.shape}")
+# Output: torch.Size([3, 224, 224])</code></pre>
+                    </div>
+                </div>
+
+                <!-- Computer Vision Applications -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Real-World Applications</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg text-center">
+                            <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-car text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Autonomous Vehicles</h3>
+                            <p class="text-slate-700 text-sm">Object detection, lane recognition, traffic sign identification for self-driving cars</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg text-center">
+                            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-heartbeat text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Medical Imaging</h3>
+                            <p class="text-slate-700 text-sm">X-ray analysis, tumor detection, cell counting, disease diagnosis from medical images</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg text-center">
+                            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-shopping-cart text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Retail & E-commerce</h3>
+                            <p class="text-slate-700 text-sm">Visual search, product recognition, inventory management, customer analytics</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg text-center">
+                            <div class="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-security text-orange-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Security & Surveillance</h3>
+                            <p class="text-slate-700 text-sm">Face recognition, anomaly detection, crowd monitoring, access control systems</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg text-center">
+                            <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-drone text-red-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Agriculture</h3>
+                            <p class="text-slate-700 text-sm">Crop monitoring, disease detection, yield estimation, precision farming with drones</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg text-center">
+                            <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-industry text-indigo-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Manufacturing</h3>
+                            <p class="text-slate-700 text-sm">Quality control, defect detection, assembly verification, predictive maintenance</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Evaluation Metrics</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Classification Metrics</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-blue-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Accuracy</h4>
+                                    <p class="text-slate-700 text-sm">Overall correctness of predictions</p>
+                                    <code class="text-xs text-blue-600">Accuracy = Correct Predictions / Total Predictions</code>
+                                </div>
+                                <div class="border-l-4 border-green-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Precision</h4>
+                                    <p class="text-slate-700 text-sm">Accuracy of positive predictions</p>
+                                    <code class="text-xs text-green-600">Precision = TP / (TP + FP)</code>
+                                </div>
+                                <div class="border-l-4 border-purple-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Recall</h4>
+                                    <p class="text-slate-700 text-sm">Coverage of actual positive cases</p>
+                                    <code class="text-xs text-purple-600">Recall = TP / (TP + FN)</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Object Detection Metrics</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-orange-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">IoU (Intersection over Union)</h4>
+                                    <p class="text-slate-700 text-sm">Overlap between predicted and ground truth bounding boxes</p>
+                                    <code class="text-xs text-orange-600">IoU = Area of Overlap / Area of Union</code>
+                                </div>
+                                <div class="border-l-4 border-red-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">mAP (mean Average Precision)</h4>
+                                    <p class="text-slate-700 text-sm">Average precision across all classes and IoU thresholds</p>
+                                    <code class="text-xs text-red-600">mAP = Average of AP values</code>
+                                </div>
+                                <div class="border-l-4 border-indigo-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">F1-Score</h4>
+                                    <p class="text-slate-700 text-sm">Harmonic mean of precision and recall</p>
+                                    <code class="text-xs text-indigo-600">F1 = 2 × (Precision × Recall) / (Precision + Recall)</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center">
+                        <a href="topic-nlp-basics.html" class="flex items-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: NLP Basics
+                        </a>
+                        <div class="flex space-x-2">
+                            <button onclick="markComplete('cv-fundamentals')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                                <i class="fas fa-check mr-2"></i>Mark Complete
+                            </button>
+                            <a href="topic-agent-architecture.html" class="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                                Next: Agent Architecture
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Agentic AI Knowledge Hub</h3>
+                <p class="text-slate-400 mb-6">Master the future of artificial intelligence</p>
+                <p class="text-slate-500 text-sm">© 2024 Agentic AI Knowledge Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate progress bar
+            anime({
+                targets: '.progress-bar',
+                width: '65%',
+                duration: 2000,
+                easing: 'easeOutQuart'
+            });
+
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.card-hover');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            translateY: [30, 0],
+                            opacity: [0, 1],
+                            duration: 800,
+                            easing: 'easeOutQuart'
+                        });
+                    }
+                });
+            });
+
+            cards.forEach(card => observer.observe(card));
+
+            // Animate pipeline steps
+            const pipelineSteps = document.querySelectorAll('.cv-pipeline .text-center');
+            pipelineSteps.forEach((step, index) => {
+                anime({
+                    targets: step,
+                    scale: [0, 1],
+                    duration: 500,
+                    delay: index * 150,
+                    easing: 'easeOutBack'
+                });
+            });
+
+            // Animate image grid
+            const imagePlaceholders = document.querySelectorAll('.image-placeholder');
+            imagePlaceholders.forEach((placeholder, index) => {
+                anime({
+                    targets: placeholder,
+                    scale: [0, 1],
+                    duration: 400,
+                    delay: index * 100,
+                    easing: 'easeOutBack'
+                });
+            });
+        });
+
+        // Mark topic as complete
+        function markComplete(topicId) {
+            localStorage.setItem(`topic_${topicId}_complete`, 'true');
+            
+            // Show success message
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Completed!';
+            button.classList.remove('bg-green-600', 'hover:bg-green-700');
+            button.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-500');
+                button.classList.add('bg-green-600', 'hover:bg-green-700');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

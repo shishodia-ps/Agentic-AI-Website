@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Fundamentals | Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .code-block { background: #1e293b; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .progress-bar { background: linear-gradient(90deg, #10b981 0%, #34d399 100%); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-brain text-2xl gradient-text mr-3"></i>
+                    <h1 class="text-xl font-bold text-slate-900">Agentic AI Hub</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors">Home</a>
+                    <a href="topics.html" class="text-slate-600 hover:text-slate-900 transition-colors">Topics</a>
+                    <a href="about.html" class="text-slate-600 hover:text-slate-900 transition-colors">About</a>
+                    <a href="manage.html" class="text-slate-600 hover:text-slate-900 transition-colors">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Machine Learning Fundamentals
+                </h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Master the core concepts that power modern AI systems and agentic architectures
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+                        <span class="text-white text-sm">Progress: </span>
+                        <div class="inline-block w-32 h-2 bg-white/20 rounded-full ml-2">
+                            <div class="progress-bar h-full rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Learning Path</h3>
+                    <nav class="space-y-2">
+                        <a href="topic-what-is-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>What is AI?
+                        </a>
+                        <a href="topic-types-of-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Types of AI
+                        </a>
+                        <a href="#" class="block px-3 py-2 text-sm bg-blue-50 text-blue-900 rounded-md font-medium">
+                            <i class="fas fa-play-circle text-blue-500 mr-2"></i>Machine Learning
+                        </a>
+                        <a href="topic-deep-learning-concepts.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-circle text-slate-300 mr-2"></i>Deep Learning
+                        </a>
+                        <a href="topic-neural-networks-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-circle text-slate-300 mr-2"></i>Neural Networks
+                        </a>
+                        <a href="topic-nlp-basics.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-circle text-slate-300 mr-2"></i>NLP Basics
+                        </a>
+                        <a href="topic-computer-vision-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-circle text-slate-300 mr-2"></i>Computer Vision
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Introduction -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">Introduction to Machine Learning</h2>
+                    <p class="text-lg text-slate-700 mb-6">
+                        Machine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. It focuses on developing computer programs that can access data and use it to learn for themselves.
+                    </p>
+                    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+                        <p class="text-blue-800">
+                            <strong>Key Insight:</strong> Machine learning algorithms build a mathematical model based on sample data, known as "training data", in order to make predictions or decisions without being explicitly programmed to perform the task.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Core Concepts -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Core Concepts</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-database text-purple-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Training Data</h3>
+                            </div>
+                            <p class="text-slate-700">The dataset used to train the machine learning model. It contains input features and corresponding output labels.</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-chart-line text-green-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Features</h3>
+                            </div>
+                            <p class="text-slate-700">Individual measurable properties or characteristics of the phenomena being observed.</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-target text-blue-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Labels</h3>
+                            </div>
+                            <p class="text-slate-700">The output or target variable that the model is trying to predict.</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-brain text-orange-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Model</h3>
+                            </div>
+                            <p class="text-slate-700">The mathematical representation of the relationship between features and labels.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Types of Machine Learning -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Types of Machine Learning</h2>
+                    
+                    <!-- Supervised Learning -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-chalkboard-teacher text-blue-600 mr-3"></i>
+                            Supervised Learning
+                        </h3>
+                        <p class="text-slate-700 mb-4">
+                            Supervised learning uses labeled training data to learn the mapping between inputs and outputs. The algorithm learns from examples where the correct answer is already known.
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-slate-900 mb-2">Common Algorithms:</h4>
+                            <ul class="list-disc list-inside text-slate-700 space-y-1">
+                                <li>Linear Regression</li>
+                                <li>Logistic Regression</li>
+                                <li>Decision Trees</li>
+                                <li>Random Forest</li>
+                                <li>Support Vector Machines (SVM)</li>
+                                <li>Neural Networks</li>
+                            </ul>
+                        </div>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># Example: Simple Linear Regression
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+# Prepare data
+X = [[1], [2], [3], [4], [5]]  # Features
+y = [2, 4, 6, 8, 10]          # Labels
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Train model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Make predictions
+predictions = model.predict(X_test)
+print(f"Predictions: {predictions}")</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Unsupervised Learning -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-search text-green-600 mr-3"></i>
+                            Unsupervised Learning
+                        </h3>
+                        <p class="text-slate-700 mb-4">
+                            Unsupervised learning finds hidden patterns in data without labeled examples. The algorithm discovers structure in the data on its own.
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-slate-900 mb-2">Common Techniques:</h4>
+                            <ul class="list-disc list-inside text-slate-700 space-y-1">
+                                <li>K-Means Clustering</li>
+                                <li>Hierarchical Clustering</li>
+                                <li>Principal Component Analysis (PCA)</li>
+                                <li>Autoencoders</li>
+                                <li>Gaussian Mixture Models</li>
+                            </ul>
+                        </div>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># Example: K-Means Clustering
+from sklearn.cluster import KMeans
+import numpy as np
+
+# Sample data points
+data = np.array([[1, 2], [1.5, 1.8], [5, 8], [8, 8], [1, 0.6], [9, 11]])
+
+# Apply K-Means clustering
+kmeans = KMeans(n_clusters=2, random_state=0)
+kmeans.fit(data)
+
+# Get cluster labels
+labels = kmeans.labels_
+print(f"Cluster labels: {labels}")
+
+# Get cluster centers
+centers = kmeans.cluster_centers_
+print(f"Cluster centers: {centers}")</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reinforcement Learning -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-robot text-purple-600 mr-3"></i>
+                            Reinforcement Learning
+                        </h3>
+                        <p class="text-slate-700 mb-4">
+                            Reinforcement learning learns through trial and error by receiving rewards or penalties for actions taken in an environment.
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-slate-900 mb-2">Key Components:</h4>
+                            <ul class="list-disc list-inside text-slate-700 space-y-1">
+                                <li><strong>Agent:</strong> The learner or decision maker</li>
+                                <li><strong>Environment:</strong> The world the agent interacts with</li>
+                                <li><strong>Actions:</strong> What the agent can do</li>
+                                <li><strong>Rewards:</strong> Feedback from the environment</li>
+                                <li><strong>Policy:</strong> The strategy for choosing actions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ML Workflow -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Machine Learning Workflow</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-database text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">1. Data Collection</h3>
+                            <p class="text-slate-700 text-sm">Gather relevant data from various sources</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-filter text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">2. Data Preprocessing</h3>
+                            <p class="text-slate-700 text-sm">Clean and prepare data for training</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-cogs text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">3. Model Training</h3>
+                            <p class="text-slate-700 text-sm">Train the model on prepared data</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                        <div class="text-center">
+                            <div class="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-chart-bar text-orange-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">4. Evaluation</h3>
+                            <p class="text-slate-700 text-sm">Test model performance on unseen data</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-wrench text-red-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">5. Optimization</h3>
+                            <p class="text-slate-700 text-sm">Tune hyperparameters and improve performance</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-rocket text-indigo-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">6. Deployment</h3>
+                            <p class="text-slate-700 text-sm">Deploy model to production environment</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Metrics -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Key Performance Metrics</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Classification Metrics</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-blue-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Accuracy</h4>
+                                    <p class="text-slate-700 text-sm">Ratio of correct predictions to total predictions</p>
+                                    <code class="text-xs text-blue-600">Accuracy = (TP + TN) / (TP + TN + FP + FN)</code>
+                                </div>
+                                <div class="border-l-4 border-green-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Precision</h4>
+                                    <p class="text-slate-700 text-sm">Ratio of true positives to all positive predictions</p>
+                                    <code class="text-xs text-green-600">Precision = TP / (TP + FP)</code>
+                                </div>
+                                <div class="border-l-4 border-purple-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Recall (Sensitivity)</h4>
+                                    <p class="text-slate-700 text-sm">Ratio of true positives to all actual positives</p>
+                                    <code class="text-xs text-purple-600">Recall = TP / (TP + FN)</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Regression Metrics</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-orange-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Mean Absolute Error (MAE)</h4>
+                                    <p class="text-slate-700 text-sm">Average of absolute differences between predictions and actual values</p>
+                                    <code class="text-xs text-orange-600">MAE = Σ|y_true - y_pred| / n</code>
+                                </div>
+                                <div class="border-l-4 border-red-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Root Mean Square Error (RMSE)</h4>
+                                    <p class="text-slate-700 text-sm">Square root of average squared differences</p>
+                                    <code class="text-xs text-red-600">RMSE = √(Σ(y_true - y_pred)² / n)</code>
+                                </div>
+                                <div class="border-l-4 border-indigo-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">R-squared (R²)</h4>
+                                    <p class="text-slate-700 text-sm">Proportion of variance in dependent variable explained by model</p>
+                                    <code class="text-xs text-indigo-600">R² = 1 - (SS_res / SS_tot)</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center">
+                        <a href="topic-types-of-ai.html" class="flex items-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: Types of AI
+                        </a>
+                        <div class="flex space-x-2">
+                            <button onclick="markComplete('ml-fundamentals')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                                <i class="fas fa-check mr-2"></i>Mark Complete
+                            </button>
+                            <a href="topic-deep-learning-concepts.html" class="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                                Next: Deep Learning Concepts
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Agentic AI Knowledge Hub</h3>
+                <p class="text-slate-400 mb-6">Master the future of artificial intelligence</p>
+                <p class="text-slate-500 text-sm">© 2024 Agentic AI Knowledge Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate progress bar
+            anime({
+                targets: '.progress-bar',
+                width: '25%',
+                duration: 2000,
+                easing: 'easeOutQuart'
+            });
+
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.card-hover');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            translateY: [30, 0],
+                            opacity: [0, 1],
+                            duration: 800,
+                            easing: 'easeOutQuart'
+                        });
+                    }
+                });
+            });
+
+            cards.forEach(card => observer.observe(card));
+        });
+
+        // Mark topic as complete
+        function markComplete(topicId) {
+            localStorage.setItem(`topic_${topicId}_complete`, 'true');
+            
+            // Show success message
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Completed!';
+            button.classList.remove('bg-green-600', 'hover:bg-green-700');
+            button.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-500');
+                button.classList.add('bg-green-600', 'hover:bg-green-700');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

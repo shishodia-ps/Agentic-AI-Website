@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring & Observability - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, #f8f6f0 0%, #e8e4dc 100%); }
+        .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .code-block { background: #2d3748; color: #e2e8f0; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .note-box { background: #fef5e7; border-left: 4px solid #f6ad55; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .warning-box { background: #fed7d7; border-left: 4px solid #fc8181; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .tip-box { background: #e6fffa; border-left: 4px solid #4fd1c7; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .info-box { background: #ebf8ff; border-left: 4px solid #63b3ed; padding: 1rem; border-radius: 0 8px 8px 0; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                        <i class="fas fa-brain text-2xl text-blue-600"></i>
+                        <span class="font-semibold text-xl">Agentic AI Hub</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-gray-900 font-medium">Home</a>
+                    <a href="ai-stack.html" class="text-gray-600 hover:text-gray-900 font-medium">AI Stack</a>
+                    <a href="visual-editor.html" class="text-blue-600 hover:text-blue-800 font-medium">Visual Editor</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-shadow">
+                    Monitoring & Observability
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Comprehensive monitoring and observability solutions for AI systems, including metrics, 
+                    logging, tracing, and alerting to ensure production reliability and performance.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="sticky top-24">
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Quick Navigation</h3>
+                        <nav class="space-y-2">
+                            <a href="#overview" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Overview</a>
+                            <a href="#metrics" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Metrics</a>
+                            <a href="#logging" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Logging</a>
+                            <a href="#tracing" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Tracing</a>
+                            <a href="#alerting" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Alerting</a>
+                            <a href="#tools" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Tools</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Overview Section -->
+                <section id="overview" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Overview</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        Observability is crucial for maintaining AI systems in production. It provides 
+                        visibility into model performance, system health, and business impact, enabling 
+                        proactive issue detection and resolution.
+                    </p>
+                    
+                    <div class="info-box mb-6">
+                        <h4 class="font-semibold text-blue-800 mb-2">
+                            <i class="fas fa-info-circle mr-2"></i>Three Pillars of Observability
+                        </h4>
+                        <p class="text-blue-700">
+                            Metrics (what), Logs (why), and Traces (where) provide comprehensive visibility 
+                            into your AI system's behavior and performance.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-chart-line text-2xl text-blue-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Metrics</h3>
+                            </div>
+                            <p class="text-gray-600">Quantitative measurements of system performance and behavior</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-file-alt text-2xl text-green-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Logs</h3>
+                            </div>
+                            <p class="text-gray-600">Detailed records of events and system activities</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-route text-2xl text-purple-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Traces</h3>
+                            </div>
+                            <p class="text-gray-600">Request flow through distributed systems</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Metrics -->
+                <section id="metrics" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Metrics Collection</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Key AI Model Metrics</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="font-semibold text-lg mb-3">Performance Metrics</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li>• Prediction latency (P50, P95, P99)</li>
+                                    <li>• Throughput (requests/sec)</li>
+                                    <li>• Model accuracy/f1-score</li>
+                                    <li>• Resource utilization (CPU, GPU, Memory)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="font-semibold text-lg mb-3">Business Metrics</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li>• Prediction confidence scores</li>
+                                    <li>• Model drift indicators</li>
+                                    <li>• Feature distribution changes</li>
+                                    <li>• User engagement metrics</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Prometheus Integration</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>from prometheus_client import Counter, Histogram, Gauge, start_http_server
+import time
+import random
+
+# Define metrics
+prediction_counter = Counter('model_predictions_total', 'Total number of predictions')
+prediction_latency = Histogram('model_prediction_duration_seconds', 'Prediction latency')
+model_accuracy = Gauge('model_accuracy_score', 'Current model accuracy')
+active_requests = Gauge('model_active_requests', 'Number of active requests')
+
+class AIModel:
+    def __init__(self):
+        self.accuracy = 0.95
+        
+    @prediction_latency.time()
+    def predict(self, data):
+        active_requests.inc()
+        try:
+            # Simulate prediction
+            time.sleep(random.uniform(0.1, 0.5))
+            prediction_counter.inc()
+            
+            # Update accuracy occasionally
+            if random.random() < 0.1:
+                self.accuracy = max(0.8, self.accuracy + random.uniform(-0.05, 0.05))
+                model_accuracy.set(self.accuracy)
+                
+            return {"prediction": random.choice([0, 1]), "confidence": random.random()}
+        finally:
+            active_requests.dec()
+
+# Start Prometheus metrics server
+start_http_server(8001)
+
+# Create model instance
+model = AIModel()
+
+# Simulate predictions
+while True:
+    result = model.predict([1, 2, 3])
+    time.sleep(0.5)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="note-box">
+                        <h4 class="font-semibold text-yellow-800 mb-2">
+                            <i class="fas fa-lightbulb mr-2"></i>Metric Design Principles
+                        </h4>
+                        <p class="text-yellow-700">
+                            Focus on actionable metrics that indicate system health and business impact. 
+                            Use percentiles (P50, P95, P99) rather than averages for latency measurements.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Logging -->
+                <section id="logging" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Structured Logging</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">AI-Specific Log Events</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import logging
+import json
+from datetime import datetime
+from pythonjsonlogger import jsonlogger
+
+# Configure structured logging
+logHandler = logging.StreamHandler()
+formatter = jsonlogger.JsonFormatter()
+logHandler.setFormatter(formatter)
+logger = logging.getLogger()
+logger.addHandler(logHandler)
+logger.setLevel(logging.INFO)
+
+class AIModelLogger:
+    def __init__(self, model_name, version):
+        self.model_name = model_name
+        self.version = version
+        self.logger = logger
+    
+    def log_prediction(self, input_data, prediction, confidence, latency):
+        self.logger.info("prediction_made", extra={
+            "model_name": self.model_name,
+            "model_version": self.version,
+            "prediction": prediction,
+            "confidence": confidence,
+            "latency_ms": latency * 1000,
+            "input_hash": hash(str(input_data)),
+            "timestamp": datetime.utcnow().isoformat()
+        })
+    
+    def log_model_drift(self, drift_score, threshold):
+        self.logger.warning("model_drift_detected", extra={
+            "model_name": self.model_name,
+            "drift_score": drift_score,
+            "threshold": threshold,
+            "action_required": drift_score > threshold,
+            "timestamp": datetime.utcnow().isoformat()
+        })
+    
+    def log_error(self, error, context):
+        self.logger.error("model_error", extra={
+            "model_name": self.model_name,
+            "error_type": type(error).__name__,
+            "error_message": str(error),
+            "context": context,
+            "timestamp": datetime.utcnow().isoformat()
+        })
+
+# Usage example
+model_logger = AIModelLogger("sentiment_classifier", "v1.2.0")
+
+# Log a prediction
+model_logger.log_prediction(
+    input_data="Great product!",
+    prediction="positive",
+    confidence=0.95,
+    latency=0.150
+)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Log Aggregation with ELK Stack</h3>
+                        <div class="code-block mb-4">
+                            <pre><code># docker-compose.yml for ELK stack
+version: '3.7'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.15.0
+    container_name: logstash
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.15.0
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+
+volumes:
+  elasticsearch_data:</code></pre>
+                        </div>
+
+                        <div class="code-block">
+                            <pre><code># logstash.conf
+input {
+  tcp {
+    port => 5000
+    codec => json
+  }
+}
+
+filter {
+  if [model_name] {
+    mutate {
+      add_tag => ["ai_model"]
+    }
+  }
+  
+  if [drift_score] {
+    mutate {
+      add_tag => ["model_drift"]
+    }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["elasticsearch:9200"]
+    index => "ai-logs-%{+YYYY.MM.dd}"
+  }
+  
+  stdout {
+    codec => rubydebug
+  }
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4 class="font-semibold text-red-800 mb-2">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>Logging Best Practices
+                        </h4>
+                        <p class="text-red-700">
+                            Avoid logging sensitive data (PII, credentials). Use correlation IDs to trace 
+                            requests across distributed systems. Implement log retention policies.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Tracing -->
+                <section id="tracing" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Distributed Tracing</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">OpenTelemetry Integration</h3>
+                        <p class="text-gray-600 text-lg mb-4">
+                            Track requests through your AI pipeline with distributed tracing for performance optimization.
+                        </p>
+                        
+                        <div class="code-block mb-4">
+                            <pre><code>from opentelemetry import trace
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.instrumentation.requests import RequestsInstrumentor
+import time
+
+# Configure OpenTelemetry
+trace.set_tracer_provider(TracerProvider())
+tracer = trace.get_tracer(__name__)
+
+# Configure exporter
+otlp_exporter = OTLPSpanExporter(
+    endpoint="otel-collector:4317",
+    insecure=True
+)
+
+# Add span processor
+span_processor = BatchSpanProcessor(otlp_exporter)
+trace.get_tracer_provider().add_span_processor(span_processor)
+
+# Instrument HTTP requests
+RequestsInstrumentor().instrument()
+
+class AIModelWithTracing:
+    def __init__(self, model_name):
+        self.model_name = model_name
+    
+    @tracer.start_as_current_span("preprocess_data")
+    def preprocess(self, raw_data):
+        # Simulate preprocessing
+        time.sleep(0.1)
+        return {"processed": raw_data}
+    
+    @tracer.start_as_current_span("model_inference")
+    def predict(self, processed_data):
+        # Add model attributes to span
+        span = trace.get_current_span()
+        span.set_attribute("model.name", self.model_name)
+        span.set_attribute("model.version", "1.0.0")
+        
+        # Simulate model inference
+        time.sleep(0.3)
+        
+        # Add prediction attributes
+        prediction = {"class": "positive", "confidence": 0.95}
+        span.set_attribute("prediction.confidence", prediction["confidence"])
+        
+        return prediction
+    
+    @tracer.start_as_current_span("postprocess_result")
+    def postprocess(self, prediction):
+        # Simulate postprocessing
+        time.sleep(0.05)
+        return {"final_result": prediction}
+
+# Usage with tracing
+model = AIModelWithTracing("sentiment_classifier")
+
+with tracer.start_as_current_span("prediction_pipeline") as pipeline_span:
+    # Add pipeline metadata
+    pipeline_span.set_attribute("pipeline.id", "12345")
+    pipeline_span.set_attribute("user.id", "user_789")
+    
+    # Execute pipeline
+    raw_data = "This product is amazing!"
+    processed = model.preprocess(raw_data)
+    prediction = model.predict(processed)
+    result = model.postprocess(prediction)
+    
+    print(f"Final result: {result}")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Jaeger Visualization</h3>
+                        <div class="code-block">
+                            <pre><code># docker-compose.yml for Jaeger
+docker run -d --name jaeger \
+  -e COLLECTOR_OTLP_ENABLED=true \
+  -p 16686:16686 \
+  -p 4317:4317 \
+  -p 4318:4318 \
+  jaegertracing/all-in-one:latest
+
+# Access Jaeger UI at http://localhost:16686</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <h4 class="font-semibold text-blue-800 mb-2">
+                            <i class="fas fa-info-circle mr-2"></i>Tracing Benefits
+                        </h4>
+                        <p class="text-blue-700">
+                            Distributed tracing helps identify bottlenecks, understand request flow, 
+                            and optimize performance in complex AI pipelines.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Alerting -->
+                <section id="alerting" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Intelligent Alerting</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Prometheus Alert Rules</h3>
+                        <div class="code-block mb-4">
+                            <pre><code># alert_rules.yml
+groups:
+- name: ai_model_alerts
+  rules:
+  - alert: HighPredictionLatency
+    expr: histogram_quantile(0.95, model_prediction_duration_seconds_bucket) > 1.0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High prediction latency detected"
+      description: "95th percentile latency is {{ $value }}s for model {{ $labels.model_name }}"
+
+  - alert: ModelAccuracyDrop
+    expr: model_accuracy_score < 0.85
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Model accuracy dropped below threshold"
+      description: "Model {{ $labels.model_name }} accuracy is {{ $value }}"
+
+  - alert: HighErrorRate
+    expr: rate(model_predictions_total[5m]) - rate(model_predictions_total[5m]) > 0.1
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High error rate detected"
+      description: "Error rate is {{ $value }} for model {{ $labels.model_name }}"
+
+  - alert: ModelDriftDetected
+    expr: model_drift_score > 0.8
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Model drift detected"
+      description: "Drift score {{ $value }} exceeds threshold for {{ $labels.model_name }}"</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Alertmanager Configuration</h3>
+                        <div class="code-block">
+                            <pre><code># alertmanager.yml
+global:
+  smtp_smarthost: 'localhost:587'
+  smtp_from: 'alerts@company.com'
+
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1h
+  receiver: 'web.hook'
+  routes:
+  - match:
+      severity: critical
+    receiver: critical_alerts
+  - match:
+      severity: warning
+    receiver: warning_alerts
+
+receivers:
+- name: 'critical_alerts'
+  email_configs:
+  - to: 'oncall@company.com'
+    subject: 'CRITICAL: {{ range .Alerts }}{{ .Annotations.summary }}{{ end }}'
+    body: |
+      {{ range .Alerts }}
+      Alert: {{ .Annotations.summary }}
+      Description: {{ .Annotations.description }}
+      {{ end }}
+  slack_configs:
+  - api_url: 'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK'
+    channel: '#ai-alerts'
+    title: 'Critical AI Model Alert'
+    text: '{{ range .Alerts }}{{ .Annotations.summary }}{{ end }}'
+
+- name: 'warning_alerts'
+  email_configs:
+  - to: 'ai-team@company.com'
+    subject: 'AI Model Warning'
+    body: '{{ range .Alerts }}{{ .Annotations.description }}{{ end }}'</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <h4 class="font-semibold text-teal-800 mb-2">
+                            <i class="fas fa-lightbulb mr-2"></i>Alerting Best Practices
+                        </h4>
+                        <p class="text-teal-700">
+                            Use meaningful thresholds, avoid alert fatigue with proper severity levels, 
+                            and include actionable information in alert descriptions.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Tools -->
+                <section id="tools" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Monitoring Tools & Platforms</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="hover-lift bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-chart-line text-2xl text-orange-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Prometheus</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Time-series database for metrics collection and alerting</p>
+                            <div class="code-block">
+                                <code>docker run -p 9090:9090 prom/prometheus</code>
+                            </div>
+                        </div>
+                        
+                        <div class="hover-lift bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-tachometer-alt text-2xl text-blue-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Grafana</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Visualization and dashboarding for metrics</p>
+                            <div class="code-block">
+                                <code>docker run -p 3000:3000 grafana/grafana</code>
+                            </div>
+                        </div>
+                        
+                        <div class="hover-lift bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-search text-2xl text-green-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">ELK Stack</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Elasticsearch, Logstash, Kibana for log management</p>
+                            <div class="code-block">
+                                <code>docker-compose up -d elasticsearch logstash kibana</code>
+                            </div>
+                        </div>
+                        
+                        <div class="hover-lift bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-route text-2xl text-purple-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Jaeger</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Distributed tracing platform</p>
+                            <div class="code-block">
+                                <code>docker run -p 16686:16686 jaegertracing/all-in-one</code>
+                            </div>
+                        </div>
+                        
+                        <div class="hover-lift bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-bell text-2xl text-red-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Alertmanager</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Alert routing and notification management</p>
+                            <div class="code-block">
+                                <code>docker run -p 9093:9093 prom/alertmanager</code>
+                            </div>
+                        </div>
+                        
+                        <div class="hover-lift bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-database text-2xl text-teal-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">InfluxDB</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">High-performance time-series database</p>
+                            <div class="code-block">
+                                <code>docker run -p 8086:8086 influxdb:2.0</code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Summary</h2>
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        Comprehensive monitoring and observability are essential for maintaining reliable 
+                        AI systems in production. By implementing metrics, logging, tracing, and alerting, 
+                        you can proactively detect issues, optimize performance, and ensure your AI models 
+                        deliver consistent value.
+                    </p>
+                    
+                    <div class="mt-6 flex flex-wrap gap-4">
+                        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                            Metrics
+                        </span>
+                        <span class="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                            Logging
+                        </span>
+                        <span class="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+                            Tracing
+                        </span>
+                        <span class="px-4 py-2 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
+                            Alerting
+                        </span>
+                        <span class="px-4 py-2 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                            Tools
+                        </span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <i class="fas fa-brain text-2xl text-blue-400"></i>
+                    <span class="text-xl font-semibold">Agentic AI Knowledge Hub</span>
+                </div>
+                <p class="text-gray-400">
+                    © 2024 Agentic AI Knowledge Hub. Empowering AI engineering excellence.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active navigation item
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-600', 'font-semibold');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-blue-600', 'font-semibold');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

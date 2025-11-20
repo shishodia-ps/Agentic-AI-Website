@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Optimization - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, #f8f6f0 0%, #e8e4dc 100%); }
+        .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .code-block { background: #2d3748; color: #e2e8f0; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .note-box { background: #fef5e7; border-left: 4px solid #f6ad55; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .warning-box { background: #fed7d7; border-left: 4px solid #fc8181; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .tip-box { background: #e6fffa; border-left: 4px solid #4fd1c7; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .info-box { background: #ebf8ff; border-left: 4px solid #63b3ed; padding: 1rem; border-radius: 0 8px 8px 0; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                        <i class="fas fa-brain text-2xl text-blue-600"></i>
+                        <span class="font-semibold text-xl">Agentic AI Hub</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-gray-900 font-medium">Home</a>
+                    <a href="ai-stack.html" class="text-gray-600 hover:text-gray-900 font-medium">AI Stack</a>
+                    <a href="visual-editor.html" class="text-blue-600 hover:text-blue-800 font-medium">Visual Editor</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-shadow">
+                    Cost Optimization
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Strategic cost optimization techniques for AI systems, covering compute, storage, 
+                    data transfer, and operational expenses with automated cost management solutions.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="sticky top-24">
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Quick Navigation</h3>
+                        <nav class="space-y-2">
+                            <a href="#overview" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Overview</a>
+                            <a href="#compute-optimization" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Compute</a>
+                            <a href="#storage-optimization" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Storage</a>
+                            <a href="#data-transfer" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Data Transfer</a>
+                            <a href="#auto-scaling" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Auto-scaling</a>
+                            <a href="#cost-monitoring" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Monitoring</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Overview Section -->
+                <section id="overview" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Overview</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        AI systems can be expensive to run at scale. Cost optimization involves strategic 
+                        decisions about compute resources, storage, data transfer, and operational processes 
+                        to maximize value while minimizing expenses.
+                    </p>
+                    
+                    <div class="info-box mb-6">
+                        <h4 class="font-semibold text-blue-800 mb-2">
+                            <i class="fas fa-info-circle mr-2"></i>Cost Optimization Strategy
+                        </h4>
+                        <p class="text-blue-700">
+                            Right-size resources, use spot instances, implement auto-scaling, 
+                            optimize data storage, and continuously monitor costs.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-server text-2xl text-blue-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Compute Optimization</h3>
+                            </div>
+                            <p class="text-gray-600">Right-size instances and use spot pricing</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-hdd text-2xl text-green-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Storage Optimization</h3>
+                            </div>
+                            <p class="text-gray-600">Tiered storage and compression</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-exchange-alt text-2xl text-purple-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Data Transfer</h3>
+                            </div>
+                            <p class="text-gray-600">Minimize cross-region transfers</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-expand-arrows-alt text-2xl text-red-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Auto-scaling</h3>
+                            </div>
+                            <p class="text-gray-600">Dynamic resource allocation</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-chart-pie text-2xl text-yellow-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Cost Monitoring</h3>
+                            </div>
+                            <p class="text-gray-600">Real-time cost tracking and alerts</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-cogs text-2xl text-teal-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Automation</h3>
+                            </div>
+                            <p class="text-gray-600">Automated cost management</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cost Monitoring -->
+                <section id="cost-monitoring" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Cost Monitoring</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">AWS Cost Explorer Integration</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import boto3
+import pandas as pd
+import json
+from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+class CostMonitor:
+    def __init__(self):
+        self.ce_client = boto3.client('ce')
+        self.budgets_client = boto3.client('budgets')
+        self.logger = logging.getLogger(__name__)
+    
+    def get_cost_and_usage(self, start_date, end_date, granularity='DAILY', 
+                          group_by=None, filter_expression=None):
+        """Get cost and usage data from AWS Cost Explorer"""
+        
+        # Build query parameters
+        query_params = {
+            'TimePeriod': {
+                'Start': start_date.strftime('%Y-%m-%d'),
+                'End': end_date.strftime('%Y-%m-%d')
+            },
+            'Granularity': granularity,
+            'Metrics': ['UnblendedCost', 'UsageQuantity']
+        }
+        
+        # Add group by if specified
+        if group_by:
+            query_params['GroupBy'] = group_by
+        
+        # Add filter if specified
+        if filter_expression:
+            query_params['Filter'] = filter_expression
+        
+        try:
+            response = self.ce_client.get_cost_and_usage(**query_params)
+            
+            # Process results
+            results = []
+            for result in response['ResultsByTime']:
+                time_period = result['TimePeriod']
+                
+                if 'Groups' in result:
+                    for group in result['Groups']:
+                        row = {
+                            'start_date': time_period['Start'],
+                            'end_date': time_period['End'],
+                            'group_keys': group['Keys'],
+                            'estimated_cost': float(group['Metrics']['UnblendedCost']['Amount']),
+                            'usage_quantity': float(group['Metrics']['UsageQuantity']['Amount'])
+                        }
+                        results.append(row)
+                else:
+                    row = {
+                        'start_date': time_period['Start'],
+                        'end_date': time_period['End'],
+                        'group_keys': ['Total'],
+                        'estimated_cost': float(result['Total']['UnblendedCost']['Amount']),
+                        'usage_quantity': float(result['Total']['UsageQuantity']['Amount'])
+                    }
+                    results.append(row)
+            
+            return pd.DataFrame(results)
+            
+        except Exception as e:
+            self.logger.error(f"Error getting cost and usage data: {e}")
+            return pd.DataFrame()
+    
+    def analyze_cost_by_service(self, days_back=30):
+        """Analyze costs by AWS service"""
+        
+        end_date = datetime.utcnow()
+        start_date = end_date - timedelta(days=days_back)
+        
+        group_by = [
+            {
+                'Type': 'DIMENSION',
+                'Key': 'SERVICE'
+            }
+        ]
+        
+        cost_data = self.get_cost_and_usage(
+            start_date=start_date,
+            end_date=end_date,
+            granularity='DAILY',
+            group_by=group_by
+        )
+        
+        if not cost_data.empty:
+            # Aggregate by service
+            service_costs = cost_data.groupby('group_keys')['estimated_cost'].sum().sort_values(ascending=False)
+            
+            return service_costs
+        else:
+            return pd.Series()
+    
+    def analyze_cost_by_instance_type(self, days_back=30):
+        """Analyze EC2 costs by instance type"""
+        
+        end_date = datetime.utcnow()
+        start_date = end_date - timedelta(days=days_back)
+        
+        # Filter for EC2 instances
+        filter_expression = {
+            'Dimensions': {
+                'Key': 'SERVICE',
+                'Values': ['Amazon Elastic Compute Cloud - Compute']
+            }
+        }
+        
+        group_by = [
+            {
+                'Type': 'DIMENSION',
+                'Key': 'INSTANCE_TYPE'
+            }
+        ]
+        
+        cost_data = self.get_cost_and_usage(
+            start_date=start_date,
+            end_date=end_date,
+            granularity='DAILY',
+            group_by=group_by,
+            filter_expression=filter_expression
+        )
+        
+        if not cost_data.empty:
+            instance_costs = cost_data.groupby('group_keys')['estimated_cost'].sum().sort_values(ascending=False)
+            return instance_costs
+        else:
+            return pd.Series()
+    
+    def create_cost_budget(self, budget_name, amount, time_unit='MONTHLY', 
+                         notification_thresholds=None):
+        """Create cost budget with notifications"""
+        
+        if notification_thresholds is None:
+            notification_thresholds = [80, 90, 100]
+        
+        budget = {
+            'BudgetName': budget_name,
+            'BudgetLimit': {
+                'Amount': str(amount),
+                'Unit': 'USD'
+            },
+            'TimeUnit': time_unit,
+            'BudgetType': 'COST'
+        }
+        
+        # Create notifications
+        notifications = []
+        for threshold in notification_thresholds:
+            notification = {
+                'NotificationType': 'ACTUAL',
+                'ComparisonOperator': 'GREATER_THAN',
+                'Threshold': threshold,
+                'ThresholdType': 'PERCENTAGE',
+                'NotificationState': 'ALARM'
+            }
+            notifications.append(notification)
+        
+        try:
+            # Create budget
+            self.budgets_client.create_budget(
+                AccountId=boto3.client('sts').get_caller_identity()['Account'],
+                Budget=budget,
+                NotificationsWithSubscribers=[
+                    {
+                        'Notification': notification,
+                        'Subscribers': [
+                            {
+                                'SubscriptionType': 'EMAIL',
+                                'Address': 'alerts@company.com'
+                            }
+                        ]
+                    }
+                    for notification in notifications
+                ]
+            )
+            
+            self.logger.info(f"Created budget: {budget_name}")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Error creating budget: {e}")
+            return False
+    
+    def generate_cost_report(self, days_back=30, output_format='json'):
+        """Generate comprehensive cost report"""
+        
+        end_date = datetime.utcnow()
+        start_date = end_date - timedelta(days=days_back)
+        
+        # Get overall costs
+        overall_costs = self.get_cost_and_usage(
+            start_date=start_date,
+            end_date=end_date,
+            granularity='DAILY'
+        )
+        
+        # Get costs by service
+        service_costs = self.analyze_cost_by_service(days_back)
+        
+        # Get EC2 costs by instance type
+        instance_costs = self.analyze_cost_by_instance_type(days_back)
+        
+        # Calculate key metrics
+        total_cost = overall_costs['estimated_cost'].sum() if not overall_costs.empty else 0
+        avg_daily_cost = total_cost / days_back
+        
+        # Cost trends
+        if not overall_costs.empty:
+            daily_costs = overall_costs.groupby('start_date')['estimated_cost'].sum()
+            cost_trend = daily_costs.pct_change().mean() * 100
+        else:
+            cost_trend = 0
+        
+        # Top spending services
+        top_services = service_costs.head(5).to_dict() if not service_costs.empty else {}
+        
+        report = {
+            'report_period': {
+                'start_date': start_date.strftime('%Y-%m-%d'),
+                'end_date': end_date.strftime('%Y-%m-%d'),
+                'days': days_back
+            },
+            'summary': {
+                'total_cost': total_cost,
+                'avg_daily_cost': avg_daily_cost,
+                'cost_trend_percent': cost_trend
+            },
+            'top_services': top_services,
+            'ec2_instance_costs': instance_costs.head(10).to_dict() if not instance_costs.empty else {},
+            'recommendations': self._generate_cost_recommendations(service_costs, instance_costs),
+            'generated_at': datetime.utcnow().isoformat()
+        }
+        
+        if output_format == 'json':
+            return json.dumps(report, indent=2, default=str)
+        else:
+            return report
+    
+    def _generate_cost_recommendations(self, service_costs, instance_costs):
+        """Generate cost optimization recommendations"""
+        
+        recommendations = []
+        
+        # Analyze top spending services
+        if not service_costs.empty:
+            top_service = service_costs.index[0]
+            top_service_cost = service_costs.iloc[0]
+            
+            if 'EC2' in top_service:
+                recommendations.append({
+                    'type': 'compute_optimization',
+                    'description': f'EC2 is your highest cost service (${top_service_cost:.2f}). Consider using spot instances and rightsizing.',
+                    'potential_savings': top_service_cost * 0.3
+                })
+            
+            elif 'S3' in top_service:
+                recommendations.append({
+                    'type': 'storage_optimization',
+                    'description': f'S3 costs are high (${top_service_cost:.2f}). Implement intelligent tiering and compression.',
+                    'potential_savings': top_service_cost * 0.2
+                })
+        
+        # Analyze instance types
+        if not instance_costs.empty:
+            expensive_instances = instance_costs[instance_costs > instance_costs.median()]
+            
+            for instance_type, cost in expensive_instances.items():
+                if 'large' in instance_type or 'xlarge' in instance_type:
+                    recommendations.append({
+                        'type': 'rightsizing',
+                        'description': f'Consider rightsizing {instance_type} instances (cost: ${cost:.2f})',
+                        'potential_savings': cost * 0.25
+                    })
+        
+        return recommendations
+    
+    def visualize_cost_trends(self, cost_data):
+        """Create cost trend visualizations"""
+        
+        if cost_data.empty:
+            return None
+        
+        # Set up the plot
+        plt.figure(figsize=(12, 8))
+        
+        # Plot daily costs
+        daily_costs = cost_data.groupby('start_date')['estimated_cost'].sum()
+        plt.subplot(2, 2, 1)
+        plt.plot(daily_costs.index, daily_costs.values, marker='o')
+        plt.title('Daily Costs Over Time')
+        plt.xlabel('Date')
+        plt.ylabel('Cost ($)')
+        plt.xticks(rotation=45)
+        
+        # Plot costs by service (if available)
+        if 'group_keys' in cost_data.columns:
+            service_costs = cost_data.groupby('group_keys')['estimated_cost'].sum().head(10)
+            plt.subplot(2, 2, 2)
+            service_costs.plot(kind='bar')
+            plt.title('Top 10 Services by Cost')
+            plt.xlabel('Service')
+            plt.ylabel('Cost ($)')
+            plt.xticks(rotation=45)
+        
+        # Cost distribution
+        plt.subplot(2, 2, 3)
+        plt.hist(daily_costs.values, bins=20, alpha=0.7)
+        plt.title('Cost Distribution')
+        plt.xlabel('Daily Cost ($)')
+        plt.ylabel('Frequency')
+        
+        # Weekly pattern
+        cost_data['date'] = pd.to_datetime(cost_data['start_date'])
+        cost_data['day_of_week'] = cost_data['date'].dt.day_name()
+        weekly_pattern = cost_data.groupby('day_of_week')['estimated_cost'].sum()
+        
+        plt.subplot(2, 2, 4)
+        weekly_pattern.plot(kind='bar')
+        plt.title('Costs by Day of Week')
+        plt.xlabel('Day')
+        plt.ylabel('Total Cost ($)')
+        plt.xticks(rotation=45)
+        
+        plt.tight_layout()
+        
+        # Save plot
+        plot_path = f"cost_analysis_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.png"
+        plt.savefig(plot_path)
+        plt.close()
+        
+        return plot_path
+
+# Usage example
+cost_monitor = CostMonitor()
+
+# Generate cost report
+report = cost_monitor.generate_cost_report(days_back=30, output_format='dict')
+
+print("Cost Analysis Report")
+print("===================")
+print(f"Total cost (30 days): ${report['summary']['total_cost']:.2f}")
+print(f"Average daily cost: ${report['summary']['avg_daily_cost']:.2f}")
+print(f"Cost trend: {report['summary']['cost_trend_percent']:.1f}%")
+
+print("\nTop Services:")
+for service, cost in report['top_services'].items():
+    print(f"  {service}: ${cost:.2f}")
+
+print("\nRecommendations:")
+for i, rec in enumerate(report['recommendations'], 1):
+    print(f"{i}. {rec['description']}")
+    print(f"   Potential savings: ${rec['potential_savings']:.2f}")
+
+# Create budget
+cost_monitor.create_cost_budget(
+    budget_name="ml-infrastructure-budget",
+    amount=5000.0,  # $5000 monthly budget
+    notification_thresholds=[50, 80, 100]
+)
+
+print("\nBudget created successfully!")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <h4 class="font-semibold text-teal-800 mb-2">
+                            <i class="fas fa-lightbulb mr-2"></i>Cost Monitoring Best Practices
+                        </h4>
+                        <p class="text-teal-700">
+                            Set up budgets and alerts, tag resources properly, analyze costs regularly, 
+                            and implement automated cost optimization based on usage patterns.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Summary</h2>
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        Cost optimization is an ongoing process that requires continuous monitoring, 
+                        analysis, and optimization. By implementing the strategies covered in this guide, 
+                        you can significantly reduce your AI infrastructure costs while maintaining 
+                        performance and reliability.
+                    </p>
+                    
+                    <div class="mt-6 flex flex-wrap gap-4">
+                        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                            Compute
+                        </span>
+                        <span class="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                            Storage
+                        </span>
+                        <span class="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+                            Data Transfer
+                        </span>
+                        <span class="px-4 py-2 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                            Auto-scaling
+                        </span>
+                        <span class="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">
+                            Monitoring
+                        </span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <i class="fas fa-brain text-2xl text-blue-400"></i>
+                    <span class="text-xl font-semibold">Agentic AI Knowledge Hub</span>
+                </div>
+                <p class="text-gray-400">
+                    © 2024 Agentic AI Knowledge Hub. Empowering AI engineering excellence.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active navigation item
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-600', 'font-semibold');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-blue-600', 'font-semibold');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

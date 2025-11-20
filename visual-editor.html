@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Editor - AI Engineering Knowledge Hub CMS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor5/40.0.0/ckeditor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'deep-blue': '#1e3a8a',
+                        'soft-gray': '#f8fafc',
+                        'accent-blue': '#3b82f6',
+                        'editor-primary': '#2563eb',
+                        'editor-secondary': '#64748b'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .editor-panel {
+            transition: all 0.3s ease;
+        }
+        .editor-panel:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .content-box {
+            transition: all 0.2s ease;
+            border: 2px dashed transparent;
+        }
+        .content-box:hover {
+            border-color: #3b82f6;
+            background-color: #f8fafc;
+        }
+        .content-box.selected {
+            border-color: #1e40af;
+            background-color: #dbeafe;
+        }
+        .editor-toolbar {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .color-picker {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .color-picker:hover {
+            transform: scale(1.1);
+            border-color: #3b82f6;
+        }
+        .drag-handle {
+            cursor: grab;
+            opacity: 0.5;
+            transition: opacity 0.2s ease;
+        }
+        .drag-handle:hover {
+            opacity: 1;
+        }
+        .sortable-ghost {
+            opacity: 0.4;
+        }
+        .editor-modal {
+            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .editor-sidebar {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        .editor-main {
+            background: #ffffff;
+        }
+        .box-note { background: #fef3c7; border-left: 4px solid #f59e0b; }
+        .box-example { background: #dbeafe; border-left: 4px solid #3b82f6; }
+        .box-warning { background: #fee2e2; border-left: 4px solid #ef4444; }
+        .box-tip { background: #dcfce7; border-left: 4px solid #22c55e; }
+        .box-info { background: #f3e8ff; border-left: 4px solid #8b5cf6; }
+    </style>
+</head>
+<body class="bg-soft-gray font-sans">
+    <!-- Main Editor Container -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="w-80 editor-sidebar border-r border-gray-200 flex flex-col">
+            <!-- Sidebar Header -->
+            <div class="p-4 border-b border-gray-200 bg-white">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-edit text-2xl text-editor-primary mr-3"></i>
+                    <h1 class="text-xl font-bold text-gray-800">Visual Editor</h1>
+                </div>
+                <p class="text-sm text-gray-600">AI Engineering Knowledge Hub CMS</p>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="flex border-b border-gray-200 bg-white">
+                <button class="flex-1 py-3 px-4 text-sm font-medium text-editor-primary border-b-2 border-editor-primary bg-blue-50" 
+                        onclick="switchTab('content')" id="content-tab">
+                    <i class="fas fa-file-alt mr-2"></i>Content
+                </button>
+                <button class="flex-1 py-3 px-4 text-sm font-medium text-gray-600 hover:text-editor-primary hover:bg-gray-50" 
+                        onclick="switchTab('structure')" id="structure-tab">
+                    <i class="fas fa-sitemap mr-2"></i>Structure
+                </button>
+                <button class="flex-1 py-3 px-4 text-sm font-medium text-gray-600 hover:text-editor-primary hover:bg-gray-50" 
+                        onclick="switchTab('design')" id="design-tab">
+                    <i class="fas fa-palette mr-2"></i>Design
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <!-- Content Tab -->
+                <div id="content-panel" class="tab-panel">
+                    <!-- Page Management -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                            <i class="fas fa-folder-open mr-2"></i>Page Management
+                        </h3>
+                        <div class="space-y-2">
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="createNewPage()">
+                                <i class="fas fa-plus mr-2 text-editor-primary"></i>
+                                Create New Page
+                            </button>
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="importPage()">
+                                <i class="fas fa-upload mr-2 text-editor-primary"></i>
+                                Import Page
+                            </button>
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="exportPage()">
+                                <i class="fas fa-download mr-2 text-editor-primary"></i>
+                                Export Page
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Current Page Info -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                            <i class="fas fa-info-circle mr-2"></i>Current Page
+                        </h3>
+                        <div class="bg-white p-4 rounded-lg border border-gray-200">
+                            <div class="mb-3">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                                <input type="text" id="page-title" class="w-full p-2 border border-gray-300 rounded-md text-sm"
+                                       placeholder="Page Title" onchange="updatePageTitle()">
+                            </div>
+                            <div class="mb-3">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">URL</label>
+                                <input type="text" id="page-url" class="w-full p-2 border border-gray-300 rounded-md text-sm"
+                                       placeholder="page-url.html" onchange="updatePageURL()">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                                <textarea id="page-description" class="w-full p-2 border border-gray-300 rounded-md text-sm h-20"
+                                          placeholder="Page description..." onchange="updatePageDescription()"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Boxes -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                            <i class="fas fa-cube mr-2"></i>Content Boxes
+                        </h3>
+                        <div class="space-y-2">
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="addContentBox('note')">
+                                <i class="fas fa-sticky-note mr-2 text-yellow-500"></i>
+                                Add Note Box
+                            </button>
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="addContentBox('example')">
+                                <i class="fas fa-lightbulb mr-2 text-blue-500"></i>
+                                Add Example Box
+                            </button>
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="addContentBox('warning')">
+                                <i class="fas fa-exclamation-triangle mr-2 text-red-500"></i>
+                                Add Warning Box
+                            </button>
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="addContentBox('tip')">
+                                <i class="fas fa-thumbs-up mr-2 text-green-500"></i>
+                                Add Tip Box
+                            </button>
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="addContentBox('info')">
+                                <i class="fas fa-info-circle mr-2 text-purple-500"></i>
+                                Add Info Box
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Code Blocks -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                            <i class="fas fa-code mr-2"></i>Code Blocks
+                        </h3>
+                        <div class="space-y-2">
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="addCodeBlock('python')">
+                                <i class="fab fa-python mr-2 text-blue-600"></i>
+                                Python Code Block
+                            </button>
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="addCodeBlock('javascript')">
+                                <i class="fab fa-js-square mr-2 text-yellow-500"></i>
+                                JavaScript Code Block
+                            </button>
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="addCodeBlock('bash')">
+                                <i class="fas fa-terminal mr-2 text-gray-600"></i>
+                                Bash Code Block
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Structure Tab -->
+                <div id="structure-panel" class="tab-panel hidden">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                            <i class="fas fa-list mr-2"></i>Page Structure
+                        </h3>
+                        <div id="structure-tree" class="space-y-1">
+                            <!-- Structure tree will be populated here -->
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                            <i class="fas fa-plus mr-2"></i>Add Section
+                        </h3>
+                        <div class="space-y-2">
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="addSection('introduction')">
+                                <i class="fas fa-header mr-2"></i>Introduction Section
+                            </button>
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="addSection('features')">
+                                <i class="fas fa-star mr-2"></i>Features Section
+                            </button>
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="addSection('implementation')">
+                                <i class="fas fa-cogs mr-2"></i>Implementation Section
+                            </button>
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-editor-primary hover:bg-blue-50 transition-colors"
+                                    onclick="addSection('conclusion')">
+                                <i class="fas fa-check-circle mr-2"></i>Conclusion Section
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design Tab -->
+                <div id="design-panel" class="tab-panel hidden">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                            <i class="fas fa-palette mr-2"></i>Color Scheme
+                        </h3>
+                        <div class="grid grid-cols-4 gap-3">
+                            <div class="color-picker bg-blue-500" onclick="setColorScheme('blue')" title="Blue Theme"></div>
+                            <div class="color-picker bg-green-500" onclick="setColorScheme('green')" title="Green Theme"></div>
+                            <div class="color-picker bg-purple-500" onclick="setColorScheme('purple')" title="Purple Theme"></div>
+                            <div class="color-picker bg-orange-500" onclick="setColorScheme('orange')" title="Orange Theme"></div>
+                            <div class="color-picker bg-red-500" onclick="setColorScheme('red')" title="Red Theme"></div>
+                            <div class="color-picker bg-teal-500" onclick="setColorScheme('teal')" title="Teal Theme"></div>
+                            <div class="color-picker bg-indigo-500" onclick="setColorScheme('indigo')" title="Indigo Theme"></div>
+                            <div class="color-picker bg-pink-500" onclick="setColorScheme('pink')" title="Pink Theme"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                            <i class="fas fa-font mr-2"></i>Typography
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Font Family</label>
+                                <select class="w-full p-2 border border-gray-300 rounded-md text-sm" onchange="setFontFamily(this.value)">
+                                    <option value="Inter">Inter (Modern)</option>
+                                    <option value="Roboto">Roboto (Clean)</option>
+                                    <option value="Open Sans">Open Sans (Friendly)</option>
+                                    <option value="Lato">Lato (Professional)</option>
+                                    <option value="Source Sans Pro">Source Sans Pro (Technical)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Base Font Size</label>
+                                <input type="range" min="14" max="20" value="16" class="w-full" 
+                                       onchange="setFontSize(this.value)">
+                                <span class="text-xs text-gray-500" id="font-size-display">16px</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                            <i class="fas fa-desktop mr-2"></i>Layout
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Content Width</label>
+                                <select class="w-full p-2 border border-gray-300 rounded-md text-sm" onchange="setContentWidth(this.value)">
+                                    <option value="max-w-4xl">Standard (1024px)</option>
+                                    <option value="max-w-5xl">Wide (1280px)</option>
+                                    <option value="max-w-6xl">Full (1536px)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Sidebar Width</label>
+                                <select class="w-full p-2 border border-gray-300 rounded-md text-sm" onchange="setSidebarWidth(this.value)">
+                                    <option value="w-80">Standard (320px)</option>
+                                    <option value="w-72">Compact (288px)</option>
+                                    <option value="w-96">Wide (384px)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Footer -->
+            <div class="p-4 border-t border-gray-200 bg-white">
+                <div class="flex space-x-2">
+                    <button class="flex-1 bg-editor-primary text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                            onclick="savePage()">
+                        <i class="fas fa-save mr-2"></i>Save
+                    </button>
+                    <button class="flex-1 bg-gray-500 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-gray-600 transition-colors"
+                            onclick="previewPage()">
+                        <i class="fas fa-eye mr-2"></i>Preview
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Editor Area -->
+        <div class="flex-1 editor-main flex flex-col">
+            <!-- Editor Toolbar -->
+            <div class="editor-toolbar border-b border-gray-200 p-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <h2 class="text-lg font-semibold text-gray-800" id="current-page-title">
+                            AI Engineering Stack Overview
+                        </h2>
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full" id="save-status">
+                            Saved
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="p-2 text-gray-600 hover:text-editor-primary hover:bg-blue-50 rounded-lg transition-colors"
+                                onclick="undo()" title="Undo">
+                            <i class="fas fa-undo"></i>
+                        </button>
+                        <button class="p-2 text-gray-600 hover:text-editor-primary hover:bg-blue-50 rounded-lg transition-colors"
+                                onclick="redo()" title="Redo">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                        <div class="w-px h-6 bg-gray-300"></div>
+                        <button class="p-2 text-gray-600 hover:text-editor-primary hover:bg-blue-50 rounded-lg transition-colors"
+                                onclick="toggleFullscreen()" title="Fullscreen">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editor Content -->
+            <div class="flex-1 overflow-y-auto p-6" id="editor-content">
+                <!-- Content will be dynamically loaded here -->
+                <div class="max-w-4xl mx-auto">
+                    <!-- Sample content structure -->
+                    <div class="content-section" data-section="introduction">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-4" contenteditable="true" data-field="title">
+                            AI Engineering Stack Overview
+                        </h1>
+                        <p class="text-gray-600 mb-6" contenteditable="true" data-field="description">
+                            Complete architecture of modern AI engineering systems
+                        </p>
+                        
+                        <div class="content-box box-note" data-box-type="note">
+                            <div class="drag-handle float-right mt-2 mr-2">
+                                <i class="fas fa-grip-vertical text-gray-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-yellow-800 mb-2">
+                                <i class="fas fa-sticky-note mr-2"></i>Note
+                            </h4>
+                            <p class="text-yellow-700" contenteditable="true">
+                                This is a sample note box. You can edit this content and add your own notes, warnings, tips, and examples.
+                            </p>
+                        </div>
+
+                        <div class="content-box box-example" data-box-type="example">
+                            <div class="drag-handle float-right mt-2 mr-2">
+                                <i class="fas fa-grip-vertical text-gray-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-blue-800 mb-2">
+                                <i class="fas fa-lightbulb mr-2"></i>Example
+                            </h4>
+                            <p class="text-blue-700" contenteditable="true">
+                                This is an example box where you can provide code examples, use cases, or practical demonstrations.
+                            </p>
+                        </div>
+
+                        <div class="content-section" data-section="implementation">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-4" contenteditable="true">
+                                Implementation Example
+                            </h2>
+                            
+                            <div class="code-block" data-language="python">
+                                <div class="code-header bg-gray-800 text-white p-3 rounded-t-lg">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-medium">example.py</span>
+                                        <div class="flex space-x-2">
+                                            <button class="text-gray-300 hover:text-white text-sm" onclick="editCodeBlock(this)">
+                                                <i class="fas fa-edit mr-1"></i>Edit
+                                            </button>
+                                            <button class="text-gray-300 hover:text-white text-sm" onclick="copyCodeBlock(this)">
+                                                <i class="fas fa-copy mr-1"></i>Copy
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <pre class="language-python bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto"><code># Sample Python code
+import torch
+import transformers
+
+class AIEngineeringStack:
+    def __init__(self):
+        self.components = []
+    
+    def add_component(self, component):
+        self.components.append(component)
+    
+    def build(self):
+        return f"Built stack with {len(self.components)} components"
+
+# Usage example
+stack = AIEngineeringStack()
+stack.add_component("LLM")
+stack.add_component("Vector DB")
+print(stack.build())</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Code Editing -->
+    <div id="code-modal" class="fixed inset-0 editor-modal hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="modal-content bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
+                <div class="p-4 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-gray-800">Edit Code Block</h3>
+                        <button class="text-gray-500 hover:text-gray-700" onclick="closeCodeModal()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Language</label>
+                        <select id="code-language" class="w-full p-2 border border-gray-300 rounded-md">
+                            <option value="python">Python</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="bash">Bash</option>
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                            <option value="json">JSON</option>
+                            <option value="sql">SQL</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Filename</label>
+                        <input type="text" id="code-filename" class="w-full p-2 border border-gray-300 rounded-md"
+                               placeholder="example.py">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Code</label>
+                        <textarea id="code-content" class="w-full p-3 border border-gray-300 rounded-md font-mono text-sm h-64"
+                                  placeholder="Enter your code here..."></textarea>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                                onclick="closeCodeModal()">
+                            Cancel
+                        </button>
+                        <button class="px-4 py-2 bg-editor-primary text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                onclick="saveCodeBlock()">
+                            Save Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+    <script>
+        // Global variables
+        let currentPage = {
+            id: 'ai-stack-overview',
+            title: 'AI Engineering Stack Overview',
+            url: 'topic-ai-stack-overview.html',
+            description: 'Complete architecture of modern AI engineering systems',
+            content: '',
+            sections: [],
+            boxes: []
+        };
+        let editorHistory = [];
+        let historyIndex = -1;
+        let selectedElement = null;
+        let codeBlockBeingEdited = null;
+
+        // Initialize editor
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeEditor();
+            loadCurrentPage();
+            makeContentSortable();
+            addEventListeners();
+        });
+
+        function initializeEditor() {
+            console.log('Visual Editor initialized');
+            showToast('Visual Editor loaded successfully!', 'success');
+        }
+
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('[id$="-tab"]').forEach(tab => {
+                tab.className = tab.className.replace('text-editor-primary border-b-2 border-editor-primary bg-blue-50', 'text-gray-600 hover:text-editor-primary hover:bg-gray-50');
+            });
+            document.getElementById(tabName + '-tab').className = 'flex-1 py-3 px-4 text-sm font-medium text-editor-primary border-b-2 border-editor-primary bg-blue-50';
+
+            // Update panels
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.add('hidden');
+            });
+            document.getElementById(tabName + '-panel').classList.remove('hidden');
+        }
+
+        function loadCurrentPage() {
+            // Load current page data
+            document.getElementById('page-title').value = currentPage.title;
+            document.getElementById('page-url').value = currentPage.url;
+            document.getElementById('page-description').value = currentPage.description;
+            document.getElementById('current-page-title').textContent = currentPage.title;
+
+            // Make all contenteditable elements save on change
+            document.querySelectorAll('[contenteditable="true"]').forEach(element => {
+                element.addEventListener('input', function() {
+                    saveToHistory();
+                    updateSaveStatus('Unsaved changes');
+                });
+            });
+        }
+
+        function addEventListeners() {
+            // Handle clicks on content boxes
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.content-box')) {
+                    selectElement(e.target.closest('.content-box'));
+                }
+            });
+
+            // Handle keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case 's':
+                            e.preventDefault();
+                            savePage();
+                            break;
+                        case 'z':
+                            e.preventDefault();
+                            undo();
+                            break;
+                        case 'y':
+                            e.preventDefault();
+                            redo();
+                            break;
+                    }
+                }
+            });
+        }
+
+        function selectElement(element) {
+            // Remove previous selection
+            document.querySelectorAll('.content-box').forEach(box => {
+                box.classList.remove('selected');
+            });
+
+            // Select new element
+            element.classList.add('selected');
+            selectedElement = element;
+
+            // Show element controls (you could add a properties panel here)
+            console.log('Selected element:', element.dataset.boxType);
+        }
+
+        function createNewPage() {
+            const pageData = {
+                id: 'new-page-' + Date.now(),
+                title: 'New Page',
+                url: 'new-page.html',
+                description: 'New page description',
+                content: '',
+                sections: [],
+                boxes: []
+            };
+
+            // In a real CMS, this would save to a database
+            showToast('New page created! You can now edit the content.', 'info');
+            
+            // Update current page
+            currentPage = pageData;
+            loadCurrentPage();
+        }
+
+        function importPage() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.html,.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const content = e.target.result;
+                            // Parse and load the content
+                            showToast('Page imported successfully!', 'success');
+                        } catch (error) {
+                            showToast('Error importing page: ' + error.message, 'error');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        function exportPage() {
+            const pageData = {
+                page: currentPage,
+                content: document.getElementById('editor-content').innerHTML,
+                timestamp: new Date().toISOString()
+            };
+
+            const blob = new Blob([JSON.stringify(pageData, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = currentPage.id + '_export.json';
+            a.click();
+            URL.revokeObjectURL(url);
+
+            showToast('Page exported successfully!', 'success');
+        }
+
+        function addContentBox(type) {
+            const boxId = 'box-' + Date.now();
+            const boxHTML = `
+                <div class="content-box box-${type}" data-box-type="${type}" id="${boxId}">
+                    <div class="drag-handle float-right mt-2 mr-2">
+                        <i class="fas fa-grip-vertical text-gray-400"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">
+                        <i class="fas fa-${getBoxIcon(type)} mr-2"></i>
+                        ${getBoxTitle(type)}
+                    </h4>
+                    <p contenteditable="true" class="cursor-text">
+                        ${getBoxDefaultContent(type)}
+                    </p>
+                </div>
+            `;
+
+            // Add to current cursor position or end of content
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const fragment = document.createRange().createContextualFragment(boxHTML);
+                range.insertNode(fragment);
+            } else {
+                document.getElementById('editor-content').insertAdjacentHTML('beforeend', boxHTML);
+            }
+
+            // Make the new box editable and save to history
+            const newBox = document.getElementById(boxId);
+            newBox.querySelector('[contenteditable="true"]').addEventListener('input', function() {
+                saveToHistory();
+                updateSaveStatus('Unsaved changes');
+            });
+
+            saveToHistory();
+            updateSaveStatus('Unsaved changes');
+            showToast(`${getBoxTitle(type)} added!`, 'success');
+        }
+
+        function addCodeBlock(language) {
+            const codeId = 'code-' + Date.now();
+            const codeHTML = `
+                <div class="code-block" data-language="${language}" id="${codeId}">
+                    <div class="code-header bg-gray-800 text-white p-3 rounded-t-lg">
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium">example.${getLanguageExtension(language)}</span>
+                            <div class="flex space-x-2">
+                                <button class="text-gray-300 hover:text-white text-sm" onclick="editCodeBlock(this)">
+                                    <i class="fas fa-edit mr-1"></i>Edit
+                                </button>
+                                <button class="text-gray-300 hover:text-white text-sm" onclick="copyCodeBlock(this)">
+                                    <i class="fas fa-copy mr-1"></i>Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <pre class="language-${language} bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto"><code># Sample ${language} code
+# Click Edit to modify this code block</code></pre>
+                </div>
+            `;
+
+            document.getElementById('editor-content').insertAdjacentHTML('beforeend', codeHTML);
+            saveToHistory();
+            updateSaveStatus('Unsaved changes');
+            showToast(`${language} code block added!`, 'success');
+        }
+
+        function editCodeBlock(button) {
+            const codeBlock = button.closest('.code-block');
+            codeBlockBeingEdited = codeBlock;
+            
+            // Get current values
+            const language = codeBlock.dataset.language;
+            const filename = codeBlock.querySelector('.code-header span').textContent;
+            const code = codeBlock.querySelector('code').textContent;
+
+            // Populate modal
+            document.getElementById('code-language').value = language;
+            document.getElementById('code-filename').value = filename;
+            document.getElementById('code-content').value = code;
+
+            // Show modal
+            document.getElementById('code-modal').classList.remove('hidden');
+        }
+
+        function saveCodeBlock() {
+            if (!codeBlockBeingEdited) return;
+
+            const language = document.getElementById('code-language').value;
+            const filename = document.getElementById('code-filename').value;
+            const code = document.getElementById('code-content').value;
+
+            // Update code block
+            codeBlockBeingEdited.dataset.language = language;
+            codeBlockBeingEdited.querySelector('.code-header span').textContent = filename;
+            codeBlockBeingEdited.querySelector('pre').className = `language-${language} bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto`;
+            codeBlockBeingEdited.querySelector('code').textContent = code;
+
+            closeCodeModal();
+            saveToHistory();
+            updateSaveStatus('Unsaved changes');
+            showToast('Code block updated!', 'success');
+        }
+
+        function closeCodeModal() {
+            document.getElementById('code-modal').classList.add('hidden');
+            codeBlockBeingEdited = null;
+        }
+
+        function copyCodeBlock(button) {
+            const codeBlock = button.closest('.code-block');
+            const code = codeBlock.querySelector('code').textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                showToast('Code copied to clipboard!', 'success');
+            });
+        }
+
+        function savePage() {
+            // Collect all page data
+            const pageData = {
+                id: currentPage.id,
+                title: document.getElementById('page-title').value,
+                url: document.getElementById('page-url').value,
+                description: document.getElementById('page-description').value,
+                content: document.getElementById('editor-content').innerHTML,
+                timestamp: new Date().toISOString()
+            };
+
+            // In a real CMS, this would save to a database
+            localStorage.setItem('page_' + currentPage.id, JSON.stringify(pageData));
+            
+            updateSaveStatus('Saved');
+            showToast('Page saved successfully!', 'success');
+            
+            // Update current page object
+            currentPage = {...currentPage, ...pageData};
+        }
+
+        function previewPage() {
+            savePage();
+            // In a real implementation, this would open a preview window
+            showToast('Preview mode would open in a new window', 'info');
+        }
+
+        function saveToHistory() {
+            const currentState = document.getElementById('editor-content').innerHTML;
+            
+            // Remove future history if we're not at the end
+            if (historyIndex < editorHistory.length - 1) {
+                editorHistory = editorHistory.slice(0, historyIndex + 1);
+            }
+            
+            // Add new state
+            editorHistory.push(currentState);
+            historyIndex = editorHistory.length - 1;
+            
+            // Limit history size
+            if (editorHistory.length > 50) {
+                editorHistory.shift();
+                historyIndex--;
+            }
+        }
+
+        function undo() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                document.getElementById('editor-content').innerHTML = editorHistory[historyIndex];
+                updateSaveStatus('Unsaved changes');
+            }
+        }
+
+        function redo() {
+            if (historyIndex < editorHistory.length - 1) {
+                historyIndex++;
+                document.getElementById('editor-content').innerHTML = editorHistory[historyIndex];
+                updateSaveStatus('Unsaved changes');
+            }
+        }
+
+        function updatePageTitle() {
+            const title = document.getElementById('page-title').value;
+            document.getElementById('current-page-title').textContent = title;
+            currentPage.title = title;
+            updateSaveStatus('Unsaved changes');
+        }
+
+        function updatePageURL() {
+            currentPage.url = document.getElementById('page-url').value;
+            updateSaveStatus('Unsaved changes');
+        }
+
+        function updatePageDescription() {
+            currentPage.description = document.getElementById('page-description').value;
+            updateSaveStatus('Unsaved changes');
+        }
+
+        function updateSaveStatus(status) {
+            const statusElement = document.getElementById('save-status');
+            statusElement.textContent = status;
+            
+            if (status === 'Saved') {
+                statusElement.className = 'px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full';
+            } else {
+                statusElement.className = 'px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full';
+            }
+        }
+
+        function makeContentSortable() {
+            const editorContent = document.getElementById('editor-content');
+            new Sortable(editorContent, {
+                handle: '.drag-handle',
+                ghostClass: 'sortable-ghost',
+                onStart: function(evt) {
+                    evt.item.classList.add('opacity-50');
+                },
+                onEnd: function(evt) {
+                    evt.item.classList.remove('opacity-50');
+                    saveToHistory();
+                    updateSaveStatus('Unsaved changes');
+                }
+            });
+        }
+
+        // Box utility functions
+        function getBoxIcon(type) {
+            const icons = {
+                note: 'sticky-note',
+                example: 'lightbulb',
+                warning: 'exclamation-triangle',
+                tip: 'thumbs-up',
+                info: 'info-circle'
+            };
+            return icons[type] || 'info-circle';
+        }
+
+        function getBoxTitle(type) {
+            const titles = {
+                note: 'Note',
+                example: 'Example',
+                warning: 'Warning',
+                tip: 'Tip',
+                info: 'Information'
+            };
+            return titles[type] || 'Information';
+        }
+
+        function getBoxDefaultContent(type) {
+            const contents = {
+                note: 'This is a note box. Use it to highlight important information or reminders.',
+                example: 'This is an example box. Use it to provide practical examples or demonstrations.',
+                warning: 'This is a warning box. Use it to alert users about potential issues or important cautions.',
+                tip: 'This is a tip box. Use it to share helpful tips, best practices, or recommendations.',
+                info: 'This is an information box. Use it to provide additional context or supplementary information.'
+            };
+            return contents[type] || 'Content box';
+        }
+
+        function getLanguageExtension(language) {
+            const extensions = {
+                python: 'py',
+                javascript: 'js',
+                bash: 'sh',
+                html: 'html',
+                css: 'css',
+                json: 'json',
+                sql: 'sql'
+            };
+            return extensions[language] || 'txt';
+        }
+
+        // Design functions
+        function setColorScheme(color) {
+            document.documentElement.style.setProperty('--primary-color', color);
+            showToast(`Color scheme changed to ${color}`, 'success');
+        }
+
+        function setFontFamily(font) {
+            document.body.style.fontFamily = font;
+            showToast(`Font changed to ${font}`, 'success');
+        }
+
+        function setFontSize(size) {
+            document.getElementById('font-size-display').textContent = size + 'px';
+            document.documentElement.style.setProperty('--base-font-size', size + 'px');
+        }
+
+        function setContentWidth(width) {
+            const content = document.getElementById('editor-content').querySelector('.max-w-4xl, .max-w-5xl, .max-w-6xl');
+            if (content) {
+                content.className = content.className.replace(/max-w-\w+/, width);
+            }
+        }
+
+        function setSidebarWidth(width) {
+            const sidebar = document.querySelector('.w-80, .w-72, .w-96');
+            if (sidebar) {
+                sidebar.className = sidebar.className.replace(/w-\d+/, width);
+            }
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Toast notifications
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `px-4 py-3 rounded-lg shadow-lg text-white text-sm max-w-sm ${
+                type === 'success' ? 'bg-green-500' :
+                type === 'error' ? 'bg-red-500' :
+                type === 'warning' ? 'bg-yellow-500' :
+                'bg-blue-500'
+            }`;
+            toast.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas ${
+                        type === 'success' ? 'fa-check-circle' :
+                        type === 'error' ? 'fa-exclamation-circle' :
+                        type === 'warning' ? 'fa-exclamation-triangle' :
+                        'fa-info-circle'
+                    } mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+
+            document.getElementById('toast-container').appendChild(toast);
+
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Auto-save functionality
+        setInterval(() => {
+            if (document.getElementById('save-status').textContent === 'Unsaved changes') {
+                savePage();
+            }
+        }, 30000); // Auto-save every 30 seconds
+
+        console.log('Visual Editor CMS loaded successfully!');
+    </script>
+</body>
+</html>

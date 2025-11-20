@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrewAI Framework | Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .code-block { background: #1e293b; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .progress-bar { background: linear-gradient(90deg, #10b981 0%, #34d399 100%); }
+        .crewai-diagram { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-brain text-2xl gradient-text mr-3"></i>
+                    <h1 class="text-xl font-bold text-slate-900">Agentic AI Hub</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors">Home</a>
+                    <a href="topics.html" class="text-slate-600 hover:text-slate-900 transition-colors">Topics</a>
+                    <a href="about.html" class="text-slate-600 hover:text-slate-900 transition-colors">About</a>
+                    <a href="manage.html" class="text-slate-600 hover:text-slate-900 transition-colors">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    CrewAI Framework
+                </h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Orchestrate role-playing, autonomous AI agents to work together seamlessly
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+                        <span class="text-white text-sm">Progress: </span>
+                        <div class="inline-block w-32 h-2 bg-white/20 rounded-full ml-2">
+                            <div class="progress-bar h-full rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Learning Path</h3>
+                    <nav class="space-y-2">
+                        <a href="topic-what-is-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>What is AI?
+                        </a>
+                        <a href="topic-types-of-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Types of AI
+                        </a>
+                        <a href="topic-machine-learning-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Machine Learning
+                        </a>
+                        <a href="topic-deep-learning-concepts.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Deep Learning
+                        </a>
+                        <a href="topic-neural-networks-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Neural Networks
+                        </a>
+                        <a href="topic-nlp-basics.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>NLP Basics
+                        </a>
+                        <a href="topic-computer-vision-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Computer Vision
+                        </a>
+                        <a href="topic-agent-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Agent Architecture
+                        </a>
+                        <a href="topic-multi-agent-systems.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Multi-Agent Systems
+                        </a>
+                        <a href="topic-langchain-framework.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>LangChain Framework
+                        </a>
+                        <a href="topic-autogen-framework.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>AutoGen Framework
+                        </a>
+                        <a href="#" class="block px-3 py-2 text-sm bg-blue-50 text-blue-900 rounded-md font-medium">
+                            <i class="fas fa-play-circle text-blue-500 mr-2"></i>CrewAI Framework
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Introduction -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">What is CrewAI?</h2>
+                    <p class="text-lg text-slate-700 mb-6">
+                        CrewAI is an innovative framework designed to orchestrate role-playing, autonomous AI agents. It enables the creation of structured "crews" of agents with specific roles, goals, and tools that work together to accomplish complex tasks through collaborative intelligence.
+                    </p>
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-400 p-6 mb-6 rounded-r-lg">
+                        <p class="text-green-800">
+                            <strong>Key Insight:</strong> CrewAI transforms how AI agents collaborate by providing a structured framework for role-based teamwork, enabling sophisticated multi-agent workflows that mimic human team dynamics.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CrewAI Architecture -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">CrewAI Architecture</h2>
+                    <div class="crewai-diagram p-8 rounded-lg mb-6">
+                        <div class="flex justify-center items-center">
+                            <svg width="800" height="500" viewBox="0 0 800 500" class="border border-slate-200 rounded-lg">
+                                <!-- Crew Container -->
+                                <rect x="50" y="50" width="700" height="400" fill="#f8fafc" stroke="#64748b" stroke-width="2" rx="10"/>
+                                <text x="400" y="35" text-anchor="middle" class="text-lg font-bold">CrewAI Crew</text>
+                                
+                                <!-- Process -->
+                                <rect x="300" y="100" width="200" height="60" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2" rx="5"/>
+                                <text x="400" y="135" text-anchor="middle" class="text-white text-sm font-bold">Process</text>
+                                <text x="400" y="150" text-anchor="middle" class="text-white text-xs">Sequential/Parallel</text>
+                                
+                                <!-- Agents -->
+                                <circle cx="150" cy="250" r="40" fill="#10b981" stroke="#059669" stroke-width="2"/>
+                                <text x="150" y="255" text-anchor="middle" class="text-white text-sm font-bold">Agent 1</text>
+                                <text x="150" y="305" text-anchor="middle" class="text-xs">Researcher</text>
+                                
+                                <circle cx="300" cy="250" r="40" fill="#8b5cf6" stroke="#7c3aed" stroke-width="2"/>
+                                <text x="300" y="255" text-anchor="middle" class="text-white text-sm font-bold">Agent 2</text>
+                                <text x="300" y="305" text-anchor="middle" class="text-xs">Writer</text>
+                                
+                                <circle cx="450" cy="250" r="40" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+                                <text x="450" y="255" text-anchor="middle" class="text-white text-sm font-bold">Agent 3</text>
+                                <text x="450" y="305" text-anchor="middle" class="text-xs">Editor</text>
+                                
+                                <circle cx="600" cy="250" r="40" fill="#ef4444" stroke="#dc2626" stroke-width="2"/>
+                                <text x="600" y="255" text-anchor="middle" class="text-white text-sm font-bold">Agent 4</text>
+                                <text x="600" y="305" text-anchor="middle" class="text-xs">Reviewer</text>
+                                
+                                <!-- Tasks -->
+                                <rect x="100" y="350" width="120" height="40" fill="#e2e8f0" stroke="#64748b" stroke-width="2" rx="5"/>
+                                <text x="160" y="375" text-anchor="middle" class="text-sm">Research Task</text>
+                                
+                                <rect x="250" y="350" width="120" height="40" fill="#e2e8f0" stroke="#64748b" stroke-width="2" rx="5"/>
+                                <text x="310" y="375" text-anchor="middle" class="text-sm">Writing Task</text>
+                                
+                                <rect x="400" y="350" width="120" height="40" fill="#e2e8f0" stroke="#64748b" stroke-width="2" rx="5"/>
+                                <text x="460" y="375" text-anchor="middle" class="text-sm">Editing Task</text>
+                                
+                                <rect x="550" y="350" width="120" height="40" fill="#e2e8f0" stroke="#64748b" stroke-width="2" rx="5"/>
+                                <text x="610" y="375" text-anchor="middle" class="text-sm">Review Task</text>
+                                
+                                <!-- Connections -->
+                                <line x1="150" y1="210" x2="150" y2="350" stroke="#374151" stroke-width="2"/>
+                                <line x1="300" y1="210" x2="300" y2="350" stroke="#374151" stroke-width="2"/>
+                                <line x1="450" y1="210" x2="450" y2="350" stroke="#374151" stroke-width="2"/>
+                                <line x1="600" y1="210" x2="600" y2="350" stroke="#374151" stroke-width="2"/>
+                                
+                                <!-- Process Flow -->
+                                <path d="M 160 320 L 240 320" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 310 320 L 390 320" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 460 320 L 540 320" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                
+                                <!-- Arrow marker definition -->
+                                <defs>
+                                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                        <polygon points="0 0, 10 3.5, 0 7" fill="#374151"/>
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-center text-slate-600 text-sm">CrewAI orchestrates multiple agents with specific roles to accomplish complex tasks collaboratively</p>
+                </div>
+
+                <!-- Core Components -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Core CrewAI Components</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-user text-blue-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Agents</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Autonomous units with specific roles, goals, backstories, and capabilities that perform tasks.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Role definition</li>
+                                <li>• Goal specification</li>
+                                <li>• Backstory and personality</li>
+                                <li>• Tool assignment</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-tasks text-green-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Tasks</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Specific assignments that agents complete, with clear descriptions, expected outputs, and dependencies.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Task description</li>
+                                <li>• Expected output</li>
+                                <li>• Agent assignment</li>
+                                <li>• Dependencies</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-users text-purple-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Crews</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Collections of agents working together with a defined process to accomplish common objectives.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Agent orchestration</li>
+                                <li>• Process definition</li>
+                                <li>• Shared context</li>
+                                <li>• Collaborative workflow</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-cogs text-orange-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Processes</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Workflow orchestration patterns that define how agents collaborate and execute tasks.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Sequential processing</li>
+                                <li>• Hierarchical processing</li>
+                                <li>• Custom workflows</li>
+                                <li>• Dynamic routing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CrewAI Features -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Key Features & Benefits</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-slate-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                <i class="fas fa-theater-masks text-blue-600 mr-2"></i>
+                                Role-Based Design
+                            </h3>
+                            <p class="text-slate-700 text-sm mb-3">
+                                Agents have specific roles, goals, and personalities that guide their behavior and decision-making.
+                            </p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• Specialized expertise</li>
+                                <li>• Consistent behavior</li>
+                                <li>• Role-based reasoning</li>
+                                <li>• Personality traits</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                <i class="fas fa-handshake text-green-600 mr-2"></i>
+                                Intelligent Collaboration
+                            </h3>
+                            <p class="text-slate-700 text-sm mb-3">
+                                Agents can delegate tasks, ask for help, and collaborate intelligently to achieve objectives.
+                            </p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• Task delegation</li>
+                                <li>• Context sharing</li>
+                                <li>• Collaborative problem-solving</li>
+                                <li>• Adaptive workflows</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                <i class="fas fa-tools text-purple-600 mr-2"></i>
+                                Tool Integration
+                            </h3>
+                            <p class="text-slate-700 text-sm mb-3">
+                                Seamless integration with external tools, APIs, and services to extend agent capabilities.
+                            </p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• Custom tool creation</li>
+                                <li>• API integrations</li>
+                                <li>• File system operations</li>
+                                <li>• Web scraping</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CrewAI Implementation Examples -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Implementation Examples</h2>
+                    
+                    <!-- Basic Crew Setup -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-rocket text-blue-600 mr-3"></i>
+                            Basic Crew Setup
+                        </h3>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># Basic CrewAI Implementation
+from crewai import Agent, Task, Crew, Process
+
+# Define specialized agents
+researcher = Agent(
+    role='Senior Research Analyst',
+    goal='Conduct comprehensive research and analysis on given topics',
+    backstory="""You are a senior research analyst with 15 years of experience
+    in market research and competitive intelligence. You excel at finding
+    relevant information and providing detailed analysis.""",
+    verbose=True,
+    allow_delegation=False,
+    tools=[]  # Add specific tools if needed
+)
+
+writer = Agent(
+    role='Content Writer',
+    goal='Create engaging and informative content based on research findings',
+    backstory="""You are an experienced content writer with expertise in
+    creating compelling articles, blog posts, and reports. You have a knack
+    for making complex topics accessible to general audiences.""",
+    verbose=True,
+    allow_delegation=False,
+    tools=[]
+)
+
+editor = Agent(
+    role='Content Editor',
+    goal='Review and refine content to ensure quality and accuracy',
+    backstory="""You are a meticulous editor with 10 years of experience in
+    content editing and quality assurance. You ensure all content meets
+    high standards of clarity, accuracy, and engagement.""",
+    verbose=True,
+    allow_delegation=True,
+    tools=[]
+)
+
+# Define tasks
+task1 = Task(
+    description="""Conduct comprehensive research on the latest trends in
+    artificial intelligence and machine learning. Focus on recent developments,
+    key players, and future predictions.""",
+    expected_output="A detailed research report with key findings and insights",
+    agent=researcher
+)
+
+task2 = Task(
+    description="""Based on the research findings, create an engaging blog post
+    about AI and ML trends that would be suitable for a general audience.
+    The post should be informative yet accessible.""",
+    expected_output="A well-written blog post with proper structure and engaging content",
+    agent=writer
+)
+
+task3 = Task(
+    description="""Review and edit the blog post for clarity, accuracy, and engagement.
+    Ensure the content meets professional standards and is ready for publication.""",
+    expected_output="A polished, publication-ready blog post with improvements",
+    agent=editor
+)
+
+# Create crew
+crew = Crew(
+    agents=[researcher, writer, editor],
+    tasks=[task1, task2, task3],
+    verbose=2,
+    process=Process.sequential  # Tasks executed in sequence
+)
+
+# Execute the crew
+result = crew.kickoff()
+print("Crew execution completed!")
+print(result)</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Hierarchical Process -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-sitemap text-green-600 mr-3"></i>
+                            Hierarchical Process
+                        </h3>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># Hierarchical Crew with Manager
+from crewai import Agent, Task, Crew, Process
+
+# Manager Agent
+manager = Agent(
+    role='Project Manager',
+    goal='Coordinate the team and ensure project success',
+    backstory="""You are an experienced project manager skilled in coordinating
+    teams and ensuring projects are completed successfully and on time.""",
+    verbose=True,
+    allow_delegation=True
+)
+
+# Team members
+developer = Agent(
+    role='Senior Developer',
+    goal='Write high-quality, efficient code',
+    backstory="""You are a senior developer with expertise in Python and web development.""",
+    verbose=True,
+    allow_delegation=False
+)
+
+tester = Agent(
+    role='Quality Assurance Tester',
+    goal='Ensure software quality and reliability',
+    backstory="""You are a QA tester focused on finding bugs and ensuring software quality.""",
+    verbose=True,
+    allow_delegation=False
+)
+
+documenter = Agent(
+    role='Technical Writer',
+    goal='Create clear and comprehensive documentation',
+    backstory="""You are a technical writer skilled in creating user-friendly documentation.""",
+    verbose=True,
+    allow_delegation=False
+)
+
+# Define tasks with dependencies
+planning_task = Task(
+    description="Plan the development of a new web application feature",
+    expected_output="Detailed project plan with milestones and task assignments",
+    agent=manager
+)
+
+development_task = Task(
+    description="Implement the new feature according to the project plan",
+    expected_output="Working code implementation with proper structure",
+    agent=developer,
+    context=[planning_task]
+)
+
+testing_task = Task(
+    description="Test the implemented feature for bugs and issues",
+    expected_output="Test results and bug reports if any issues found",
+    agent=tester,
+    context=[development_task]
+)
+
+documentation_task = Task(
+    description="Create user documentation for the new feature",
+    expected_output="Comprehensive user guide and documentation",
+    agent=documenter,
+    context=[development_task, testing_task]
+)
+
+# Create hierarchical crew
+hierarchical_crew = Crew(
+    agents=[manager, developer, tester, documenter],
+    tasks=[planning_task, development_task, testing_task, documentation_task],
+    verbose=2,
+    process=Process.hierarchical,  # Manager coordinates the team
+    manager_agent=manager
+)
+
+# Execute hierarchical crew
+result = hierarchical_crew.kickoff()
+print("Hierarchical crew execution completed!")</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Custom Tools Integration -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-tools text-purple-600 mr-3"></i>
+                            Custom Tools Integration
+                        </h3>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># Custom Tools with CrewAI
+from crewai import Agent, Task, Crew
+from crewai_tools import BaseTool, SerperDevTool
+import requests
+
+# Custom search tool
+class CustomSearchTool(BaseTool):
+    name: str = "Custom Web Search"
+    description: str = "Search the web for current information"
+    
+    def _run(self, query: str) -> str:
+        # Implementation would use a search API
+        return f"Search results for: {query}"
+
+# Custom data analysis tool
+class DataAnalysisTool(BaseTool):
+    name: str = "Data Analysis"
+    description: str = "Analyze data and provide insights"
+    
+    def _run(self, data: str) -> str:
+        # Simple analysis implementation
+        lines = data.split('\n')
+        word_count = sum(len(line.split()) for line in lines)
+        return f"Analysis: {len(lines)} lines, {word_count} words"
+
+# Create agents with custom tools
+research_analyst = Agent(
+    role='Research Analyst',
+    goal='Gather and analyze market data',
+    backstory="""You are an expert research analyst with access to advanced
+    search and analysis tools.""",
+    tools=[CustomSearchTool(), SerperDevTool()],
+    verbose=True
+)
+
+data_analyst = Agent(
+    role='Data Analyst',
+    goal='Process and analyze collected data',
+    backstory="""You specialize in data analysis and statistical insights.""",
+    tools=[DataAnalysisTool()],
+    verbose=True
+)
+
+# Define tasks with tool usage
+research_task = Task(
+    description="""Research the latest trends in electric vehicle market.
+Use the search tool to find current information about EV sales, market leaders,
+and consumer preferences.""",
+    expected_output="Comprehensive market research report",
+    agent=research_analyst
+)
+
+analysis_task = Task(
+    description="""Analyze the research findings using the data analysis tool.
+Look for patterns, key insights, and actionable recommendations.""",
+    expected_output="Data analysis report with insights and recommendations",
+    agent=data_analyst,
+    context=[research_task]
+)
+
+# Create crew with custom tools
+analyst_crew = Crew(
+    agents=[research_analyst, data_analyst],
+    tasks=[research_task, analysis_task],
+    verbose=2,
+    process=Process.sequential
+)
+
+# Execute crew
+result = analyst_crew.kickoff()
+print("Analysis crew execution completed!")</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Parallel Process -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-parallel text-orange-600 mr-3"></i>
+                            Parallel Task Execution
+                        </h3>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># Parallel Task Execution
+from crewai import Agent, Task, Crew, Process
+import asyncio
+
+# Create multiple specialized agents
+researcher1 = Agent(
+    role='Technology Researcher',
+    goal='Research latest technology trends',
+    backstory='Expert in emerging technologies and innovations'
+)
+
+researcher2 = Agent(
+    role='Market Researcher',
+    goal='Analyze market trends and opportunities',
+    backstory='Specialist in market analysis and competitive intelligence'
+)
+
+researcher3 = Agent(
+    role='Financial Analyst',
+    goal='Assess financial implications and opportunities',
+    backstory='Expert in financial modeling and investment analysis'
+)
+
+# Define parallel tasks
+tech_research = Task(
+    description="Research the latest AI and machine learning technologies",
+    expected_output="Technology trends report",
+    agent=researcher1
+)
+
+market_research = Task(
+    description="Analyze the current market for AI/ML solutions",
+    expected_output="Market analysis report",
+    agent=researcher2
+)
+
+financial_analysis = Task(
+    description="Assess the financial viability of AI/ML investments",
+    expected_output="Financial analysis report",
+    agent=researcher3
+)
+
+# Create crew with parallel processing
+parallel_crew = Crew(
+    agents=[researcher1, researcher2, researcher3],
+    tasks=[tech_research, market_research, financial_analysis],
+    verbose=2,
+    process=Process.parallel  # Tasks run simultaneously
+)
+
+# Execute parallel crew
+result = parallel_crew.kickoff()
+print("Parallel crew execution completed!")
+
+# The results from all three researchers will be available simultaneously</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CrewAI Applications -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Real-World Applications</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg text-center">
+                            <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-newspaper text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Content Creation</h3>
+                            <p class="text-slate-700 text-sm">Research, write, edit, and publish articles, blogs, and marketing content</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg text-center">
+                            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-chart-line text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Market Research</h3>
+                            <p class="text-slate-700 text-sm">Analyze markets, competitors, and trends to provide business insights</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg text-center">
+                            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-code text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Software Development</h3>
+                            <p class="text-slate-700 text-sm">Plan, develop, test, and document software applications</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg text-center">
+                            <div class="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-bullhorn text-orange-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Marketing Campaigns</h3>
+                            <p class="text-slate-700 text-sm">Design, execute, and analyze marketing campaigns and strategies</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg text-center">
+                            <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-graduation-cap text-red-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Educational Content</h3>
+                            <p class="text-slate-700 text-sm">Develop curriculum, create lessons, and design educational materials</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg text-center">
+                            <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-search text-indigo-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Due Diligence</h3>
+                            <p class="text-slate-700 text-sm">Conduct comprehensive research for investment and business decisions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CrewAI Best Practices -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Best Practices</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Agent Design</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-blue-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Clear Role Definition</h4>
+                                    <p class="text-slate-700 text-sm">Define specific, non-overlapping roles for each agent to avoid confusion</p>
+                                </div>
+                                <div class="border-l-4 border-green-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Detailed Backstories</h4>
+                                    <p class="text-slate-700 text-sm">Provide rich backstories that inform agent behavior and decision-making</p>
+                                </div>
+                                <div class="border-l-4 border-purple-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Appropriate Tools</h4>
+                                    <p class="text-slate-700 text-sm">Assign tools that align with agent roles and capabilities</p>
+                                </div>
+                                <div class="border-l-4 border-orange-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Personality Consistency</h4>
+                                    <p class="text-slate-700 text-sm">Maintain consistent personality traits and communication styles</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Workflow Optimization</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-red-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Task Dependencies</h4>
+                                    <p class="text-slate-700 text-sm">Clearly define task dependencies to ensure proper execution order</p>
+                                </div>
+                                <div class="border-l-4 border-indigo-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Process Selection</h4>
+                                    <p class="text-slate-700 text-sm">Choose appropriate process types (sequential, hierarchical, parallel) for your use case</p>
+                                </div>
+                                <div class="border-l-4 border-pink-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Context Management</h4>
+                                    <p class="text-slate-700 text-sm">Use context effectively to share information between agents</p>
+                                </div>
+                                <div class="border-l-4 border-teal-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Error Handling</h4>
+                                    <p class="text-slate-700 text-sm">Implement robust error handling and fallback mechanisms</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Getting Started -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Getting Started with CrewAI</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Installation</h3>
+                            <div class="code-block">
+                                <pre class="text-green-400 text-sm"><code># Install CrewAI
+pip install crewai
+
+# Install with tools
+pip install crewai[tools]
+
+# For development
+pip install crewai --upgrade
+
+# Verify installation
+python -c "import crewai; print('CrewAI installed successfully!')"</code></pre>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Project Structure</h3>
+                            <div class="code-block">
+                                <pre class="text-green-400 text-sm"><code># Recommended project structure
+my_crew/
+├── agents/
+│   ├── researcher.py
+│   ├── writer.py
+│   └── editor.py
+├── tasks/
+│   ├── research_task.py
+│   ├── writing_task.py
+│   └── editing_task.py
+├── tools/
+│   └── custom_tools.py
+├── config/
+│   └── config.py
+├── main.py
+└── requirements.txt
+
+# Example main.py
+from crew import MyCrew
+
+if __name__ == "__main__":
+    crew = MyCrew()
+    result = crew.run()
+    print(result)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center">
+                        <a href="topic-autogen-framework.html" class="flex items-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: AutoGen Framework
+                        </a>
+                        <div class="flex space-x-2">
+                            <button onclick="markComplete('crewai')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                                <i class="fas fa-check mr-2"></i>Mark Complete
+                            </button>
+                            <a href="topics.html" class="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                                View All Topics
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Agentic AI Knowledge Hub</h3>
+                <p class="text-slate-400 mb-6">Master the future of artificial intelligence</p>
+                <p class="text-slate-500 text-sm">© 2024 Agentic AI Knowledge Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate progress bar
+            anime({
+                targets: '.progress-bar',
+                width: '100%',
+                duration: 2000,
+                easing: 'easeOutQuart'
+            });
+
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.card-hover');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            translateY: [30, 0],
+                            opacity: [0, 1],
+                            duration: 800,
+                            easing: 'easeOutQuart'
+                        });
+                    }
+                });
+            });
+
+            cards.forEach(card => observer.observe(card));
+        });
+
+        // Mark topic as complete
+        function markComplete(topicId) {
+            localStorage.setItem(`topic_${topicId}_complete`, 'true');
+            
+            // Show success message
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Completed!';
+            button.classList.remove('bg-green-600', 'hover:bg-green-700');
+            button.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-500');
+                button.classList.add('bg-green-600', 'hover:bg-green-700');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

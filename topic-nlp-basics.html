@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Language Processing Basics | Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .code-block { background: #1e293b; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .progress-bar { background: linear-gradient(90deg, #10b981 0%, #34d399 100%); }
+        .nlp-pipeline { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-brain text-2xl gradient-text mr-3"></i>
+                    <h1 class="text-xl font-bold text-slate-900">Agentic AI Hub</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors">Home</a>
+                    <a href="topics.html" class="text-slate-600 hover:text-slate-900 transition-colors">Topics</a>
+                    <a href="about.html" class="text-slate-600 hover:text-slate-900 transition-colors">About</a>
+                    <a href="manage.html" class="text-slate-600 hover:text-slate-900 transition-colors">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Natural Language Processing Basics
+                </h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Learn how AI systems understand, interpret, and generate human language
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+                        <span class="text-white text-sm">Progress: </span>
+                        <div class="inline-block w-32 h-2 bg-white/20 rounded-full ml-2">
+                            <div class="progress-bar h-full rounded-full" style="width: 55%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Learning Path</h3>
+                    <nav class="space-y-2">
+                        <a href="topic-what-is-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>What is AI?
+                        </a>
+                        <a href="topic-types-of-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Types of AI
+                        </a>
+                        <a href="topic-machine-learning-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Machine Learning
+                        </a>
+                        <a href="topic-deep-learning-concepts.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Deep Learning
+                        </a>
+                        <a href="topic-neural-networks-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Neural Networks
+                        </a>
+                        <a href="#" class="block px-3 py-2 text-sm bg-blue-50 text-blue-900 rounded-md font-medium">
+                            <i class="fas fa-play-circle text-blue-500 mr-2"></i>NLP Basics
+                        </a>
+                        <a href="topic-computer-vision-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-circle text-slate-300 mr-2"></i>Computer Vision
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Introduction -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">What is Natural Language Processing?</h2>
+                    <p class="text-lg text-slate-700 mb-6">
+                        Natural Language Processing (NLP) is a field of artificial intelligence that focuses on the interaction between computers and human language. It enables machines to understand, interpret, generate, and manipulate human language in a meaningful way.
+                    </p>
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-400 p-6 mb-6 rounded-r-lg">
+                        <p class="text-green-800">
+                            <strong>Key Insight:</strong> NLP bridges the gap between human communication and computer understanding, enabling applications like chatbots, translation systems, sentiment analysis, and content generation.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- NLP Pipeline -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">NLP Processing Pipeline</h2>
+                    <div class="nlp-pipeline p-6 rounded-lg mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                            <div class="text-center">
+                                <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-file-text text-blue-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-1">Text Input</h3>
+                                <p class="text-xs text-slate-600">Raw text data</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-cut text-green-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-1">Tokenization</h3>
+                                <p class="text-xs text-slate-600">Split into words/tokens</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-tags text-purple-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-1">POS Tagging</h3>
+                                <p class="text-xs text-slate-600">Part-of-speech labels</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-sitemap text-orange-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-1">Parsing</h3>
+                                <p class="text-xs text-slate-600">Syntactic structure</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-brain text-red-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-1">Understanding</h3>
+                                <p class="text-xs text-slate-600">Semantic meaning</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center text-slate-600 text-sm">The typical NLP pipeline transforms raw text into structured, machine-readable representations</p>
+                </div>
+
+                <!-- Core NLP Tasks -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Core NLP Tasks</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-cut text-blue-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Tokenization</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Breaking text into smaller units (tokens) such as words, sentences, or subwords.</p>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <strong>Example:</strong> "Hello world!" → ["Hello", "world", "!"]
+                            </div>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-tags text-green-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Part-of-Speech Tagging</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Assigning grammatical categories (nouns, verbs, adjectives) to each word.</p>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <strong>Example:</strong> "The cat runs" → ["DT", "NN", "VBZ"]
+                            </div>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-sitemap text-purple-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Named Entity Recognition</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Identifying and classifying named entities like people, organizations, and locations.</p>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <strong>Example:</strong> "Apple Inc. was founded by Steve Jobs" → ["ORG", "PERSON"]
+                            </div>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-chart-line text-orange-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Sentiment Analysis</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Determining the emotional tone or opinion expressed in text (positive, negative, neutral).</p>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <strong>Example:</strong> "I love this product!" → Positive (0.95)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Representation -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Text Representation Methods</h2>
+                    
+                    <!-- Bag of Words -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-shopping-bag text-blue-600 mr-3"></i>
+                            Bag of Words (BoW)
+                        </h3>
+                        <p class="text-slate-700 mb-4">
+                            Simple representation that counts word occurrences in a document, ignoring grammar and word order.
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-slate-900 mb-2">Example:</h4>
+                            <p class="text-slate-700 mb-2"><strong>Document:</strong> "The cat sat on the mat"</p>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <p><strong>Vocabulary:</strong></p>
+                                    <ul class="list-disc list-inside">
+                                        <li>the: 2</li>
+                                        <li>cat: 1</li>
+                                        <li>sat: 1</li>
+                                        <li>on: 1</li>
+                                        <li>mat: 1</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p><strong>Vector:</strong> [2, 1, 1, 1, 1]</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TF-IDF -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-balance-scale text-green-600 mr-3"></i>
+                            TF-IDF (Term Frequency-Inverse Document Frequency)
+                        </h3>
+                        <p class="text-slate-700 mb-4">
+                            Weighs words by their frequency in a document relative to their frequency across all documents, highlighting distinctive terms.
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-slate-900 mb-2">Formula:</h4>
+                            <div class="space-y-2 text-sm">
+                                <p><strong>TF (Term Frequency):</strong> (Number of times term appears in document) / (Total terms in document)</p>
+                                <p><strong>IDF (Inverse Document Frequency):</strong> log(Total documents / Number of documents containing term)</p>
+                                <p><strong>TF-IDF:</strong> TF × IDF</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Word Embeddings -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-vector-square text-purple-600 mr-3"></i>
+                            Word Embeddings
+                        </h3>
+                        <p class="text-slate-700 mb-4">
+                            Dense vector representations where semantically similar words have similar vectors. Captures semantic relationships and context.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div class="bg-blue-100 p-4 rounded-lg text-center">
+                                <i class="fas fa-cube text-blue-600 text-2xl mb-2"></i>
+                                <h4 class="font-semibold text-slate-900 text-sm">Word2Vec</h4>
+                                <p class="text-xs text-slate-600">Predicts surrounding words</p>
+                            </div>
+                            <div class="bg-green-100 p-4 rounded-lg text-center">
+                                <i class="fas fa-project-diagram text-green-600 text-2xl mb-2"></i>
+                                <h4 class="font-semibold text-slate-900 text-sm">GloVe</h4>
+                                <p class="text-xs text-slate-600">Global word co-occurrence</p>
+                            </div>
+                            <div class="bg-purple-100 p-4 rounded-lg text-center">
+                                <i class="fas fa-brain text-purple-600 text-2xl mb-2"></i>
+                                <h4 class="font-semibold text-slate-900 text-sm">Contextual Embeddings</h4>
+                                <p class="text-xs text-slate-600">BERT, ELMo (context-aware)</p>
+                            </div>
+                        </div>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># Word Embeddings Example
+import gensim.downloader as api
+
+# Load pre-trained Word2Vec model
+model = api.load("word2vec-google-news-300")
+
+# Find similar words
+similar_words = model.most_similar("king", topn=5)
+print("Words similar to 'king':")
+for word, similarity in similar_words:
+    print(f"  {word}: {similarity:.3f}")
+
+# Word analogy: king - man + woman = ?
+result = model.most_similar(positive=['king', 'woman'], negative=['man'], topn=1)
+print(f"\nking - man + woman = {result[0][0]}")
+
+# Get word vector
+vector = model['computer']
+print(f"\nVector for 'computer': {vector[:10]}...")  # Show first 10 dimensions</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NLP Applications -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Real-World NLP Applications</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg text-center">
+                            <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-robot text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Chatbots & Virtual Assistants</h3>
+                            <p class="text-slate-700 text-sm">Conversational AI that understands and responds to user queries naturally</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg text-center">
+                            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-language text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Machine Translation</h3>
+                            <p class="text-slate-700 text-sm">Automatic translation between languages while preserving meaning</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg text-center">
+                            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-search text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Information Retrieval</h3>
+                            <p class="text-slate-700 text-sm">Finding relevant documents and information from large text collections</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg text-center">
+                            <div class="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-file-alt text-orange-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Text Summarization</h3>
+                            <p class="text-slate-700 text-sm">Automatically generating concise summaries of longer texts</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg text-center">
+                            <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-question-circle text-red-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Question Answering</h3>
+                            <p class="text-slate-700 text-sm">Systems that can answer questions based on given context or knowledge</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg text-center">
+                            <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-pen text-indigo-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Content Generation</h3>
+                            <p class="text-slate-700 text-sm">Creating human-like text for articles, stories, or marketing content</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modern NLP with Transformers -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Modern NLP: Transformers & Large Language Models</h2>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-bolt text-yellow-600 mr-3"></i>
+                            Transformer Architecture
+                        </h3>
+                        <p class="text-slate-700 mb-4">
+                            Revolutionary architecture that uses self-attention mechanisms to process text in parallel, enabling more efficient training and better understanding of long-range dependencies.
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-slate-900 mb-2">Key Components:</h4>
+                            <ul class="list-disc list-inside text-slate-700 space-y-1">
+                                <li><strong>Self-Attention:</strong> Allows each word to attend to all other words in the sentence</li>
+                                <li><strong>Multi-Head Attention:</strong> Multiple attention mechanisms working in parallel</li>
+                                <li><strong>Positional Encoding:</strong> Adds position information since there's no recurrence</li>
+                                <li><strong>Feed-Forward Networks:</strong> Dense layers for feature transformation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-robot text-green-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">BERT (Bidirectional)</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Understands context from both left and right sides of words, excelling at understanding tasks.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Masked language modeling</li>
+                                <li>• Next sentence prediction</li>
+                                <li>• Fine-tuning for specific tasks</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-text-width text-purple-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">GPT (Generative)</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Autoregressive model that generates text by predicting the next word based on previous context.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Unidirectional attention</li>
+                                <li>• Text generation capabilities</li>
+                                <li>• Zero-shot learning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center">
+                        <a href="topic-neural-networks-architecture.html" class="flex items-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: Neural Networks
+                        </a>
+                        <div class="flex space-x-2">
+                            <button onclick="markComplete('nlp-basics')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                                <i class="fas fa-check mr-2"></i>Mark Complete
+                            </button>
+                            <a href="topic-computer-vision-fundamentals.html" class="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                                Next: Computer Vision
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Agentic AI Knowledge Hub</h3>
+                <p class="text-slate-400 mb-6">Master the future of artificial intelligence</p>
+                <p class="text-slate-500 text-sm">© 2024 Agentic AI Knowledge Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate progress bar
+            anime({
+                targets: '.progress-bar',
+                width: '55%',
+                duration: 2000,
+                easing: 'easeOutQuart'
+            });
+
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.card-hover');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            translateY: [30, 0],
+                            opacity: [0, 1],
+                            duration: 800,
+                            easing: 'easeOutQuart'
+                        });
+                    }
+                });
+            });
+
+            cards.forEach(card => observer.observe(card));
+
+            // Animate pipeline steps
+            const pipelineSteps = document.querySelectorAll('.nlp-pipeline .text-center');
+            pipelineSteps.forEach((step, index) => {
+                anime({
+                    targets: step,
+                    scale: [0, 1],
+                    duration: 500,
+                    delay: index * 200,
+                    easing: 'easeOutBack'
+                });
+            });
+        });
+
+        // Mark topic as complete
+        function markComplete(topicId) {
+            localStorage.setItem(`topic_${topicId}_complete`, 'true');
+            
+            // Show success message
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Completed!';
+            button.classList.remove('bg-green-600', 'hover:bg-green-700');
+            button.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-500');
+                button.classList.add('bg-green-600', 'hover:bg-green-700');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

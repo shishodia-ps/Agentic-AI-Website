@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Topics - Agentic AI Knowledge Hub</title>
+    <meta name="description" content="Browse comprehensive AI topics with advanced filtering, search, and detailed content management.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --sage-deep: #2D5A3D;
+            --charcoal-warm: #3A3A3A;
+            --cream-soft: #F8F6F0;
+            --copper-accent: #B87333;
+            --teal-muted: #4A7C7E;
+            --lavender-soft: #B8A9C9;
+            --gray-warm: #8B8680;
+            --success-green: #6B8E5A;
+            --warning-amber: #D4A574;
+            --error-coral: #C67B5C;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream-soft);
+            color: var(--charcoal-warm);
+        }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Navigation */
+        .nav-glass {
+            background: rgba(248, 246, 240, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--copper-accent);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--copper-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .filter-section {
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+            padding: 1.5rem;
+        }
+        
+        .filter-checkbox {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--gray-warm);
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .filter-checkbox:checked {
+            background: var(--copper-accent);
+            border-color: var(--copper-accent);
+        }
+        
+        .filter-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: -2px;
+            left: 2px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        /* Topic Cards */
+        .topic-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(45, 90, 61, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--copper-accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .topic-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(45, 90, 61, 0.1);
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+        
+        .difficulty-beginner {
+            background: rgba(107, 142, 90, 0.1);
+            color: var(--success-green);
+        }
+        
+        .difficulty-intermediate {
+            background: rgba(212, 165, 116, 0.1);
+            color: var(--warning-amber);
+        }
+        
+        .difficulty-advanced {
+            background: rgba(198, 123, 92, 0.1);
+            color: var(--error-coral);
+        }
+        
+        /* Topic Detail Modal */
+        .topic-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .topic-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .topic-modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .topic-modal.active .topic-modal-content {
+            transform: scale(1);
+        }
+        
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 500px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            border: 2px solid rgba(45, 90, 61, 0.1);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--copper-accent);
+            box-shadow: 0 0 0 4px rgba(184, 115, 51, 0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-warm);
+        }
+        
+        /* Action Buttons */
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .action-btn-primary {
+            background: var(--copper-accent);
+            color: white;
+        }
+        
+        .action-btn-primary:hover {
+            background: var(--sage-deep);
+            transform: translateY(-1px);
+        }
+        
+        .action-btn-secondary {
+            background: rgba(45, 90, 61, 0.1);
+            color: var(--sage-deep);
+        }
+        
+        .action-btn-secondary:hover {
+            background: rgba(45, 90, 61, 0.2);
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(45, 90, 61, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--copper-accent);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Tags */
+        .concept-tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: rgba(184, 115, 51, 0.1);
+            color: var(--copper-accent);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin: 0.125rem;
+        }
+        
+        /* Sort Controls */
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(45, 90, 61, 0.2);
+            border-radius: 8px;
+            background: white;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+        
+        .sort-select:focus {
+            outline: none;
+            border-color: var(--copper-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -300px;
+                width: 300px;
+                height: 100vh;
+                z-index: 1500;
+                transition: left 0.3s ease;
+            }
+            
+            .sidebar.mobile-open {
+                left: 0;
+            }
+            
+            .mobile-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1499;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+            
+            .mobile-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .stagger-item.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-xl font-bold text-sage-deep">Agentic AI Hub</h1>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="index.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Home</a>
+                        <a href="#" class="nav-link text-copper-accent font-semibold">Topics</a>
+                        <a href="manage.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Manage</a>
+                        <a href="about.html" class="nav-link text-charcoal-warm hover:text-copper-accent">About</a>
+                    </div>
+                </div>
+                
+                <div class="search-container hidden md:block">
+                    <div class="search-icon">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <input type="text" class="search-input" placeholder="Search topics..." id="searchInput">
+                </div>
+                
+                <button class="md:hidden text-charcoal-warm" id="mobileMenuBtn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    <div class="flex pt-20">
+        <!-- Sidebar -->
+        <aside class="sidebar w-80 h-screen overflow-y-auto" id="sidebar">
+            <div class="p-6">
+                <h2 class="text-xl font-bold text-charcoal-warm mb-6">Filter Topics</h2>
+                
+                <!-- Category Filter -->
+                <div class="filter-section">
+                    <h3 class="font-semibold text-charcoal-warm mb-4">Categories</h3>
+                    <div class="space-y-3" id="categoryFilters">
+                        <!-- Category filters will be dynamically generated -->
+                    </div>
+                </div>
+                
+                <!-- Difficulty Filter -->
+                <div class="filter-section">
+                    <h3 class="font-semibold text-charcoal-warm mb-4">Difficulty Level</h3>
+                    <div class="space-y-3" id="difficultyFilters">
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="filter-checkbox" value="beginner" checked>
+                            <span class="text-sm">Beginner</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="filter-checkbox" value="intermediate" checked>
+                            <span class="text-sm">Intermediate</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="filter-checkbox" value="advanced" checked>
+                            <span class="text-sm">Advanced</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Progress Filter -->
+                <div class="filter-section">
+                    <h3 class="font-semibold text-charcoal-warm mb-4">Progress</h3>
+                    <div class="space-y-3" id="progressFilters">
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="filter-checkbox" value="not-started" checked>
+                            <span class="text-sm">Not Started</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="filter-checkbox" value="in-progress" checked>
+                            <span class="text-sm">In Progress</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" class="filter-checkbox" value="completed" checked>
+                            <span class="text-sm">Completed</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="p-4 bg-sage-deep/5 rounded-lg mt-6">
+                    <h3 class="font-semibold text-charcoal-warm mb-3">Quick Stats</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-warm">Total Topics:</span>
+                            <span class="font-semibold" id="totalTopics">0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-warm">Completed:</span>
+                            <span class="font-semibold" id="completedTopics">0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-warm">In Progress:</span>
+                            <span class="font-semibold" id="inProgressTopics">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="flex-1 min-h-screen">
+            <div class="p-6">
+                <!-- Header -->
+                <div class="mb-8 fade-in">
+                    <h1 class="text-4xl font-bold text-charcoal-warm mb-4">AI Topics</h1>
+                    <p class="text-xl text-gray-warm mb-6">
+                        Explore comprehensive coverage of Agentic AI concepts, from fundamentals to advanced implementations.
+                    </p>
+                    
+                    <!-- Controls -->
+                    <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <button class="action-btn action-btn-primary" id="mobileFilterBtn">
+                                <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                                </svg>
+                                Filters
+                            </button>
+                            <select class="sort-select" id="sortSelect">
+                                <option value="title">Sort by Title</option>
+                                <option value="difficulty">Sort by Difficulty</option>
+                                <option value="category">Sort by Category</option>
+                                <option value="progress">Sort by Progress</option>
+                                <option value="recent">Recently Added</option>
+                            </select>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-warm">View:</span>
+                            <button class="action-btn action-btn-secondary" id="gridViewBtn">Grid</button>
+                            <button class="action-btn action-btn-secondary" id="listViewBtn">List</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Topic Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="topicGrid">
+                    <!-- Topic cards will be dynamically generated -->
+                </div>
+                
+                <!-- No Results -->
+                <div class="text-center py-20 hidden" id="noResults">
+                    <div class="text-6xl mb-4">🔍</div>
+                    <h3 class="text-2xl font-bold text-charcoal-warm mb-2">No topics found</h3>
+                    <p class="text-gray-warm mb-6">Try adjusting your filters or search terms</p>
+                    <button class="action-btn action-btn-primary" id="clearFilters">Clear All Filters</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Topic Detail Modal -->
+    <div class="topic-modal" id="topicModal">
+        <div class="topic-modal-content">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="difficulty-badge mb-2" id="modalDifficulty"></div>
+                        <h2 class="text-2xl font-bold text-charcoal-warm" id="modalTitle"></h2>
+                        <p class="text-gray-warm" id="modalCategory"></p>
+                    </div>
+                    <button class="text-gray-warm hover:text-charcoal-warm" id="closeModal">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="mb-6">
+                    <h3 class="font-semibold text-charcoal-warm mb-2">Description</h3>
+                    <p class="text-gray-warm" id="modalDescription"></p>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="font-semibold text-charcoal-warm mb-3">Key Concepts</h3>
+                    <div class="flex flex-wrap gap-2" id="modalConcepts"></div>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="font-semibold text-charcoal-warm mb-3">Progress</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="modalProgress"></div>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-warm mt-2">
+                        <span id="modalProgressText">0% Complete</span>
+                        <span>Mark as complete to track progress</span>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="font-semibold text-charcoal-warm mb-3">Content</h3>
+                    <div class="prose max-w-none" id="modalContent">
+                        <p class="text-gray-warm">Detailed content for this topic will be available soon. This is a comprehensive learning platform for Agentic AI concepts.</p>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-4 pt-4 border-t border-gray-200">
+                    <button class="action-btn action-btn-primary" id="markCompleteBtn">
+                        Mark as Complete
+                    </button>
+                    <button class="action-btn action-btn-secondary" id="bookmarkBtn">
+                        Bookmark
+                    </button>
+                    <button class="action-btn action-btn-secondary" id="editTopicBtn">
+                        Edit Topic
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Topics Page JavaScript
+        class TopicsPage {
+            constructor() {
+                this.topics = this.loadTopics();
+                this.filteredTopics = [...this.topics];
+                this.currentView = 'grid';
+                this.currentSort = 'title';
+                this.activeFilters = {
+                    categories: [],
+                    difficulties: ['beginner', 'intermediate', 'advanced'],
+                    progress: ['not-started', 'in-progress', 'completed']
+                };
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.renderCategoryFilters();
+                this.renderTopics();
+                this.updateStats();
+                this.initializeAnimations();
+                this.checkUrlParams();
+            }
+
+            loadTopics() {
+                const savedTopics = localStorage.getItem('ai-topics');
+                return savedTopics ? JSON.parse(savedTopics) : [];
+            }
+
+            saveTopics() {
+                localStorage.setItem('ai-topics', JSON.stringify(this.topics));
+            }
+
+            setupEventListeners() {
+                // Search
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.addEventListener('input', (e) => this.handleSearch(e.target.value));
+                }
+
+                // Filters
+                document.addEventListener('change', (e) => {
+                    if (e.target.classList.contains('filter-checkbox')) {
+                        this.handleFilterChange(e.target);
+                    }
+                });
+
+                // Sort
+                const sortSelect = document.getElementById('sortSelect');
+                if (sortSelect) {
+                    sortSelect.addEventListener('change', (e) => this.handleSortChange(e.target.value));
+                }
+
+                // View toggles
+                document.getElementById('gridViewBtn')?.addEventListener('click', () => this.setView('grid'));
+                document.getElementById('listViewBtn')?.addEventListener('click', () => this.setView('list'));
+
+                // Mobile filter
+                document.getElementById('mobileFilterBtn')?.addEventListener('click', () => this.toggleMobileSidebar());
+                document.getElementById('mobileOverlay')?.addEventListener('click', () => this.closeMobileSidebar());
+
+                // Modal
+                document.getElementById('closeModal')?.addEventListener('click', () => this.closeModal());
+                document.getElementById('topicModal')?.addEventListener('click', (e) => {
+                    if (e.target.id === 'topicModal') this.closeModal();
+                });
+
+                // Modal actions
+                document.getElementById('markCompleteBtn')?.addEventListener('click', () => this.markCurrentComplete());
+                document.getElementById('bookmarkBtn')?.addEventListener('click', () => this.toggleBookmark());
+                document.getElementById('editTopicBtn')?.addEventListener('click', () => this.editTopic());
+
+                // Clear filters
+                document.getElementById('clearFilters')?.addEventListener('click', () => this.clearAllFilters());
+            }
+
+            renderCategoryFilters() {
+                const categories = this.getUniqueCategories();
+                const container = document.getElementById('categoryFilters');
+                if (!container) return;
+
+                container.innerHTML = categories.map(category => `
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" class="filter-checkbox" value="${category}" checked>
+                        <span class="text-sm capitalize">${category.replace('-', ' ')}</span>
+                    </label>
+                `).join('');
+            }
+
+            getUniqueCategories() {
+                return [...new Set(this.topics.map(topic => topic.category))];
+            }
+
+            handleSearch(query) {
+                this.searchQuery = query.toLowerCase();
+                this.applyFilters();
+            }
+
+            handleFilterChange(checkbox) {
+                const filterType = checkbox.closest('[id$="Filters"]')?.id;
+                const value = checkbox.value;
+
+                if (filterType === 'categoryFilters') {
+                    if (checkbox.checked) {
+                        this.activeFilters.categories.push(value);
+                    } else {
+                        this.activeFilters.categories = this.activeFilters.categories.filter(c => c !== value);
+                    }
+                } else if (filterType === 'difficultyFilters') {
+                    if (checkbox.checked) {
+                        this.activeFilters.difficulties.push(value);
+                    } else {
+                        this.activeFilters.difficulties = this.activeFilters.difficulties.filter(d => d !== value);
+                    }
+                } else if (filterType === 'progressFilters') {
+                    if (checkbox.checked) {
+                        this.activeFilters.progress.push(value);
+                    } else {
+                        this.activeFilters.progress = this.activeFilters.progress.filter(p => p !== value);
+                    }
+                }
+
+                this.applyFilters();
+            }
+
+            handleSortChange(sortBy) {
+                this.currentSort = sortBy;
+                this.sortTopics();
+                this.renderTopics();
+            }
+
+            applyFilters() {
+                this.filteredTopics = this.topics.filter(topic => {
+                    // Category filter
+                    if (this.activeFilters.categories.length > 0 && 
+                        !this.activeFilters.categories.includes(topic.category)) {
+                        return false;
+                    }
+
+                    // Difficulty filter
+                    if (!this.activeFilters.difficulties.includes(topic.difficulty)) {
+                        return false;
+                    }
+
+                    // Progress filter
+                    const progressStatus = topic.progress === 100 ? 'completed' : 
+                                         topic.progress > 0 ? 'in-progress' : 'not-started';
+                    if (!this.activeFilters.progress.includes(progressStatus)) {
+                        return false;
+                    }
+
+                    // Search filter
+                    if (this.searchQuery) {
+                        const searchText = `${topic.title} ${topic.description} ${topic.concepts.join(' ')}`.toLowerCase();
+                        if (!searchText.includes(this.searchQuery)) {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                });
+
+                this.sortTopics();
+                this.renderTopics();
+                this.updateStats();
+            }
+
+            sortTopics() {
+                this.filteredTopics.sort((a, b) => {
+                    switch (this.currentSort) {
+                        case 'title':
+                            return a.title.localeCompare(b.title);
+                        case 'difficulty':
+                            const difficultyOrder = { 'beginner': 1, 'intermediate': 2, 'advanced': 3 };
+                            return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+                        case 'category':
+                            return a.category.localeCompare(b.category);
+                        case 'progress':
+                            return b.progress - a.progress;
+                        case 'recent':
+                            return b.id - a.id;
+                        default:
+                            return 0;
+                    }
+                });
+            }
+
+            renderTopics() {
+                const grid = document.getElementById('topicGrid');
+                const noResults = document.getElementById('noResults');
+                
+                if (!grid) return;
+
+                if (this.filteredTopics.length === 0) {
+                    grid.style.display = 'none';
+                    noResults?.classList.remove('hidden');
+                    return;
+                }
+
+                grid.style.display = 'grid';
+                noResults?.classList.add('hidden');
+
+                grid.innerHTML = this.filteredTopics.map(topic => this.createTopicCard(topic)).join('');
+
+                // Animate cards
+                anime({
+                    targets: '.topic-card',
+                    opacity: [0, 1],
+                    translateY: [20, 0],
+                    delay: anime.stagger(50),
+                    duration: 400,
+                    easing: 'easeOutQuart'
+                });
+            }
+
+            createTopicCard(topic) {
+                const progressStatus = topic.progress === 100 ? 'completed' : 
+                                     topic.progress > 0 ? 'in-progress' : 'not-started';
+                
+                return `
+                    <div class="topic-card stagger-item" onclick="topicsPage.viewTopic(${topic.id})">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="difficulty-badge difficulty-${topic.difficulty}">
+                                ${topic.difficulty}
+                            </div>
+                            <div class="text-xs text-gray-warm capitalize">${topic.category.replace('-', ' ')}</div>
+                        </div>
+                        
+                        <h3 class="text-lg font-bold text-charcoal-warm mb-2 line-clamp-2">${topic.title}</h3>
+                        <p class="text-gray-warm text-sm mb-4 line-clamp-3">${topic.description}</p>
+                        
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            ${topic.concepts.slice(0, 3).map(concept => 
+                                `<span class="concept-tag">${concept}</span>`
+                            ).join('')}
+                            ${topic.concepts.length > 3 ? `<span class="concept-tag">+${topic.concepts.length - 3}</span>` : ''}
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${topic.progress}%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-warm">
+                                <span>${topic.progress}% Complete</span>
+                                <span class="capitalize">${progressStatus.replace('-', ' ')}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-2 mt-4">
+                            <button class="action-btn action-btn-primary text-xs flex-1" onclick="event.stopPropagation(); topicsPage.markComplete(${topic.id})">
+                                ${topic.progress === 100 ? 'Completed' : 'Mark Complete'}
+                            </button>
+                            <button class="action-btn action-btn-secondary text-xs" onclick="event.stopPropagation(); topicsPage.toggleBookmark(${topic.id})">
+                                ${topic.bookmarked ? '★' : '☆'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            viewTopic(topicId) {
+                const topic = this.topics.find(t => t.id === topicId);
+                if (!topic) return;
+
+                // Navigate to the actual HTML page instead of showing modal
+                if (topic.url) {
+                    window.location.href = topic.url;
+                } else {
+                    // Fallback to modal for topics without direct URLs
+                    this.currentTopic = topic;
+                    this.populateModal(topic);
+                    this.showModal();
+                }
+            }                    // Fallback to modal for topics without direct URLs
+                    this.currentTopic = topic;
+                    this.populateModal(topic);
+                    this.showModal();
+                }
+            }
+
+            populateModal(topic) {
+                document.getElementById('modalTitle').textContent = topic.title;
+                document.getElementById('modalCategory').textContent = topic.category.replace('-', ' ');
+                document.getElementById('modalDifficulty').textContent = topic.difficulty;
+                document.getElementById('modalDifficulty').className = `difficulty-badge difficulty-${topic.difficulty}`;
+                document.getElementById('modalDescription').textContent = topic.description;
+                document.getElementById('modalProgress').style.width = `${topic.progress}%`;
+                document.getElementById('modalProgressText').textContent = `${topic.progress}% Complete`;
+
+                // Concepts
+                const conceptsContainer = document.getElementById('modalConcepts');
+                conceptsContainer.innerHTML = topic.concepts.map(concept => 
+                    `<span class="concept-tag">${concept}</span>`
+                ).join('');
+
+                // Content
+                const content = topic.content || 'Detailed content for this topic will be available soon.';
+                document.getElementById('modalContent').innerHTML = `<p class="text-gray-warm">${content}</p>`;
+
+                // Action buttons
+                const markCompleteBtn = document.getElementById('markCompleteBtn');
+                markCompleteBtn.textContent = topic.progress === 100 ? 'Completed' : 'Mark as Complete';
+                markCompleteBtn.disabled = topic.progress === 100;
+
+                const bookmarkBtn = document.getElementById('bookmarkBtn');
+                bookmarkBtn.textContent = topic.bookmarked ? '★ Bookmarked' : '☆ Bookmark';
+            }
+
+            showModal() {
+                const modal = document.getElementById('topicModal');
+                if (modal) {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            closeModal() {
+                const modal = document.getElementById('topicModal');
+                if (modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            markComplete(topicId) {
+                const topic = this.topics.find(t => t.id === topicId);
+                if (topic && topic.progress < 100) {
+                    topic.progress = 100;
+                    this.saveTopics();
+                    this.applyFilters();
+                    this.updateStats();
+                    this.showNotification('Topic marked as complete!', 'success');
+                }
+            }
+
+            markCurrentComplete() {
+                if (this.currentTopic) {
+                    this.markComplete(this.currentTopic.id);
+                    this.populateModal(this.currentTopic);
+                }
+            }
+
+            toggleBookmark(topicId) {
+                const topic = this.topics.find(t => t.id === topicId || t.id === this.currentTopic?.id);
+                if (topic) {
+                    topic.bookmarked = !topic.bookmarked;
+                    this.saveTopics();
+                    this.applyFilters();
+                    this.showNotification(topic.bookmarked ? 'Topic bookmarked!' : 'Bookmark removed', 'info');
+                }
+            }
+
+            editTopic() {
+                if (this.currentTopic) {
+                    // Redirect to manage page with topic ID
+                    window.location.href = `manage.html?edit=${this.currentTopic.id}`;
+                }
+            }
+
+            setView(view) {
+                this.currentView = view;
+                this.renderTopics();
+                
+                // Update button states
+                document.getElementById('gridViewBtn')?.classList.toggle('action-btn-primary', view === 'grid');
+                document.getElementById('gridViewBtn')?.classList.toggle('action-btn-secondary', view !== 'grid');
+                document.getElementById('listViewBtn')?.classList.toggle('action-btn-primary', view === 'list');
+                document.getElementById('listViewBtn')?.classList.toggle('action-btn-secondary', view !== 'list');
+            }
+
+            toggleMobileSidebar() {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('mobileOverlay');
+                
+                sidebar?.classList.toggle('mobile-open');
+                overlay?.classList.toggle('active');
+            }
+
+            closeMobileSidebar() {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('mobileOverlay');
+                
+                sidebar?.classList.remove('mobile-open');
+                overlay?.classList.remove('active');
+            }
+
+            clearAllFilters() {
+                // Reset all checkboxes
+                document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+                    checkbox.checked = true;
+                });
+
+                // Reset search
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.value = '';
+                }
+
+                // Reset filters
+                this.activeFilters = {
+                    categories: [],
+                    difficulties: ['beginner', 'intermediate', 'advanced'],
+                    progress: ['not-started', 'in-progress', 'completed']
+                };
+                this.searchQuery = '';
+
+                this.applyFilters();
+            }
+
+            updateStats() {
+                const stats = this.calculateStats();
+                
+                document.getElementById('totalTopics').textContent = stats.total;
+                document.getElementById('completedTopics').textContent = stats.completed;
+                document.getElementById('inProgressTopics').textContent = stats.inProgress;
+            }
+
+            calculateStats() {
+                return {
+                    total: this.filteredTopics.length,
+                    completed: this.filteredTopics.filter(t => t.progress === 100).length,
+                    inProgress: this.filteredTopics.filter(t => t.progress > 0 && t.progress < 100).length
+                };
+            }
+
+            checkUrlParams() {
+                const params = new URLSearchParams(window.location.search);
+                const category = params.get('category');
+                
+                if (category) {
+                    // Filter by category
+                    this.activeFilters.categories = [category];
+                    document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+                        if (checkbox.value === category) {
+                            checkbox.checked = true;
+                        } else if (checkbox.closest('#categoryFilters')) {
+                            checkbox.checked = false;
+                        }
+                    });
+                    this.applyFilters();
+                }
+
+                // Check for selected topic
+                const selectedTopicId = localStorage.getItem('selectedTopicId');
+                if (selectedTopicId) {
+                    this.viewTopic(parseInt(selectedTopicId));
+                    localStorage.removeItem('selectedTopicId');
+                }
+            }
+
+            initializeAnimations() {
+                // Fade in elements
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animated');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg text-white font-semibold transform translate-x-full transition-transform duration-300`;
+                notification.style.background = type === 'success' ? 'var(--success-green)' : 'var(--copper-accent)';
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(0)';
+                }, 100);
+                
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize the topics page
+        let topicsPage;
+        document.addEventListener('DOMContentLoaded', () => {
+            topicsPage = new TopicsPage();
+        });
+    </script>
+    
+    <script>
+        // Simplified topics data for testing
+        const testTopics = [
+            {
+                id: 1,
+                title: "Introduction to Generative AI",
+                category: "fundamentals",
+                difficulty: "beginner",
+                description: "Learn the fundamentals of generative AI, how Large Language Models work, and their core capabilities in content generation.",
+                concepts: ["Generative AI", "LLMs", "Content Generation", "AI Fundamentals"],
+                featured: true,
+                progress: 0,
+                content: "Introduction to Generative AI content..."
+            },
+            {
+                id: 2,
+                title: "Exploring and Comparing LLMs",
+                category: "fundamentals",
+                difficulty: "beginner",
+                description: "Understand different types of Large Language Models, compare their capabilities, and learn how to select the right model for your use case.",
+                concepts: ["Model Comparison", "GPT", "Claude", "Llama", "Model Selection"],
+                featured: true,
+                progress: 0,
+                content: "Exploring and Comparing LLMs content..."
+            },
+            {
+                id: 3,
+                title: "Using Generative AI Responsibly",
+                category: "fundamentals",
+                difficulty: "beginner",
+                description: "Learn the principles of Responsible AI, ethical considerations, and best practices for building trustworthy AI applications.",
+                concepts: ["Responsible AI", "Ethics", "Bias", "Fairness", "Transparency"],
+                featured: false,
+                progress: 0,
+                content: "Using Generative AI Responsibly content..."
+            },
+            {
+                id: 4,
+                title: "Prompt Engineering Fundamentals",
+                category: "implementation",
+                difficulty: "beginner",
+                description: "Master the art and science of crafting effective prompts to guide AI models toward desired outputs and behaviors.",
+                concepts: ["Prompt Engineering", "Zero-shot", "Few-shot", "Chain-of-Thought", "System Prompts"],
+                featured: true,
+                progress: 0,
+                content: "Prompt Engineering Fundamentals content..."
+            },
+            {
+                id: 5,
+                title: "Retrieval-Augmented Generation (RAG)",
+                category: "implementation",
+                difficulty: "intermediate",
+                description: "Learn how to enhance LLM responses with external knowledge using RAG techniques and vector databases.",
+                concepts: ["RAG", "Vector Databases", "Embeddings", "Semantic Search", "Knowledge Retrieval"],
+                featured: true,
+                progress: 0,
+                content: "Retrieval-Augmented Generation content..."
+            },
+            {
+                id: 6,
+                title: "Building AI Agents",
+                category: "architecture",
+                difficulty: "intermediate",
+                description: "Create autonomous AI agents that can perceive, reason, act, and learn to accomplish complex tasks.",
+                concepts: ["AI Agents", "Autonomous Systems", "Tool Use", "Planning", "Multi-Agent Systems"],
+                featured: true,
+                progress: 0,
+                content: "Building AI Agents content..."
+            },
+            {
+                id: 7,
+                title: "LangChain Framework",
+                category: "frameworks",
+                difficulty: "intermediate",
+                description: "Master LangChain for building applications with language models using chains, agents, and memory systems.",
+                concepts: ["LangChain", "Chains", "Agents", "Memory", "Tools", "Prompts"],
+                featured: true,
+                progress: 0,
+                content: "LangChain Framework content..."
+            },
+            {
+                id: 8,
+                title: "Vector Databases for AI Applications",
+                category: "architecture",
+                difficulty: "intermediate",
+                description: "Learn about vector databases, embeddings, and semantic search for building scalable AI applications.",
+                concepts: ["Vector Databases", "Embeddings", "Semantic Search", "Similarity Search", "Pinecone", "Chroma"],
+                featured: false,
+                progress: 0,
+                content: "Vector Databases content..."
+            },
+            {
+                id: 9,
+                title: "Fine-Tuning Large Language Models",
+                category: "advanced",
+                difficulty: "advanced",
+                description: "Learn advanced techniques for fine-tuning LLMs on custom datasets to improve performance on specific tasks.",
+                concepts: ["Fine-tuning", "Transfer Learning", "Custom Datasets", "PEFT", "LoRA", "QLoRA"],
+                featured: false,
+                progress: 0,
+                content: "Fine-Tuning LLMs content..."
+            },
+            {
+                id: 10,
+                title: "AutoGen Multi-Agent Framework",
+                category: "frameworks",
+                difficulty: "advanced",
+                description: "Build sophisticated multi-agent systems with AutoGen's conversational approach to AI agent orchestration.",
+                concepts: ["AutoGen", "Multi-Agent Systems", "Conversational AI", "Agent Orchestration", "Microsoft Research"],
+                featured: true,
+                progress: 0,
+                content: "AutoGen Framework content..."
+            }
+        ];
+        
+        // Make topics available globally
+        window.allTopics = testTopics;
+        console.log('Loaded', testTopics.length, 'topics for testing');
+    </script>
+</body>
+</html>

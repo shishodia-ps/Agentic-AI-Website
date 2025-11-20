@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Agentic AI Knowledge Hub</title>
+    <meta name="description" content="Learn about Agentic AI concepts, platform features, and comprehensive learning resources for AI development.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --sage-deep: #2D5A3D;
+            --charcoal-warm: #3A3A3A;
+            --cream-soft: #F8F6F0;
+            --copper-accent: #B87333;
+            --teal-muted: #4A7C7E;
+            --lavender-soft: #B8A9C9;
+            --gray-warm: #8B8680;
+            --success-green: #6B8E5A;
+            --warning-amber: #D4A574;
+            --error-coral: #C67B5C;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream-soft);
+            color: var(--charcoal-warm);
+        }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Navigation */
+        .nav-glass {
+            background: rgba(248, 246, 240, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--copper-accent);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--copper-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero-bg {
+            background: linear-gradient(135deg, var(--sage-deep) 0%, var(--teal-muted) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        /* Content Cards */
+        .content-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(45, 90, 61, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(45, 90, 61, 0.1);
+        }
+        
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--sage-deep), var(--teal-muted));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--copper-accent);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--copper-accent);
+            border-radius: 50%;
+            border: 3px solid var(--cream-soft);
+        }
+        
+        /* Interactive Demo */
+        .demo-container {
+            background: white;
+            border: 1px solid rgba(45, 90, 61, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .demo-step {
+            padding: 1rem;
+            border: 2px dashed rgba(45, 90, 61, 0.2);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .demo-step:hover {
+            border-color: var(--copper-accent);
+            background: rgba(184, 115, 51, 0.05);
+        }
+        
+        .demo-step.active {
+            border-color: var(--copper-accent);
+            background: rgba(184, 115, 51, 0.1);
+            border-style: solid;
+        }
+        
+        /* Code Block */
+        .code-block {
+            background: #1a1a1a;
+            color: #e5e5e5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        .code-comment { color: #6b7280; }
+        .code-keyword { color: #c678dd; }
+        .code-string { color: #98c379; }
+        .code-number { color: #d19a66; }
+        
+        /* Comparison Table */
+        .comparison-table {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(45, 90, 61, 0.1);
+        }
+        
+        .comparison-table th {
+            background: var(--sage-deep);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(184, 115, 51, 0.05);
+        }
+        
+        /* Action Buttons */
+        .action-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .action-btn-primary {
+            background: var(--copper-accent);
+            color: white;
+        }
+        
+        .action-btn-primary:hover {
+            background: var(--sage-deep);
+            transform: translateY(-1px);
+        }
+        
+        .action-btn-secondary {
+            background: rgba(45, 90, 61, 0.1);
+            color: var(--sage-deep);
+        }
+        
+        .action-btn-secondary:hover {
+            background: rgba(45, 90, 61, 0.2);
+        }
+        
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content-card {
+                padding: 1.5rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .stagger-item.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation" id="bgAnimation"></div>
+    
+    <!-- Navigation -->
+    <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-xl font-bold text-sage-deep">Agentic AI Hub</h1>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="index.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Home</a>
+                        <a href="topics.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Topics</a>
+                        <a href="manage.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Manage</a>
+                        <a href="#" class="nav-link text-copper-accent font-semibold">About</a>
+                    </div>
+                </div>
+                
+                <button class="action-btn action-btn-primary" onclick="window.location.href='topics.html'">
+                    Explore Topics
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="hero-content max-w-7xl mx-auto px-6 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h1 class="hero-title text-white mb-6">
+                        Understanding Agentic AI
+                    </h1>
+                    <p class="hero-subtitle text-white mb-8">
+                        Explore the fascinating world of autonomous AI systems, from fundamental concepts 
+                        to cutting-edge implementations that are reshaping technology.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="action-btn action-btn-primary bg-white text-sage-deep hover:bg-gray-100" onclick="scrollToSection('what-is-agentic-ai')">
+                            Learn Concepts
+                        </button>
+                        <button class="action-btn action-btn-secondary border-2 border-white text-white hover:bg-white hover:text-sage-deep" onclick="scrollToSection('platform-features')">
+                            Platform Features
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <img src="resources/agent-architecture.png" alt="AI Agent Architecture" class="w-full h-auto rounded-2xl shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- What is Agentic AI -->
+    <section class="py-20 bg-white" id="what-is-agentic-ai">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-charcoal-warm mb-4">What is Agentic AI?</h2>
+                <p class="text-xl text-gray-warm max-w-3xl mx-auto">
+                    Agentic AI represents a paradigm shift from traditional AI systems to autonomous agents 
+                    that can perceive, reason, act, and learn in dynamic environments.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="content-card stagger-item">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-3">Autonomous Decision-Making</h3>
+                    <p class="text-gray-warm">
+                        AI agents can make independent decisions based on their perception of the environment 
+                        and their programmed goals, without constant human intervention.
+                    </p>
+                </div>
+                
+                <div class="content-card stagger-item">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-3">Perception-Action Loop</h3>
+                    <p class="text-gray-warm">
+                        Agents continuously perceive their environment through sensors, process information, 
+                        and take actions through actuators to achieve their objectives.
+                    </p>
+                </div>
+                
+                <div class="content-card stagger-item">
+                    <div class="feature-icon">📚</div>
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-3">Learning & Adaptation</h3>
+                    <p class="text-gray-warm">
+                        Through experience and feedback, agents improve their performance over time, 
+                        adapting to new situations and optimizing their behavior.
+                    </p>
+                </div>
+                
+                <div class="content-card stagger-item">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-3">Multi-Agent Collaboration</h3>
+                    <p class="text-gray-warm">
+                        Multiple agents can work together, communicating and coordinating to solve 
+                        complex problems that exceed individual agent capabilities.
+                    </p>
+                </div>
+                
+                <div class="content-card stagger-item">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-3">Goal-Oriented Behavior</h3>
+                    <p class="text-gray-warm">
+                        Agents are designed with specific goals and objectives, driving their actions 
+                        and decision-making processes toward desired outcomes.
+                    </p>
+                </div>
+                
+                <div class="content-card stagger-item">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-3">Tool Integration</h3>
+                    <p class="text-gray-warm">
+                        Modern AI agents can integrate with external tools, APIs, and services, 
+                        extending their capabilities beyond simple text generation.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Interactive Demo -->
+            <div class="demo-container fade-in">
+                <h3 class="text-2xl font-bold text-charcoal-warm mb-6">Interactive Demo: Agent Decision Process</h3>
+                <p class="text-gray-warm mb-6">
+                    Click through the steps below to see how an AI agent processes information and makes decisions:
+                </p>
+                
+                <div class="space-y-4" id="demoSteps">
+                    <div class="demo-step" data-step="1">
+                        <h4 class="font-semibold text-charcoal-warm mb-2">Step 1: Perception</h4>
+                        <p class="text-gray-warm">The agent observes its environment and gathers relevant data through sensors or input mechanisms.</p>
+                    </div>
+                    
+                    <div class="demo-step" data-step="2">
+                        <h4 class="font-semibold text-charcoal-warm mb-2">Step 2: Reasoning</h4>
+                        <p class="text-gray-warm">The agent analyzes the perceived information, considers its goals, and evaluates possible actions.</p>
+                    </div>
+                    
+                    <div class="demo-step" data-step="3">
+                        <h4 class="font-semibold text-charcoal-warm mb-2">Step 3: Planning</h4>
+                        <p class="text-gray-warm">The agent creates a plan or sequence of actions to achieve its objectives effectively.</p>
+                    </div>
+                    
+                    <div class="demo-step" data-step="4">
+                        <h4 class="font-semibold text-charcoal-warm mb-2">Step 4: Action</h4>
+                        <p class="text-gray-warm">The agent executes the planned actions through its available actuators or output mechanisms.</p>
+                    </div>
+                    
+                    <div class="demo-step" data-step="5">
+                        <h4 class="font-semibold text-charcoal-warm mb-2">Step 5: Learning</h4>
+                        <p class="text-gray-warm">The agent observes the results of its actions and updates its knowledge for future decisions.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-sage-deep/5 rounded-lg">
+                    <h4 class="font-semibold text-charcoal-warm mb-2">Current Step: <span id="currentStepTitle">Click a step above</span></h4>
+                    <p class="text-gray-warm" id="currentStepDescription">Select any step to see detailed information about that phase of the agent's decision-making process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Platform Features -->
+    <section class="py-20 bg-cream-soft" id="platform-features">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-charcoal-warm mb-4">Platform Features</h2>
+                <p class="text-xl text-gray-warm max-w-3xl mx-auto">
+                    Our comprehensive learning platform provides everything you need to master Agentic AI concepts 
+                    and stay updated with the latest developments in the field.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="content-card stagger-item text-center">
+                    <div class="feature-icon mx-auto">📖</div>
+                    <h3 class="text-lg font-bold text-charcoal-warm mb-3">Comprehensive Content</h3>
+                    <p class="text-gray-warm text-sm">
+                        Detailed coverage of AI concepts from basics to advanced implementations with practical examples.
+                    </p>
+                </div>
+                
+                <div class="content-card stagger-item text-center">
+                    <div class="feature-icon mx-auto">🔍</div>
+                    <h3 class="text-lg font-bold text-charcoal-warm mb-3">Advanced Search</h3>
+                    <p class="text-gray-warm text-sm">
+                        Powerful search and filtering capabilities to quickly find relevant topics and concepts.
+                    </p>
+                </div>
+                
+                <div class="content-card stagger-item text-center">
+                    <div class="feature-icon mx-auto">✏️</div>
+                    <h3 class="text-lg font-bold text-charcoal-warm mb-3">Content Management</h3>
+                    <p class="text-gray-warm text-sm">
+                        Add, edit, and organize your own topics with our comprehensive content management system.
+                    </p>
+                </div>
+                
+                <div class="content-card stagger-item text-center">
+                    <div class="feature-icon mx-auto">📊</div>
+                    <h3 class="text-lg font-bold text-charcoal-warm mb-3">Progress Tracking</h3>
+                    <p class="text-gray-warm text-sm">
+                        Track your learning progress with visual indicators and completion statistics.
+                    </p>
+                </div>
+                
+                <div class="content-card stagger-item text-center">
+                    <div class="feature-icon mx-auto">🎯</div>
+                    <h3 class="text-lg font-bold text-charcoal-warm mb-3">Learning Paths</h3>
+                    <p class="text-gray-warm text-sm">
+                        Structured learning paths guide you from beginner to advanced concepts systematically.
+                    </p>
+                </div>
+                
+                <div class="content-card stagger-item text-center">
+                    <div class="feature-icon mx-auto">🔄</div>
+                    <h3 class="text-lg font-bold text-charcoal-warm mb-3">Regular Updates</h3>
+                    <p class="text-gray-warm text-sm">
+                        Stay current with the latest AI developments and emerging frameworks in the field.
+                    </p>
+                </div>
+                
+                <div class="content-card stagger-item text-center">
+                    <div class="feature-icon mx-auto">📱</div>
+                    <h3 class="text-lg font-bold text-charcoal-warm mb-3">Responsive Design</h3>
+                    <p class="text-gray-warm text-sm">
+                        Access your learning materials on any device with our fully responsive design.
+                    </p>
+                </div>
+                
+                <div class="content-card stagger-item text-center">
+                    <div class="feature-icon mx-auto">🔧</div>
+                    <h3 class="text-lg font-bold text-charcoal-warm mb-3">Rich Editor</h3>
+                    <p class="text-gray-warm text-sm">
+                        Create beautifully formatted content with our intuitive rich text editing tools.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Framework Comparison -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-charcoal-warm mb-4">Popular AI Frameworks</h2>
+                <p class="text-xl text-gray-warm max-w-3xl mx-auto">
+                    Compare leading AI agent frameworks to choose the right tools for your projects.
+                </p>
+            </div>
+            
+            <div class="comparison-table fade-in">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Framework</th>
+                            <th class="text-left">Primary Use Case</th>
+                            <th class="text-left">Language Support</th>
+                            <th class="text-left">Complexity</th>
+                            <th class="text-left">Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-semibold">LangChain</td>
+                            <td>General-purpose agent development</td>
+                            <td>Python, JavaScript</td>
+                            <td><span class="difficulty-badge difficulty-intermediate">Intermediate</span></td>
+                            <td>Complex workflows, tool integration</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">AutoGen</td>
+                            <td>Multi-agent conversations</td>
+                            <td>Python, .NET</td>
+                            <td><span class="difficulty-badge difficulty-advanced">Advanced</span></td>
+                            <td>Research, complex orchestration</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">CrewAI</td>
+                            <td>Role-based agent teams</td>
+                            <td>Python</td>
+                            <td><span class="difficulty-badge difficulty-intermediate">Intermediate</span></td>
+                            <td>Specialized agent collaboration</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">OpenAI Agents</td>
+                            <td>Lightweight agent development</td>
+                            <td>Python, TypeScript</td>
+                            <td><span class="difficulty-badge difficulty-beginner">Beginner</span></td>
+                            <td>Quick prototyping, simple agents</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Google ADK</td>
+                            <td>Multi-modal agent systems</td>
+                            <td>Python, Java</td>
+                            <td><span class="difficulty-badge difficulty-intermediate">Intermediate</span></td>
+                            <td>Voice/video interactions, Gemini integration</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Learning Path -->
+    <section class="py-20 bg-cream-soft">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-charcoal-warm mb-4">Recommended Learning Path</h2>
+                <p class="text-xl text-gray-warm max-w-3xl mx-auto">
+                    Follow our structured approach to mastering Agentic AI concepts and implementation.
+                </p>
+            </div>
+            
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-2">1. Foundation Concepts</h3>
+                    <p class="text-gray-warm mb-2">
+                        Start with fundamental AI concepts, agent definitions, and basic architecture principles. 
+                        Understand the difference between traditional AI and agentic systems.
+                    </p>
+                    <div class="text-sm text-copper-accent font-semibold">Duration: 2-3 weeks</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-2">2. Agent Architecture</h3>
+                    <p class="text-gray-warm mb-2">
+                        Dive deep into agent architecture components including perception, reasoning, planning, 
+                        and action modules. Learn about different architectural patterns.
+                    </p>
+                    <div class="text-sm text-copper-accent font-semibold">Duration: 3-4 weeks</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-2">3. Framework Exploration</h3>
+                    <p class="text-gray-warm mb-2">
+                        Explore popular AI agent frameworks like LangChain, AutoGen, and CrewAI. 
+                        Understand their strengths, weaknesses, and use cases.
+                    </p>
+                    <div class="text-sm text-copper-accent font-semibold">Duration: 4-5 weeks</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-2">4. Implementation Practice</h3>
+                    <p class="text-gray-warm mb-2">
+                        Build practical projects implementing agentic systems. Learn about tool integration, 
+                        memory systems, and multi-agent coordination.
+                    </p>
+                    <div class="text-sm text-copper-accent font-semibold">Duration: 4-6 weeks</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-2">5. Advanced Topics</h3>
+                    <p class="text-gray-warm mb-2">
+                        Explore advanced concepts like emergent behaviors, AI safety, alignment, 
+                        and cutting-edge research in agentic systems.
+                    </p>
+                    <div class="text-sm text-copper-accent font-semibold">Duration: 3-4 weeks</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-2">6. Real-World Applications</h3>
+                    <p class="text-gray-warm mb-2">
+                        Apply your knowledge to real-world scenarios and industry applications. 
+                        Build portfolio projects and contribute to the AI community.
+                    </p>
+                    <div class="text-sm text-copper-accent font-semibold">Duration: Ongoing</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Code Example -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-charcoal-warm mb-4">Simple Agent Example</h2>
+                <p class="text-xl text-gray-warm max-w-3xl mx-auto">
+                    Here's a basic example of how to create a simple AI agent using modern frameworks.
+                </p>
+            </div>
+            
+            <div class="demo-container fade-in">
+                <h3 class="text-xl font-bold text-charcoal-warm mb-4">Basic ReAct Agent with LangChain</h3>
+                <div class="code-block">
+<span class="code-comment"># Import necessary libraries</span>
+<span class="code-keyword">from</span> langchain.agents <span class="code-keyword">import</span> AgentType, initialize_agent
+<span class="code-keyword">from</span> langchain.tools <span class="code-keyword">import</span> Tool
+<span class="code-keyword">from</span> langchain.llms <span class="code-keyword">import</span> OpenAI
+
+<span class="code-comment"># Define custom tools for the agent</span>
+<span class="code-keyword">def</span> <span class="code-function">search_database</span>(query):
+    <span class="code-comment">"""Search internal database for information"""</span>
+    <span class="code-comment"># Implementation would connect to actual database</span>
+    <span class="code-keyword">return</span> <span class="code-string">f"Found relevant information for: {query}"</span>
+
+<span class="code-keyword">def</span> <span class="code-function">calculate_result</span>(expression):
+    <span class="code-comment">"""Perform mathematical calculations"""</span>
+    <span class="code-keyword">try</span>:
+        result = <span class="code-function">eval</span>(expression)
+        <span class="code-keyword">return</span> <span class="code-function">str</span>(result)
+    <span class="code-keyword">except</span>:
+        <span class="code-keyword">return</span> <span class="code-string">"Invalid expression"</span>
+
+<span class="code-comment"># Create tools list</span>
+tools = [
+    Tool(
+        name=<span class="code-string">"Database Search"</span>,
+        func=search_database,
+        description=<span class="code-string">"Search internal database for information"</span>
+    ),
+    Tool(
+        name=<span class="code-string">"Calculator"</span>,
+        func=calculate_result,
+        description=<span class="code-string">"Perform mathematical calculations"</span>
+    )
+]
+
+<span class="code-comment"># Initialize the language model</span>
+llm = OpenAI(temperature=<span class="code-number">0</span>)
+
+<span class="code-comment"># Create the ReAct agent</span>
+agent = initialize_agent(
+    tools,
+    llm,
+    agent=AgentType.REACT_DOCSTORE,
+    verbose=<span class="code-keyword">True</span>
+)
+
+<span class="code-comment"># Use the agent</span>
+result = agent.run(<span class="code-string">"Search for information about AI agents and calculate 15% of 200"</span>)
+<span class="code-function">print</span>(result)
+                </div>
+                
+                <div class="mt-6 p-4 bg-sage-deep/5 rounded-lg">
+                    <h4 class="font-semibold text-charcoal-warm mb-2">What's Happening Here?</h4>
+                    <p class="text-gray-warm text-sm">
+                        This example demonstrates a ReAct (Reasoning and Acting) agent that can use tools to gather information 
+                        and perform calculations. The agent follows a thought-process → action → observation loop, making it 
+                        more capable than simple question-answering systems.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action -->
+    <section class="py-20 bg-sage-deep text-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="fade-in">
+                <h2 class="text-4xl font-bold mb-6">Ready to Start Your AI Journey?</h2>
+                <p class="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
+                    Join thousands of learners mastering Agentic AI concepts. Start with our comprehensive 
+                    topics and build your way up to advanced implementations.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="action-btn action-btn-primary bg-white text-sage-deep hover:bg-gray-100" onclick="window.location.href='topics.html'">
+                        Browse All Topics
+                    </button>
+                    <button class="action-btn action-btn-secondary border-2 border-white text-white hover:bg-white hover:text-sage-deep" onclick="window.location.href='manage.html'">
+                        Create Your First Topic
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // About Page JavaScript
+        class AboutPage {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.initializeAnimations();
+                this.createBackgroundAnimation();
+            }
+
+            setupEventListeners() {
+                // Demo step interactions
+                document.querySelectorAll('.demo-step').forEach(step => {
+                    step.addEventListener('click', (e) => this.selectDemoStep(e.currentTarget));
+                });
+            }
+
+            selectDemoStep(stepElement) {
+                // Remove active class from all steps
+                document.querySelectorAll('.demo-step').forEach(step => {
+                    step.classList.remove('active');
+                });
+
+                // Add active class to selected step
+                stepElement.classList.add('active');
+
+                // Update step information
+                const stepNumber = stepElement.dataset.step;
+                const title = stepElement.querySelector('h4').textContent;
+                const description = stepElement.querySelector('p').textContent;
+
+                document.getElementById('currentStepTitle').textContent = title;
+                document.getElementById('currentStepDescription').textContent = description;
+
+                // Animate the update
+                anime({
+                    targets: '#currentStepTitle, #currentStepDescription',
+                    opacity: [0, 1],
+                    translateY: [10, 0],
+                    duration: 300,
+                    easing: 'easeOutQuart'
+                });
+            }
+
+            initializeAnimations() {
+                // Intersection Observer for scroll animations
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animated');
+                            
+                            // Stagger animation for cards
+                            if (entry.target.classList.contains('stagger-item')) {
+                                const cards = entry.target.parentElement.querySelectorAll('.stagger-item');
+                                anime({
+                                    targets: cards,
+                                    opacity: [0, 1],
+                                    translateY: [30, 0],
+                                    delay: anime.stagger(100),
+                                    duration: 600,
+                                    easing: 'easeOutQuart'
+                                });
+                            }
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+
+                document.querySelectorAll('.fade-in, .stagger-item').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+
+            createBackgroundAnimation() {
+                const bgAnimation = document.getElementById('bgAnimation');
+                if (!bgAnimation) return;
+
+                // Create p5.js sketch for background animation
+                const sketch = (p) => {
+                    let particles = [];
+                    let connections = [];
+                    
+                    p.setup = () => {
+                        const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+                        canvas.parent('bgAnimation');
+                        
+                        // Create particles
+                        for (let i = 0; i < 30; i++) {
+                            particles.push({
+                                x: p.random(p.width),
+                                y: p.random(p.height),
+                                vx: p.random(-0.3, 0.3),
+                                vy: p.random(-0.3, 0.3),
+                                size: p.random(2, 6)
+                            });
+                        }
+                    };
+                    
+                    p.draw = () => {
+                        p.clear();
+                        p.stroke(45, 90, 61, 20);
+                        p.strokeWeight(1);
+                        p.noFill();
+                        
+                        // Update and draw particles
+                        particles.forEach((particle, i) => {
+                            particle.x += particle.vx;
+                            particle.y += particle.vy;
+                            
+                            // Wrap around edges
+                            if (particle.x < 0) particle.x = p.width;
+                            if (particle.x > p.width) particle.x = 0;
+                            if (particle.y < 0) particle.y = p.height;
+                            if (particle.y > p.height) particle.y = 0;
+                            
+                            // Draw connections to nearby particles
+                            particles.forEach((other, j) => {
+                                if (i !== j) {
+                                    const distance = p.dist(particle.x, particle.y, other.x, other.y);
+                                    if (distance < 150) {
+                                        p.line(particle.x, particle.y, other.x, other.y);
+                                    }
+                                }
+                            });
+                            
+                            // Draw particle
+                            p.fill(45, 90, 61, 30);
+                            p.noStroke();
+                            p.circle(particle.x, particle.y, particle.size);
+                        });
+                    };
+                    
+                    p.windowResized = () => {
+                        p.resizeCanvas(p.windowWidth, p.windowHeight);
+                    };
+                };
+                
+                new p5(sketch);
+            }
+        }
+
+        // Utility function for smooth scrolling
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Initialize the about page
+        document.addEventListener('DOMContentLoaded', () => {
+            new AboutPage();
+        });
+    </script>
+</body>
+</html>

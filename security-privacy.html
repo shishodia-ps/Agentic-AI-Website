@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security & Privacy - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, #f8f6f0 0%, #e8e4dc 100%); }
+        .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .code-block { background: #2d3748; color: #e2e8f0; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .note-box { background: #fef5e7; border-left: 4px solid #f6ad55; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .warning-box { background: #fed7d7; border-left: 4px solid #fc8181; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .tip-box { background: #e6fffa; border-left: 4px solid #4fd1c7; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .info-box { background: #ebf8ff; border-left: 4px solid #63b3ed; padding: 1rem; border-radius: 0 8px 8px 0; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                        <i class="fas fa-brain text-2xl text-blue-600"></i>
+                        <span class="font-semibold text-xl">Agentic AI Hub</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-gray-900 font-medium">Home</a>
+                    <a href="ai-stack.html" class="text-gray-600 hover:text-gray-900 font-medium">AI Stack</a>
+                    <a href="visual-editor.html" class="text-blue-600 hover:text-blue-800 font-medium">Visual Editor</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-shadow">
+                    Security & Privacy
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Comprehensive security frameworks and privacy protection strategies for AI systems, 
+                    covering data protection, model security, compliance, and threat mitigation.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="sticky top-24">
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Quick Navigation</h3>
+                        <nav class="space-y-2">
+                            <a href="#overview" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Overview</a>
+                            <a href="#data-protection" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Data Protection</a>
+                            <a href="#model-security" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Model Security</a>
+                            <a href="#privacy" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Privacy</a>
+                            <a href="#compliance" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Compliance</a>
+                            <a href="#threat-mitigation" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Threat Mitigation</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Overview Section -->
+                <section id="overview" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Overview</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        AI security and privacy require a multi-layered approach addressing data protection, 
+                        model integrity, user privacy, and regulatory compliance. Modern AI systems face 
+                        unique challenges including adversarial attacks, data poisoning, and privacy breaches.
+                    </p>
+                    
+                    <div class="warning-box mb-6">
+                        <h4 class="font-semibold text-red-800 mb-2">
+                            <i class="fas fa-shield-alt mr-2"></i>Security Reality
+                        </h4>
+                        <p class="text-red-700">
+                            AI systems are vulnerable to unique attack vectors including adversarial examples, 
+                            model inversion, and data poisoning. Proactive security measures are essential.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-lock text-2xl text-red-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Data Encryption</h3>
+                            </div>
+                            <p class="text-gray-600">Protect data at rest and in transit</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-user-secret text-2xl text-blue-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Privacy Protection</h3>
+                            </div>
+                            <p class="text-gray-600">Anonymization and differential privacy</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-bug text-2xl text-green-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Adversarial Defense</h3>
+                            </div>
+                            <p class="text-gray-600">Robustness against attacks</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-gavel text-2xl text-purple-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Compliance</h3>
+                            </div>
+                            <p class="text-gray-600">GDPR, CCPA, and other regulations</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-eye text-2xl text-orange-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Access Control</h3>
+                            </div>
+                            <p class="text-gray-600">Authentication and authorization</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-search text-2xl text-teal-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Audit Logging</h3>
+                            </div>
+                            <p class="text-gray-600">Security event monitoring</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Protection -->
+                <section id="data-protection" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Data Protection</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Encryption at Rest and in Transit</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import boto3
+from cryptography.fernet import Fernet
+import os
+from datetime import datetime
+
+class SecureDataStore:
+    def __init__(self):
+        self.kms_client = boto3.client('kms')
+        self.s3_client = boto3.client('s3')
+        
+        # Generate or retrieve encryption key
+        self.data_key = self._get_data_key()
+        self.cipher = Fernet(self.data_key)
+    
+    def _get_data_key(self):
+        """Generate or retrieve encrypted data key from KMS"""
+        try:
+            response = self.kms_client.generate_data_key(
+                KeyId='alias/ai-model-key',
+                KeySpec='AES_256'
+            )
+            return response['Plaintext'][:32]  # Use first 32 bytes for Fernet
+        except Exception as e:
+            # Fallback to local key for demo
+            return Fernet.generate_key()
+    
+    def encrypt_sensitive_data(self, data):
+        """Encrypt sensitive data before storage"""
+        if isinstance(data, dict):
+            data = json.dumps(data)
+        
+        encrypted_data = self.cipher.encrypt(data.encode())
+        return encrypted_data
+    
+    def decrypt_sensitive_data(self, encrypted_data):
+        """Decrypt sensitive data after retrieval"""
+        decrypted_data = self.cipher.decrypt(encrypted_data)
+        return decrypted_data.decode()
+    
+    def store_training_data(self, data, dataset_id):
+        """Securely store training data"""
+        encrypted_data = self.encrypt_sensitive_data(data)
+        
+        # Add metadata
+        metadata = {
+            'dataset_id': dataset_id,
+            'encrypted_at': datetime.utcnow().isoformat(),
+            'encryption_version': '1.0',
+            'data_classification': 'confidential'
+        }
+        
+        # Store in S3 with encryption
+        self.s3_client.put_object(
+            Bucket='ai-training-data',
+            Key=f'datasets/{dataset_id}/data.enc',
+            Body=encrypted_data,
+            Metadata=metadata,
+            ServerSideEncryption='AES256'
+        )
+        
+        return f"Dataset {dataset_id} stored securely"
+
+# Usage
+secure_store = SecureDataStore()
+sensitive_data = {"user_id": "12345", "medical_history": "confidential"}
+result = secure_store.store_training_data(sensitive_data, "patient_data_001")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Data Masking and Tokenization</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import hashlib
+import secrets
+from typing import Dict, Any
+
+class DataMasking:
+    def __init__(self):
+        self.token_map = {}
+        self.salt = secrets.token_hex(16)
+    
+    def mask_pii(self, data: Dict[str, Any], sensitive_fields: list) -> Dict[str, Any]:
+        """Mask personally identifiable information"""
+        masked_data = data.copy()
+        
+        for field in sensitive_fields:
+            if field in masked_data:
+                original_value = masked_data[field]
+                
+                # Generate consistent token
+                token = self._generate_token(original_value)
+                self.token_map[token] = original_value
+                masked_data[field] = token
+        
+        return masked_data
+    
+    def _generate_token(self, value: str) -> str:
+        """Generate reversible token for PII"""
+        # Hash-based tokenization
+        token_hash = hashlib.sha256(f"{value}{self.salt}".encode()).hexdigest()[:16]
+        return f"TOKEN_{token_hash}"
+    
+    def unmask_data(self, masked_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Restore original PII from tokens"""
+        unmasked_data = masked_data.copy()
+        
+        for key, value in unmasked_data.items():
+            if isinstance(value, str) and value.startswith("TOKEN_"):
+                if value in self.token_map:
+                    unmasked_data[key] = self.token_map[value]
+        
+        return unmasked_data
+    
+    def apply_differential_privacy(self, numeric_value: float, epsilon: float = 1.0):
+        """Add Laplacian noise for differential privacy"""
+        import numpy as np
+        
+        sensitivity = 1.0  # Global sensitivity
+        scale = sensitivity / epsilon
+        noise = np.random.laplace(0, scale)
+        
+        return numeric_value + noise
+
+# Usage example
+masker = DataMasking()
+
+# Original data with PII
+user_data = {
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "ssn": "123-45-6789",
+    "age": 35,
+    "salary": 75000
+}
+
+# Mask sensitive fields
+masked = masker.mask_pii(user_data, ["name", "email", "ssn"])
+print(f"Masked data: {masked}")
+
+# Apply differential privacy to salary
+private_salary = masker.apply_differential_privacy(masked["salary"], epsilon=0.1)
+print(f"Private salary: {private_salary}")
+
+# Unmask when needed (for authorized access)
+unmasked = masker.unmask_data(masked)
+print(f"Unmasked data: {unmasked}")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <h4 class="font-semibold text-blue-800 mb-2">
+                            <i class="fas fa-info-circle mr-2"></i>Data Protection Strategy
+                        </h4>
+                        <p class="text-blue-700">
+                            Implement defense-in-depth with encryption, access controls, data masking, 
+                            and regular security audits. Classify data by sensitivity level.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Model Security -->
+                <section id="model-security" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Model Security</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Adversarial Attack Defense</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import numpy as np
+import torch
+import torch.nn as nn
+from torchvision import transforms
+
+class AdversarialDefense:
+    def __init__(self, model, epsilon=0.1, alpha=0.01):
+        self.model = model
+        self.epsilon = epsilon
+        self.alpha = alpha
+        self.device = next(model.parameters()).device
+    
+    def fgsm_attack(self, images, labels):
+        """Fast Gradient Sign Method attack"""
+        images.requires_grad = True
+        
+        outputs = self.model(images)
+        loss = nn.CrossEntropyLoss()(outputs, labels)
+        
+        # Calculate gradients
+        loss.backward()
+        
+        # Generate adversarial examples
+        perturbed_images = images + self.epsilon * images.grad.data.sign()
+        perturbed_images = torch.clamp(perturbed_images, 0, 1)
+        
+        return perturbed_images
+    
+    def pgd_attack(self, images, labels, num_steps=7):
+        """Projected Gradient Descent attack"""
+        perturbed_images = images.clone().detach()
+        perturbed_images.requires_grad = True
+        
+        for _ in range(num_steps):
+            outputs = self.model(perturbed_images)
+            loss = nn.CrossEntropyLoss()(outputs, labels)
+            
+            loss.backward()
+            
+            # Update perturbation
+            with torch.no_grad():
+                perturbed_images += self.alpha * perturbed_images.grad.sign()
+                
+                # Project back to epsilon ball
+                perturbation = torch.clamp(perturbed_images - images, -self.epsilon, self.epsilon)
+                perturbed_images = torch.clamp(images + perturbation, 0, 1)
+                
+                perturbed_images.grad.zero_()
+        
+        return perturbed_images.detach()
+    
+    def adversarial_training(self, images, labels):
+        """Adversarial training with FGSM"""
+        # Generate adversarial examples
+        adversarial_images = self.fgsm_attack(images, labels)
+        
+        # Combine clean and adversarial examples
+        combined_images = torch.cat([images, adversarial_images], dim=0)
+        combined_labels = torch.cat([labels, labels], dim=0)
+        
+        return combined_images, combined_labels
+    
+    def defensive_distillation(self, temperature=10):
+        """Defensive distillation for robustness"""
+        # Create a softer version of the model
+        def soft_predict(self, x):
+            logits = self.model(x)
+            soft_logits = logits / temperature
+            return torch.softmax(soft_logits, dim=1)
+        
+        return soft_predict
+
+# Usage example
+model = nn.Sequential(
+    nn.Linear(784, 128),
+    nn.ReLU(),
+    nn.Linear(128, 10)
+)
+
+defense = AdversarialDefense(model)
+
+# Generate adversarial examples for testing
+images = torch.randn(10, 784)
+labels = torch.randint(0, 10, (10,))
+adversarial_examples = defense.fgsm_attack(images, labels)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Model Watermarking</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import hashlib
+import numpy as np
+from scipy.fft import dct, idct
+
+class ModelWatermark:
+    def __init__(self, watermark_key="AI_MODEL_2024"):
+        self.watermark_key = watermark_key
+        self.watermark_pattern = self._generate_watermark_pattern()
+    
+    def _generate_watermark_pattern(self, size=64):
+        """Generate pseudo-random watermark pattern"""
+        np.random.seed(int(hashlib.md5(self.watermark_key.encode()).hexdigest()[:8], 16))
+        return np.random.choice([-1, 1], size=size)
+    
+    def embed_watermark(self, model_weights, strength=0.1):
+        """Embed watermark into model weights using DCT"""
+        # Flatten weights
+        weights_flat = model_weights.flatten()
+        
+        # Apply DCT
+        weights_dct = dct(weights_flat, norm='ortho')
+        
+        # Embed watermark in mid-frequency coefficients
+        start_idx = len(weights_dct) // 4
+        end_idx = start_idx + len(self.watermark_pattern)
+        
+        if end_idx <= len(weights_dct):
+            weights_dct[start_idx:end_idx] += strength * self.watermark_pattern
+        
+        # Inverse DCT
+        watermarked_weights = idct(weights_dct, norm='ortho')
+        
+        return watermarked_weights.reshape(model_weights.shape)
+    
+    def extract_watermark(self, model_weights):
+        """Extract and verify watermark"""
+        weights_flat = model_weights.flatten()
+        weights_dct = dct(weights_flat, norm='ortho')
+        
+        start_idx = len(weights_dct) // 4
+        end_idx = start_idx + len(self.watermark_pattern)
+        
+        if end_idx <= len(weights_dct):
+            extracted_pattern = np.sign(weights_dct[start_idx:end_idx])
+            correlation = np.corrcoef(extracted_pattern, self.watermark_pattern)[0, 1]
+            return correlation > 0.7  # Threshold for watermark detection
+        
+        return False
+    
+    def generate_ownership_proof(self, model_hash):
+        """Generate cryptographic proof of ownership"""
+        proof = hashlib.sha256(f"{self.watermark_key}{model_hash}".encode()).hexdigest()
+        return proof
+
+# Usage example
+watermark = ModelWatermark("MY_SECRET_KEY_12345")
+
+# Simulate model weights
+model_weights = np.random.randn(1000, 100)
+
+# Embed watermark
+watermarked_weights = watermark.embed_watermark(model_weights, strength=0.05)
+
+# Verify watermark
+is_watermarked = watermark.extract_watermark(watermarked_weights)
+print(f"Watermark detected: {is_watermarked}")
+
+# Generate ownership proof
+model_hash = hashlib.sha256(model_weights.tobytes()).hexdigest()
+ownership_proof = watermark.generate_ownership_proof(model_hash)
+print(f"Ownership proof: {ownership_proof}")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4 class="font-semibold text-red-800 mb-2">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>Model Security Threats
+                        </h4>
+                        <p class="text-red-700">
+                            Protect against model extraction, inversion attacks, and membership inference. 
+                            Implement rate limiting, input validation, and output perturbation.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Privacy -->
+                <section id="privacy" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Privacy Protection</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Differential Privacy Implementation</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import numpy as np
+from typing import List, Callable
+
+class DifferentialPrivacy:
+    def __init__(self, epsilon: float = 1.0, delta: float = 1e-5):
+        self.epsilon = epsilon  # Privacy budget
+        self.delta = delta      # Probability of privacy breach
+    
+    def laplacian_mechanism(self, data: List[float], sensitivity: float) -> List[float]:
+        """Add Laplacian noise to protect individual data points"""
+        scale = sensitivity / self.epsilon
+        noise = np.random.laplace(0, scale, len(data))
+        return [x + n for x, n in zip(data, noise)]
+    
+    def gaussian_mechanism(self, data: List[float], sensitivity: float) -> List[float]:
+        """Add Gaussian noise for (ε,δ)-differential privacy"""
+        sigma = sensitivity * np.sqrt(2 * np.log(1.25 / self.delta)) / self.epsilon
+        noise = np.random.normal(0, sigma, len(data))
+        return [x + n for x, n in zip(data, noise)]
+    
+    def private_mean(self, data: List[float]) -> float:
+        """Compute differentially private mean"""
+        sensitivity = (max(data) - min(data)) / len(data)
+        true_mean = np.mean(data)
+        noise = np.random.laplace(0, sensitivity / self.epsilon)
+        return true_mean + noise
+    
+    def private_count(self, data: List[bool]) -> int:
+        """Compute differentially private count"""
+        sensitivity = 1.0
+        true_count = sum(data)
+        noise = np.random.laplace(0, sensitivity / self.epsilon)
+        return int(true_count + noise)
+    
+    def exponential_mechanism(self, candidates: List[str], 
+                            utility_function: Callable, sensitivity: float) -> str:
+        """Exponential mechanism for private selection"""
+        utilities = [utility_function(c) for c in candidates]
+        
+        # Compute probabilities
+        probabilities = []
+        for u in utilities:
+            prob = np.exp(self.epsilon * u / (2 * sensitivity))
+            probabilities.append(prob)
+        
+        # Normalize probabilities
+        total = sum(probabilities)
+        probabilities = [p / total for p in probabilities]
+        
+        # Sample from distribution
+        return np.random.choice(candidates, p=probabilities)
+
+# Usage example
+dp = DifferentialPrivacy(epsilon=1.0)
+
+# Protect individual salaries
+salaries = [50000, 55000, 60000, 65000, 70000]
+private_salaries = dp.laplacian_mechanism(salaries, sensitivity=10000)
+print(f"Private salaries: {private_salaries}")
+
+# Private mean salary
+private_mean = dp.private_mean(salaries)
+print(f"Private mean salary: {private_mean}")
+
+# Private count of high earners
+high_earners = [s > 60000 for s in salaries]
+private_count = dp.private_count(high_earners)
+print(f"Private count of high earners: {private_count}")
+
+# Private selection of best model
+models = ["model_a", "model_b", "model_c"]
+accuracies = {"model_a": 0.85, "model_b": 0.90, "model_c": 0.88}
+
+private_model = dp.exponential_mechanism(
+    models, 
+    lambda m: accuracies[m], 
+    sensitivity=0.1
+)
+print(f"Privately selected model: {private_model}")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Federated Learning</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import torch
+import torch.nn as nn
+from typing import List, Dict
+import copy
+
+class FederatedLearning:
+    def __init__(self, global_model: nn.Module, num_clients: int):
+        self.global_model = global_model
+        self.num_clients = num_clients
+        self.client_models = [copy.deepcopy(global_model) for _ in range(num_clients)]
+    
+    def local_training(self, client_id: int, local_data, epochs=5):
+        """Train model on local client data"""
+        model = self.client_models[client_id]
+        optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
+        criterion = nn.CrossEntropyLoss()
+        
+        model.train()
+        for epoch in range(epochs):
+            for batch_idx, (data, target) in enumerate(local_data):
+                optimizer.zero_grad()
+                output = model(data)
+                loss = criterion(output, target)
+                loss.backward()
+                optimizer.step()
+        
+        return model.state_dict()
+    
+    def secure_aggregation(self, client_updates: List[Dict], 
+                         privacy_budget: float = 1.0) -> Dict:
+        """Secure aggregation of client model updates"""
+        global_state = self.global_model.state_dict()
+        
+        # Initialize aggregated state
+        aggregated_state = {}
+        for key in global_state.keys():
+            aggregated_state[key] = torch.zeros_like(global_state[key])
+        
+        # Aggregate updates with privacy protection
+        num_participating = len(client_updates)
+        
+        for client_update in client_updates:
+            for key in global_state.keys():
+                # Add Laplacian noise for privacy
+                sensitivity = 1.0 / num_participating
+                noise = torch.tensor(np.random.laplace(0, sensitivity / privacy_budget))
+                
+                aggregated_state[key] += (client_update[key] + noise) / num_participating
+        
+        return aggregated_state
+    
+    def federated_averaging(self, client_updates: List[Dict], 
+                          client_weights: List[float] = None) -> Dict:
+        """Federated averaging (FedAvg) algorithm"""
+        if client_weights is None:
+            client_weights = [1.0 / len(client_updates)] * len(client_updates)
+        
+        global_state = self.global_model.state_dict()
+        aggregated_state = {}
+        
+        for key in global_state.keys():
+            aggregated_state[key] = torch.zeros_like(global_state[key])
+            
+            for i, client_update in enumerate(client_updates):
+                aggregated_state[key] += client_weights[i] * client_update[key]
+        
+        return aggregated_state
+    
+    def update_global_model(self, aggregated_state: Dict):
+        """Update global model with aggregated state"""
+        self.global_model.load_state_dict(aggregated_state)
+        
+        # Update all client models
+        for i in range(self.num_clients):
+            self.client_models[i] = copy.deepcopy(self.global_model)
+
+# Usage example
+class SimpleModel(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(784, 128)
+        self.fc2 = nn.Linear(128, 10)
+    
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        return self.fc2(x)
+
+# Initialize federated learning
+model = SimpleModel()
+fed_learning = FederatedLearning(model, num_clients=5)
+
+# Simulate local training (in practice, this happens on client devices)
+client_updates = []
+for client_id in range(5):
+    # Simulate local data
+    local_data = [(torch.randn(32, 784), torch.randint(0, 10, (32,))) for _ in range(10)]
+    
+    # Local training
+    client_update = fed_learning.local_training(client_id, local_data, epochs=3)
+    client_updates.append(client_update)
+
+# Aggregate updates
+aggregated_state = fed_learning.federated_averaging(client_updates)
+fed_learning.update_global_model(aggregated_state)
+
+print("Federated learning round completed successfully")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <h4 class="font-semibold text-teal-800 mb-2">
+                            <i class="fas fa-lightbulb mr-2"></i>Privacy Best Practices
+                        </h4>
+                        <p class="text-teal-700">
+                            Implement privacy by design, use differential privacy for aggregate statistics, 
+                            and consider federated learning for distributed training without data sharing.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Compliance -->
+                <section id="compliance" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Regulatory Compliance</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">GDPR Compliance Framework</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="font-semibold text-lg mb-3">Data Subject Rights</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li>• Right to access personal data</li>
+                                    <li>• Right to rectification</li>
+                                    <li>• Right to erasure ("right to be forgotten")</li>
+                                    <li>• Right to data portability</li>
+                                    <li>• Right to object to processing</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="font-semibold text-lg mb-3">AI-Specific Requirements</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li>• Algorithmic transparency</li>
+                                    <li>• Automated decision-making safeguards</li>
+                                    <li>• Data protection impact assessments</li>
+                                    <li>• Privacy by design implementation</li>
+                                    <li>• Cross-border data transfer controls</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Compliance Monitoring System</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>from datetime import datetime, timedelta
+from typing import Dict, List
+import json
+
+class ComplianceMonitor:
+    def __init__(self):
+        self.compliance_rules = {
+            'data_retention_days': 365,
+            'consent_expiry_days': 730,
+            'audit_retention_years': 7,
+            'breach_notification_hours': 72
+        }
+    
+    def check_data_retention(self, data_timestamp: datetime) -> Dict:
+        """Check if data retention period is exceeded"""
+        age_days = (datetime.utcnow() - data_timestamp).days
+        is_compliant = age_days <= self.compliance_rules['data_retention_days']
+        
+        return {
+            'compliant': is_compliant,
+            'data_age_days': age_days,
+            'max_age_days': self.compliance_rules['data_retention_days'],
+            'action_required': not is_compliant
+        }
+    
+    def validate_consent(self, consent_timestamp: datetime, 
+                        consent_type: str = "explicit") -> Dict:
+        """Validate consent status and expiry"""
+        age_days = (datetime.utcnow() - consent_timestamp).days
+        max_age = self.compliance_rules['consent_expiry_days']
+        
+        if consent_type == "implicit":
+            max_age = 365  # Shorter for implicit consent
+        
+        is_valid = age_days <= max_age
+        
+        return {
+            'valid': is_valid,
+            'consent_age_days': age_days,
+            'max_age_days': max_age,
+            'needs_renewal': not is_valid
+        }
+    
+    def generate_audit_trail(self, user_id: str, action: str, 
+                           data_categories: List[str]) -> Dict:
+        """Generate compliance audit trail"""
+        audit_entry = {
+            'timestamp': datetime.utcnow().isoformat(),
+            'user_id': user_id,
+            'action': action,
+            'data_categories': data_categories,
+            'session_id': self._generate_session_id(),
+            'ip_address': self._get_client_ip(),
+            'compliance_framework': 'GDPR'
+        }
+        
+        # Store audit entry
+        self._store_audit_entry(audit_entry)
+        
+        return audit_entry
+    
+    def check_cross_border_transfer(self, data_location: str, 
+                                  recipient_location: str) -> Dict:
+        """Check if cross-border data transfer is compliant"""
+        # Simplified check - in practice, this would check adequacy decisions
+        eu_countries = ['DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'AT', 'SE', 'DK', 'FI']
+        
+        is_adequate = (data_location in eu_countries and 
+                      recipient_location in eu_countries)
+        
+        requirements = []
+        if not is_adequate:
+            requirements = [
+                "Standard Contractual Clauses (SCCs)",
+                "Transfer Impact Assessment (TIA)",
+                "Additional safeguards"
+            ]
+        
+        return {
+            'compliant': is_adequate or len(requirements) > 0,
+            'adequate_country': is_adequate,
+            'requirements': requirements
+        }
+    
+    def _generate_session_id(self) -> str:
+        """Generate unique session identifier"""
+        import uuid
+        return str(uuid.uuid4())
+    
+    def _get_client_ip(self) -> str:
+        """Get client IP address (simplified)"""
+        return "192.168.1.100"  # In practice, get from request
+    
+    def _store_audit_entry(self, entry: Dict):
+        """Store audit entry in secure log"""
+        # In practice, store in tamper-proof audit system
+        with open('compliance_audit.log', 'a') as f:
+            f.write(json.dumps(entry) + '\n')
+
+# Usage example
+compliance = ComplianceMonitor()
+
+# Check data retention
+data_timestamp = datetime.utcnow() - timedelta(days=400)
+retention_check = compliance.check_data_retention(data_timestamp)
+print(f"Data retention compliant: {retention_check}")
+
+# Validate consent
+consent_timestamp = datetime.utcnow() - timedelta(days=800)
+consent_check = compliance.validate_consent(consent_timestamp)
+print(f"Consent valid: {consent_check}")
+
+# Generate audit trail
+audit_entry = compliance.generate_audit_trail(
+    user_id="user_12345",
+    action="data_access",
+    data_categories=["personal", "financial"]
+)
+print(f"Audit entry: {audit_entry}")
+
+# Check cross-border transfer
+transfer_check = compliance.check_cross_border_transfer('DE', 'US')
+print(f"Cross-border transfer compliant: {transfer_check}")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Privacy Impact Assessment (PIA)</h3>
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h4 class="font-semibold text-lg mb-3">PIA Framework</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm mr-3">1</span>
+                                    <span class="text-gray-700">Identify data collection and processing activities</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm mr-3">2</span>
+                                    <span class="text-gray-700">Assess necessity and proportionality</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm mr-3">3</span>
+                                    <span class="text-gray-700">Identify and assess privacy risks</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm mr-3">4</span>
+                                    <span class="text-gray-700">Identify mitigation measures</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm mr-3">5</span>
+                                    <span class="text-gray-700">Document and approve the assessment</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <h4 class="font-semibold text-blue-800 mb-2">
+                            <i class="fas fa-info-circle mr-2"></i>Compliance Frameworks
+                        </h4>
+                        <p class="text-blue-700">
+                            Implement GDPR, CCPA, HIPAA, and other relevant regulations. Regular compliance 
+                            audits and automated monitoring ensure ongoing adherence.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Threat Mitigation -->
+                <section id="threat-mitigation" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Threat Mitigation</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Security Monitoring & Response</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import logging
+from datetime import datetime
+from typing import Dict, List
+import json
+
+class SecurityMonitor:
+    def __init__(self):
+        self.setup_logging()
+        self.anomaly_threshold = 0.8
+        self.rate_limit_threshold = 100  # requests per minute
+        self.suspicious_patterns = [
+            'UNION SELECT', 'DROP TABLE', 'SCRIPT', 'EXEC(', 
+            '../../', 'etc/passwd', 'admin'
+        ]
+    
+    def setup_logging(self):
+        """Setup security logging"""
+        self.security_logger = logging.getLogger('security')
+        handler = logging.FileHandler('security_events.log')
+        formatter = logging.Formatter(
+            '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        )
+        handler.setFormatter(formatter)
+        self.security_logger.addHandler(handler)
+        self.security_logger.setLevel(logging.INFO)
+    
+    def detect_anomalous_input(self, input_data: str, model_prediction: float) -> Dict:
+        """Detect potentially adversarial or anomalous inputs"""
+        anomaly_score = 0.0
+        reasons = []
+        
+        # Check for suspicious patterns
+        for pattern in self.suspicious_patterns:
+            if pattern.lower() in input_data.lower():
+                anomaly_score += 0.3
+                reasons.append(f"Suspicious pattern: {pattern}")
+        
+        # Check prediction confidence (very low confidence might indicate adversarial input)
+        if model_prediction < 0.1 or model_prediction > 0.9:
+            anomaly_score += 0.2
+            reasons.append(f"Extreme confidence: {model_prediction}")
+        
+        # Check input length anomalies
+        if len(input_data) > 10000:  # Unusually long input
+            anomaly_score += 0.2
+            reasons.append(f"Excessive input length: {len(input_data)}")
+        
+        is_anomalous = anomaly_score >= self.anomaly_threshold
+        
+        if is_anomalous:
+            self.security_logger.warning(f"Anomalous input detected: {reasons}")
+        
+        return {
+            'is_anomalous': is_anomalous,
+            'anomaly_score': anomaly_score,
+            'reasons': reasons
+        }
+    
+    def rate_limit_check(self, client_ip: str, current_time: datetime) -> Dict:
+        """Check if client is exceeding rate limits"""
+        # In practice, use Redis or similar for distributed rate limiting
+        if not hasattr(self, 'rate_tracker'):
+            self.rate_tracker = {}
+        
+        if client_ip not in self.rate_tracker:
+            self.rate_tracker[client_ip] = []
+        
+        # Clean old entries (older than 1 minute)
+        one_minute_ago = current_time.timestamp() - 60
+        self.rate_tracker[client_ip] = [
+            ts for ts in self.rate_tracker[client_ip] 
+            if ts > one_minute_ago
+        ]
+        
+        # Add current request
+        self.rate_tracker[client_ip].append(current_time.timestamp())
+        
+        request_count = len(self.rate_tracker[client_ip])
+        is_rate_limited = request_count > self.rate_limit_threshold
+        
+        if is_rate_limited:
+            self.security_logger.warning(f"Rate limit exceeded for IP: {client_ip}")
+        
+        return {
+            'is_rate_limited': is_rate_limited,
+            'request_count': request_count,
+            'limit': self.rate_limit_threshold
+        }
+    
+    def model_extraction_detection(self, request_pattern: List[Dict]) -> Dict:
+        """Detect potential model extraction attempts"""
+        # Analyze request patterns for model extraction
+        high_volume_threshold = 1000  # requests per hour
+        diverse_inputs = set()
+        
+        for req in request_pattern:
+            diverse_inputs.add(req.get('input_hash', ''))
+        
+        extraction_score = 0.0
+        reasons = []
+        
+        # Check for high volume diverse queries
+        if len(request_pattern) > high_volume_threshold:
+            extraction_score += 0.4
+            reasons.append(f"High volume: {len(request_pattern)} requests")
+        
+        # Check for diverse inputs (potential probing)
+        diversity_ratio = len(diverse_inputs) / len(request_pattern)
+        if diversity_ratio > 0.8:
+            extraction_score += 0.3
+            reasons.append(f"High input diversity: {diversity_ratio:.2f}")
+        
+        is_extraction_attempt = extraction_score > 0.5
+        
+        if is_extraction_attempt:
+            self.security_logger.critical(f"Model extraction detected: {reasons}")
+        
+        return {
+            'is_extraction_attempt': is_extraction_attempt,
+            'extraction_score': extraction_score,
+            'reasons': reasons
+        }
+    
+    def security_response(self, threat_level: str, details: Dict):
+        """Automated security response"""
+        if threat_level == "critical":
+            # Immediate response: block IP, alert security team
+            self.security_logger.critical(f"CRITICAL THREAT: {json.dumps(details)}")
+            # In practice: implement blocking, alerting
+            
+        elif threat_level == "high":
+            # Enhanced monitoring, captcha challenge
+            self.security_logger.warning(f"HIGH THREAT: {json.dumps(details)}")
+            
+        elif threat_level == "medium":
+            # Increased logging, additional validation
+            self.security_logger.info(f"MEDIUM THREAT: {json.dumps(details)}")
+
+# Usage example
+monitor = SecurityMonitor()
+
+# Simulate anomalous input detection
+input_data = "SELECT * FROM users; DROP TABLE users;"
+model_prediction = 0.05
+anomaly_check = monitor.detect_anomalous_input(input_data, model_prediction)
+print(f"Anomaly detection: {anomaly_check}")
+
+# Rate limiting check
+rate_check = monitor.rate_limit_check("192.168.1.100", datetime.utcnow())
+print(f"Rate limit check: {rate_check}")
+
+# Simulate model extraction detection
+request_pattern = [
+    {'input_hash': 'hash1', 'timestamp': '2024-01-01T10:00:00'},
+    {'input_hash': 'hash2', 'timestamp': '2024-01-01T10:00:01'},
+    # ... many more requests
+] * 1000
+
+extraction_check = monitor.model_extraction_detection(request_pattern)
+print(f"Model extraction detection: {extraction_check}")
+
+# Security response
+if extraction_check['is_extraction_attempt']:
+    monitor.security_response("critical", extraction_check)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Incident Response Plan</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="font-semibold text-lg mb-3">Immediate Response (0-1 hour)</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li>• Contain the threat</li>
+                                    <li>• Preserve evidence</li>
+                                    <li>• Notify security team</li>
+                                    <li>• Assess impact scope</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="font-semibold text-lg mb-3">Short-term Response (1-24 hours)</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li>• Detailed investigation</li>
+                                    <li>• Stakeholder notification</li>
+                                    <li>• Implement temporary fixes</li>
+                                    <li>• Document findings</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4 class="font-semibold text-red-800 mb-2">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>Security is Continuous
+                        </h4>
+                        <p class="text-red-700">
+                            Security is not a one-time implementation. Regular security assessments, 
+                            penetration testing, and threat modeling are essential for maintaining security posture.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="bg-gradient-to-r from-red-50 to-orange-50 rounded-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Summary</h2>
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        AI security and privacy require a comprehensive, multi-layered approach. By implementing 
+                        robust data protection, model security, privacy-preserving techniques, and compliance 
+                        frameworks, you can build trustworthy AI systems that protect both data and users.
+                    </p>
+                    
+                    <div class="mt-6 flex flex-wrap gap-4">
+                        <span class="px-4 py-2 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                            Data Protection
+                        </span>
+                        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                            Model Security
+                        </span>
+                        <span class="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                            Privacy
+                        </span>
+                        <span class="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+                            Compliance
+                        </span>
+                        <span class="px-4 py-2 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
+                            Threat Mitigation
+                        </span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <i class="fas fa-brain text-2xl text-blue-400"></i>
+                    <span class="text-xl font-semibold">Agentic AI Knowledge Hub</span>
+                </div>
+                <p class="text-gray-400">
+                    © 2024 Agentic AI Knowledge Hub. Empowering AI engineering excellence.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active navigation item
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-600', 'font-semibold');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-blue-600', 'font-semibold');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

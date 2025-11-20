@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine-tuning Techniques - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            overflow-x: hidden;
+        }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        .hero-overlay { 
+            background: linear-gradient(135deg, rgba(45, 55, 72, 0.95) 0%, rgba(74, 85, 104, 0.95) 100%);
+        }
+        .topic-card { 
+            transition: all 0.3s ease; 
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .topic-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 10px;
+            height: 8px;
+            transition: width 0.3s ease;
+        }
+        .code-block {
+            background: #1a202c;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .technique-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .technique-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #4CAF50;
+            transition: all 0.3s ease;
+        }
+        .technique-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        .comparison-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+        .table-header {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 1rem;
+        }
+        .table-row {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem;
+            transition: background-color 0.2s ease;
+        }
+        .table-row:hover {
+            background-color: #f7fafc;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            background-color: rgba(74, 85, 104, 0.1);
+            transform: translateX(4px);
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-brain text-2xl text-indigo-600 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-900">Agentic AI Hub</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="topics.html" class="nav-link text-gray-700 hover:text-indigo-600">Topics</a>
+                    <a href="about.html" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
+                    <a href="manage.html" class="nav-link text-gray-700 hover:text-indigo-600">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative h-64 hero-overlay flex items-center justify-center">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="relative z-10 text-center text-white">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 stagger-item">Fine-tuning Techniques</h1>
+            <p class="text-xl md:text-2xl stagger-item">Master the art of model optimization and specialization</p>
+        </div>
+        <div class="floating-element absolute top-10 right-10 text-white opacity-20">
+            <i class="fas fa-cogs text-6xl"></i>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Introduction -->
+        <div class="mb-12 stagger-item">
+            <div class="highlight-box">
+                <h2 class="text-2xl font-bold mb-4">What is Fine-tuning?</h2>
+                <p class="text-lg leading-relaxed">
+                    Fine-tuning is the process of adapting a pre-trained language model to perform specific tasks or work with particular domains. 
+                    It involves training the model on a smaller, task-specific dataset to optimize its performance for your specific use case.
+                </p>
+            </div>
+        </div>
+
+        <!-- Core Concepts -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Core Fine-tuning Techniques</h2>
+            
+            <div class="technique-grid">
+                <div class="technique-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-layer-group text-2xl text-blue-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">Full Fine-tuning</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Updates all model parameters on the new dataset. Provides maximum performance but requires significant computational resources.
+                    </p>
+                    <div class="text-sm text-gray-600">
+                        <strong>Best for:</strong> High-resource scenarios, maximum accuracy requirements
+                    </div>
+                </div>
+
+                <div class="technique-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-compress-alt text-2xl text-green-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">Parameter-Efficient Fine-tuning (PEFT)</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Only updates a small subset of parameters while keeping most weights frozen. Much more efficient than full fine-tuning.
+                    </p>
+                    <div class="text-sm text-gray-600">
+                        <strong>Best for:</strong> Resource-constrained environments, rapid prototyping
+                    </div>
+                </div>
+
+                <div class="technique-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-puzzle-piece text-2xl text-purple-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">Adapter-based Methods</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Inserts small trainable modules between existing layers. Minimal overhead while maintaining model performance.
+                    </p>
+                    <div class="text-sm text-gray-600">
+                        <strong>Best for:</strong> Multi-task learning, model serving efficiency
+                    </div>
+                </div>
+
+                <div class="technique-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-rank text-2xl text-orange-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">LoRA (Low-Rank Adaptation)</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Decomposes weight updates into low-rank matrices. Achieves comparable performance with dramatically fewer parameters.
+                    </p>
+                    <div class="text-sm text-gray-600">
+                        <strong>Best for:</strong> Large model adaptation, memory-efficient training
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LoRA Implementation Example -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">LoRA Implementation Example</h2>
+            
+            <div class="code-block">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-white font-semibold">LoRA Fine-tuning with Hugging Face</span>
+                    <i class="fab fa-python text-yellow-400"></i>
+                </div>
+                <pre class="text-green-400 code-font text-sm"><code>from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import LoraConfig, get_peft_model, TaskType
+import torch
+
+# Load base model
+model_name = "microsoft/DialoGPT-medium"
+model = AutoModelForCausalLM.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+# Configure LoRA
+lora_config = LoraConfig(
+    task_type=TaskType.CAUSAL_LM,
+    r=16,                # Rank of LoRA matrices
+    lora_alpha=32,       # Scaling factor
+    lora_dropout=0.1,    # Dropout probability
+    target_modules=["q_proj", "v_proj", "k_proj", "o_proj"]
+)
+
+# Apply LoRA to model
+model = get_peft_model(model, lora_config)
+
+# Training loop
+from transformers import TrainingArguments, Trainer
+
+training_args = TrainingArguments(
+    output_dir="./lora-model",
+    per_device_train_batch_size=4,
+    num_train_epochs=3,
+    learning_rate=3e-4,
+    save_steps=500,
+    logging_steps=100
+)
+
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=train_dataset,
+    tokenizer=tokenizer
+)
+
+# Start training
+trainer.train()
+
+# Save LoRA adapters
+model.save_pretrained("./lora-adapters")</code></pre>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Fine-tuning Methods Comparison</h2>
+            
+            <div class="comparison-table">
+                <div class="table-header grid grid-cols-5 gap-4 font-semibold">
+                    <div>Method</div>
+                    <div>Parameters</div>
+                    <div>Memory</div>
+                    <div>Performance</div>
+                    <div>Use Case</div>
+                </div>
+                
+                <div class="table-row grid grid-cols-5 gap-4">
+                    <div class="font-semibold">Full Fine-tuning</div>
+                    <div>100%</div>
+                    <div>High</div>
+                    <div>Excellent</div>
+                    <div>Maximum accuracy</div>
+                </div>
+                
+                <div class="table-row grid grid-cols-5 gap-4">
+                    <div class="font-semibold">LoRA</div>
+                    <div>~1%</div>
+                    <div>Low</div>
+                    <div>Very Good</div>
+                    <div>Efficient adaptation</div>
+                </div>
+                
+                <div class="table-row grid grid-cols-5 gap-4">
+                    <div class="font-semibold">QLoRA</div>
+                    <div>~0.1%</div>
+                    <div>Very Low</div>
+                    <div>Good</div>
+                    <div>Resource-constrained</div>
+                </div>
+                
+                <div class="table-row grid grid-cols-5 gap-4">
+                    <div class="font-semibold">Adapters</div>
+                    <div>~2-5%</div>
+                    <div>Medium</div>
+                    <div>Good</div>
+                    <div>Multi-task learning</div>
+                </div>
+                
+                <div class="table-row grid grid-cols-5 gap-4">
+                    <div class="font-semibold">Prefix Tuning</div>
+                    <div>~0.1%</div>
+                    <div>Very Low</div>
+                    <div>Moderate</div>
+                    <div>Generation tasks</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Best Practices & Tips</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-green-700">
+                        <i class="fas fa-lightbulb mr-2"></i>Data Preparation
+                    </h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Use high-quality, diverse training data</li>
+                        <li>• Balance positive and negative examples</li>
+                        <li>• Clean and preprocess text properly</li>
+                        <li>• Validate data format consistency</li>
+                        <li>• Consider data augmentation techniques</li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-blue-700">
+                        <i class="fas fa-cog mr-2"></i>Training Optimization
+                    </h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Start with lower learning rates (1e-5 to 5e-5)</li>
+                        <li>• Use gradient clipping to prevent exploding gradients</li>
+                        <li>• Implement early stopping based on validation loss</li>
+                        <li>• Monitor training metrics regularly</li>
+                        <li>• Save checkpoints at regular intervals</li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-purple-700">
+                        <i class="fas fa-chart-line mr-2"></i>Evaluation Strategy
+                    </h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Use multiple evaluation metrics</li>
+                        <li>• Test on held-out validation set</li>
+                        <li>• Compare against baseline models</li>
+                        <li>• Perform A/B testing when possible</li>
+                        <li>• Monitor for overfitting signs</li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-orange-700">
+                        <i class="fas fa-shield-alt mr-2"></i>Safety & Ethics
+                    </h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Test for bias and fairness issues</li>
+                        <li>• Implement safety filters</li>
+                        <li>• Monitor for harmful outputs</li>
+                        <li>• Document training data sources</li>
+                        <li>• Consider societal impact</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Metrics -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Performance Impact Analysis</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4">Training Efficiency</h3>
+                    <div id="trainingChart" style="height: 300px;"></div>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4">Memory Usage Comparison</h3>
+                    <div id="memoryChart" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-12 stagger-item">
+            <a href="topic-vector-databases.html" class="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Previous: Vector Databases
+            </a>
+            <div class="flex space-x-4">
+                <a href="topics.html" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    All Topics
+                </a>
+            </div>
+            <a href="topic-prompt-engineering.html" class="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors">
+                Next: Prompt Engineering
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 Agentic AI Knowledge Hub. Empowering the future of artificial intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize animations
+        anime({
+            targets: '.stagger-item',
+            opacity: [0, 1],
+            translateY: [30, 0],
+            delay: anime.stagger(100),
+            duration: 800,
+            easing: 'easeOutQuart'
+        });
+
+        // Training Efficiency Chart
+        const trainingChart = echarts.init(document.getElementById('trainingChart'));
+        const trainingOption = {
+            tooltip: { trigger: 'axis' },
+            legend: { data: ['Full FT', 'LoRA', 'QLoRA'] },
+            xAxis: {
+                type: 'category',
+                data: ['1 Epoch', '2 Epochs', '3 Epochs', '4 Epochs', '5 Epochs']
+            },
+            yAxis: { type: 'value', name: 'Training Time (hours)' },
+            series: [
+                { name: 'Full FT', type: 'line', data: [8.5, 17.0, 25.5, 34.0, 42.5], itemStyle: { color: '#ef4444' } },
+                { name: 'LoRA', type: 'line', data: [1.2, 2.4, 3.6, 4.8, 6.0], itemStyle: { color: '#10b981' } },
+                { name: 'QLoRA', type: 'line', data: [0.8, 1.6, 2.4, 3.2, 4.0], itemStyle: { color: '#3b82f6' } }
+            ]
+        };
+        trainingChart.setOption(trainingOption);
+
+        // Memory Usage Chart
+        const memoryChart = echarts.init(document.getElementById('memoryChart'));
+        const memoryOption = {
+            tooltip: { trigger: 'item' },
+            series: [{
+                name: 'Memory Usage',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                data: [
+                    { value: 100, name: 'Full FT', itemStyle: { color: '#ef4444' } },
+                    { value: 15, name: 'LoRA', itemStyle: { color: '#10b981' } },
+                    { value: 8, name: 'QLoRA', itemStyle: { color: '#3b82f6' } },
+                    { value: 25, name: 'Adapters', itemStyle: { color: '#f59e0b' } }
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        };
+        memoryChart.setOption(memoryOption);
+
+        // Responsive charts
+        window.addEventListener('resize', function() {
+            trainingChart.resize();
+            memoryChart.resize();
+        });
+    </script>
+</body>
+</html>

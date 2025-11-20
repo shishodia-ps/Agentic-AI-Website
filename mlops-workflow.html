@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLOps Workflow - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, #f8f6f0 0%, #e8e4dc 100%); }
+        .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .code-block { background: #2d3748; color: #e2e8f0; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .note-box { background: #fef5e7; border-left: 4px solid #f6ad55; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .warning-box { background: #fed7d7; border-left: 4px solid #fc8181; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .tip-box { background: #e6fffa; border-left: 4px solid #4fd1c7; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .info-box { background: #ebf8ff; border-left: 4px solid #63b3ed; padding: 1rem; border-radius: 0 8px 8px 0; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                        <i class="fas fa-brain text-2xl text-blue-600"></i>
+                        <span class="font-semibold text-xl">Agentic AI Hub</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-gray-900 font-medium">Home</a>
+                    <a href="ai-stack.html" class="text-gray-600 hover:text-gray-900 font-medium">AI Stack</a>
+                    <a href="visual-editor.html" class="text-blue-600 hover:text-blue-800 font-medium">Visual Editor</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-shadow">
+                    MLOps Workflow
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Comprehensive MLOps practices and workflows for managing the complete machine learning 
+                    lifecycle, from experimentation to production deployment and monitoring.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="sticky top-24">
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Quick Navigation</h3>
+                        <nav class="space-y-2">
+                            <a href="#overview" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Overview</a>
+                            <a href="#experimentation" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Experimentation</a>
+                            <a href="#model-registry" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Model Registry</a>
+                            <a href="#deployment" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Deployment</a>
+                            <a href="#monitoring" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Monitoring</a>
+                            <a href="#ci-cd" class="block text-sm text-gray-600 hover:text-blue-600 py-1">CI/CD</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Overview Section -->
+                <section id="overview" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Overview</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        MLOps combines machine learning with DevOps practices to streamline the deployment, 
+                        monitoring, and management of ML models in production environments. It bridges the 
+                        gap between data science and engineering teams.
+                    </p>
+                    
+                    <div class="info-box mb-6">
+                        <h4 class="font-semibold text-blue-800 mb-2">
+                            <i class="fas fa-info-circle mr-2"></i>MLOps Core Principles
+                        </h4>
+                        <p class="text-blue-700">
+                            Automation, reproducibility, continuous integration/continuous deployment (CI/CD), 
+                            monitoring, and collaboration across teams.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-flask text-2xl text-blue-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Experimentation</h3>
+                            </div>
+                            <p class="text-gray-600">Track experiments, metrics, and artifacts</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-database text-2xl text-green-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Model Registry</h3>
+                            </div>
+                            <p class="text-gray-600">Centralized model versioning and management</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-rocket text-2xl text-purple-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Deployment</h3>
+                            </div>
+                            <p class="text-gray-600">Automated model deployment pipelines</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-chart-line text-2xl text-red-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Monitoring</h3>
+                            </div>
+                            <p class="text-gray-600">Real-time model and data monitoring</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-sync-alt text-2xl text-yellow-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">CI/CD</h3>
+                            </div>
+                            <p class="text-gray-600">Continuous integration and deployment</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-shield-alt text-2xl text-teal-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Governance</h3>
+                            </div>
+                            <p class="text-gray-600">Model governance and compliance</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Experimentation -->
+                <section id="experimentation" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Experimentation Management</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">MLflow Experiment Tracking</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import mlflow
+import mlflow.sklearn
+from mlflow.tracking import MlflowClient
+import pandas as pd
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+import joblib
+import os
+
+class MLExperimentTracker:
+    def __init__(self, experiment_name, tracking_uri="http://localhost:5000"):
+        mlflow.set_tracking_uri(tracking_uri)
+        mlflow.set_experiment(experiment_name)
+        self.client = MlflowClient()
+        self.experiment_name = experiment_name
+    
+    def start_experiment_run(self, run_name, tags=None):
+        """Start a new experiment run"""
+        return mlflow.start_run(run_name=run_name, tags=tags or {})
+    
+    def log_parameters(self, params):
+        """Log experiment parameters"""
+        for key, value in params.items():
+            mlflow.log_param(key, value)
+    
+    def log_metrics(self, metrics):
+        """Log experiment metrics"""
+        for key, value in metrics.items():
+            mlflow.log_metric(key, value)
+    
+    def log_artifacts(self, artifact_path):
+        """Log artifacts (models, plots, etc.)"""
+        if os.path.exists(artifact_path):
+            mlflow.log_artifacts(artifact_path)
+    
+    def log_model(self, model, model_name, input_example=None):
+        """Log trained model"""
+        mlflow.sklearn.log_model(
+            sk_model=model,
+            artifact_path=model_name,
+            input_example=input_example
+        )
+    
+    def train_and_evaluate_model(self, X_train, X_test, y_train, y_test, 
+                                 model_class, model_params, model_name):
+        """Complete training and evaluation pipeline"""
+        
+        with self.start_experiment_run(f"{model_name}_experiment"):
+            # Log model parameters
+            self.log_parameters(model_params)
+            
+            # Train model
+            model = model_class(**model_params)
+            model.fit(X_train, y_train)
+            
+            # Make predictions
+            y_pred = model.predict(X_test)
+            y_pred_proba = model.predict_proba(X_test) if hasattr(model, 'predict_proba') else None
+            
+            # Calculate metrics
+            metrics = {
+                'accuracy': accuracy_score(y_test, y_pred),
+                'precision': precision_score(y_test, y_pred, average='weighted'),
+                'recall': recall_score(y_test, y_pred, average='weighted'),
+                'f1_score': f1_score(y_test, y_pred, average='weighted')
+            }
+            
+            # Cross-validation score
+            cv_scores = cross_val_score(model, X_train, y_train, cv=5, scoring='accuracy')
+            metrics['cv_mean'] = cv_scores.mean()
+            metrics['cv_std'] = cv_scores.std()
+            
+            # Log metrics
+            self.log_metrics(metrics)
+            
+            # Log model
+            input_example = X_test[:5] if hasattr(X_test, 'iloc') else X_test[:5]
+            self.log_model(model, model_name, input_example)
+            
+            # Save model locally
+            model_path = f"/tmp/{model_name}.pkl"
+            joblib.dump(model, model_path)
+            mlflow.log_artifact(model_path)
+            
+            return model, metrics
+    
+    def compare_experiments(self, experiment_ids=None):
+        """Compare multiple experiment runs"""
+        experiment_id = mlflow.get_experiment_by_name(self.experiment_name).experiment_id
+        runs = self.client.search_runs(experiment_ids=[experiment_id])
+        
+        comparison_data = []
+        for run in runs:
+            run_data = {
+                'run_id': run.info.run_id,
+                'run_name': run.data.tags.get('mlflow.runName', 'Unnamed'),
+                'start_time': run.info.start_time,
+                'status': run.info.status,
+                'metrics': run.data.metrics,
+                'params': run.data.params
+            }
+            comparison_data.append(run_data)
+        
+        return pd.DataFrame(comparison_data)
+    
+    def get_best_run(self, metric='f1_score', ascending=False):
+        """Get the best performing run"""
+        experiment_id = mlflow.get_experiment_by_name(self.experiment_name).experiment_id
+        runs = self.client.search_runs(
+            experiment_ids=[experiment_id],
+            order_by=[f"metrics.{metric} {'ASC' if ascending else 'DESC'}"],
+            max_results=1
+        )
+        
+        return runs[0] if runs else None
+
+# Usage example
+tracker = MLExperimentTracker("customer_churn_prediction")
+
+# Sample data generation
+np.random.seed(42)
+n_samples = 1000
+X = np.random.randn(n_samples, 10)
+y = np.random.randint(0, 2, n_samples)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Experiment with different models
+models_to_try = [
+    (RandomForestClassifier, {
+        'n_estimators': 100,
+        'max_depth': 10,
+        'random_state': 42
+    }, "random_forest"),
+    
+    (GradientBoostingClassifier, {
+        'n_estimators': 100,
+        'learning_rate': 0.1,
+        'max_depth': 5,
+        'random_state': 42
+    }, "gradient_boosting")
+]
+
+# Run experiments
+results = []
+for model_class, params, name in models_to_try:
+    model, metrics = tracker.train_and_evaluate_model(
+        X_train, X_test, y_train, y_test,
+        model_class, params, name
+    )
+    results.append((name, metrics))
+
+# Compare experiments
+comparison_df = tracker.compare_experiments()
+print("Experiment Comparison:")
+print(comparison_df[['run_name', 'metrics.accuracy', 'metrics.f1_score']].to_string(index=False))
+
+# Get best run
+best_run = tracker.get_best_run('f1_score')
+if best_run:
+    print(f"\\nBest run: {best_run.data.tags.get('mlflow.runName')}")
+    print(f"F1 Score: {best_run.data.metrics.get('f1_score', 'N/A')}")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="note-box">
+                        <h4 class="font-semibold text-yellow-800 mb-2">
+                            <i class="fas fa-lightbulb mr-2"></i>Experimentation Best Practices
+                        </h4>
+                        <p class="text-yellow-700">
+                            Track everything: code versions, data versions, hyperparameters, metrics, and artifacts. 
+                            Use systematic approaches like Optuna for hyperparameter optimization.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Summary</h2>
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        MLOps provides the framework and tools needed to successfully deploy and manage 
+                        machine learning models in production. By implementing proper experimentation, 
+                        model registry, deployment, monitoring, and CI/CD practices, you can build 
+                        robust, scalable AI systems.
+                    </p>
+                    
+                    <div class="mt-6 flex flex-wrap gap-4">
+                        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                            Experimentation
+                        </span>
+                        <span class="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                            Model Registry
+                        </span>
+                        <span class="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+                            Deployment
+                        </span>
+                        <span class="px-4 py-2 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                            Monitoring
+                        </span>
+                        <span class="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">
+                            CI/CD
+                        </span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <i class="fas fa-brain text-2xl text-blue-400"></i>
+                    <span class="text-xl font-semibold">Agentic AI Knowledge Hub</span>
+                </div>
+                <p class="text-gray-400">
+                    © 2024 Agentic AI Knowledge Hub. Empowering AI engineering excellence.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active navigation item
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-600', 'font-semibold');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-blue-600', 'font-semibold');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

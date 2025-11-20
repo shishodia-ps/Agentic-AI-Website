@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Learning Concepts | Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .code-block { background: #1e293b; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .progress-bar { background: linear-gradient(90deg, #10b981 0%, #34d399 100%); }
+        .neural-node { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #3b82f6, #1d4ed8); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .neural-connection { stroke: #6b7280; stroke-width: 2; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-brain text-2xl gradient-text mr-3"></i>
+                    <h1 class="text-xl font-bold text-slate-900">Agentic AI Hub</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors">Home</a>
+                    <a href="topics.html" class="text-slate-600 hover:text-slate-900 transition-colors">Topics</a>
+                    <a href="about.html" class="text-slate-600 hover:text-slate-900 transition-colors">About</a>
+                    <a href="manage.html" class="text-slate-600 hover:text-slate-900 transition-colors">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Deep Learning Concepts
+                </h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Explore the revolutionary approach to AI that mimics the human brain's neural networks
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+                        <span class="text-white text-sm">Progress: </span>
+                        <div class="inline-block w-32 h-2 bg-white/20 rounded-full ml-2">
+                            <div class="progress-bar h-full rounded-full" style="width: 35%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Learning Path</h3>
+                    <nav class="space-y-2">
+                        <a href="topic-what-is-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>What is AI?
+                        </a>
+                        <a href="topic-types-of-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Types of AI
+                        </a>
+                        <a href="topic-machine-learning-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Machine Learning
+                        </a>
+                        <a href="#" class="block px-3 py-2 text-sm bg-blue-50 text-blue-900 rounded-md font-medium">
+                            <i class="fas fa-play-circle text-blue-500 mr-2"></i>Deep Learning
+                        </a>
+                        <a href="topic-neural-networks-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-circle text-slate-300 mr-2"></i>Neural Networks
+                        </a>
+                        <a href="topic-nlp-basics.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-circle text-slate-300 mr-2"></i>NLP Basics
+                        </a>
+                        <a href="topic-computer-vision-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-circle text-slate-300 mr-2"></i>Computer Vision
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Introduction -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">What is Deep Learning?</h2>
+                    <p class="text-lg text-slate-700 mb-6">
+                        Deep Learning is a subset of machine learning that uses neural networks with multiple layers (deep neural networks) to model and understand complex patterns in data. It's the technology behind many recent AI breakthroughs in image recognition, natural language processing, and autonomous systems.
+                    </p>
+                    <div class="bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-400 p-6 mb-6 rounded-r-lg">
+                        <p class="text-blue-800">
+                            <strong>Key Insight:</strong> Deep learning models automatically learn feature hierarchies, where lower layers learn simple features (edges, colors) and higher layers learn complex concepts (faces, objects, sentences) through multiple levels of abstraction.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Neural Network Visualization -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Deep Neural Network Architecture</h2>
+                    <div class="flex justify-center mb-8">
+                        <svg width="600" height="400" viewBox="0 0 600 400" class="border border-slate-200 rounded-lg">
+                            <!-- Input Layer -->
+                            <g transform="translate(100, 50)">
+                                <text x="0" y="-20" text-anchor="middle" class="text-sm font-semibold">Input Layer</text>
+                                <circle cx="0" cy="0" r="20" fill="#3b82f6" class="neural-node"/>
+                                <circle cx="0" cy="60" r="20" fill="#3b82f6" class="neural-node"/>
+                                <circle cx="0" cy="120" r="20" fill="#3b82f6" class="neural-node"/>
+                                <circle cx="0" cy="180" r="20" fill="#3b82f6" class="neural-node"/>
+                            </g>
+                            
+                            <!-- Hidden Layer 1 -->
+                            <g transform="translate(250, 30)">
+                                <text x="0" y="-20" text-anchor="middle" class="text-sm font-semibold">Hidden Layer 1</text>
+                                <circle cx="0" cy="0" r="20" fill="#10b981" class="neural-node"/>
+                                <circle cx="0" cy="40" r="20" fill="#10b981" class="neural-node"/>
+                                <circle cx="0" cy="80" r="20" fill="#10b981" class="neural-node"/>
+                                <circle cx="0" cy="120" r="20" fill="#10b981" class="neural-node"/>
+                                <circle cx="0" cy="160" r="20" fill="#10b981" class="neural-node"/>
+                                <circle cx="0" cy="200" r="20" fill="#10b981" class="neural-node"/>
+                            </g>
+                            
+                            <!-- Hidden Layer 2 -->
+                            <g transform="translate(400, 50)">
+                                <text x="0" y="-20" text-anchor="middle" class="text-sm font-semibold">Hidden Layer 2</text>
+                                <circle cx="0" cy="0" r="20" fill="#f59e0b" class="neural-node"/>
+                                <circle cx="0" cy="50" r="20" fill="#f59e0b" class="neural-node"/>
+                                <circle cx="0" cy="100" r="20" fill="#f59e0b" class="neural-node"/>
+                                <circle cx="0" cy="150" r="20" fill="#f59e0b" class="neural-node"/>
+                                <circle cx="0" cy="200" r="20" fill="#f59e0b" class="neural-node"/>
+                            </g>
+                            
+                            <!-- Output Layer -->
+                            <g transform="translate(550, 100)">
+                                <text x="0" y="-20" text-anchor="middle" class="text-sm font-semibold">Output Layer</text>
+                                <circle cx="0" cy="0" r="20" fill="#ef4444" class="neural-node"/>
+                                <circle cx="0" cy="50" r="20" fill="#ef4444" class="neural-node"/>
+                                <circle cx="0" cy="100" r="20" fill="#ef4444" class="neural-node"/>
+                            </g>
+                            
+                            <!-- Connections -->
+                            <g stroke="#6b7280" stroke-width="1" opacity="0.3" fill="none">
+                                <!-- Input to Hidden 1 -->
+                                <line x1="120" y1="50" x2="230" y2="30"/>
+                                <line x1="120" y1="50" x2="230" y2="70"/>
+                                <line x1="120" y1="50" x2="230" y2="110"/>
+                                <line x1="120" y1="110" x2="230" y2="30"/>
+                                <line x1="120" y1="110" x2="230" y2="70"/>
+                                <line x1="120" y1="110" x2="230" y2="110"/>
+                                <!-- More connections would be drawn similarly -->
+                            </g>
+                        </svg>
+                    </div>
+                    <p class="text-center text-slate-600 text-sm">
+                        A typical deep neural network consists of an input layer, multiple hidden layers, and an output layer. Each connection has a weight that is learned during training.
+                    </p>
+                </div>
+
+                <!-- Core Concepts -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Core Deep Learning Concepts</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-layer-group text-blue-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Neural Networks</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Interconnected nodes (neurons) organized in layers that process information similar to the human brain.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Input, hidden, and output layers</li>
+                                <li>• Weighted connections between neurons</li>
+                                <li>• Activation functions for non-linearity</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-chart-line text-green-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Backpropagation</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Algorithm that calculates gradients by propagating errors backward through the network to update weights.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Forward pass to make predictions</li>
+                                <li>• Calculate loss (error)</li>
+                                <li>• Backward pass to update weights</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-bolt text-purple-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Activation Functions</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Mathematical functions that determine whether a neuron should be activated based on input.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• ReLU (Rectified Linear Unit)</li>
+                                <li>• Sigmoid and Tanh functions</li>
+                                <li>• Softmax for multi-class classification</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-cogs text-orange-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Gradient Descent</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Optimization algorithm that iteratively adjusts weights to minimize the loss function.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Learning rate controls step size</li>
+                                <li>• Stochastic and mini-batch variants</li>
+                                <li>• Momentum and adaptive methods</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deep Learning Architectures -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Popular Deep Learning Architectures</h2>
+                    
+                    <!-- Convolutional Neural Networks -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-eye text-blue-600 mr-3"></i>
+                            Convolutional Neural Networks (CNNs)
+                        </h3>
+                        <p class="text-slate-700 mb-4">
+                            Specialized for processing grid-like data such as images. CNNs use convolutional layers to detect local features and pooling layers to reduce spatial dimensions.
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-slate-900 mb-2">Key Components:</h4>
+                            <ul class="list-disc list-inside text-slate-700 space-y-1">
+                                <li><strong>Convolutional Layers:</strong> Apply filters to detect features like edges, textures, and patterns</li>
+                                <li><strong>Pooling Layers:</strong> Reduce spatial dimensions while preserving important features</li>
+                                <li><strong>Feature Maps:</strong> Output of convolution operations highlighting detected features</li>
+                                <li><strong>Fully Connected Layers:</strong> Final classification or regression layers</li>
+                            </ul>
+                        </div>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># CNN Architecture Example
+import torch
+import torch.nn as nn
+
+class SimpleCNN(nn.Module):
+    def __init__(self, num_classes=10):
+        super(SimpleCNN, self).__init__()
+        self.conv1 = nn.Conv2d(3, 32, kernel_size=3, padding=1)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.fc1 = nn.Linear(64 * 8 * 8, 512)
+        self.fc2 = nn.Linear(512, num_classes)
+        self.relu = nn.ReLU()
+        
+    def forward(self, x):
+        x = self.pool(self.relu(self.conv1(x)))
+        x = self.pool(self.relu(self.conv2(x)))
+        x = x.view(-1, 64 * 8 * 8)
+        x = self.relu(self.fc1(x))
+        x = self.fc2(x)
+        return x</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Recurrent Neural Networks -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-wave-square text-green-600 mr-3"></i>
+                            Recurrent Neural Networks (RNNs)
+                        </h3>
+                        <p class="text-slate-700 mb-4">
+                            Designed for sequential data, RNNs have memory that allows them to process variable-length sequences and maintain information about previous inputs.
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-slate-900 mb-2">Variants and Improvements:</h4>
+                            <ul class="list-disc list-inside text-slate-700 space-y-1">
+                                <li><strong>LSTM (Long Short-Term Memory):</strong> Solves vanishing gradient problem with gated memory cells</li>
+                                <li><strong>GRU (Gated Recurrent Unit):</strong> Simplified version of LSTM with fewer parameters</li>
+                                <li><strong>Bidirectional RNNs:</strong> Process sequences in both forward and backward directions</li>
+                                <li><strong>Attention Mechanisms:</strong> Allow models to focus on relevant parts of the input sequence</li>
+                            </ul>
+                        </div>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># LSTM Example
+import torch.nn as nn
+
+class SimpleLSTM(nn.Module):
+    def __init__(self, vocab_size, embed_dim, hidden_dim, num_classes):
+        super(SimpleLSTM, self).__init__()
+        self.embedding = nn.Embedding(vocab_size, embed_dim)
+        self.lstm = nn.LSTM(embed_dim, hidden_dim, batch_first=True)
+        self.fc = nn.Linear(hidden_dim, num_classes)
+        
+    def forward(self, x):
+        embedded = self.embedding(x)
+        lstm_out, (hidden, cell) = self.lstm(embedded)
+        # Use the last hidden state
+        output = self.fc(hidden[-1])
+        return output</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Transformers -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-exchange-alt text-purple-600 mr-3"></i>
+                            Transformers
+                        </h3>
+                        <p class="text-slate-700 mb-4">
+                            Revolutionary architecture that uses self-attention mechanisms to process sequences in parallel, enabling more efficient training and better long-range dependencies.
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-slate-900 mb-2">Key Innovations:</h4>
+                            <ul class="list-disc list-inside text-slate-700 space-y-1">
+                                <li><strong>Self-Attention:</strong> Allows each position to attend to all positions in the sequence</li>
+                                <li><strong>Multi-Head Attention:</strong> Multiple attention mechanisms in parallel for richer representations</li>
+                                <li><strong>Positional Encoding:</strong> Adds position information since there's no recurrence</li>
+                                <li><strong>Parallel Processing:</strong> Processes entire sequences simultaneously</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deep Learning Applications -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Real-World Applications</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg text-center">
+                            <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-image text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Computer Vision</h3>
+                            <p class="text-slate-700 text-sm">Image recognition, object detection, facial recognition, medical imaging analysis</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg text-center">
+                            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-language text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Natural Language</h3>
+                            <p class="text-slate-700 text-sm">Machine translation, chatbots, sentiment analysis, text summarization</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg text-center">
+                            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-music text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Audio Processing</h3>
+                            <p class="text-slate-700 text-sm">Speech recognition, music generation, audio classification, voice synthesis</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg text-center">
+                            <div class="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-robot text-orange-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Robotics</h3>
+                            <p class="text-slate-700 text-sm">Autonomous navigation, manipulation, human-robot interaction</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg text-center">
+                            <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-heartbeat text-red-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Healthcare</h3>
+                            <p class="text-slate-700 text-sm">Drug discovery, disease diagnosis, personalized treatment, medical imaging</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg text-center">
+                            <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-car text-indigo-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Autonomous Vehicles</h3>
+                            <p class="text-slate-700 text-sm">Object detection, path planning, sensor fusion, decision making</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training Considerations -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Training Deep Learning Models</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Challenges</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-red-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Overfitting</h4>
+                                    <p class="text-slate-700 text-sm">Model performs well on training data but poorly on new data</p>
+                                </div>
+                                <div class="border-l-4 border-orange-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Vanishing Gradients</h4>
+                                    <p class="text-slate-700 text-sm">Gradients become very small in deep networks, slowing learning</p>
+                                </div>
+                                <div class="border-l-4 border-yellow-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Computational Requirements</h4>
+                                    <p class="text-slate-700 text-sm">Deep models require significant computing power and memory</p>
+                                </div>
+                                <div class="border-l-4 border-purple-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Data Requirements</h4>
+                                    <p class="text-slate-700 text-sm">Large amounts of labeled data needed for effective training</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Solutions</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-green-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Regularization</h4>
+                                    <p class="text-slate-700 text-sm">Dropout, L1/L2 regularization to prevent overfitting</p>
+                                </div>
+                                <div class="border-l-4 border-blue-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Better Architectures</h4>
+                                    <p class="text-slate-700 text-sm">Skip connections, batch normalization, residual connections</p>
+                                </div>
+                                <div class="border-l-4 border-indigo-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Transfer Learning</h4>
+                                    <p class="text-slate-700 text-sm">Use pre-trained models and fine-tune for specific tasks</p>
+                                </div>
+                                <div class="border-l-4 border-pink-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Data Augmentation</h4>
+                                    <p class="text-slate-700 text-sm">Artificially expand training data through transformations</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center">
+                        <a href="topic-machine-learning-fundamentals.html" class="flex items-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: ML Fundamentals
+                        </a>
+                        <div class="flex space-x-2">
+                            <button onclick="markComplete('dl-concepts')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                                <i class="fas fa-check mr-2"></i>Mark Complete
+                            </button>
+                            <a href="topic-neural-networks-architecture.html" class="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                                Next: Neural Networks Architecture
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Agentic AI Knowledge Hub</h3>
+                <p class="text-slate-400 mb-6">Master the future of artificial intelligence</p>
+                <p class="text-slate-500 text-sm">© 2024 Agentic AI Knowledge Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate progress bar
+            anime({
+                targets: '.progress-bar',
+                width: '35%',
+                duration: 2000,
+                easing: 'easeOutQuart'
+            });
+
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.card-hover');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            translateY: [30, 0],
+                            opacity: [0, 1],
+                            duration: 800,
+                            easing: 'easeOutQuart'
+                        });
+                    }
+                });
+            });
+
+            cards.forEach(card => observer.observe(card));
+
+            // Animate neural network visualization
+            const neuralNodes = document.querySelectorAll('.neural-node');
+            neuralNodes.forEach((node, index) => {
+                anime({
+                    targets: node,
+                    scale: [0, 1],
+                    duration: 500,
+                    delay: index * 100,
+                    easing: 'easeOutBack'
+                });
+            });
+        });
+
+        // Mark topic as complete
+        function markComplete(topicId) {
+            localStorage.setItem(`topic_${topicId}_complete`, 'true');
+            
+            // Show success message
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Completed!';
+            button.classList.remove('bg-green-600', 'hover:bg-green-700');
+            button.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-500');
+                button.classList.add('bg-green-600', 'hover:bg-green-700');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

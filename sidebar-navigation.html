@@ -1,0 +1,544 @@
+<!-- Comprehensive Sidebar Navigation for Agentic AI Knowledge Hub -->
+<nav class="sidebar-nav">
+    <div class="sidebar-header">
+        <h3>AI Knowledge Hub</h3>
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </div>
+    
+    <div class="sidebar-search">
+        <input type="text" placeholder="Search topics..." id="sidebarSearch">
+        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+    </div>
+    
+    <div class="sidebar-content">
+        <!-- Core AI Fundamentals -->
+        <div class="sidebar-section">
+            <h4 class="sidebar-section-title" onclick="toggleSection('fundamentals')">
+                <span>🧠 AI Fundamentals</span>
+                <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </h4>
+            <div class="sidebar-section-content" id="fundamentals">
+                <ul>
+                    <li><a href="topic-what-is-ai.html">What is Artificial Intelligence?</a></li>
+                    <li><a href="topic-types-of-ai.html">Types of AI: Narrow vs General</a></li>
+                    <li><a href="topic-ml-fundamentals.html">Machine Learning Fundamentals</a></li>
+                    <li><a href="topic-supervised-learning.html">Supervised Learning</a></li>
+                    <li><a href="topic-unsupervised-learning.html">Unsupervised Learning</a></li>
+                    <li><a href="topic-reinforcement-learning.html">Reinforcement Learning</a></li>
+                    <li><a href="topic-deep-learning-basics.html">Deep Learning Basics</a></li>
+                    <li><a href="topic-neural-networks-intro.html">Neural Networks Introduction</a></li>
+                    <li><a href="topic-training-vs-inference.html">Training vs Inference</a></li>
+                    <li><a href="topic-overfitting-underfitting.html">Overfitting and Underfitting</a></li>
+                    <li><a href="topic-cross-validation.html">Cross-validation and Model Selection</a></li>
+                    <li><a href="topic-bias-variance-tradeoff.html">Bias-Variance Tradeoff</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Generative AI -->
+        <div class="sidebar-section">
+            <h4 class="sidebar-section-title" onclick="toggleSection('generative-ai')">
+                <span>🤖 Generative AI</span>
+                <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </h4>
+            <div class="sidebar-section-content" id="generative-ai">
+                <ul>
+                    <li><a href="topic-intro-generative-ai.html">Introduction to Generative AI</a></li>
+                    <li><a href="topic-large-language-models.html">Large Language Models Overview</a></li>
+                    <li><a href="topic-transformer-architecture.html">Transformer Architecture</a></li>
+                    <li><a href="topic-attention-mechanisms.html">Attention Mechanisms</a></li>
+                    <li><a href="topic-tokenization-embeddings.html">Tokenization and Embeddings</a></li>
+                    <li><a href="topic-context-windows.html">Context Windows and Limitations</a></li>
+                    <li><a href="topic-hallucinations-ai.html">Hallucinations in AI</a></li>
+                    <li><a href="topic-temperature-sampling.html">Temperature and Sampling Parameters</a></li>
+                    <li><a href="topic-top-p-top-k.html">Top-p and Top-k Sampling</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Prompt Engineering -->
+        <div class="sidebar-section">
+            <h4 class="sidebar-section-title" onclick="toggleSection('prompt-engineering')">
+                <span>✍️ Prompt Engineering</span>
+                <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </h4>
+            <div class="sidebar-section-content" id="prompt-engineering">
+                <ul>
+                    <li><a href="topic-basic-prompting.html">Basic Prompting Techniques</a></li>
+                    <li><a href="topic-zero-one-few-shot.html">Zero-shot, One-shot, Few-shot Learning</a></li>
+                    <li><a href="topic-chain-of-thought.html">Chain-of-Thought Prompting</a></li>
+                    <li><a href="topic-role-based-prompting.html">Role-based Prompting</a></li>
+                    <li><a href="topic-system-user-prompts.html">System and User Prompts</a></li>
+                    <li><a href="topic-prompt-templates.html">Prompt Templates and Variables</a></li>
+                    <li><a href="topic-prompt-chaining.html">Prompt Chaining</a></li>
+                    <li><a href="topic-iterative-prompt-refinement.html">Iterative Prompt Refinement</a></li>
+                    <li><a href="topic-prompt-injection-security.html">Prompt Injection and Security</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- AI Agent Architecture -->
+        <div class="sidebar-section">
+            <h4 class="sidebar-section-title" onclick="toggleSection('agent-architecture')">
+                <span>🏗️ Agent Architecture</span>
+                <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </h4>
+            <div class="sidebar-section-content" id="agent-architecture">
+                <ul>
+                    <li><a href="topic-what-are-ai-agents.html">What are AI Agents?</a></li>
+                    <li><a href="topic-agent-components.html">Agent Components: Perception, Reasoning, Action</a></li>
+                    <li><a href="topic-autonomous-semi-autonomous.html">Autonomous vs Semi-autonomous Agents</a></li>
+                    <li><a href="topic-goal-oriented-agents.html">Goal-oriented vs Utility-based Agents</a></li>
+                    <li><a href="topic-reactive-deliberative.html">Reactive vs Deliberative Agents</a></li>
+                    <li><a href="topic-single-multi-agent.html">Single-agent vs Multi-agent Systems</a></li>
+                    <li><a href="topic-agent-environments.html">Agent Environments and Sensors</a></li>
+                    <li><a href="topic-agent-communication.html">Agent Communication Protocols</a></li>
+                    <li><a href="topic-agent-learning.html">Agent Learning and Adaptation</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Multi-Agent Systems -->
+        <div class="sidebar-section">
+            <h4 class="sidebar-section-title" onclick="toggleSection('multi-agent')">
+                <span>🤝 Multi-Agent Systems</span>
+                <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </h4>
+            <div class="sidebar-section-content" id="multi-agent">
+                <ul>
+                    <li><a href="topic-intro-multi-agent.html">Introduction to Multi-Agent Systems</a></li>
+                    <li><a href="topic-agent-communication-coordination.html">Agent Communication and Coordination</a></li>
+                    <li><a href="topic-distributed-problem-solving.html">Distributed Problem Solving</a></li>
+                    <li><a href="topic-emergent-behaviors.html">Emergent Behaviors</a></li>
+                    <li><a href="topic-swarm-intelligence.html">Swarm Intelligence</a></li>
+                    <li><a href="topic-consensus-mechanisms.html">Consensus Mechanisms</a></li>
+                    <li><a href="topic-auction-based-systems.html">Auction-based Systems</a></li>
+                    <li><a href="topic-game-theory-agents.html">Game Theory in Multi-Agent Systems</a></li>
+                    <li><a href="topic-agent-negotiation.html">Agent Negotiation Protocols</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- LangChain Framework -->
+        <div class="sidebar-section">
+            <h4 class="sidebar-section-title" onclick="toggleSection('langchain')">
+                <span>⛓️ LangChain Framework</span>
+                <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </h4>
+            <div class="sidebar-section-content" id="langchain">
+                <ul>
+                    <li><a href="topic-langchain-architecture.html">LangChain Architecture</a></li>
+                    <li><a href="topic-langchain-models.html">Models and LLM Integration</a></li>
+                    <li><a href="topic-langchain-prompts.html">Prompt Templates and Management</a></li>
+                    <li><a href="topic-langchain-chains.html">Chains and Sequential Processing</a></li>
+                    <li><a href="topic-langchain-memory.html">Memory Systems and Conversation Memory</a></li>
+                    <li><a href="topic-langchain-tools.html">Tools and Tool Integration</a></li>
+                    <li><a href="topic-langchain-agents.html">Agents and Agent Executors</a></li>
+                    <li><a href="topic-langchain-document-loaders.html">Document Loaders and Processors</a></li>
+                    <li><a href="topic-langchain-vector-stores.html">Vector Stores and Retrievers</a></li>
+                    <li><a href="topic-langchain-callbacks.html">Callbacks and Custom Components</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- AutoGen Framework -->
+        <div class="sidebar-section">
+            <h4 class="sidebar-section-title" onclick="toggleSection('autogen')">
+                <span>🔄 AutoGen Framework</span>
+                <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </h4>
+            <div class="sidebar-section-content" id="autogen">
+                <ul>
+                    <li><a href="topic-autogen-architecture.html">AutoGen Architecture</a></li>
+                    <li><a href="topic-conversable-agents.html">Conversable Agents</a></li>
+                    <li><a href="topic-multi-agent-orchestration.html">Multi-Agent Orchestration</a></li>
+                    <li><a href="topic-automated-chat.html">Automated Chat</a></li>
+                    <li><a href="topic-autogen-tool-integration.html">Tool Integration in AutoGen</a></li>
+                    <li><a href="topic-human-in-loop.html">Human-in-the-Loop Integration</a></li>
+                    <li><a href="topic-nested-chat-patterns.html">Nested Chat Patterns</a></li>
+                    <li><a href="topic-custom-agent-development.html">Custom Agent Development</a></li>
+                    <li><a href="topic-agent-specialization.html">Agent Specialization</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Vector Databases and RAG -->
+        <div class="sidebar-section">
+            <h4 class="sidebar-section-title" onclick="toggleSection('vector-rag')">
+                <span>📊 Vector Databases & RAG</span>
+                <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </h4>
+            <div class="sidebar-section-content" id="vector-rag">
+                <ul>
+                    <li><a href="topic-intro-vector-databases.html">Introduction to Vector Databases</a></li>
+                    <li><a href="topic-pinecone-vector-db.html">Pinecone Vector Database</a></li>
+                    <li><a href="topic-chroma-db.html">Chroma DB</a></li>
+                    <li><a href="topic-weaviate.html">Weaviate</a></li>
+                    <li><a href="topic-qdrant.html">Qdrant</a></li>
+                    <li><a href="topic-faiss.html">FAISS (Facebook AI Similarity Search)</a></li>
+                    <li><a href="topic-embedding-models.html">Embedding Models and Techniques</a></li>
+                    <li><a href="topic-semantic-search.html">Semantic Search Implementation</a></li>
+                    <li><a href="topic-hybrid-search.html">Hybrid Search Approaches</a></li>
+                    <li><a href="topic-rag-architecture.html">RAG Architecture and Implementation</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Fine-tuning and Customization -->
+        <div class="sidebar-section">
+            <h4 class="sidebar-section-title" onclick="toggleSection('fine-tuning')">
+                <span>🎯 Fine-tuning & Customization</span>
+                <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </h4>
+            <div class="sidebar-section-content" id="fine-tuning">
+                <ul>
+                    <li><a href="topic-intro-fine-tuning.html">Introduction to Fine-tuning</a></li>
+                    <li><a href="topic-full-vs-peft.html">Full Fine-tuning vs Parameter-Efficient Fine-tuning</a></li>
+                    <li><a href="topic-lora-adaptation.html">LoRA (Low-Rank Adaptation)</a></li>
+                    <li><a href="topic-qlora.html">QLoRA (Quantized LoRA)</a></li>
+                    <li><a href="topic-prefix-tuning.html">Prefix Tuning</a></li>
+                    <li><a href="topic-prompt-tuning.html">Prompt Tuning</a></li>
+                    <li><a href="topic-adapter-methods.html">Adapter Methods</a></li>
+                    <li><a href="topic-multi-task-fine-tuning.html">Multi-task Fine-tuning</a></li>
+                    <li><a href="topic-continual-learning.html">Continual Learning</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- AI Safety and Ethics -->
+        <div class="sidebar-section">
+            <h4 class="sidebar-section-title" onclick="toggleSection('safety-ethics')">
+                <span>🛡️ AI Safety & Ethics</span>
+                <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </h4>
+            <div class="sidebar-section-content" id="safety-ethics">
+                <ul>
+                    <li><a href="topic-responsible-ai-principles.html">Responsible AI Principles</a></li>
+                    <li><a href="topic-ai-bias-fairness.html">AI Bias and Fairness</a></li>
+                    <li><a href="topic-transparency-explainability.html">Transparency and Explainability</a></li>
+                    <li><a href="topic-ai-safety-alignment.html">AI Safety and Alignment</a></li>
+                    <li><a href="topic-content-moderation.html">Content Moderation</a></li>
+                    <li><a href="topic-privacy-ai-systems.html">Privacy in AI Systems</a></li>
+                    <li><a href="topic-ai-governance.html">AI Governance and Regulation</a></li>
+                    <li><a href="topic-ethical-decision-making.html">Ethical Decision Making in AI</a></li>
+                    <li><a href="topic-ai-social-good.html">AI for Social Good</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Industry Applications -->
+        <div class="sidebar-section">
+            <h4 class="sidebar-section-title" onclick="toggleSection('applications')">
+                <span>🏭 Industry Applications</span>
+                <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </h4>
+            <div class="sidebar-section-content" id="applications">
+                <ul>
+                    <li><a href="topic-ai-healthcare.html">AI in Healthcare</a></li>
+                    <li><a href="topic-ai-finance.html">AI in Finance and Banking</a></li>
+                    <li><a href="topic-ai-education.html">AI in Education</a></li>
+                    <li><a href="topic-ai-customer-service.html">AI in Customer Service</a></li>
+                    <li><a href="topic-ai-content-creation.html">AI in Content Creation</a></li>
+                    <li><a href="topic-ai-software-development.html">AI in Software Development</a></li>
+                    <li><a href="topic-ai-research.html">AI in Research and Development</a></li>
+                    <li><a href="topic-ai-legal.html">AI in Legal Services</a></li>
+                    <li><a href="topic-ai-marketing.html">AI in Marketing and Sales</a></li>
+                    <li><a href="topic-ai-manufacturing.html">AI in Manufacturing</a></li>
+                    <li><a href="topic-ai-transportation.html">AI in Transportation</a></li>
+                    <li><a href="topic-ai-gaming.html">AI in Gaming and Entertainment</a></li>
+                    <li><a href="topic-ai-cybersecurity.html">AI in Cybersecurity</a></li>
+                    <li><a href="topic-ai-climate.html">AI in Climate and Environment</a></li>
+                    <li><a href="topic-ai-agriculture.html">AI in Agriculture</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Development Tools -->
+        <div class="sidebar-section">
+            <h4 class="sidebar-section-title" onclick="toggleSection('tools')">
+                <span>🛠️ Development Tools</span>
+                <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </h4>
+            <div class="sidebar-section-content" id="tools">
+                <ul>
+                    <li><a href="topic-jupyter-notebooks.html">Jupyter Notebooks for AI</a></li>
+                    <li><a href="topic-google-colab.html">Google Colab</a></li>
+                    <li><a href="topic-vscode-ai.html">VS Code for AI Development</a></li>
+                    <li><a href="topic-git-version-control.html">Git and Version Control for AI</a></li>
+                    <li><a href="topic-docker-ai.html">Docker for AI Applications</a></li>
+                    <li><a href="topic-kubernetes-ai.html">Kubernetes for AI Scaling</a></li>
+                    <li><a href="topic-mlflow.html">MLflow for Experiment Tracking</a></li>
+                    <li><a href="topic-weights-biases.html">Weights & Biases (W&B)</a></li>
+                    <li><a href="topic-tensorboard.html">TensorBoard</a></li>
+                    <li><a href="topic-hugging-face-hub.html">Hugging Face Hub</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="sidebar-footer">
+        <div class="sidebar-stats">
+            <div class="stat-item">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">Topics</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">20+</span>
+                <span class="stat-label">Categories</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Code Examples</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<style>
+.sidebar-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 100vh;
+    background: rgba(248, 246, 240, 0.95);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(45, 90, 61, 0.1);
+    z-index: 1000;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-header h3 {
+    color: var(--sage-deep);
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: var(--charcoal-warm);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+    background: rgba(45, 90, 61, 0.1);
+}
+
+.sidebar-search {
+    padding: 1rem 1.5rem;
+    position: relative;
+}
+
+.sidebar-search input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid rgba(45, 90, 61, 0.2);
+    border-radius: 8px;
+    background: white;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.sidebar-search input:focus {
+    outline: none;
+    border-color: var(--copper-accent);
+    box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.1);
+}
+
+.sidebar-search .search-icon {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    color: var(--gray-warm);
+}
+
+.sidebar-content {
+    padding: 0 0 2rem 0;
+}
+
+.sidebar-section {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-section-title {
+    padding: 0.75rem 1.5rem;
+    margin: 0;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--charcoal-warm);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar-section-title:hover {
+    background: rgba(45, 90, 61, 0.05);
+}
+
+.sidebar-section-title.active {
+    background: rgba(184, 115, 51, 0.1);
+    color: var(--copper-accent);
+}
+
+.sidebar-section-title .chevron {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.sidebar-section-title.active .chevron {
+    transform: rotate(180deg);
+}
+
+.sidebar-section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.sidebar-section-content.active {
+    max-height: 1000px;
+}
+
+.sidebar-section-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-section-content li {
+    margin: 0;
+}
+
+.sidebar-section-content a {
+    display: block;
+    padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+    color: var(--charcoal-warm);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-section-content a:hover {
+    background: rgba(184, 115, 51, 0.05);
+    color: var(--copper-accent);
+    border-left-color: var(--copper-accent);
+}
+
+.sidebar-section-content a.active {
+    background: rgba(184, 115, 51, 0.1);
+    color: var(--copper-accent);
+    border-left-color: var(--copper-accent);
+    font-weight: 500;
+}
+
+.sidebar-footer {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(45, 90, 61, 0.1);
+}
+
+.sidebar-stats {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--copper-accent);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--gray-warm);
+    margin-top: 0.25rem;
+}
+
+/* Mobile Styles */
+@media (max-width: 1024px) {
+    .sidebar-nav {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar-nav.mobile-open {
+        transform: translateX(0);
+    }
+}</nav>
+
+<script>
+function toggleSection(sectionId) {
+    const content = document.getElementById(sectionId);
+    const title = content.previousElementSibling;
+    
+    // Toggle active state
+    title.classList.toggle('active');
+    content.classList.toggle('active');
+}
+
+// Initialize first section as open
+document.addEventListener('DOMContentLoaded', () => {
+    toggleSection('fundamentals');
+});
+</script>

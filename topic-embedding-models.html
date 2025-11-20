@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedding Models - AI Engineering Knowledge Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'deep-blue': '#1e3a8a',
+                        'soft-gray': '#f8fafc',
+                        'accent-blue': '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .code-block { 
+            background: #1a1a1a; 
+            border-radius: 8px; 
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .code-header { 
+            background: #2d2d2d; 
+            padding: 0.75rem 1rem; 
+            display: flex; 
+            justify-content: between; 
+            align-items: center;
+            border-bottom: 1px solid #404040;
+        }
+        .copy-btn { 
+            background: #4a5568; 
+            color: white; 
+            border: none; 
+            padding: 0.25rem 0.75rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover { background: #718096; }
+        .progress-bar { 
+            width: 100%; 
+            height: 4px; 
+            background: #e2e8f0; 
+            border-radius: 2px; 
+            overflow: hidden;
+        }
+        .progress-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, #3b82f6, #1e40af); 
+            transition: width 0.3s ease;
+        }
+        .model-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .model-card:hover {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-soft-gray font-sans">
+    <div class="min-h-screen flex">
+        <!-- Sidebar Navigation -->
+        <div class="w-80 bg-white shadow-lg border-r border-gray-200 flex flex-col">
+            <!-- Sidebar Header -->
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-brain text-2xl text-deep-blue mr-3"></i>
+                    <h1 class="text-xl font-bold text-gray-800">AI Engineering Hub</h1>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="sidebarSearch" 
+                        placeholder="Search topics..." 
+                        class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-blue focus:border-transparent"
+                    >
+                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Navigation Content -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <!-- Modern AI-Engineering Stack Section -->
+                <div class="sidebar-section rounded-lg mb-4">
+                    <div class="section-header p-4 bg-blue-50 rounded-lg" onclick="toggleSection('modern-stack')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-layer-group text-deep-blue mr-3"></i>
+                                <span class="font-semibold text-gray-800">Modern AI-Engineering Stack</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 transition-transform" id="modern-stack-icon"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-1 ml-6">Core architecture components</p>
+                    </div>
+                    <div class="section-content" id="modern-stack-content">
+                        <div class="p-2">
+                            <a href="topic-ai-stack-overview.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-sitemap text-blue-500 mr-2"></i>AI Engineering Stack Overview
+                            </a>
+                            <a href="topic-llm-foundations.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-brain text-green-500 mr-2"></i>LLM Foundations
+                            </a>
+                            <a href="topic-vector-databases.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-database text-purple-500 mr-2"></i>Vector Databases
+                            </a>
+                            <a href="topic-embedding-models.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700 bg-blue-100 border-l-4 border-deep-blue">
+                                <i class="fas fa-vector-square text-orange-500 mr-2"></i>Embedding Models
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto">
+            <!-- Header -->
+            <div class="bg-white shadow-sm border-b border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-800">Embedding Models</h1>
+                        <p class="text-gray-600 mt-2">Text and multimodal embedding generation and optimization</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-right">
+                            <div class="text-sm text-gray-500">Progress</div>
+                            <div class="text-lg font-semibold text-deep-blue">78%</div>
+                        </div>
+                        <div class="progress-bar w-32">
+                            <div class="progress-fill" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Introduction -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                            <i class="fas fa-vector-square text-deep-blue mr-3"></i>
+                            Understanding Embedding Models
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Embedding models are the cornerstone of modern AI systems, transforming unstructured data like text, 
+                            images, and audio into dense numerical representations that capture semantic meaning and relationships. 
+                            These high-dimensional vectors enable machines to understand and process human language and multimodal 
+                            content with remarkable sophistication.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            In AI engineering, embeddings serve as the bridge between raw data and intelligent applications. 
+                            They power everything from semantic search and recommendation systems to retrieval-augmented generation 
+                            and cross-modal understanding. Mastering embedding models is essential for building robust, 
+                            scalable AI applications that can effectively process and understand complex data.
+                        </p>
+
+                        <!-- Embedding Process Visualization -->
+                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Embedding Generation Process</h3>
+                            <div id="embedding-process" style="height: 400px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Types of Embedding Models -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-layer-group text-deep-blue mr-3"></i>
+                            Types of Embedding Models
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <!-- Word Embeddings -->
+                            <div class="model-card bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-font text-2xl text-blue-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Word Embeddings</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Represent individual words as dense vectors capturing semantic relationships 
+                                    and contextual meaning.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Word2Vec (CBOW, Skip-gram)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>GloVe (Global Vectors)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>FastText (subword information)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Static embeddings</li>
+                                </ul>
+                            </div>
+
+                            <!-- Contextual Embeddings -->
+                            <div class="model-card bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-comments text-2xl text-green-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Contextual Embeddings</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Generate context-aware representations that change based on surrounding words 
+                                    and sentence structure.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>BERT (Bidirectional)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>RoBERTa (Optimized BERT)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>DistilBERT (Lightweight)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Dynamic embeddings</li>
+                                </ul>
+                            </div>
+
+                            <!-- Sentence Embeddings -->
+                            <div class="model-card bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-align-left text-2xl text-purple-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Sentence Embeddings</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Represent entire sentences or paragraphs as single vectors capturing 
+                                    overall meaning and semantic content.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Sentence-BERT (SBERT)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Universal Sentence Encoder</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>SimCSE (Contrastive learning)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Pooling strategies</li>
+                                </ul>
+                            </div>
+
+                            <!-- Multimodal Embeddings -->
+                            <div class="model-card bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-images text-2xl text-orange-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Multimodal Embeddings</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Joint representations of text, images, audio, and other modalities 
+                                    in a shared embedding space.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>CLIP (Contrastive Learning)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>ALIGN (Large-scale training)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>BLIP (Bootstrapping)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Cross-modal retrieval</li>
+                                </ul>
+                            </div>
+
+                            <!-- Domain-Specific Embeddings -->
+                            <div class="model-card bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-cogs text-2xl text-red-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Domain-Specific</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Specialized embeddings trained on domain-specific corpora for 
+                                    improved performance in specialized applications.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>SciBERT (Scientific text)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>ClinicalBERT (Medical)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>FinBERT (Financial)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>LegalBERT (Legal)</li>
+                                </ul>
+                            </div>
+
+                            <!-- Code Embeddings -->
+                            <div class="model-card bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-code text-2xl text-gray-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Code Embeddings</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Represent source code as vectors to enable semantic code search, 
+                                    completion, and analysis applications.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>CodeBERT (Programming)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>GraphCodeBERT (AST-based)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>CodeT5 (Text-to-code)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Semantic code search</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Popular Embedding Models Comparison -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-star text-deep-blue mr-3"></i>
+                            Popular Embedding Models & Performance
+                        </h2>
+                        
+                        <div class="overflow-x-auto mb-6">
+                            <table class="w-full border-collapse border border-gray-300">
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Model</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Dimensions</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Context Length</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Developer</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Best Use Case</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">License</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">text-embedding-ada-002</td>
+                                        <td class="border border-gray-300 px-4 py-3">1,536</td>
+                                        <td class="border border-gray-300 px-4 py-3">8,192</td>
+                                        <td class="border border-gray-300 px-4 py-3">OpenAI</td>
+                                        <td class="border border-gray-300 px-4 py-3">General purpose</td>
+                                        <td class="border border-gray-300 px-4 py-3">Commercial</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">all-MiniLM-L6-v2</td>
+                                        <td class="border border-gray-300 px-4 py-3">384</td>
+                                        <td class="border border-gray-300 px-4 py-3">256</td>
+                                        <td class="border border-gray-300 px-4 py-3">Microsoft</td>
+                                        <td class="border border-gray-300 px-4 py-3">Lightweight apps</td>
+                                        <td class="border border-gray-300 px-4 py-3">Apache 2.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">all-mpnet-base-v2</td>
+                                        <td class="border border-gray-300 px-4 py-3">768</td>
+                                        <td class="border border-gray-300 px-4 py-3">384</td>
+                                        <td class="border border-gray-300 px-4 py-3">Microsoft</td>
+                                        <td class="border border-gray-300 px-4 py-3">High accuracy</td>
+                                        <td class="border border-gray-300 px-4 py-3">Apache 2.0</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">sentence-t5-xxl</td>
+                                        <td class="border border-gray-300 px-4 py-3">768</td>
+                                        <td class="border border-gray-300 px-4 py-3">512</td>
+                                        <td class="border border-gray-300 px-4 py-3">Google</td>
+                                        <td class="border border-gray-300 px-4 py-3">Sentence similarity</td>
+                                        <td class="border border-gray-300 px-4 py-3">Apache 2.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">e5-large-v2</td>
+                                        <td class="border border-gray-300 px-4 py-3">1,024</td>
+                                        <td class="border border-gray-300 px-4 py-3">512</td>
+                                        <td class="border border-gray-300 px-4 py-3">Microsoft</td>
+                                        <td class="border border-gray-300 px-4 py-3">Multilingual</td>
+                                        <td class="border border-gray-300 px-4 py-3">MIT</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">bge-large-en-v1.5</td>
+                                        <td class="border border-gray-300 px-4 py-3">1,024</td>
+                                        <td class="border border-gray-300 px-4 py-3">512</td>
+                                        <td class="border border-gray-300 px-4 py-3">BAAI</td>
+                                        <td class="border border-gray-300 px-4 py-3">Retrieval tasks</td>
+                                        <td class="border border-gray-300 px-4 py-3">Apache 2.0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Performance Comparison Chart -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Embedding Model Performance Comparison</h3>
+                            <div id="embedding-performance" style="height: 400px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Implementation Examples -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-code text-deep-blue mr-3"></i>
+                            Implementation Examples
+                        </h2>
+                        
+                        <!-- OpenAI Embeddings -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">OpenAI Embeddings API</h3>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="text-gray-300 font-medium">openai_embeddings.py</span>
+                                    <button class="copy-btn" onclick="copyCode('openai-embeddings')">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre id="openai-embeddings" class="language-python"><code>import openai
+import numpy as np
+from typing import List, Dict, Any, Optional
+import asyncio
+from dataclasses import dataclass
+import time
+
+@dataclass
+class EmbeddingConfig:
+    api_key: str
+    model: str = "text-embedding-ada-002"
+    dimensions: int = 1536
+    max_tokens: int = 8192
+    batch_size: int = 100
+
+class OpenAIEmbeddingModel:
+    """
+    OpenAI Embeddings API integration with batching, caching, and optimization
+    """
+    
+    def __init__(self, config: EmbeddingConfig):
+        self.config = config
+        openai.api_key = config.api_key
+        self.client = openai.AsyncOpenAI()
+        
+        # Simple in-memory cache for embeddings
+        self.embedding_cache: Dict[str, List[float]] = {}
+        self.cache_hits = 0
+        self.cache_misses = 0
+    
+    async def generate_embeddings(
+        self, 
+        texts: List[str], 
+        use_cache: bool = True
+    ) -> List[Dict[str, Any]]:
+        """
+        Generate embeddings for a list of texts with caching and batching
+        """
+        results = []
+        
+        # Check cache first if enabled
+        if use_cache:
+            uncached_texts = []
+            for text in texts:
+                if text in self.embedding_cache:
+                    results.append({
+                        "text": text,
+                        "embedding": self.embedding_cache[text],
+                        "cached": True
+                    })
+                    self.cache_hits += 1
+                else:
+                    uncached_texts.append(text)
+                    self.cache_misses += 1
+        else:
+            uncached_texts = texts
+        
+        # Generate embeddings for uncached texts in batches
+        if uncached_texts:
+            batch_results = await self._generate_embeddings_batch(uncached_texts)
+            
+            # Cache new embeddings
+            for result in batch_results:
+                if use_cache:
+                    self.embedding_cache[result["text"]] = result["embedding"]
+                results.append(result)
+        
+        # Return results in original order
+        text_to_result = {result["text"]: result for result in results}
+        return [text_to_result[text] for text in texts]
+    
+    async def _generate_embeddings_batch(
+        self, 
+        texts: List[str]
+    ) -> List[Dict[str, Any]]:
+        """
+        Generate embeddings in batches to optimize API calls
+        """
+        results = []
+        
+        for i in range(0, len(texts), self.config.batch_size):
+            batch = texts[i:i + self.config.batch_size]
+            
+            try:
+                # Clean and prepare texts
+                cleaned_batch = [self._clean_text(text) for text in batch]
+                
+                # Make API call
+                response = await self.client.embeddings.create(
+                    model=self.config.model,
+                    input=cleaned_batch
+                )
+                
+                # Process results
+                for j, embedding_data in enumerate(response.data):
+                    results.append({
+                        "text": batch[j],
+                        "embedding": embedding_data.embedding,
+                        "tokens": embedding_data.usage.total_tokens,
+                        "cached": False
+                    })
+                
+                # Rate limiting - be nice to the API
+                if i + self.config.batch_size < len(texts):
+                    await asyncio.sleep(0.1)
+                
+            except Exception as e:
+                # Handle errors for individual batches
+                for text in batch:
+                    results.append({
+                        "text": text,
+                        "error": str(e),
+                        "embedding": None
+                    })
+        
+        return results
+    
+    def _clean_text(self, text: str) -> str:
+        """
+        Clean and prepare text for embedding generation
+        """
+        # Remove excessive whitespace
+        text = " ".join(text.split())
+        
+        # Truncate if too long (leave some buffer for tokens)
+        if len(text) > self.config.max_tokens * 4:  # Rough character estimate
+            text = text[:self.config.max_tokens * 4] + "..."
+        
+        return text.strip()
+    
+    def calculate_similarity(
+        self, 
+        embedding1: List[float], 
+        embedding2: List[float]
+    ) -> float:
+        """
+        Calculate cosine similarity between two embeddings
+        """
+        vec1 = np.array(embedding1)
+        vec2 = np.array(embedding2)
+        
+        # Calculate cosine similarity
+        dot_product = np.dot(vec1, vec2)
+        norm1 = np.linalg.norm(vec1)
+        norm2 = np.linalg.norm(vec2)
+        
+        if norm1 == 0 or norm2 == 0:
+            return 0.0
+        
+        return dot_product / (norm1 * norm2)
+    
+    def find_similar_embeddings(
+        self, 
+        query_embedding: List[float], 
+        embeddings: List[List[float]], 
+        top_k: int = 5
+    ) -> List[int]:
+        """
+        Find the most similar embeddings to a query embedding
+        """
+        similarities = [
+            self.calculate_similarity(query_embedding, emb) 
+            for emb in embeddings
+        ]
+        
+        # Get indices of top-k most similar embeddings
+        top_indices = np.argsort(similarities)[-top_k:][::-1]
+        return top_indices.tolist()
+    
+    async def generate_query_embedding(self, query: str) -> List[float]:
+        """
+        Generate embedding for a single query text
+        """
+        result = await self.generate_embeddings([query], use_cache=True)
+        return result[0]["embedding"] if result[0]["embedding"] else []
+    
+    def get_cache_stats(self) -> Dict[str, Any]:
+        """
+        Get cache performance statistics
+        """
+        total_requests = self.cache_hits + self.cache_misses
+        hit_rate = (self.cache_hits / total_requests) * 100 if total_requests > 0 else 0
+        
+        return {
+            "cache_hits": self.cache_hits,
+            "cache_misses": self.cache_misses,
+            "hit_rate": round(hit_rate, 2),
+            "cache_size": len(self.embedding_cache)
+        }
+    
+    async def batch_similarity_search(
+        self, 
+        queries: List[str], 
+        candidates: List[str], 
+        top_k: int = 5
+    ) -> List[Dict[str, Any]]:
+        """
+        Perform similarity search for multiple queries against candidate texts
+        """
+        # Generate embeddings for all texts
+        all_texts = queries + candidates
+        all_results = await self.generate_embeddings(all_texts)
+        
+        # Separate query and candidate embeddings
+        query_embeddings = [result["embedding"] for result in all_results[:len(queries)]]
+        candidate_embeddings = [result["embedding"] for result in all_results[len(queries):]]
+        
+        # Find similar embeddings for each query
+        search_results = []
+        for i, query_emb in enumerate(query_embeddings):
+            if query_emb is not None:
+                similar_indices = self.find_similar_embeddings(
+                    query_emb, candidate_embeddings, top_k
+                )
+                
+                similar_texts = [
+                    {
+                        "text": candidates[idx],
+                        "similarity_score": self.calculate_similarity(query_emb, candidate_embeddings[idx])
+                    }
+                    for idx in similar_indices
+                ]
+                
+                search_results.append({
+                    "query": queries[i],
+                    "similar_texts": similar_texts
+                })
+        
+        return search_results
+
+# Usage Example
+async def main():
+    # Initialize embedding model
+    config = EmbeddingConfig(
+        api_key="your-openai-api-key",
+        model="text-embedding-ada-002"
+    )
+    
+    embedding_model = OpenAIEmbeddingModel(config)
+    
+    # Sample documents
+    documents = [
+        "Artificial Intelligence is transforming modern technology and business operations.",
+        "Machine learning algorithms enable computers to learn from data without explicit programming.",
+        "Deep neural networks consist of multiple layers that process information hierarchically.",
+        "Natural language processing allows computers to understand and generate human language.",
+        "Computer vision systems can analyze and interpret visual information from images and videos.",
+        "Reinforcement learning involves training agents to make decisions through trial and error."
+    ]
+    
+    # Generate embeddings
+    print("Generating embeddings...")
+    embeddings = await embedding_model.generate_embeddings(documents)
+    
+    print(f"Generated {len(embeddings)} embeddings")
+    
+    # Show first embedding details
+    first_emb = embeddings[0]
+    print(f"First embedding: {len(first_emb['embedding'])} dimensions")
+    print(f"Tokens used: {first_emb.get('tokens', 'N/A')}")
+    print(f"From cache: {first_emb.get('cached', False)}")
+    
+    # Query similarity search
+    queries = [
+        "How does AI work?",
+        "What is machine learning?"
+    ]
+    
+    print("\nPerforming similarity search...")
+    search_results = await embedding_model.batch_similarity_search(
+        queries=queries,
+        candidates=documents,
+        top_k=3
+    )
+    
+    for result in search_results:
+        print(f"\nQuery: {result['query']}")
+        print("Most similar documents:")
+        for i, similar in enumerate(result['similar_texts'], 1):
+            print(f"{i}. Score: {similar['similarity_score']:.3f}")
+            print(f"   Text: {similar['text'][:80]}...")
+    
+    # Cache statistics
+    cache_stats = embedding_model.get_cache_stats()
+    print(f"\nCache statistics: {cache_stats}")
+
+# Run the example
+if __name__ == "__main__":
+    asyncio.run(main())</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Hugging Face Embeddings -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Hugging Face Sentence Transformers</h3>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="text-gray-300 font-medium">hf_embeddings.py</span>
+                                    <button class="copy-btn" onclick="copyCode('hf-embeddings')">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre id="hf-embeddings" class="language-python"><code>from sentence_transformers import SentenceTransformer
+import numpy as np
+from typing import List, Dict, Any, Optional, Union
+import torch
+from dataclasses import dataclass
+import json
+
+@dataclass
+class HFEmbeddingConfig:
+    model_name: str = "all-MiniLM-L6-v2"
+    device: str = "auto"  # auto, cpu, cuda
+    normalize_embeddings: bool = True
+    batch_size: int = 32
+    max_seq_length: Optional[int] = None
+
+class HuggingFaceEmbeddingModel:
+    """
+    Hugging Face Sentence Transformers integration for local embedding generation
+    """
+    
+    def __init__(self, config: HFEmbeddingConfig):
+        self.config = config
+        self.device = self._get_device(config.device)
+        
+        # Load model
+        print(f"Loading model {config.model_name} on {self.device}...")
+        self.model = SentenceTransformer(
+            config.model_name,
+            device=self.device
+        )
+        
+        # Set max sequence length if specified
+        if config.max_seq_length:
+            self.model.max_seq_length = config.max_seq_length
+        
+        print(f"Model loaded successfully!")
+        print(f"Embedding dimensions: {self.get_embedding_dimension()}")
+        print(f"Max sequence length: {self.model.max_seq_length}")
+    
+    def _get_device(self, device: str) -> str:
+        """Determine the best available device"""
+        if device == "auto":
+            if torch.cuda.is_available():
+                return "cuda"
+            elif torch.backends.mps.is_available():
+                return "mps"
+            else:
+                return "cpu"
+        return device
+    
+    def generate_embeddings(
+        self, 
+        texts: Union[str, List[str]], 
+        batch_size: Optional[int] = None,
+        show_progress_bar: bool = False
+    ) -> np.ndarray:
+        """
+        Generate embeddings for texts
+        """
+        if isinstance(texts, str):
+            texts = [texts]
+        
+        batch_size = batch_size or self.config.batch_size
+        
+        # Generate embeddings
+        embeddings = self.model.encode(
+            texts,
+            batch_size=batch_size,
+            show_progress_bar=show_progress_bar,
+            normalize_embeddings=self.config.normalize_embeddings,
+            convert_to_numpy=True
+        )
+        
+        return embeddings
+    
+    def generate_single_embedding(self, text: str) -> np.ndarray:
+        """
+        Generate embedding for a single text
+        """
+        return self.generate_embeddings([text])[0]
+    
+    def calculate_similarity_matrix(
+        self, 
+        embeddings1: np.ndarray, 
+        embeddings2: np.ndarray
+    ) -> np.ndarray:
+        """
+        Calculate similarity matrix between two sets of embeddings
+        """
+        # Normalize embeddings if not already normalized
+        if self.config.normalize_embeddings:
+            embeddings1 = embeddings1 / np.linalg.norm(embeddings1, axis=1, keepdims=True)
+            embeddings2 = embeddings2 / np.linalg.norm(embeddings2, axis=1, keepdims=True)
+        
+        # Calculate cosine similarity matrix
+        similarity_matrix = np.dot(embeddings1, embeddings2.T)
+        
+        return similarity_matrix
+    
+    def find_most_similar(
+        self, 
+        query_embedding: np.ndarray, 
+        candidate_embeddings: np.ndarray, 
+        top_k: int = 5
+    ) -> List[Dict[str, Any]]:
+        """
+        Find most similar embeddings to a query embedding
+        """
+        # Calculate similarities
+        similarities = np.dot(candidate_embeddings, query_embedding)
+        
+        # Get top-k indices
+        top_indices = np.argsort(similarities)[-top_k:][::-1]
+        
+        results = []
+        for idx in top_indices:
+            results.append({
+                "index": int(idx),
+                "similarity_score": float(similarities[idx])
+            })
+        
+        return results
+    
+    def semantic_search(
+        self, 
+        queries: List[str], 
+        corpus: List[str], 
+        top_k: int = 5,
+        return_embeddings: bool = False
+    ) -> List[Dict[str, Any]]:
+        """
+        Perform semantic search of queries against corpus
+        """
+        # Generate embeddings
+        query_embeddings = self.generate_embeddings(queries)
+        corpus_embeddings = self.generate_embeddings(corpus, show_progress_bar=True)
+        
+        # Calculate similarities
+        similarity_matrix = self.calculate_similarity_matrix(
+            query_embeddings, corpus_embeddings
+        )
+        
+        # Find top results for each query
+        search_results = []
+        for i, query in enumerate(queries):
+            # Get top-k indices for this query
+            top_indices = np.argsort(similarity_matrix[i])[-top_k:][::-1]
+            
+            query_results = {
+                "query": query,
+                "results": []
+            }
+            
+            for idx in top_indices:
+                result = {
+                    "corpus_text": corpus[idx],
+                    "corpus_index": int(idx),
+                    "similarity_score": float(similarity_matrix[i][idx])
+                }
+                
+                if return_embeddings:
+                    result["query_embedding"] = query_embeddings[i].tolist()
+                    result["corpus_embedding"] = corpus_embeddings[idx].tolist()
+                
+                query_results["results"].append(result)
+            
+            search_results.append(query_results)
+        
+        return search_results
+    
+    def cluster_embeddings(
+        self, 
+        embeddings: np.ndarray, 
+        num_clusters: int,
+        algorithm: str = "kmeans"
+    ) -> Dict[str, Any]:
+        """
+        Cluster embeddings using various algorithms
+        """
+        from sklearn.cluster import KMeans
+        from sklearn.metrics import silhouette_score
+        
+        if algorithm == "kmeans":
+            cluster_model = KMeans(n_clusters=num_clusters, random_state=42)
+            cluster_labels = cluster_model.fit_predict(embeddings)
+            
+            # Calculate silhouette score
+            silhouette_avg = silhouette_score(embeddings, cluster_labels)
+            
+            return {
+                "algorithm": algorithm,
+                "cluster_labels": cluster_labels.tolist(),
+                "cluster_centers": cluster_model.cluster_centers_.tolist(),
+                "silhouette_score": float(silhouette_avg),
+                "inertia": float(cluster_model.inertia_)
+            }
+        
+        else:
+            raise ValueError(f"Unsupported clustering algorithm: {algorithm}")
+    
+    def get_embedding_dimension(self) -> int:
+        """
+        Get the dimension of embeddings generated by this model
+        """
+        # Generate a test embedding to get dimension
+        test_embedding = self.generate_single_embedding("test")
+        return len(test_embedding)
+    
+    def save_embeddings(
+        self, 
+        embeddings: np.ndarray, 
+        texts: List[str], 
+        file_path: str,
+        include_metadata: bool = True
+    ):
+        """
+        Save embeddings and texts to file
+        """
+        data = {
+            "model_name": self.config.model_name,
+            "embedding_dimension": self.get_embedding_dimension(),
+            "num_embeddings": len(embeddings),
+            "embeddings": embeddings.tolist(),
+            "texts": texts
+        }
+        
+        if include_metadata:
+            data["metadata"] = {
+                "created_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+                "model_config": {
+                    "normalize_embeddings": self.config.normalize_embeddings,
+                    "max_seq_length": self.model.max_seq_length
+                }
+            }
+        
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+    
+    def load_embeddings(self, file_path: str) -> Dict[str, Any]:
+        """
+        Load embeddings from file
+        """
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        # Convert embeddings back to numpy array
+        data["embeddings"] = np.array(data["embeddings"])
+        
+        return data
+
+# Usage Example
+import time
+
+def main():
+    # Initialize Hugging Face embedding model
+    config = HFEmbeddingConfig(
+        model_name="all-MiniLM-L6-v2",
+        device="auto",
+        normalize_embeddings=True
+    )
+    
+    embedding_model = HuggingFaceEmbeddingModel(config)
+    
+    # Sample corpus of documents
+    corpus = [
+        "Machine learning is a subset of artificial intelligence that enables computers to learn without explicit programming.",
+        "Deep learning uses neural networks with multiple layers to model complex patterns in data.",
+        "Natural language processing allows computers to understand, interpret, and generate human language.",
+        "Computer vision enables machines to interpret and understand visual information from the world.",
+        "Reinforcement learning trains agents to make decisions by rewarding desired behaviors.",
+        "Neural networks are computing systems inspired by biological neural networks in animal brains.",
+        "Supervised learning uses labeled training data to learn mapping between inputs and outputs.",
+        "Unsupervised learning finds hidden patterns in data without labeled examples.",
+        "Transfer learning adapts pre-trained models to new but related tasks.",
+        "Data preprocessing involves cleaning and transforming raw data for machine learning."
+    ]
+    
+    # Sample queries
+    queries = [
+        "What is machine learning?",
+        "How do neural networks work?",
+        "What is natural language processing?"
+    ]
+    
+    print("Generating embeddings for corpus...")
+    start_time = time.time()
+    
+    # Perform semantic search
+    search_results = embedding_model.semantic_search(
+        queries=queries,
+        corpus=corpus,
+        top_k=3,
+        return_embeddings=False
+    )
+    
+    end_time = time.time()
+    print(f"Search completed in {end_time - start_time:.2f} seconds")
+    
+    # Display results
+    for result in search_results:
+        print(f"\nQuery: {result['query']}")
+        print("Most similar documents:")
+        for i, doc_result in enumerate(result['results'], 1):
+            print(f"{i}. Score: {doc_result['similarity_score']:.4f}")
+            print(f"   Text: {doc_result['corpus_text'][:80]}...")
+    
+    # Example of clustering
+    print("\nClustering embeddings...")
+    all_embeddings = embedding_model.generate_embeddings(corpus)
+    
+    cluster_results = embedding_model.cluster_embeddings(
+        embeddings=all_embeddings,
+        num_clusters=3
+    )
+    
+    print(f"Clustering completed using {cluster_results['algorithm']}")
+    print(f"Silhouette Score: {cluster_results['silhouette_score']:.3f}")
+    
+    # Show cluster assignments
+    cluster_assignments = cluster_results['cluster_labels']
+    for cluster_id in range(3):
+        cluster_texts = [corpus[i] for i, label in enumerate(cluster_assignments) if label == cluster_id]
+        print(f"\nCluster {cluster_id} ({len(cluster_texts)} documents):")
+        for text in cluster_texts[:2]:  # Show first 2 texts per cluster
+            print(f"  - {text[:60]}...")
+
+if __name__ == "__main__":
+    main()</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Best Practices -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-star text-deep-blue mr-3"></i>
+                            Embedding Model Best Practices
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-6">
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                                    <h4 class="font-semibold text-blue-800 mb-2">
+                                        <i class="fas fa-search mr-2"></i>
+                                        Model Selection
+                                    </h4>
+                                    <p class="text-blue-700 text-sm">
+                                        Choose embedding models based on your specific use case. Consider 
+                                        trade-offs between accuracy, speed, and resource requirements.
+                                    </p>
+                                </div>
+
+                                <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                                    <h4 class="font-semibold text-green-800 mb-2">
+                                        <i class="fas fa-chart-line mr-2"></i>
+                                        Performance Optimization
+                                    </h4>
+                                    <p class="text-green-700 text-sm">
+                                        Use batching for efficiency, implement caching for repeated queries, 
+                                        and consider quantization for memory-constrained environments.
+                                    </p>
+                                </div>
+
+                                <div class="bg-purple-50 border-l-4 border-purple-500 p-4">
+                                    <h4 class="font-semibold text-purple-800 mb-2">
+                                        <i class="fas fa-database mr-2"></i>
+                                        Data Preprocessing
+                                    </h4>
+                                    <p class="text-purple-700 text-sm">
+                                        Clean and normalize text before embedding generation. 
+                                        Handle long texts appropriately and consider truncation strategies.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="bg-orange-50 border-l-4 border-orange-500 p-4">
+                                    <h4 class="font-semibold text-orange-800 mb-2">
+                                        <i class="fas fa-layer-group mr-2"></i>
+                                        Vector Storage
+                                    </h4>
+                                    <p class="text-orange-700 text-sm">
+                                        Choose appropriate vector databases based on scale requirements. 
+                                        Consider indexing strategies and similarity metrics carefully.
+                                    </p>
+                                </div>
+
+                                <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                                    <h4 class="font-semibold text-red-800 mb-2">
+                                        <i class="fas fa-sync-alt mr-2"></i>
+                                        Model Updates
+                                    </h4>
+                                    <p class="text-red-700 text-sm">
+                                        Plan for model versioning and updates. Consider re-indexing 
+                                        strategies when updating to new embedding models.
+                                    </p>
+                                </div>
+
+                                <div class="bg-teal-50 border-l-4 border-teal-500 p-4">
+                                    <h4 class="font-semibold text-teal-800 mb-2">
+                                        <i class="fas fa-shield-alt mr-2"></i>
+                                        Privacy & Security
+                                    </h4>
+                                    <p class="text-teal-700 text-sm">
+                                        Be mindful of sensitive information in embeddings. 
+                                        Consider privacy implications and implement appropriate access controls.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-between items-center bg-white rounded-lg shadow-lg p-6">
+                        <a href="topic-vector-databases.html" class="text-gray-500 hover:text-deep-blue transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: Vector Databases
+                        </a>
+                        <div class="flex space-x-4">
+                            <a href="topic-prompt-engineering.html" class="bg-deep-blue text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+                                Next: Prompt Engineering Framework
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const icon = document.getElementById(sectionId + '-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('expanded');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const text = codeElement.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                // Show feedback
+                const btn = event.target.closest('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+
+        // Create embedding process diagram
+        function createEmbeddingProcess() {
+            const data = [{
+                type: 'sankey',
+                node: {
+                    pad: 15,
+                    thickness: 20,
+                    line: { color: "black", width: 0.5 },
+                    label: [
+                        "Raw Text", "Tokenization", "Embedding Layer", "Transformer Encoder",
+                        "Attention Mechanism", "Contextual Representation", "Pooling Strategy",
+                        "Final Embedding", "Vector Database", "Similarity Search"
+                    ],
+                    color: [
+                        "#3b82f6", "#60a5fa", "#93c5fd", "#dbeafe",
+                        "#10b981", "#34d399", "#6ee7b7", "#d1fae5",
+                        "#8b5cf6", "#a78bfa"
+                    ]
+                },
+                link: {
+                    source: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    target: [1, 2, 3, 4, 5, 6, 7, 8, 9, 8],
+                    value: [10, 10, 10, 8, 8, 8, 10, 8, 10, 8]
+                }
+            }];
+
+            const layout = {
+                title: "Text Embedding Generation Process",
+                font: { size: 12 },
+                margin: { l: 0, r: 0, t: 50, b: 0 }
+            };
+
+            Plotly.newPlot('embedding-process', data, layout, {responsive: true});
+        }
+
+        // Create embedding performance comparison chart
+        function createEmbeddingPerformance() {
+            const models = ['text-embedding-ada-002', 'all-MiniLM-L6-v2', 'all-mpnet-base-v2', 'sentence-t5-xxl', 'e5-large-v2', 'bge-large-en-v1.5'];
+            const semantic_search = [92, 85, 88, 82, 90, 87];
+            const clustering = [88, 82, 85, 80, 86, 84];
+            const speed = [75, 95, 80, 60, 70, 75];
+            const memory_efficiency = [70, 90, 75, 50, 65, 70];
+
+            const data = [
+                {
+                    x: models,
+                    y: semantic_search,
+                    name: 'Semantic Search',
+                    type: 'bar',
+                    marker: { color: '#3b82f6' }
+                },
+                {
+                    x: models,
+                    y: clustering,
+                    name: 'Clustering',
+                    type: 'bar',
+                    marker: { color: '#10b981' }
+                },
+                {
+                    x: models,
+                    y: speed,
+                    name: 'Speed',
+                    type: 'bar',
+                    marker: { color: '#f59e0b' }
+                },
+                {
+                    x: models,
+                    y: memory_efficiency,
+                    name: 'Memory Efficiency',
+                    type: 'bar',
+                    marker: { color: '#8b5cf6' }
+                }
+            ];
+
+            const layout = {
+                title: 'Embedding Model Performance Comparison (Score 0-100)',
+                xaxis: { title: 'Models' },
+                yaxis: { title: 'Score' },
+                barmode: 'group',
+                margin: { l: 50, r: 50, t: 50, b: 50 }
+            };
+
+            Plotly.newPlot('embedding-performance', data, layout, {responsive: true});
+        }
+
+        // Initialize charts when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createEmbeddingProcess();
+            createEmbeddingPerformance();
+        });
+    </script>
+</body>
+</html>

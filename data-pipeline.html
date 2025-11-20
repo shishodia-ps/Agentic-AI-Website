@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pipeline - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, #f8f6f0 0%, #e8e4dc 100%); }
+        .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .code-block { background: #2d3748; color: #e2e8f0; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .note-box { background: #fef5e7; border-left: 4px solid #f6ad55; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .warning-box { background: #fed7d7; border-left: 4px solid #fc8181; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .tip-box { background: #e6fffa; border-left: 4px solid #4fd1c7; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .info-box { background: #ebf8ff; border-left: 4px solid #63b3ed; padding: 1rem; border-radius: 0 8px 8px 0; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                        <i class="fas fa-brain text-2xl text-blue-600"></i>
+                        <span class="font-semibold text-xl">Agentic AI Hub</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-gray-900 font-medium">Home</a>
+                    <a href="ai-stack.html" class="text-gray-600 hover:text-gray-900 font-medium">AI Stack</a>
+                    <a href="visual-editor.html" class="text-blue-600 hover:text-blue-800 font-medium">Visual Editor</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-shadow">
+                    Data Pipeline
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Scalable, reliable data pipelines for AI systems, covering ingestion, processing, 
+                    transformation, and quality assurance with real-time and batch processing capabilities.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="sticky top-24">
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Quick Navigation</h3>
+                        <nav class="space-y-2">
+                            <a href="#overview" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Overview</a>
+                            <a href="#ingestion" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Data Ingestion</a>
+                            <a href="#processing" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Processing</a>
+                            <a href="#transformation" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Transformation</a>
+                            <a href="#quality" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Quality Assurance</a>
+                            <a href="#orchestration" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Orchestration</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Overview Section -->
+                <section id="overview" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Overview</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        A robust data pipeline is the foundation of any successful AI system. It ensures 
+                        data flows efficiently from source to model, with proper validation, transformation, 
+                        and quality checks throughout the process.
+                    </p>
+                    
+                    <div class="info-box mb-6">
+                        <h4 class="font-semibold text-blue-800 mb-2">
+                            <i class="fas fa-info-circle mr-2"></i>Key Principle
+                        </h4>
+                        <p class="text-blue-700">
+                            Build data pipelines that are scalable, reliable, and maintainable. 
+                            Prioritize data quality and observability from the start.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-download text-2xl text-blue-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Data Ingestion</h3>
+                            </div>
+                            <p class="text-gray-600">Collect data from multiple sources</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-cogs text-2xl text-green-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Processing</h3>
+                            </div>
+                            <p class="text-gray-600">Clean, validate, and transform data</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-exchange-alt text-2xl text-purple-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Transformation</h3>
+                            </div>
+                            <p class="text-gray-600">Convert data to model-ready format</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-check-circle text-2xl text-red-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Quality Assurance</h3>
+                            </div>
+                            <p class="text-gray-600">Monitor and validate data quality</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-sitemap text-2xl text-yellow-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Orchestration</h3>
+                            </div>
+                            <p class="text-gray-600">Manage and schedule pipeline workflows</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-chart-line text-2xl text-teal-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Monitoring</h3>
+                            </div>
+                            <p class="text-gray-600">Track pipeline performance and health</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Ingestion -->
+                <section id="ingestion" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Data Ingestion</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Multi-Source Data Ingestion</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import asyncio
+import aiohttp
+import boto3
+from kafka import KafkaConsumer
+import pandas as pd
+from typing import Dict, Any, List
+import json
+from datetime import datetime
+
+class DataIngestionPipeline:
+    def __init__(self):
+        self.s3_client = boto3.client('s3')
+        self.kafka_consumer = None
+        self.ingestion_metrics = {
+            'records_processed': 0,
+            'errors': 0,
+            'start_time': datetime.utcnow()
+        }
+    
+    async def ingest_from_api(self, api_endpoint: str, headers: Dict[str, str] = None) -> List[Dict]:
+        """Ingest data from REST APIs"""
+        async with aiohttp.ClientSession() as session:
+            try:
+                async with session.get(api_endpoint, headers=headers) as response:
+                    data = await response.json()
+                    self.ingestion_metrics['records_processed'] += len(data)
+                    return data
+            except Exception as e:
+                self.ingestion_metrics['errors'] += 1
+                print(f"API ingestion error: {e}")
+                return []
+    
+    def ingest_from_s3(self, bucket: str, prefix: str) -> List[Dict]:
+        """Ingest data from S3 buckets"""
+        try:
+            response = self.s3_client.list_objects_v2(Bucket=bucket, Prefix=prefix)
+            objects = response.get('Contents', [])
+            
+            data_records = []
+            for obj in objects:
+                file_key = obj['Key']
+                file_obj = self.s3_client.get_object(Bucket=bucket, Key=file_key)
+                
+                if file_key.endswith('.csv'):
+                    df = pd.read_csv(file_obj['Body'])
+                    data_records.extend(df.to_dict('records'))
+                elif file_key.endswith('.json'):
+                    content = file_obj['Body'].read().decode('utf-8')
+                    if content.strip().startswith('['):
+                        data_records.extend(json.loads(content))
+                    else:
+                        data_records.append(json.loads(content))
+            
+            self.ingestion_metrics['records_processed'] += len(data_records)
+            return data_records
+        except Exception as e:
+            self.ingestion_metrics['errors'] += 1
+            print(f"S3 ingestion error: {e}")
+            return []
+    
+    def setup_kafka_consumer(self, bootstrap_servers: str, topic: str):
+        """Setup Kafka consumer for real-time data"""
+        self.kafka_consumer = KafkaConsumer(
+            topic,
+            bootstrap_servers=bootstrap_servers,
+            value_deserializer=lambda m: json.loads(m.decode('utf-8')),
+            auto_offset_reset='earliest',
+            enable_auto_commit=True,
+            group_id='ai_data_pipeline'
+        )
+    
+    def ingest_from_kafka(self, max_records: int = 1000) -> List[Dict]:
+        """Ingest data from Kafka topics"""
+        if not self.kafka_consumer:
+            raise ValueError("Kafka consumer not initialized")
+        
+        records = []
+        try:
+            for message in self.kafka_consumer:
+                records.append(message.value)
+                if len(records) >= max_records:
+                    break
+            
+            self.ingestion_metrics['records_processed'] += len(records)
+            return records
+        except Exception as e:
+            self.ingestion_metrics['errors'] += 1
+            print(f"Kafka ingestion error: {e}")
+            return []
+    
+    def ingest_from_database(self, connection_string: str, query: str) -> List[Dict]:
+        """Ingest data from SQL databases"""
+        try:
+            # Using SQLAlchemy for database connectivity
+            from sqlalchemy import create_engine
+            
+            engine = create_engine(connection_string)
+            df = pd.read_sql(query, engine)
+            
+            records = df.to_dict('records')
+            self.ingestion_metrics['records_processed'] += len(records)
+            return records
+        except Exception as e:
+            self.ingestion_metrics['errors'] += 1
+            print(f"Database ingestion error: {e}")
+            return []
+    
+    def get_ingestion_stats(self) -> Dict:
+        """Get pipeline statistics"""
+        runtime = datetime.utcnow() - self.ingestion_metrics['start_time']
+        return {
+            'records_processed': self.ingestion_metrics['records_processed'],
+            'errors': self.ingestion_metrics['errors'],
+            'runtime_seconds': runtime.total_seconds(),
+            'records_per_second': (self.ingestion_metrics['records_processed'] / 
+                                 runtime.total_seconds()) if runtime.total_seconds() > 0 else 0
+        }
+
+# Usage example
+async def main():
+    pipeline = DataIngestionPipeline()
+    
+    # Ingest from multiple sources
+    tasks = [
+        pipeline.ingest_from_api("https://api.example.com/data"),
+        pipeline.ingest_from_s3("my-bucket", "data/2024/"),
+        pipeline.ingest_from_database(
+            "postgresql://user:pass@localhost/db", 
+            "SELECT * FROM training_data"
+        )
+    ]
+    
+    # Execute ingestion tasks
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+    
+    # Setup Kafka consumer for real-time data
+    pipeline.setup_kafka_consumer("localhost:9092", "ai_data_topic")
+    
+    # Get statistics
+    stats = pipeline.get_ingestion_stats()
+    print(f"Ingestion statistics: {stats}")
+
+# Run the pipeline
+# asyncio.run(main())</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Data Validation on Ingestion</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>from pydantic import BaseModel, validator
+from typing import Optional, List
+import pandas as pd
+
+class DataRecord(BaseModel):
+    user_id: str
+    timestamp: str
+    feature_1: float
+    feature_2: Optional[float] = None
+    target: Optional[str] = None
+    
+    @validator('user_id')
+    def validate_user_id(cls, v):
+        if not v or len(v) < 3:
+            raise ValueError('User ID must be at least 3 characters')
+        return v
+    
+    @validator('timestamp')
+    def validate_timestamp(cls, v):
+        from datetime import datetime
+        try:
+            datetime.fromisoformat(v.replace('Z', '+00:00'))
+            return v
+        except ValueError:
+            raise ValueError('Invalid timestamp format')
+    
+    @validator('feature_1')
+    def validate_feature_1(cls, v):
+        if v < 0 or v > 1000:
+            raise ValueError('Feature 1 must be between 0 and 1000')
+        return v
+
+class DataValidator:
+    def __init__(self, schema: BaseModel):
+        self.schema = schema
+        self.validation_stats = {
+            'total_records': 0,
+            'valid_records': 0,
+            'invalid_records': 0,
+            'errors': []
+        }
+    
+    def validate_record(self, record: dict) -> tuple:
+        """Validate a single record against schema"""
+        try:
+            validated_record = self.schema(**record)
+            self.validation_stats['valid_records'] += 1
+            return True, validated_record.dict()
+        except Exception as e:
+            self.validation_stats['invalid_records'] += 1
+            self.validation_stats['errors'].append(str(e))
+            return False, None
+    
+    def validate_batch(self, records: List[dict]) -> tuple:
+        """Validate a batch of records"""
+        valid_records = []
+        invalid_records = []
+        
+        self.validation_stats['total_records'] += len(records)
+        
+        for record in records:
+            is_valid, validated = self.validate_record(record)
+            if is_valid:
+                valid_records.append(validated)
+            else:
+                invalid_records.append(record)
+        
+        return valid_records, invalid_records
+    
+    def get_validation_report(self) -> dict:
+        """Get validation statistics"""
+        return {
+            **self.validation_stats,
+            'validation_rate': (self.validation_stats['valid_records'] / 
+                              max(self.validation_stats['total_records'], 1)) * 100
+        }
+
+# Usage
+validator = DataValidator(DataRecord)
+
+# Sample data
+sample_data = [
+    {"user_id": "user123", "timestamp": "2024-01-01T10:00:00Z", "feature_1": 100.5},
+    {"user_id": "ab", "timestamp": "invalid", "feature_1": 1500},  # Invalid
+    {"user_id": "user456", "timestamp": "2024-01-01T11:00:00Z", "feature_1": 200.0}
+]
+
+# Validate batch
+valid_data, invalid_data = validator.validate_batch(sample_data)
+print(f"Valid records: {len(valid_data)}")
+print(f"Invalid records: {len(invalid_data)}")
+
+# Get validation report
+report = validator.get_validation_report()
+print(f"Validation report: {report}")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="note-box">
+                        <h4 class="font-semibold text-yellow-800 mb-2">
+                            <i class="fas fa-lightbulb mr-2"></i>Ingestion Best Practices
+                        </h4>
+                        <p class="text-yellow-700">
+                            Implement backpressure handling, idempotent ingestion, and comprehensive logging. 
+                            Use schema validation and data quality checks at ingestion time.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Data Processing -->
+                <section id="processing" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Data Processing</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Apache Spark Processing</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, when, udf
+from pyspark.sql.types import StringType, DoubleType
+import pyspark.sql.functions as F
+
+class SparkDataProcessor:
+    def __init__(self, app_name="AI_Data_Processing"):
+        self.spark = SparkSession.builder \
+            .appName(app_name) \
+            .config("spark.sql.adaptive.enabled", "true") \
+            .config("spark.sql.adaptive.coalescePartitions.enabled", "true") \
+            .getOrCreate()
+        
+        self.spark.sparkContext.setLogLevel("WARN")
+    
+    def clean_data(self, df):
+        """Clean and standardize data"""
+        # Remove duplicates
+        df_cleaned = df.dropDuplicates()
+        
+        # Handle missing values
+        numeric_columns = [f.name for f in df_cleaned.schema.fields 
+                          if f.dataType.typeName() in ['integer', 'double', 'float']]
+        
+        for col_name in numeric_columns:
+            median_value = df_cleaned.approxQuantile(col_name, [0.5], 0.01)[0]
+            df_cleaned = df_cleaned.fillna({col_name: median_value})
+        
+        # Remove outliers using IQR method
+        for col_name in numeric_columns:
+            quantiles = df_cleaned.approxQuantile(col_name, [0.25, 0.75], 0.01)
+            q1, q3 = quantiles
+            iqr = q3 - q1
+            lower_bound = q1 - 1.5 * iqr
+            upper_bound = q3 + 1.5 * iqr
+            
+            df_cleaned = df_cleaned.filter(
+                (col(col_name) >= lower_bound) & (col(col_name) <= upper_bound)
+            )
+        
+        return df_cleaned
+    
+    def feature_engineering(self, df):
+        """Create new features and transformations"""
+        # Example: Create age groups
+        if 'age' in df.columns:
+            df = df.withColumn('age_group', 
+                when(col('age') < 18, 'under_18')
+                .when(col('age') < 35, '18_34')
+                .when(col('age') < 50, '35_49')
+                .otherwise('50_plus')
+            )
+        
+        # Example: Create interaction features
+        if 'feature1' in df.columns and 'feature2' in df.columns:
+            df = df.withColumn('feature1_feature2_interaction', 
+                col('feature1') * col('feature2'))
+        
+        # Example: Normalize numeric features
+        numeric_cols = [f.name for f in df.schema.fields 
+                       if f.dataType.typeName() in ['integer', 'double', 'float']]
+        
+        for col_name in numeric_cols:
+            # Min-max scaling
+            min_val = df.agg(F.min(col_name)).collect()[0][0]
+            max_val = df.agg(F.max(col_name)).collect()[0][0]
+            
+            if max_val != min_val:
+                df = df.withColumn(f'{col_name}_normalized', 
+                    (col(col_name) - min_val) / (max_val - min_val))
+        
+        return df
+    
+    def data_validation(self, df):
+        """Validate data quality and schema"""
+        validation_results = {
+            'total_records': df.count(),
+            'null_counts': {},
+            'data_types': {},
+            'unique_counts': {}
+        }
+        
+        # Count null values
+        for col_name in df.columns:
+            null_count = df.filter(col(col_name).isNull()).count()
+            validation_results['null_counts'][col_name] = null_count
+        
+        # Check data types
+        for field in df.schema.fields:
+            validation_results['data_types'][field.name] = field.dataType.typeName()
+        
+        # Count unique values for categorical columns
+        for col_name in df.columns:
+            if df.schema[col_name].dataType.typeName() == 'string':
+                unique_count = df.select(col_name).distinct().count()
+                validation_results['unique_counts'][col_name] = unique_count
+        
+        return validation_results
+    
+    def process_pipeline(self, input_path, output_path):
+        """Complete data processing pipeline"""
+        # Load data
+        df = self.spark.read.parquet(input_path)
+        
+        print(f"Initial record count: {df.count()}")
+        
+        # Clean data
+        df_cleaned = self.clean_data(df)
+        print(f"After cleaning: {df_cleaned.count()}")
+        
+        # Feature engineering
+        df_features = self.feature_engineering(df_cleaned)
+        print(f"Features added: {len(df_features.columns)} columns")
+        
+        # Validate data
+        validation_results = self.data_validation(df_features)
+        print(f"Validation results: {validation_results}")
+        
+        # Save processed data
+        df_features.write.mode('overwrite').parquet(output_path)
+        print(f"Processed data saved to: {output_path}")
+        
+        return df_features, validation_results
+
+# Usage example
+processor = SparkDataProcessor()
+
+# Process data
+df_processed, validation = processor.process_pipeline(
+    's3://bucket/raw_data/',
+    's3://bucket/processed_data/'
+)
+
+# Stop Spark session
+processor.spark.stop()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Real-time Stream Processing</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>from kafka import KafkaConsumer, KafkaProducer
+import json
+import time
+from datetime import datetime
+import threading
+
+class RealTimeProcessor:
+    def __init__(self, kafka_servers=['localhost:9092']):
+        self.kafka_servers = kafka_servers
+        self.processing_stats = {
+            'messages_processed': 0,
+            'errors': 0,
+            'processing_time': 0
+        }
+    
+    def create_consumer(self, topic, group_id='realtime_processor'):
+        """Create Kafka consumer for real-time processing"""
+        return KafkaConsumer(
+            topic,
+            bootstrap_servers=self.kafka_servers,
+            value_deserializer=lambda m: json.loads(m.decode('utf-8')),
+            group_id=group_id,
+            auto_offset_reset='latest',
+            enable_auto_commit=True
+        )
+    
+    def create_producer(self):
+        """Create Kafka producer for output"""
+        return KafkaProducer(
+            bootstrap_servers=self.kafka_servers,
+            value_serializer=lambda v: json.dumps(v).encode('utf-8')
+        )
+    
+    def process_message(self, message):
+        """Process individual message"""
+        start_time = time.time()
+        
+        try:
+            # Extract data from message
+            data = message.value
+            
+            # Real-time validation
+            if not self.validate_message(data):
+                return None
+            
+            # Real-time feature extraction
+            enriched_data = self.enrich_data(data)
+            
+            # Add processing metadata
+            enriched_data['processed_at'] = datetime.utcnow().isoformat()
+            enriched_data['processing_latency_ms'] = (time.time() - start_time) * 1000
+            
+            self.processing_stats['messages_processed'] += 1
+            return enriched_data
+            
+        except Exception as e:
+            self.processing_stats['errors'] += 1
+            print(f"Processing error: {e}")
+            return None
+    
+    def validate_message(self, data):
+        """Validate incoming message"""
+        required_fields = ['user_id', 'timestamp', 'event_type']
+        
+        for field in required_fields:
+            if field not in data or not data[field]:
+                return False
+        
+        # Additional validation logic
+        if len(data.get('user_id', '')) < 3:
+            return False
+        
+        return True
+    
+    def enrich_data(self, data):
+        """Enrich data with additional features"""
+        enriched = data.copy()
+        
+        # Add derived features
+        if 'user_id' in data:
+            enriched['user_hash'] = hash(data['user_id']) % 1000
+        
+        # Categorize events
+        event_type = data.get('event_type', 'unknown')
+        enriched['event_category'] = self.categorize_event(event_type)
+        
+        # Add time-based features
+        timestamp = datetime.fromisoformat(data['timestamp'].replace('Z', '+00:00'))
+        enriched['hour_of_day'] = timestamp.hour
+        enriched['day_of_week'] = timestamp.weekday()
+        
+        return enriched
+    
+    def categorize_event(self, event_type):
+        """Categorize events for analysis"""
+        categories = {
+            'login': 'authentication',
+            'logout': 'authentication',
+            'purchase': 'transaction',
+            'view': 'engagement',
+            'click': 'engagement'
+        }
+        return categories.get(event_type, 'other')
+    
+    def start_processing(self, input_topic, output_topic):
+        """Start real-time processing"""
+        consumer = self.create_consumer(input_topic)
+        producer = self.create_producer()
+        
+        print(f"Starting real-time processing from {input_topic} to {output_topic}")
+        
+        try:
+            for message in consumer:
+                processed_data = self.process_message(message)
+                
+                if processed_data:
+                    # Send to output topic
+                    producer.send(output_topic, processed_data)
+                    
+                # Small delay to prevent overwhelming
+                time.sleep(0.001)
+                
+        except KeyboardInterrupt:
+            print("Stopping real-time processor...")
+        finally:
+            consumer.close()
+            producer.close()
+    
+    def get_stats(self):
+        """Get processing statistics"""
+        return self.processing_stats.copy()
+
+# Usage example
+def run_stream_processor():
+    processor = RealTimeProcessor()
+    processor.start_processing('raw_events', 'processed_events')
+
+# Run in background thread
+processor_thread = threading.Thread(target=run_stream_processor)
+processor_thread.daemon = True
+processor_thread.start()
+
+print("Real-time stream processor started")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <h4 class="font-semibold text-teal-800 mb-2">
+                            <i class="fas fa-lightbulb mr-2"></i>Processing Best Practices
+                        </h4>
+                        <p class="text-teal-700">
+                            Use distributed processing frameworks like Spark for scalability. 
+                            Implement checkpointing and fault tolerance for reliability.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Data Transformation -->
+                <section id="transformation" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Data Transformation</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Feature Engineering Pipeline</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+import pandas as pd
+import numpy as np
+
+class DateTimeFeatureExtractor(BaseEstimator, TransformerMixin):
+    """Extract datetime features"""
+    def __init__(self, datetime_cols):
+        self.datetime_cols = datetime_cols
+    
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X):
+        X_transformed = X.copy()
+        
+        for col in self.datetime_cols:
+            if col in X_transformed.columns:
+                X_transformed[col] = pd.to_datetime(X_transformed[col])
+                X_transformed[f'{col}_year'] = X_transformed[col].dt.year
+                X_transformed[f'{col}_month'] = X_transformed[col].dt.month
+                X_transformed[f'{col}_day'] = X_transformed[col].dt.day
+                X_transformed[f'{col}_weekday'] = X_transformed[col].dt.weekday
+                X_transformed[f'{col}_hour'] = X_transformed[col].dt.hour
+                
+                # Drop original datetime column
+                X_transformed = X_transformed.drop(col, axis=1)
+        
+        return X_transformed
+
+class TextFeatureExtractor(BaseEstimator, TransformerMixin):
+    """Extract text features"""
+    def __init__(self, text_cols, max_features=1000):
+        self.text_cols = text_cols
+        self.max_features = max_features
+        self.vocab = {}
+    
+    def fit(self, X, y=None):
+        for col in self.text_cols:
+            if col in X.columns:
+                # Build vocabulary from training data
+                all_text = ' '.join(X[col].astype(str).fillna(''))
+                words = all_text.lower().split()
+                word_freq = {}
+                
+                for word in words:
+                    word_freq[word] = word_freq.get(word, 0) + 1
+                
+                # Keep most frequent words
+                self.vocab[col] = sorted(word_freq.items(), 
+                                       key=lambda x: x[1], 
+                                       reverse=True)[:self.max_features]
+        
+        return self
+    
+    def transform(self, X):
+        X_transformed = X.copy()
+        
+        for col in self.text_cols:
+            if col in X_transformed.columns and col in self.vocab:
+                # Create binary features for each vocabulary word
+                vocab_words = [word for word, _ in self.vocab[col]]
+                
+                for word in vocab_words[:50]:  # Limit to top 50 words
+                    X_transformed[f'{col}_has_{word}'] = (
+                        X_transformed[col].astype(str)
+                        .str.lower()
+                        .str.contains(word, na=False)
+                        .astype(int)
+                    )
+                
+                # Drop original text column
+                X_transformed = X_transformed.drop(col, axis=1)
+        
+        return X_transformed
+
+class InteractionFeatureGenerator(BaseEstimator, TransformerMixin):
+    """Generate interaction features"""
+    def __init__(self, interaction_pairs):
+        self.interaction_pairs = interaction_pairs
+    
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X):
+        X_transformed = X.copy()
+        
+        for col1, col2 in self.interaction_pairs:
+            if col1 in X_transformed.columns and col2 in X_transformed.columns:
+                # Create interaction terms
+                X_transformed[f'{col1}_{col2}_multiply'] = (
+                    X_transformed[col1] * X_transformed[col2]
+                )
+                X_transformed[f'{col1}_{col2}_add'] = (
+                    X_transformed[col1] + X_transformed[col2]
+                )
+                X_transformed[f'{col1}_{col2}_ratio'] = (
+                    X_transformed[col1] / (X_transformed[col2] + 1e-8)
+                )
+        
+        return X_transformed
+
+class FeatureEngineeringPipeline:
+    def __init__(self):
+        self.pipeline = None
+        self.feature_names = None
+    
+    def build_pipeline(self, numeric_features, categorical_features, 
+                      datetime_features, text_features):
+        """Build complete feature engineering pipeline"""
+        
+        # Numeric pipeline
+        numeric_pipeline = Pipeline([
+            ('scaler', StandardScaler())
+        ])
+        
+        # Categorical pipeline
+        categorical_pipeline = Pipeline([
+            ('onehot', OneHotEncoder(handle_unknown='ignore', sparse=False))
+        ])
+        
+        # Column transformer
+        column_transformer = ColumnTransformer([
+            ('numeric', numeric_pipeline, numeric_features),
+            ('categorical', categorical_pipeline, categorical_features)
+        ])
+        
+        # Full pipeline
+        self.pipeline = Pipeline([
+            ('datetime_extractor', DateTimeFeatureExtractor(datetime_features)),
+            ('text_extractor', TextFeatureExtractor(text_features)),
+            ('interaction_generator', InteractionFeatureGenerator([
+                ('feature_1', 'feature_2'),
+                ('feature_1', 'feature_3')
+            ])),
+            ('preprocessor', column_transformer)
+        ])
+        
+        return self.pipeline
+    
+    def fit_transform(self, X, y=None):
+        """Fit and transform data"""
+        if not self.pipeline:
+            raise ValueError("Pipeline not built. Call build_pipeline first.")
+        
+        transformed = self.pipeline.fit_transform(X, y)
+        
+        # Generate feature names
+        self.feature_names = self._generate_feature_names(X)
+        
+        return transformed
+    
+    def transform(self, X):
+        """Transform new data"""
+        if not self.pipeline:
+            raise ValueError("Pipeline not built or fitted.")
+        
+        return self.pipeline.transform(X)
+    
+    def _generate_feature_names(self, X):
+        """Generate meaningful feature names"""
+        feature_names = []
+        
+        # Original features
+        feature_names.extend(X.columns.tolist())
+        
+        # Datetime features
+        datetime_cols = [col for col in X.columns if 'date' in col.lower() or 'time' in col.lower()]
+        for col in datetime_cols:
+            feature_names.extend([
+                f'{col}_year', f'{col}_month', f'{col}_day',
+                f'{col}_weekday', f'{col}_hour'
+            ])
+        
+        return feature_names
+    
+    def get_feature_importance(self, model, top_n=20):
+        """Get feature importance from trained model"""
+        if hasattr(model, 'feature_importances_'):
+            importances = model.feature_importances_
+            feature_importance = list(zip(self.feature_names, importances))
+            feature_importance.sort(key=lambda x: x[1], reverse=True)
+            return feature_importance[:top_n]
+        
+        return []
+
+# Usage example
+pipeline = FeatureEngineeringPipeline()
+
+# Sample data
+data = {
+    'user_id': ['user1', 'user2', 'user3'],
+    'age': [25, 30, 35],
+    'income': [50000, 60000, 70000],
+    'category': ['A', 'B', 'A'],
+    'signup_date': ['2024-01-01', '2024-01-02', '2024-01-03'],
+    'description': ['Great product', 'Good service', 'Excellent quality']
+}
+
+df = pd.DataFrame(data)
+
+# Build and apply pipeline
+pipeline.build_pipeline(
+    numeric_features=['age', 'income'],
+    categorical_features=['category'],
+    datetime_features=['signup_date'],
+    text_features=['description']
+)
+
+transformed_data = pipeline.fit_transform(df)
+print(f"Transformed data shape: {transformed_data.shape}")
+print(f"Feature names: {pipeline.feature_names}")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Data Augmentation</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import numpy as np
+from sklearn.utils import resample
+import random
+import nltk
+from nltk.corpus import wordnet
+
+class DataAugmentation:
+    def __init__(self):
+        self.noise_level = 0.1
+        self.synonym_cache = {}
+    
+    def add_gaussian_noise(self, data, noise_factor=0.1):
+        """Add Gaussian noise to numeric data"""
+        noise = np.random.normal(0, noise_factor, data.shape)
+        return data + noise
+    
+    def random_rotation_2d(self, data, max_angle=15):
+        """Apply random rotation to 2D data (images)"""
+        angle = np.random.uniform(-max_angle, max_angle)
+        angle_rad = np.radians(angle)
+        
+        rotation_matrix = np.array([
+            [np.cos(angle_rad), -np.sin(angle_rad)],
+            [np.sin(angle_rad), np.cos(angle_rad)]
+        ])
+        
+        return np.dot(data.reshape(-1, 2), rotation_matrix.T).reshape(data.shape)
+    
+    def synonym_replacement(self, text, p=0.1):
+        """Replace words with synonyms"""
+        words = text.split()
+        augmented_words = []
+        
+        for word in words:
+            if random.random() < p and len(word) > 3:
+                synonyms = self.get_synonyms(word)
+                if synonyms:
+                    augmented_words.append(random.choice(synonyms))
+                else:
+                    augmented_words.append(word)
+            else:
+                augmented_words.append(word)
+        
+        return ' '.join(augmented_words)
+    
+    def get_synonyms(self, word):
+        """Get synonyms for a word"""
+        if word in self.synonym_cache:
+            return self.synonym_cache[word]
+        
+        synonyms = []
+        for syn in wordnet.synsets(word):
+            for lemma in syn.lemmas():
+                if lemma.name() != word and '_' not in lemma.name():
+                    synonyms.append(lemma.name())
+        
+        self.synonym_cache[word] = list(set(synonyms))[:5]  # Limit to 5 synonyms
+        return self.synonym_cache[word]
+    
+    def random_deletion(self, text, p=0.1):
+        """Randomly delete words from text"""
+        words = text.split()
+        if len(words) == 1:
+            return text
+        
+        remaining_words = []
+        for word in words:
+            if random.random() > p:
+                remaining_words.append(word)
+        
+        return ' '.join(remaining_words) if remaining_words else text
+    
+    def random_swap(self, text, n=1):
+        """Randomly swap words in text"""
+        words = text.split()
+        if len(words) < 2:
+            return text
+        
+        for _ in range(n):
+            idx1, idx2 = random.sample(range(len(words)), 2)
+            words[idx1], words[idx2] = words[idx2], words[idx1]
+        
+        return ' '.join(words)
+    
+    def augment_dataset(self, X, y, augmentation_factor=2):
+        """Augment entire dataset"""
+        augmented_X = []
+        augmented_y = []
+        
+        for i in range(len(X)):
+            # Original sample
+            augmented_X.append(X[i])
+            augmented_y.append(y[i])
+            
+            # Augmented samples
+            for _ in range(augmentation_factor - 1):
+                if isinstance(X[i], str):  # Text data
+                    augmented_text = self.synonym_replacement(X[i])
+                    augmented_text = self.random_deletion(augmented_text)
+                    augmented_text = self.random_swap(augmented_text)
+                    augmented_X.append(augmented_text)
+                else:  # Numeric data
+                    augmented_data = self.add_gaussian_noise(X[i])
+                    augmented_X.append(augmented_data)
+                
+                augmented_y.append(y[i])
+        
+        return np.array(augmented_X), np.array(augmented_y)
+
+# Download required NLTK data
+try:
+    nltk.data.find('corpora/wordnet')
+except LookupError:
+    nltk.download('wordnet')
+
+# Usage example
+augmenter = DataAugmentation()
+
+# Text augmentation
+original_text = "The product quality is excellent and the service is great"
+augmented_text = augmenter.synonym_replacement(original_text)
+print(f"Original: {original_text}")
+print(f"Augmented: {augmented_text}")
+
+# Dataset augmentation
+X_text = ["Great product", "Excellent service", "Good quality"]
+y = [1, 1, 1]
+
+X_augmented, y_augmented = augmenter.augment_dataset(X_text, y, augmentation_factor=3)
+print(f"Original size: {len(X_text)}")
+print(f"Augmented size: {len(X_augmented)}")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <h4 class="font-semibold text-blue-800 mb-2">
+                            <i class="fas fa-info-circle mr-2"></i>Transformation Strategy
+                        </h4>
+                        <p class="text-blue-700">
+                            Create reusable transformation pipelines that can be applied consistently 
+                            to both training and inference data. Document all transformations for reproducibility.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Quality Assurance -->
+                <section id="quality" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Quality Assurance</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Data Quality Framework</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>import pandas as pd
+import numpy as np
+from typing import Dict, List, Any
+import json
+from datetime import datetime
+
+class DataQualityFramework:
+    def __init__(self):
+        self.quality_rules = {}
+        self.quality_metrics = {}
+        self.alert_thresholds = {
+            'completeness': 0.95,
+            'accuracy': 0.98,
+            'consistency': 0.95,
+            'validity': 0.99,
+            'uniqueness': 0.90
+        }
+    
+    def add_quality_rule(self, rule_name: str, rule_func, severity='medium'):
+        """Add a data quality rule"""
+        self.quality_rules[rule_name] = {
+            'function': rule_func,
+            'severity': severity,
+            'last_run': None,
+            'status': 'active'
+        }
+    
+    def check_completeness(self, df: pd.DataFrame) -> Dict[str, Any]:
+        """Check data completeness"""
+        total_records = len(df)
+        completeness_scores = {}
+        
+        for column in df.columns:
+            non_null_count = df[column].notna().sum()
+            completeness_scores[column] = {
+                'completeness_rate': non_null_count / total_records,
+                'missing_count': total_records - non_null_count,
+                'missing_percentage': (total_records - non_null_count) / total_records * 100
+            }
+        
+        overall_completeness = sum(
+            score['completeness_rate'] for score in completeness_scores.values()
+        ) / len(completeness_scores)
+        
+        return {
+            'overall_completeness': overall_completeness,
+            'column_scores': completeness_scores,
+            'status': 'PASS' if overall_completeness >= self.alert_thresholds['completeness'] else 'FAIL'
+        }
+    
+    def check_uniqueness(self, df: pd.DataFrame, key_columns: List[str]) -> Dict[str, Any]:
+        """Check data uniqueness"""
+        total_records = len(df)
+        uniqueness_results = {}
+        
+        for col in key_columns:
+            if col in df.columns:
+                unique_count = df[col].nunique()
+                uniqueness_rate = unique_count / total_records
+                
+                uniqueness_results[col] = {
+                    'uniqueness_rate': uniqueness_rate,
+                    'duplicate_count': total_records - unique_count,
+                    'unique_values': unique_count
+                }
+        
+        overall_uniqueness = sum(
+            result['uniqueness_rate'] for result in uniqueness_results.values()
+        ) / len(uniqueness_results) if uniqueness_results else 1.0
+        
+        return {
+            'overall_uniqueness': overall_uniqueness,
+            'column_results': uniqueness_results,
+            'status': 'PASS' if overall_uniqueness >= self.alert_thresholds['uniqueness'] else 'FAIL'
+        }
+    
+    def check_validity(self, df: pd.DataFrame, validation_rules: Dict) -> Dict[str, Any]:
+        """Check data validity against business rules"""
+        validity_results = {}
+        total_records = len(df)
+        
+        for rule_name, rule_config in validation_rules.items():
+            column = rule_config['column']
+            rule_func = rule_config['validator']
+            
+            if column in df.columns:
+                valid_mask = rule_func(df[column])
+                valid_count = valid_mask.sum()
+                validity_rate = valid_count / total_records
+                
+                validity_results[rule_name] = {
+                    'column': column,
+                    'validity_rate': validity_rate,
+                    'invalid_count': total_records - valid_count,
+                    'description': rule_config.get('description', '')
+                }
+        
+        overall_validity = sum(
+            result['validity_rate'] for result in validity_results.values()
+        ) / len(validity_results) if validity_results else 1.0
+        
+        return {
+            'overall_validity': overall_validity,
+            'rule_results': validity_results,
+            'status': 'PASS' if overall_validity >= self.alert_thresholds['validity'] else 'FAIL'
+        }
+    
+    def check_consistency(self, df: pd.DataFrame, consistency_rules: List[Dict]) -> Dict[str, Any]:
+        """Check data consistency across columns"""
+        consistency_results = {}
+        total_records = len(df)
+        
+        for rule in consistency_rules:
+            rule_name = rule['name']
+            condition_func = rule['condition']
+            
+            consistent_mask = condition_func(df)
+            consistent_count = consistent_mask.sum()
+            consistency_rate = consistent_count / total_records
+            
+            consistency_results[rule_name] = {
+                'consistency_rate': consistency_rate,
+                'inconsistent_count': total_records - consistent_count,
+                'description': rule.get('description', '')
+            }
+        
+        overall_consistency = sum(
+            result['consistency_rate'] for result in consistency_results.values()
+        ) / len(consistency_results) if consistency_results else 1.0
+        
+        return {
+            'overall_consistency': overall_consistency,
+            'rule_results': consistency_results,
+            'status': 'PASS' if overall_consistency >= self.alert_thresholds['consistency'] else 'FAIL'
+        }
+    
+    def generate_quality_report(self, df: pd.DataFrame, 
+                              key_columns: List[str] = None,
+                              validation_rules: Dict = None,
+                              consistency_rules: List[Dict] = None) -> Dict[str, Any]:
+        """Generate comprehensive data quality report"""
+        
+        report = {
+            'timestamp': datetime.utcnow().isoformat(),
+            'dataset_info': {
+                'total_records': len(df),
+                'total_columns': len(df.columns),
+                'columns': df.columns.tolist()
+            },
+            'quality_scores': {}
+        }
+        
+        # Run all quality checks
+        report['quality_scores']['completeness'] = self.check_completeness(df)
+        
+        if key_columns:
+            report['quality_scores']['uniqueness'] = self.check_uniqueness(df, key_columns)
+        
+        if validation_rules:
+            report['quality_scores']['validity'] = self.check_validity(df, validation_rules)
+        
+        if consistency_rules:
+            report['quality_scores']['consistency'] = self.check_consistency(df, consistency_rules)
+        
+        # Overall quality score
+        quality_scores = []
+        for check_name, result in report['quality_scores'].items():
+            if isinstance(result, dict) and 'overall_' in check_name:
+                quality_scores.append(result.get(f'overall_{check_name}', 1.0))
+        
+        report['overall_quality_score'] = (
+            sum(quality_scores) / len(quality_scores) if quality_scores else 1.0
+        )
+        
+        # Quality status
+        report['quality_status'] = 'PASS' if report['overall_quality_score'] >= 0.95 else 'FAIL'
+        
+        return report
+    
+    def save_quality_report(self, report: Dict, filepath: str):
+        """Save quality report to file"""
+        with open(filepath, 'w') as f:
+            json.dump(report, f, indent=2, default=str)
+
+# Usage example
+quality_framework = DataQualityFramework()
+
+# Sample data with quality issues
+data = {
+    'user_id': ['user1', 'user2', None, 'user4', 'user5'],
+    'age': [25, 150, 30, 35, -5],  # Invalid ages
+    'email': ['user1@example.com', 'invalid_email', 'user3@example.com', 
+              'user4@example.com', 'user5@example.com'],
+    'signup_date': ['2024-01-01', '2024-01-02', '2024-01-03', 
+                   '2024-01-04', 'invalid_date']
+}
+
+df = pd.DataFrame(data)
+
+# Define validation rules
+validation_rules = {
+    'valid_age': {
+        'column': 'age',
+        'validator': lambda x: (x >= 0) & (x <= 120),
+        'description': 'Age must be between 0 and 120'
+    },
+    'valid_email': {
+        'column': 'email',
+        'validator': lambda x: x.str.contains('@', na=False),
+        'description': 'Email must contain @ symbol'
+    }
+}
+
+# Define consistency rules
+consistency_rules = [
+    {
+        'name': 'age_consistency',
+        'condition': lambda df: (df['age'] >= 18) | (df['user_id'].isna()),
+        'description': 'Users under 18 should not have user_id'
+    }
+]
+
+# Generate quality report
+report = quality_framework.generate_quality_report(
+    df,
+    key_columns=['user_id', 'email'],
+    validation_rules=validation_rules,
+    consistency_rules=consistency_rules
+)
+
+print(f"Overall Quality Score: {report['overall_quality_score']:.2%}")
+print(f"Quality Status: {report['quality_status']}")
+
+# Save report
+quality_framework.save_quality_report(report, 'data_quality_report.json')</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Data Drift Detection</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>from scipy import stats
+from scipy.stats import ks_2samp, chi2_contingency
+import numpy as np
+from typing import Dict, Tuple
+
+class DataDriftDetector:
+    def __init__(self, significance_level=0.05):
+        self.significance_level = significance_level
+        self.reference_distribution = {}
+        self.drift_history = []
+    
+    def set_reference_distribution(self, df: pd.DataFrame, sample_size=10000):
+        """Set reference distribution for drift detection"""
+        if len(df) > sample_size:
+            df = df.sample(n=sample_size, random_state=42)
+        
+        for column in df.columns:
+            if df[column].dtype in ['int64', 'float64']:
+                self.reference_distribution[column] = {
+                    'type': 'numeric',
+                    'data': df[column].dropna().values,
+                    'mean': df[column].mean(),
+                    'std': df[column].std(),
+                    'percentiles': np.percentile(df[column].dropna(), [5, 25, 50, 75, 95])
+                }
+            else:
+                self.reference_distribution[column] = {
+                    'type': 'categorical',
+                    'value_counts': df[column].value_counts().to_dict(),
+                    'categories': df[column].unique().tolist()
+                }
+    
+    def detect_numeric_drift(self, column_name: str, current_data: np.ndarray) -> Dict:
+        """Detect drift in numeric features using Kolmogorov-Smirnov test"""
+        if column_name not in self.reference_distribution:
+            return {'error': 'Column not in reference distribution'}
+        
+        ref_data = self.reference_distribution[column_name]['data']
+        
+        # Perform KS test
+        ks_statistic, ks_pvalue = ks_2samp(ref_data, current_data)
+        
+        # Calculate additional metrics
+        ref_mean = np.mean(ref_data)
+        current_mean = np.mean(current_data)
+        mean_difference = abs(ref_mean - current_mean)
+        
+        ref_std = np.std(ref_data)
+        current_std = np.std(current_data)
+        std_ratio = current_std / ref_std if ref_std != 0 else np.inf
+        
+        # Detect drift
+        has_drift = ks_pvalue < self.significance_level
+        
+        return {
+            'column': column_name,
+            'test_type': 'kolmogorov_smirnov',
+            'ks_statistic': ks_statistic,
+            'p_value': ks_pvalue,
+            'has_drift': has_drift,
+            'mean_difference': mean_difference,
+            'std_ratio': std_ratio,
+            'drift_severity': 'high' if ks_pvalue < 0.01 else 'medium' if ks_pvalue < 0.05 else 'low'
+        }
+    
+    def detect_categorical_drift(self, column_name: str, current_data: np.ndarray) -> Dict:
+        """Detect drift in categorical features using Chi-square test"""
+        if column_name not in self.reference_distribution:
+            return {'error': 'Column not in reference distribution'}
+        
+        ref_counts = self.reference_distribution[column_name]['value_counts']
+        current_series = pd.Series(current_data)
+        current_counts = current_series.value_counts().to_dict()
+        
+        # Align categories
+        all_categories = set(ref_counts.keys()) | set(current_counts.keys())
+        
+        ref_frequencies = []
+        current_frequencies = []
+        
+        for category in all_categories:
+            ref_freq = ref_counts.get(category, 0)
+            current_freq = current_counts.get(category, 0)
+            ref_frequencies.append(ref_freq)
+            current_frequencies.append(current_freq)
+        
+        # Perform Chi-square test
+        try:
+            chi2_statistic, chi2_pvalue, _, _ = chi2_contingency(
+                [ref_frequencies, current_frequencies]
+            )
+            
+            has_drift = chi2_pvalue < self.significance_level
+            
+            return {
+                'column': column_name,
+                'test_type': 'chi_square',
+                'chi2_statistic': chi2_statistic,
+                'p_value': chi2_pvalue,
+                'has_drift': has_drift,
+                'drift_severity': 'high' if chi2_pvalue < 0.01 else 'medium' if chi2_pvalue < 0.05 else 'low'
+            }
+        except Exception as e:
+            return {'error': str(e)}
+    
+    def detect_drift(self, current_df: pd.DataFrame) -> Dict[str, Any]:
+        """Detect drift across all features"""
+        drift_results = {
+            'timestamp': datetime.utcnow().isoformat(),
+            'total_features': len(self.reference_distribution),
+            'drift_detected': False,
+            'feature_results': {},
+            'summary': {
+                'high_drift': 0,
+                'medium_drift': 0,
+                'low_drift': 0,
+                'no_drift': 0
+            }
+        }
+        
+        for column_name in self.reference_distribution.keys():
+            if column_name not in current_df.columns:
+                continue
+            
+            current_data = current_df[column_name].dropna().values
+            
+            if len(current_data) == 0:
+                continue
+            
+            ref_info = self.reference_distribution[column_name]
+            
+            if ref_info['type'] == 'numeric':
+                result = self.detect_numeric_drift(column_name, current_data)
+            else:
+                result = self.detect_categorical_drift(column_name, current_data)
+            
+            drift_results['feature_results'][column_name] = result
+            
+            # Update summary
+            if result.get('has_drift', False):
+                severity = result.get('drift_severity', 'low')
+                drift_results['summary'][f'{severity}_drift'] += 1
+                drift_results['drift_detected'] = True
+            else:
+                drift_results['summary']['no_drift'] += 1
+        
+        # Store in history
+        self.drift_history.append(drift_results)
+        
+        return drift_results
+    
+    def get_drift_trend(self, column_name: str, window_size: 10) -> Dict:
+        """Get drift trend for a specific feature"""
+        if column_name not in self.reference_distribution:
+            return {'error': 'Column not in reference distribution'}
+        
+        recent_drifts = []
+        for result in self.drift_history[-window_size:]:
+            if column_name in result['feature_results']:
+                feature_result = result['feature_results'][column_name]
+                if 'p_value' in feature_result:
+                    recent_drifts.append({
+                        'timestamp': result['timestamp'],
+                        'p_value': feature_result['p_value'],
+                        'has_drift': feature_result['has_drift']
+                    })
+        
+        return {
+            'column': column_name,
+            'drift_count': len([d for d in recent_drifts if d['has_drift']]),
+            'avg_p_value': np.mean([d['p_value'] for d in recent_drifts]) if recent_drifts else None,
+            'trend': 'increasing' if len(recent_drifts) > 5 and 
+                    recent_drifts[-1]['p_value'] < recent_drifts[0]['p_value'] else 'stable'
+        }
+
+# Usage example
+drift_detector = DataDriftDetector()
+
+# Set reference distribution (training data)
+reference_data = pd.DataFrame({
+    'age': np.random.normal(35, 10, 1000),
+    'income': np.random.lognormal(10.5, 0.5, 1000),
+    'category': np.random.choice(['A', 'B', 'C'], 1000, p=[0.5, 0.3, 0.2])
+})
+
+drift_detector.set_reference_distribution(reference_data)
+
+# Simulate current data with some drift
+current_data = pd.DataFrame({
+    'age': np.random.normal(32, 12, 500),  # Slight drift in age distribution
+    'income': np.random.lognormal(10.8, 0.6, 500),  # Drift in income
+    'category': np.random.choice(['A', 'B', 'C'], 500, p=[0.3, 0.4, 0.3])  # Drift in categories
+})
+
+# Detect drift
+drift_results = drift_detector.detect_drift(current_data)
+print(f"Drift detected: {drift_results['drift_detected']}")
+print(f"Summary: {drift_results['summary']}")
+
+# Check drift trend for specific feature
+trend = drift_detector.get_drift_trend('age')
+print(f"Drift trend for age: {trend}")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4 class="font-semibold text-red-800 mb-2">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>Quality is Critical
+                        </h4>
+                        <p class="text-red-700">
+                            Poor data quality is the leading cause of AI model failures. 
+                            Implement comprehensive quality checks throughout your pipeline.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Orchestration -->
+                <section id="orchestration" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Pipeline Orchestration</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Apache Airflow DAG</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>from datetime import datetime, timedelta
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.sensors.filesystem import FileSensor
+from airflow.providers.amazon.aws.transfers.local_to_s3 import LocalFilesystemToS3Operator
+from airflow.utils.dates import days_ago
+
+# Default arguments for the DAG
+default_args = {
+    'owner': 'ai_team',
+    'depends_on_past': False,
+    'start_date': days_ago(1),
+    'email': ['ai-team@company.com'],
+    'email_on_failure': True,
+    'email_on_retry': False,
+    'retries': 2,
+    'retry_delay': timedelta(minutes=5),
+}
+
+# Define the DAG
+dag = DAG(
+    'ai_data_pipeline',
+    default_args=default_args,
+    description='Complete AI Data Pipeline',
+    schedule_interval='@daily',  # Run daily
+    catchup=False,
+    tags=['ai', 'data', 'pipeline'],
+)
+
+# Task 1: Check for new data files
+check_new_data = FileSensor(
+    task_id='check_new_data',
+    filepath='/data/raw/',
+    fs_conn_id='fs_default',
+    dag=dag,
+)
+
+# Task 2: Data ingestion and validation
+def ingest_and_validate_data(**context):
+    """Ingest and validate new data"""
+    from data_ingestion import DataIngestionPipeline
+    from data_quality import DataQualityFramework
+    
+    # Initialize components
+    ingestion_pipeline = DataIngestionPipeline()
+    quality_framework = DataQualityFramework()
+    
+    # Ingest data
+    raw_data = ingestion_pipeline.ingest_from_directory('/data/raw/')
+    
+    # Validate data quality
+    df = pd.DataFrame(raw_data)
+    quality_report = quality_framework.generate_quality_report(df)
+    
+    # Save quality report
+    quality_framework.save_quality_report(quality_report, '/data/quality/quality_report.json')
+    
+    # Store data in temporary location
+    df.to_parquet('/tmp/validated_data.parquet')
+    
+    # Push quality metrics to XCom
+    context['task_instance'].xcom_push(key='quality_score', 
+                                     value=quality_report['overall_quality_score'])
+    
+    return f"Processed {len(df)} records with quality score {quality_report['overall_quality_score']}"
+
+ingest_validate_task = PythonOperator(
+    task_id='ingest_validate_data',
+    python_callable=ingest_and_validate_data,
+    dag=dag,
+)
+
+# Task 3: Feature engineering
+def feature_engineering(**context):
+    """Apply feature engineering transformations"""
+    from feature_engineering import FeatureEngineeringPipeline
+    
+    # Load validated data
+    df = pd.read_parquet('/tmp/validated_data.parquet')
+    
+    # Initialize feature engineering pipeline
+    fe_pipeline = FeatureEngineeringPipeline()
+    
+    # Build and apply pipeline
+    fe_pipeline.build_pipeline(
+        numeric_features=['age', 'income', 'spending'],
+        categorical_features=['category', 'region'],
+        datetime_features=['transaction_date'],
+        text_features=['description']
+    )
+    
+    # Transform data
+    features = fe_pipeline.fit_transform(df)
+    
+    # Save features
+    np.save('/tmp/engineered_features.npy', features)
+    
+    return f"Generated {features.shape[1]} features from {len(df)} records"
+
+feature_engineering_task = PythonOperator(
+    task_id='feature_engineering',
+    python_callable=feature_engineering,
+    dag=dag,
+)
+
+# Task 4: Model training
+def train_model(**context):
+    """Train AI model with engineered features"""
+    import numpy as np
+    from sklearn.ensemble import RandomForestClassifier
+    import joblib
+    
+    # Load features and target
+    features = np.load('/tmp/engineered_features.npy')
+    df = pd.read_parquet('/tmp/validated_data.parquet')
+    target = df['target'].values
+    
+    # Train model
+    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    model.fit(features, target)
+    
+    # Calculate model performance
+    train_score = model.score(features, target)
+    
+    # Save model
+    joblib.dump(model, '/models/ai_model.pkl')
+    
+    # Push metrics to XCom
+    context['task_instance'].xcom_push(key='model_accuracy', value=train_score)
+    
+    return f"Trained model with accuracy {train_score:.4f}"
+
+train_model_task = PythonOperator(
+    task_id='train_model',
+    python_callable=train_model,
+    dag=dag,
+)
+
+# Task 5: Model validation and testing
+def validate_model(**context):
+    """Validate trained model"""
+    from sklearn.metrics import classification_report, confusion_matrix
+    import joblib
+    
+    # Load model and test data
+    model = joblib.load('/models/ai_model.pkl')
+    features = np.load('/tmp/engineered_features.npy')
+    df = pd.read_parquet('/tmp/validated_data.parquet')
+    target = df['target'].values
+    
+    # Make predictions
+    predictions = model.predict(features)
+    
+    # Generate validation report
+    report = classification_report(target, predictions, output_dict=True)
+    cm = confusion_matrix(target, predictions)
+    
+    # Save validation results
+    validation_results = {
+        'classification_report': report,
+        'confusion_matrix': cm.tolist(),
+        'validation_timestamp': datetime.utcnow().isoformat()
+    }
+    
+    with open('/models/validation_results.json', 'w') as f:
+        json.dump(validation_results, f, indent=2)
+    
+    # Check if model meets performance threshold
+    f1_score = report['weighted avg']['f1-score']
+    
+    if f1_score < 0.85:
+        raise ValueError(f"Model F1 score {f1_score} below threshold 0.85")
+    
+    return f"Model validation passed with F1 score {f1_score:.4f}"
+
+validate_model_task = PythonOperator(
+    task_id='validate_model',
+    python_callable=validate_model,
+    dag=dag,
+)
+
+# Task 6: Deploy model
+def deploy_model(**context):
+    """Deploy validated model to production"""
+    import shutil
+    import os
+    
+    # Copy model to production location
+    shutil.copy('/models/ai_model.pkl', '/production/models/')
+    shutil.copy('/models/validation_results.json', '/production/models/')
+    
+    # Create deployment manifest
+    deployment_info = {
+        'model_version': datetime.utcnow().strftime('%Y%m%d_%H%M%S'),
+        'deployment_timestamp': datetime.utcnow().isoformat(),
+        'model_accuracy': context['task_instance'].xcom_pull(task_ids='train_model', 
+                                                           key='model_accuracy'),
+        'quality_score': context['task_instance'].xcom_pull(task_ids='ingest_validate_data', 
+                                                           key='quality_score')
+    }
+    
+    with open('/production/models/deployment_info.json', 'w') as f:
+        json.dump(deployment_info, f, indent=2)
+    
+    return f"Deployed model version {deployment_info['model_version']}"
+
+deploy_model_task = PythonOperator(
+    task_id='deploy_model',
+    python_callable=deploy_model,
+    dag=dag,
+)
+
+# Task 7: Data archival
+def archive_data(**context):
+    """Archive processed data"""
+    # Archive raw data
+    archive_date = datetime.utcnow().strftime('%Y/%m/%d')
+    
+    # Move raw data to archive
+    bash_command = f"""
+    mkdir -p /data/archive/{archive_date}/ &&
+    mv /data/raw/* /data/archive/{archive_date}/ &&
+    echo "Archived data for {archive_date}"
+    """
+    
+    return bash_command
+
+archive_data_task = BashOperator(
+    task_id='archive_data',
+    bash_command=archive_data,
+    dag=dag,
+)
+
+# Task 8: Send notification
+def send_notification(**context):
+    """Send pipeline completion notification"""
+    model_accuracy = context['task_instance'].xcom_pull(task_ids='train_model', 
+                                                       key='model_accuracy')
+    quality_score = context['task_instance'].xcom_pull(task_ids='ingest_validate_data', 
+                                                      key='quality_score')
+    
+    # In practice, send email/Slack notification
+    print(f"""
+    Pipeline completed successfully!
+    Model Accuracy: {model_accuracy:.4f}
+    Data Quality Score: {quality_score:.4f}
+    """)
+    
+    return "Notification sent"
+
+notification_task = PythonOperator(
+    task_id='send_notification',
+    python_callable=send_notification,
+    dag=dag,
+)
+
+# Define task dependencies
+check_new_data >> ingest_validate_task >> feature_engineering_task
+check_new_data >> ingest_validate_task >> feature_engineering_task >> train_model_task
+train_model_task >> validate_model_task >> deploy_model_task >> archive_data_task >> notification_task
+
+# Alternative: Run data quality check in parallel with feature engineering
+from airflow.operators.dummy import DummyOperator
+
+parallel_start = DummyOperator(task_id='parallel_processing', dag=dag)
+quality_check_task = PythonOperator(
+    task_id='quality_check',
+    python_callable=lambda: print("Running quality checks..."),
+    dag=dag,
+)
+
+# Parallel execution
+ingest_validate_task >> parallel_start
+parallel_start >> [feature_engineering_task, quality_check_task]
+feature_engineering_task >> train_model_task
+quality_check_task >> train_model_task</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Pipeline Monitoring & Alerting</h3>
+                        <div class="code-block mb-4">
+                            <pre><code>from airflow.models import TaskInstance
+from airflow.utils.state import State
+from airflow.providers.slack.operators.slack import SlackAPIPostOperator
+from airflow.operators.email import EmailOperator
+
+def monitor_pipeline_health(**context):
+    """Monitor pipeline health and performance"""
+    dag_id = context['dag'].dag_id
+    execution_date = context['execution_date']
+    
+    # Get task instances for this DAG run
+    task_instances = context['dag_run'].get_task_instances()
+    
+    # Calculate metrics
+    total_tasks = len(task_instances)
+    successful_tasks = len([ti for ti in task_instances if ti.state == State.SUCCESS])
+    failed_tasks = len([ti for ti in task_instances if ti.state == State.FAILED])
+    
+    # Performance metrics
+    execution_times = []
+    for ti in task_instances:
+        if ti.start_date and ti.end_date:
+            duration = (ti.end_date - ti.start_date).total_seconds()
+            execution_times.append(duration)
+    
+    avg_execution_time = np.mean(execution_times) if execution_times else 0
+    
+    # Health status
+    success_rate = successful_tasks / total_tasks if total_tasks > 0 else 0
+    health_status = 'healthy' if success_rate >= 0.95 else 'degraded' if success_rate >= 0.80 else 'unhealthy'
+    
+    # Create health report
+    health_report = {
+        'dag_id': dag_id,
+        'execution_date': execution_date.isoformat(),
+        'total_tasks': total_tasks,
+        'successful_tasks': successful_tasks,
+        'failed_tasks': failed_tasks,
+        'success_rate': success_rate,
+        'avg_execution_time': avg_execution_time,
+        'health_status': health_status
+    }
+    
+    # Push to XCom for alerting
+    context['task_instance'].xcom_push(key='health_report', value=health_report)
+    
+    return f"Pipeline health: {health_status} (Success rate: {success_rate:.2%})"
+
+# Health monitoring task
+health_monitor_task = PythonOperator(
+    task_id='monitor_pipeline_health',
+    python_callable=monitor_pipeline_health,
+    dag=dag,
+)
+
+# Alerting tasks
+def create_alerting_tasks(dag):
+    """Create alerting tasks based on health status"""
+    
+    # Slack notification for failures
+    slack_alert = SlackAPIPostOperator(
+        task_id='slack_alert',
+        slack_conn_id='slack_default',
+        channel='#ai-alerts',
+        text='Pipeline execution completed with status: {{ task_instance.xcom_pull(task_ids="monitor_pipeline_health", key="health_report")["health_status"] }}',
+        dag=dag,
+    )
+    
+    # Email notification for critical failures
+    email_alert = EmailOperator(
+        task_id='email_alert',
+        to=['ai-team@company.com'],
+        subject='AI Pipeline Alert - {{ ds }}',
+        html_content='''
+        <h3>Pipeline Execution Alert</h3>
+        <p>Pipeline: {{ dag.dag_id }}</p>
+        <p>Execution Date: {{ ds }}</p>
+        <p>Status: {{ task_instance.xcom_pull(task_ids="monitor_pipeline_health", key="health_report")["health_status"] }}</p>
+        <p>Success Rate: {{ "%.2f" | format(task_instance.xcom_pull(task_ids="monitor_pipeline_health", key="health_report")["success_rate"] * 100) }}%</p>
+        ''',
+        dag=dag,
+    )
+    
+    return slack_alert, email_alert
+
+# Add health monitoring to pipeline
+deploy_model_task >> health_monitor_task >> archive_data_task
+
+# Conditional alerting based on health status
+from airflow.operators.python import BranchPythonOperator
+
+def decide_alert(**context):
+    health_report = context['task_instance'].xcom_pull(
+        task_ids='monitor_pipeline_health', 
+        key='health_report'
+    )
+    
+    if health_report['health_status'] == 'unhealthy':
+        return ['critical_slack_alert', 'critical_email_alert']
+    elif health_report['health_status'] == 'degraded':
+        return ['warning_slack_alert']
+    else:
+        return ['success_notification']
+
+branch_alert_task = BranchPythonOperator(
+    task_id='decide_alert',
+    python_callable=decide_alert,
+    dag=dag,
+)
+
+# Add to DAG
+health_monitor_task >> branch_alert_task</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <h4 class="font-semibold text-teal-800 mb-2">
+                            <i class="fas fa-lightbulb mr-2"></i>Orchestration Best Practices
+                        </h4>
+                        <p class="text-teal-700">
+                            Use workflow orchestration tools like Airflow for complex pipelines. 
+                            Implement idempotent tasks, proper error handling, and comprehensive monitoring.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Summary</h2>
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        A robust data pipeline is essential for AI success. By implementing comprehensive 
+                        ingestion, processing, transformation, and quality assurance, you can ensure 
+                        your AI models receive clean, reliable data for optimal performance.
+                    </p>
+                    
+                    <div class="mt-6 flex flex-wrap gap-4">
+                        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                            Ingestion
+                        </span>
+                        <span class="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                            Processing
+                        </span>
+                        <span class="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+                            Transformation
+                        </span>
+                        <span class="px-4 py-2 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                            Quality
+                        </span>
+                        <span class="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">
+                            Orchestration
+                        </span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <i class="fas fa-brain text-2xl text-blue-400"></i>
+                    <span class="text-xl font-semibold">Agentic AI Knowledge Hub</span>
+                </div>
+                <p class="text-gray-400">
+                    © 2024 Agentic AI Knowledge Hub. Empowering AI engineering excellence.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active navigation item
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-600', 'font-semibold');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-blue-600', 'font-semibold');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Types of AI: Narrow vs General - Agentic AI Knowledge Hub</title>
+    <meta name="description" content="Understand the different types of Artificial Intelligence, from narrow AI to general AI and superintelligence.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --sage-deep: #2D5A3D;
+            --charcoal-warm: #3A3A3A;
+            --cream-soft: #F8F6F0;
+            --copper-accent: #B87333;
+            --teal-muted: #4A7C7E;
+            --lavender-soft: #B8A9C9;
+            --gray-warm: #8B8680;
+            --success-green: #6B8E5A;
+            --warning-amber: #D4A574;
+            --error-coral: #C67B5C;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream-soft);
+            color: var(--charcoal-warm);
+            line-height: 1.6;
+        }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Navigation */
+        .nav-glass {
+            background: rgba(248, 246, 240, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--copper-accent);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--copper-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 320px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        
+        .topic-header {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .topic-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .topic-content h2 {
+            color: var(--sage-deep);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--copper-accent);
+        }
+        
+        .topic-content h3 {
+            color: var(--charcoal-warm);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+        
+        .topic-content h4 {
+            color: var(--charcoal-warm);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem 0;
+        }
+        
+        .topic-content p {
+            margin-bottom: 1rem;
+            color: var(--charcoal-warm);
+        }
+        
+        .topic-content ul, .topic-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        
+        .topic-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .topic-content strong {
+            color: var(--sage-deep);
+            font-weight: 600;
+        }
+        
+        /* Comparison Tables */
+        .comparison-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(45, 90, 61, 0.1);
+            margin: 2rem 0;
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th {
+            background: var(--sage-deep);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+            vertical-align: top;
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(184, 115, 51, 0.05);
+        }
+        
+        /* AI Type Cards */
+        .ai-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .ai-type-card {
+            background: white;
+            border: 1px solid rgba(45, 90, 61, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-type-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(45, 90, 61, 0.1);
+        }
+        
+        .ai-type-card h4 {
+            color: var(--sage-deep);
+            margin-bottom: 1rem;
+        }
+        
+        /* Progress and Navigation */
+        .topic-progress {
+            background: rgba(45, 90, 61, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .progress-bar {
+            width: 200px;
+            height: 8px;
+            background: rgba(45, 90, 61, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--copper-accent);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .topic-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--copper-accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: var(--sage-deep);
+            transform: translateY(-2px);
+        }
+        
+        .nav-button.secondary {
+            background: rgba(45, 90, 61, 0.1);
+            color: var(--charcoal-warm);
+        }
+        
+        .nav-button.secondary:hover {
+            background: rgba(45, 90, 61, 0.2);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            
+            .topic-header,
+            .topic-content {
+                padding: 1.5rem;
+            }
+            
+            .ai-type-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Sidebar Styles */
+        .sidebar-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 320px;
+            height: 100vh;
+            background: rgba(248, 246, 240, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(45, 90, 61, 0.1);
+            z-index: 1000;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .sidebar-header h3 {
+            color: var(--sage-deep);
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin: 0;
+        }
+        
+        .sidebar-toggle {
+            background: none;
+            border: none;
+            color: var(--charcoal-warm);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .sidebar-toggle:hover {
+            background: rgba(45, 90, 61, 0.1);
+        }
+        
+        .sidebar-content {
+            padding: 0 0 2rem 0;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-section-title {
+            padding: 0.75rem 1.5rem;
+            margin: 0;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--charcoal-warm);
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: background-color 0.2s ease;
+        }
+        
+        .sidebar-section-title:hover {
+            background: rgba(45, 90, 61, 0.05);
+        }
+        
+        .sidebar-section-title.active {
+            background: rgba(184, 115, 51, 0.1);
+            color: var(--copper-accent);
+        }
+        
+        .sidebar-section-title .chevron {
+            width: 1rem;
+            height: 1rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .sidebar-section-title.active .chevron {
+            transform: rotate(180deg);
+        }
+        
+        .sidebar-section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .sidebar-section-content.active {
+            max-height: 1000px;
+        }
+        
+        .sidebar-section-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-section-content li {
+            margin: 0;
+        }
+        
+        .sidebar-section-content a {
+            display: block;
+            padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+            color: var(--charcoal-warm);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar-section-content a:hover {
+            background: rgba(184, 115, 51, 0.05);
+            color: var(--copper-accent);
+            border-left-color: var(--copper-accent);
+        }
+        
+        .sidebar-section-content a.active {
+            background: rgba(184, 115, 51, 0.1);
+            color: var(--copper-accent);
+            border-left-color: var(--copper-accent);
+            font-weight: 500;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .sidebar-nav {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar-nav.mobile-open {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div id="sidebarContainer"></div>
+    
+    <!-- Main Navigation -->
+    <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <button class="sidebar-toggle md:hidden" id="mobileSidebarToggle">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <h1 class="text-xl font-bold text-sage-deep">Agentic AI Hub</h1>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="index.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Home</a>
+                        <a href="topics.html" class="nav-link text-copper-accent font-semibold">Topics</a>
+                        <a href="manage.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Manage</a>
+                        <a href="about.html" class="nav-link text-charcoal-warm hover:text-copper-accent">About</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="text-sm text-gray-warm hover:text-copper-accent" onclick="toggleSidebar()">
+                        Toggle Sidebar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content pt-20">
+        <div class="topic-header">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <span class="inline-block px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full mb-2">Fundamentals</span>
+                    <h1 class="text-4xl font-bold text-charcoal-warm mb-2">Types of AI: Narrow vs General</h1>
+                    <p class="text-xl text-gray-warm">Understanding the different categories and capabilities of artificial intelligence systems</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm text-gray-warm mb-1">Difficulty Level</div>
+                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">Beginner</span>
+                </div>
+            </div>
+            
+            <div class="topic-progress">
+                <div>
+                    <span class="text-sm font-medium text-charcoal-warm">Learning Progress</span>
+                    <div class="text-xs text-gray-warm mt-1">Complete this topic to unlock the next one</div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="text-sm font-medium text-charcoal-warm">0%</span>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Narrow AI</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">General AI</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Superintelligence</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">AI Categories</span>
+            </div>
+        </div>
+        
+        <div class="topic-content">
+            <h2>Understanding AI Types and Capabilities</h2>
+            
+            <p>Artificial Intelligence is not a monolithic technology but rather a spectrum of capabilities and implementations. Understanding the different types of AI is crucial for grasping both the current state of the technology and its potential future developments.</p>
+            
+            <h3>Primary Classification: Based on Capabilities</h3>
+            
+            <p>The most fundamental way to categorize AI systems is by their capabilities and scope of intelligence. This classification helps us understand both the current limitations and future possibilities of AI technology.</p>
+            
+            <div class="ai-type-grid">
+                <div class="ai-type-card">
+                    <h4>🎯 Narrow AI (Weak AI)</h4>
+                    <p><strong>Definition:</strong> AI systems designed and trained to perform specific tasks or solve particular problems.</p>
+                    <p><strong>Characteristics:</strong></p>
+                    <ul>
+                        <li>Limited to predefined tasks</li>
+                        <li>Cannot generalize beyond training</li>
+                        <li>Highly specialized and efficient</li>
+                        <li>Current state of AI technology</li>
+                    </ul>
+                    <p><strong>Examples:</strong> Voice assistants, image recognition, chess programs</p>
+                </div>
+                
+                <div class="ai-type-card">
+                    <h4>🧠 General AI (Strong AI)</h4>
+                    <p><strong>Definition:</strong> AI systems with human-level intelligence that can understand, learn, and apply knowledge across any domain.</p>
+                    <p><strong>Characteristics:</strong></p>
+                    <ul>
+                        <li>Human-like cognitive abilities</li>
+                        <li>Cross-domain knowledge transfer</li>
+                        <li>Abstract thinking and reasoning</li>
+                        <li>Theoretical future technology</li>
+                    </ul>
+                    <p><strong>Status:</strong> Not yet achieved, subject of ongoing research</p>
+                </div>
+                
+                <div class="ai-type-card">
+                    <h4>⚡ Super AI (Superintelligence)</h4>
+                    <p><strong>Definition:</strong> AI systems that surpass human intelligence in virtually every field of knowledge and capability.</p>
+                    <p><strong>Characteristics:</strong></p>
+                    <ul>
+                        <li>Beyond human-level intelligence</li>
+                        <li>Superior problem-solving abilities</li>
+                        <li>Rapid self-improvement</li>
+                        <li>Hypothetical future concept</li>
+                    </ul>
+                    <p><strong>Considerations:</strong> Subject of much debate and ethical discussion</p>
+                </div>
+            </div>
+            
+            <h3>Detailed Comparison: AI Types by Capability</h3>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Narrow AI</th>
+                            <th>General AI</th>
+                            <th>Super AI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Intelligence Level</strong></td>
+                            <td>Task-specific, below or at human level</td>
+                            <td>Human-level across all domains</td>
+                            <td>Far exceeds human intelligence</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Learning Ability</strong></td>
+                            <td>Limited to specific tasks</td>
+                            <td>Can learn any intellectual task</td>
+                            <td>Rapid learning and self-improvement</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Generalization</strong></td>
+                            <td>Poor cross-domain transfer</td>
+                            <td>Excellent cross-domain transfer</td>
+                            <td>Perfect generalization and innovation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Consciousness</strong></td>
+                            <td>None</td>
+                            <td>Potentially conscious</td>
+                            <td>Highly conscious and self-aware</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Current Status</strong></td>
+                            <td>Widely deployed</td>
+                            <td>Research in progress</td>
+                            <td>Theoretical concept</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Examples</strong></td>
+                            <td>Siri, AlphaGo, Tesla Autopilot</td>
+                            <td>Not yet achieved</td>
+                            <td>Science fiction (HAL 9000, Skynet)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Secondary Classification: Based on Functionality</h3>
+            
+            <p>Another way to categorize AI systems is by their functional characteristics and cognitive abilities:</p>
+            
+            <h4>1. Reactive Machines</h4>
+            <p>These are the most basic types of AI systems that can only react to current situations based on pre-programmed rules. They have no memory of past experiences and cannot learn from them.</p>
+            
+            <div class="info-box">
+                <h4>🔍 Example: IBM's Deep Blue</h4>
+                <p>The chess-playing computer that defeated Garry Kasparov in 1997 was a reactive machine. It could analyze the current board position and choose the best move based on programmed chess strategies, but it couldn't learn from past games or adapt its strategy based on opponent patterns.</p>
+            </div>
+            
+            <h4>2. Limited Memory</h4>
+            <p>These AI systems can use past experiences to inform current decisions. They have a limited memory that allows them to learn from recent data and improve their performance over time.</p>
+            
+            <ul>
+                <li><strong>Characteristics:</strong> Can learn from recent experiences, short-term memory</li>
+                <li><strong>Applications:</strong> Self-driving cars, chatbots, recommendation systems</li>
+                <li><strong>Example:</strong> Tesla's Autopilot system uses limited memory to learn from recent driving patterns</li>
+            </ul>
+            
+            <h4>3. Theory of Mind</h4>
+            <p>This represents a more advanced type of AI that can understand human emotions, beliefs, and intentions. These systems would be able to interact with humans on a more sophisticated level, understanding not just what people say, but what they mean.</p>
+            
+            <ul>
+                <li><strong>Characteristics:</strong> Understanding of human psychology, emotional intelligence</li>
+                <li><strong>Status:</strong> Research in progress, not yet fully achieved</li>
+                <li><strong>Potential Applications:</strong> Advanced virtual assistants, therapy bots, negotiation systems</li>
+            </ul>
+            
+            <h4>4. Self-Aware</h4>
+            <p>The most advanced type of AI, these systems would have consciousness and self-awareness. They would understand their own existence, have emotions, and be capable of introspection.</p>
+            
+            <div class="warning-box">
+                <h4>⚠️ Ethical Considerations</h4>
+                <p>Self-aware AI raises profound ethical questions about machine rights, consciousness, and the nature of intelligence. This type of AI remains purely theoretical and is the subject of ongoing philosophical and scientific debate.</p>
+            </div>
+            
+            <h3>Real-World Examples of Narrow AI</h3>
+            
+            <p>Most AI systems we interact with today are examples of narrow AI:</p>
+            
+            <h4>1. Voice Assistants</h4>
+            <ul>
+                <li><strong>Apple Siri:</strong> Natural language processing and task automation</li>
+                <li><strong>Amazon Alexa:</strong> Voice commands and smart home control</li>
+                <li><strong>Google Assistant:</strong> Information retrieval and device control</li>
+            </ul>
+            
+            <h4>2. Computer Vision Systems</h4>
+            <ul>
+                <li><strong>Facebook's Photo Tagging:</strong> Face recognition in images</li>
+                <li><strong>Tesla's Autopilot:</strong> Object detection and lane keeping</li>
+                <li><strong>Medical Imaging AI:</strong> Disease detection in X-rays and MRIs</li>
+            </ul>
+            
+            <h4>3. Recommendation Systems</h4>
+            <ul>
+                <li><strong>Netflix:</strong> Movie and TV show recommendations</li>
+                <li><strong>Spotify:</strong> Music discovery and playlist creation</li>
+                <li><strong>Amazon:</strong> Product recommendations and personalization</li>
+            </ul>
+            
+            <h4>4. Game AI</h4>
+            <ul>
+                <li><strong>AlphaGo:</strong> Defeated world champions in the game of Go</li>
+                <li><strong>OpenAI Five:</strong> Competitive Dota 2 gameplay</li>
+                <li><strong>Stockfish:</strong> World-class chess engine</li>
+            </ul>
+            
+            <h3>The Path to General AI</h3>
+            
+            <p>While narrow AI has achieved remarkable success, the path to general AI remains challenging. Key obstacles include:</p>
+            
+            <ul>
+                <li><strong>Common Sense Reasoning:</strong> Teaching AI systems to understand the world like humans do</li>
+                <li><strong>Transfer Learning:</strong> Enabling AI to apply knowledge from one domain to another</li>
+                <li><strong>Causal Understanding:</strong> Moving beyond correlation to understand cause and effect</li>
+                <li><strong>Consciousness and Self-Awareness:</strong> Understanding the nature of consciousness in machines</li>
+                <li><strong>Ethical Frameworks:</strong> Developing moral reasoning capabilities</li>
+            </ul>
+            
+            <h3>Implications for Agentic AI</h3>
+            
+            <p>Understanding AI types is particularly important for agentic AI systems, which aim to create autonomous agents that can operate independently in complex environments:</p>
+            
+            <ul>
+                <li><strong>Current Agentic AI:</strong> Mostly narrow AI with limited memory capabilities</li>
+                <li><strong>Future Development:</strong> Moving toward theory of mind capabilities</li>
+                <li><strong>Multi-Agent Systems:</strong> Combining multiple narrow AI agents to simulate broader intelligence</li>
+                <li><strong>Human-AI Collaboration:</strong> Leveraging the strengths of both human and artificial intelligence</li>
+            </ul>
+            
+            <div class="info-box">
+                <h4>💡 Key Takeaway</h4>
+                <p>While we currently live in the age of narrow AI, the pursuit of general AI continues to drive research and innovation. Understanding these different types helps us appreciate both the current capabilities and future potential of artificial intelligence.</p>
+            </div>
+            
+            <h3>Next Steps in Your AI Journey</h3>
+            
+            <p>Now that you understand the different types of AI, you can explore more specific topics:</p>
+            
+            <ol>
+                <li>Learn about <a href="topic-ml-fundamentals.html" style="color: var(--copper-accent);">Machine Learning Fundamentals</a></li>
+                <li>Explore <a href="topic-neural-networks-intro.html" style="color: var(--copper-accent);">Neural Networks</a></li>
+                <li>Understand <a href="topic-deep-learning-basics.html" style="color: var(--copper-accent);">Deep Learning Basics</a></li>
+                <li>Study <a href="topic-agent-architecture.html" style="color: var(--copper-accent);">Agent Architecture</a></li>
+            </ol>
+            
+            <div class="topic-navigation">
+                <a href="topic-what-is-ai.html" class="nav-button secondary">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Previous: What is AI?
+                </a>
+                
+                <a href="topic-ml-fundamentals.html" class="nav-button">
+                    Next: ML Fundamentals
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Load sidebar navigation
+        fetch('sidebar-navigation.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('sidebarContainer').innerHTML = html;
+                initializeSidebar();
+            })
+            .catch(error => {
+                console.log('Sidebar not found, creating basic version');
+                createBasicSidebar();
+            });
+        
+        function initializeSidebar() {
+            // Set current page as active
+            const currentPage = window.location.pathname.split('/').pop() || 'topic-types-of-ai.html';
+            const links = document.querySelectorAll('.sidebar-section-content a');
+            links.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                    // Open the parent section
+                    const section = link.closest('.sidebar-section-content');
+                    const title = section.previousElementSibling;
+                    if (title) {
+                        title.classList.add('active');
+                        section.classList.add('active');
+                    }
+                }
+            });
+            
+            // Mobile sidebar toggle
+            const mobileToggle = document.getElementById('mobileSidebarToggle');
+            const sidebar = document.querySelector('.sidebar-nav');
+            
+            if (mobileToggle && sidebar) {
+                mobileToggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('mobile-open');
+                });
+            }
+        }
+        
+        function createBasicSidebar() {
+            const sidebarHTML = `
+                <nav class="sidebar-nav">
+                    <div class="sidebar-header">
+                        <h3>AI Knowledge Hub</h3>
+                    </div>
+                    <div class="sidebar-content">
+                        <div class="p-4">
+                            <h4>Navigation</h4>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="topics.html">All Topics</a></li>
+                                <li><a href="manage.html">Manage Content</a></li>
+                                <li><a href="about.html">About</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            `;
+            document.getElementById('sidebarContainer').innerHTML = sidebarHTML;
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar-nav');
+            if (sidebar) {
+                sidebar.classList.toggle('mobile-open');
+            }
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate content on load
+            anime({
+                targets: '.topic-header, .topic-content',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                delay: anime.stagger(200),
+                duration: 600,
+                easing: 'easeOutQuart'
+            });
+            
+            // Add smooth scrolling for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

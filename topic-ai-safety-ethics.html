@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Safety & Ethics - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            overflow-x: hidden;
+        }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        .hero-overlay { 
+            background: linear-gradient(135deg, rgba(220, 38, 127, 0.95) 0%, rgba(239, 68, 68, 0.95) 100%);
+        }
+        .topic-card { 
+            transition: all 0.3s ease; 
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .topic-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 10px;
+            height: 8px;
+            transition: width 0.3s ease;
+        }
+        .code-block {
+            background: #1a202c;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .principle-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #dc2626;
+            transition: all 0.3s ease;
+        }
+        .principle-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        .risk-indicator {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .risk-high { background: #fecaca; color: #dc2626; }
+        .risk-medium { background: #fed7aa; color: #ea580c; }
+        .risk-low { background: #bbf7d0; color: #059669; }
+        .framework-step {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid #3b82f6;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            background-color: rgba(220, 38, 127, 0.1);
+            transform: translateX(4px);
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .ethical-dilemma {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            border-left: 3px solid #10b981;
+        }
+        .checklist-item input[type="checkbox"] {
+            margin-right: 0.75rem;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-brain text-2xl text-indigo-600 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-900">Agentic AI Hub</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="topics.html" class="nav-link text-gray-700 hover:text-indigo-600">Topics</a>
+                    <a href="about.html" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
+                    <a href="manage.html" class="nav-link text-gray-700 hover:text-indigo-600">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative h-64 hero-overlay flex items-center justify-center">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="relative z-10 text-center text-white">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 stagger-item">AI Safety & Ethics</h1>
+            <p class="text-xl md:text-2xl stagger-item">Building responsible and trustworthy AI systems</p>
+        </div>
+        <div class="floating-element absolute top-10 right-10 text-white opacity-20">
+            <i class="fas fa-shield-alt text-6xl"></i>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Introduction -->
+        <div class="mb-12 stagger-item">
+            <div class="highlight-box">
+                <h2 class="text-2xl font-bold mb-4">Why AI Safety & Ethics Matter</h2>
+                <p class="text-lg leading-relaxed">
+                    As AI systems become more powerful and autonomous, ensuring their safety, fairness, and ethical behavior 
+                    is crucial. AI safety and ethics encompass the principles, practices, and frameworks needed to develop 
+                    AI systems that are beneficial, trustworthy, and aligned with human values.
+                </p>
+            </div>
+        </div>
+
+        <!-- Core Ethical Principles -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Core Ethical Principles</h2>
+            
+            <div class="principle-grid">
+                <div class="principle-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-balance-scale text-2xl text-blue-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">Fairness & Non-discrimination</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        AI systems should treat all individuals and groups fairly, without bias or discrimination based on protected characteristics.
+                    </p>
+                    <div class="mb-3">
+                        <span class="risk-indicator risk-high">High Risk</span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Regular bias audits and testing</li>
+                        <li>• Diverse training data collection</li>
+                        <li>• Algorithmic fairness metrics</li>
+                        <li>• Inclusive design processes</li>
+                    </ul>
+                </div>
+
+                <div class="principle-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-eye text-2xl text-green-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">Transparency & Explainability</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        AI decision-making processes should be understandable and explainable to stakeholders and affected individuals.
+                    </p>
+                    <div class="mb-3">
+                        <span class="risk-indicator risk-medium">Medium Risk</span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Clear documentation of AI systems</li>
+                        <li>• Explainable AI (XAI) techniques</li>
+                        <li>• User-friendly explanations</li>
+                        <li>• Open-source when appropriate</li>
+                    </ul>
+                </div>
+
+                <div class="principle-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-user-shield text-2xl text-purple-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">Privacy & Data Protection</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Personal data should be protected, and individuals should have control over how their data is collected and used.
+                    </p>
+                    <div class="mb-3">
+                        <span class="risk-indicator risk-high">High Risk</span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Data minimization principles</li>
+                        <li>• Privacy-preserving techniques</li>
+                        <li>• Consent mechanisms</li>
+                        <li>• Secure data handling</li>
+                    </ul>
+                </div>
+
+                <div class="principle-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-handshake text-2xl text-orange-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">Accountability & Responsibility</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Clear responsibility structures should exist for AI system outcomes, with mechanisms for redress and appeal.
+                    </p>
+                    <div class="mb-3">
+                        <span class="risk-indicator risk-medium">Medium Risk</span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Clear governance frameworks</li>
+                        <li>• Human oversight mechanisms</li>
+                        <li>• Audit trails and logging</li>
+                        <li>• Complaint and appeal processes</li>
+                    </ul>
+                </div>
+
+                <div class="principle-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-lock text-2xl text-red-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">Safety & Security</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        AI systems should be robust, secure, and designed to prevent harm to individuals and society.
+                    </p>
+                    <div class="mb-3">
+                        <span class="risk-indicator risk-high">High Risk</span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Robust testing and validation</li>
+                        <li>• Adversarial attack resistance</li>
+                        <li>• Fail-safe mechanisms</li>
+                        <li>• Continuous monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="principle-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-users text-2xl text-indigo-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">Human Agency & Oversight</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Humans should retain meaningful control over AI systems and the ability to override automated decisions.
+                    </p>
+                    <div class="mb-3">
+                        <span class="risk-indicator risk-low">Low Risk</span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Human-in-the-loop systems</li>
+                        <li>• Override capabilities</li>
+                        <li>• Informed consent</li>
+                        <li>• User empowerment features</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ethical Dilemmas -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Common Ethical Dilemmas</h2>
+            
+            <div class="ethical-dilemma">
+                <h3 class="text-xl font-bold mb-4 text-yellow-800">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>The Trolley Problem in AI
+                </h3>
+                <p class="text-gray-700 mb-4">
+                    An autonomous vehicle must choose between hitting one person or swerving and potentially hitting five people. 
+                    How should the AI be programmed to make this life-or-death decision?
+                </p>
+                <div class="grid md:grid-cols-2 gap-4 mt-4">
+                    <div class="bg-red-100 p-4 rounded-lg">
+                        <h4 class="font-semibold text-red-800 mb-2">Considerations:</h4>
+                        <ul class="text-red-700 text-sm space-y-1">
+                            <li>• Utilitarian vs. deontological ethics</li>
+                            <li>• Legal liability implications</li>
+                            <li>• Public acceptance and trust</li>
+                            <li>• Cultural and societal values</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-100 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">Potential Solutions:</h4>
+                        <ul class="text-green-700 text-sm space-y-1">
+                            <li>• Transparent ethical frameworks</li>
+                            <li>• Public consultation and debate</li>
+                            <li>• Regulatory guidelines</li>
+                            <li>• Continuous evaluation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ethical-dilemma">
+                <h3 class="text-xl font-bold mb-4 text-yellow-800">
+                    <i class="fas fa-balance-scale mr-2"></i>Bias in Hiring Algorithms
+                </h3>
+                <p class="text-gray-700 mb-4">
+                    An AI hiring system trained on historical data shows bias against certain demographic groups. 
+                    Should the system be deployed for efficiency, or rejected to ensure fairness?
+                </p>
+                <div class="grid md:grid-cols-2 gap-4 mt-4">
+                    <div class="bg-red-100 p-4 rounded-lg">
+                        <h4 class="font-semibold text-red-800 mb-2">Challenges:</h4>
+                        <ul class="text-red-700 text-sm space-y-1">
+                            <li>• Historical bias in training data</li>
+                            <li>• Disparate impact on protected groups</li>
+                            <li>• Legal compliance requirements</li>
+                            <li>• Business efficiency vs. fairness</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-100 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">Mitigation Strategies:</h4>
+                        <ul class="text-green-700 text-sm space-y-1">
+                            <li>• Bias detection and correction</li>
+                            <li>• Diverse training datasets</li>
+                            <li>• Algorithmic fairness tools</li>
+                            <li>• Human oversight and review</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Safety Framework -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">AI Safety Framework</h2>
+            
+            <div class="framework-step">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4">1</div>
+                    <h3 class="text-xl font-bold">Risk Assessment & Classification</h3>
+                </div>
+                <p class="text-gray-700 mb-4">
+                    Identify potential risks and classify AI systems based on their potential impact and likelihood of harm.
+                </p>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-semibold text-red-800 mb-2">High Risk</h4>
+                        <p class="text-red-700 text-sm">Critical infrastructure, healthcare, criminal justice</p>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                        <h4 class="font-semibold text-yellow-800 mb-2">Medium Risk</h4>
+                        <p class="text-yellow-700 text-sm">Financial services, education, employment</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <h4 class="font-semibold text-green-800 mb-2">Low Risk</h4>
+                        <p class="text-green-700 text-sm">Entertainment, gaming, simple automation</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="framework-step">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4">2</div>
+                    <h3 class="text-xl font-bold">Design & Development Controls</h3>
+                </div>
+                <p class="text-gray-700 mb-4">
+                    Implement safety measures and ethical considerations throughout the AI development lifecycle.
+                </p>
+                <ul class="text-gray-700 space-y-2">
+                    <li>• Privacy-by-design principles</li>
+                    <li>• Bias detection and mitigation techniques</li>
+                    <li>• Robust testing and validation protocols</li>
+                    <li>• Security and adversarial robustness measures</li>
+                </ul>
+            </div>
+
+            <div class="framework-step">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4">3</div>
+                    <h3 class="text-xl font-bold">Deployment & Monitoring</h3>
+                </div>
+                <p class="text-gray-700 mb-4">
+                    Establish continuous monitoring and oversight mechanisms to ensure ongoing safety and ethical compliance.
+                </p>
+                <ul class="text-gray-700 space-y-2">
+                    <li>• Real-time performance monitoring</li>
+                    <li>• Bias and fairness audits</li>
+                    <li>• User feedback collection and analysis</li>
+                    <li>• Incident response and escalation procedures</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Implementation Checklist -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">AI Ethics Implementation Checklist</h2>
+            
+            <div class="bg-white rounded-lg p-6 shadow-lg">
+                <p class="text-gray-700 mb-6">Use this checklist to ensure your AI system meets ethical standards:</p>
+                
+                <div class="space-y-3">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check1">
+                        <label for="check1" class="text-gray-800">Conducted bias assessment on training data</label>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check2">
+                        <label for="check2" class="text-gray-800">Implemented privacy protection measures</label>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check3">
+                        <label for="check3" class="text-gray-800">Established human oversight mechanisms</label>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check4">
+                        <label for="check4" class="text-gray-800">Created transparency documentation</label>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check5">
+                        <label for="check5" class="text-gray-800">Developed incident response procedures</label>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check6">
+                        <label for="check6" class="text-gray-800">Tested for adversarial vulnerabilities</label>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check7">
+                        <label for="check7" class="text-gray-800">Established accountability frameworks</label>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check8">
+                        <label for="check8" class="text-gray-800">Created user appeal and redress processes</label>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+                        <p class="text-blue-800 text-sm">
+                            <strong>Progress:</strong> <span id="progressCount">0</span>/8 items completed
+                        </p>
+                    </div>
+                    <div class="mt-2 bg-blue-200 rounded-full h-2">
+                        <div id="progressBar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Global Standards -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Global AI Ethics Standards</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-blue-700">
+                        <i class="fas fa-globe mr-2"></i>International Frameworks
+                    </h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>OECD AI Principles:</strong> Five principles for trustworthy AI including inclusive growth, human-centered values, transparency, robustness, and accountability.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>EU AI Act:</strong> Risk-based approach to AI regulation with strict requirements for high-risk applications.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>IEEE Standards:</strong> Technical standards for AI ethics including algorithmic bias considerations and transparency.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-green-700">
+                        <i class="fas fa-industry mr-2"></i>Industry Standards
+                    </h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Partnership on AI:</strong> Multi-stakeholder organization developing best practices for AI research and deployment.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong> Responsible AI Institute:</strong> Certification programs for trustworthy AI systems and organizational practices.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>ML Commons:</strong> Benchmarking and evaluation standards for AI safety and performance.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-12 stagger-item">
+            <a href="topic-prompt-engineering.html" class="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Previous: Prompt Engineering
+            </a>
+            <div class="flex space-x-4">
+                <a href="topics.html" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    All Topics
+                </a>
+            </div>
+            <a href="topic-evaluation-metrics.html" class="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors">
+                Next: Evaluation Metrics
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 Agentic AI Knowledge Hub. Empowering the future of artificial intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize animations
+        anime({
+            targets: '.stagger-item',
+            opacity: [0, 1],
+            translateY: [30, 0],
+            delay: anime.stagger(100),
+            duration: 800,
+            easing: 'easeOutQuart'
+        });
+
+        // Checklist functionality
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const progressCount = document.getElementById('progressCount');
+        const progressBar = document.getElementById('progressBar');
+
+        function updateProgress() {
+            const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const total = checkboxes.length;
+            const percentage = (checkedCount / total) * 100;
+            
+            progressCount.textContent = checkedCount;
+            progressBar.style.width = percentage + '%';
+        }
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgress);
+        });
+    </script>
+</body>
+</html>

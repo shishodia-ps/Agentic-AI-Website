@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine-tuning Pipeline - AI Engineering Knowledge Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'deep-blue': '#1e3a8a',
+                        'soft-gray': '#f8fafc',
+                        'accent-blue': '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .code-block { 
+            background: #1a1a1a; 
+            border-radius: 8px; 
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .code-header { 
+            background: #2d2d2d; 
+            padding: 0.75rem 1rem; 
+            display: flex; 
+            justify-content: between; 
+            align-items: center;
+            border-bottom: 1px solid #404040;
+        }
+        .copy-btn { 
+            background: #4a5568; 
+            color: white; 
+            border: none; 
+            padding: 0.25rem 0.75rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover { background: #718096; }
+        .progress-bar { 
+            width: 100%; 
+            height: 4px; 
+            background: #e2e8f0; 
+            border-radius: 2px; 
+            overflow: hidden;
+        }
+        .progress-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, #3b82f6, #1e40af); 
+            transition: width 0.3s ease;
+        }
+        .technique-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .technique-card:hover {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-soft-gray font-sans">
+    <div class="min-h-screen flex">
+        <!-- Sidebar Navigation -->
+        <div class="w-80 bg-white shadow-lg border-r border-gray-200 flex flex-col">
+            <!-- Sidebar Header -->
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-brain text-2xl text-deep-blue mr-3"></i>
+                    <h1 class="text-xl font-bold text-gray-800">AI Engineering Hub</h1>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="sidebarSearch" 
+                        placeholder="Search topics..." 
+                        class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-blue focus:border-transparent"
+                    >
+                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Navigation Content -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <!-- Modern AI-Engineering Stack Section -->
+                <div class="sidebar-section rounded-lg mb-4">
+                    <div class="section-header p-4 bg-blue-50 rounded-lg" onclick="toggleSection('modern-stack')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-layer-group text-deep-blue mr-3"></i>
+                                <span class="font-semibold text-gray-800">Modern AI-Engineering Stack</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 transition-transform" id="modern-stack-icon"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-1 ml-6">Core architecture components</p>
+                    </div>
+                    <div class="section-content" id="modern-stack-content">
+                        <div class="p-2">
+                            <a href="topic-ai-stack-overview.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-sitemap text-blue-500 mr-2"></i>AI Engineering Stack Overview
+                            </a>
+                            <a href="topic-llm-foundations.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-brain text-green-500 mr-2"></i>LLM Foundations
+                            </a>
+                            <a href="topic-vector-databases.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-database text-purple-500 mr-2"></i>Vector Databases
+                            </a>
+                            <a href="topic-embedding-models.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-vector-square text-orange-500 mr-2"></i>Embedding Models
+                            </a>
+                            <a href="topic-prompt-engineering.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-comment-dots text-pink-500 mr-2"></i>Prompt Engineering Framework
+                            </a>
+                            <a href="topic-retrieval-systems.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-search text-indigo-500 mr-2"></i>Retrieval Systems
+                            </a>
+                            <a href="topic-fine-tuning-pipeline.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700 bg-blue-100 border-l-4 border-deep-blue">
+                                <i class="fas fa-sliders-h text-teal-500 mr-2"></i>Fine-tuning Pipeline
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto">
+            <!-- Header -->
+            <div class="bg-white shadow-sm border-b border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-800">Fine-tuning Pipeline</h1>
+                        <p class="text-gray-600 mt-2">Model adaptation and domain-specific optimization</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-right">
+                            <div class="text-sm text-gray-500">Progress</div>
+                            <div class="text-lg font-semibold text-deep-blue">92%</div>
+                        </div>
+                        <div class="progress-bar w-32">
+                            <div class="progress-fill" style="width: 92%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Introduction -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                            <i class="fas fa-sliders-h text-deep-blue mr-3"></i>
+                            Understanding Fine-tuning
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Fine-tuning is the process of adapting pre-trained language models to specific domains, 
+                            tasks, or datasets to improve performance and accuracy for specialized applications. 
+                            This critical technique in AI engineering enables the customization of general-purpose models 
+                            for industry-specific use cases, reducing the need for training models from scratch.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Modern fine-tuning approaches have evolved from traditional full-model fine-tuning to 
+                            more efficient parameter-efficient methods like LoRA (Low-Rank Adaptation) and QLoRA 
+                            (Quantized LoRA). These techniques allow for rapid adaptation of large language models 
+                            while maintaining computational efficiency and reducing resource requirements.
+                        </p>
+
+                        <!-- Fine-tuning Process -->
+                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Fine-tuning Process Flow</h3>
+                            <div id="fine-tuning-process" style="height: 400px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Fine-tuning Techniques -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-tools text-deep-blue mr-3"></i>
+                            Fine-tuning Techniques
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <!-- Full Fine-tuning -->
+                            <div class="technique-card bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-layer-group text-2xl text-blue-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Full Fine-tuning</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Traditional approach updating all model parameters on domain-specific data.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Maximum adaptation</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Complete parameter updates</li>
+                                    <li><i class="fas fa-times text-red-500 mr-2"></i>High computational cost</li>
+                                    <li><i class="fas fa-times text-red-500 mr-2"></i>Large storage requirements</li>
+                                </ul>
+                            </div>
+
+                            <!-- LoRA -->
+                            <div class="technique-card bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-compress-alt text-2xl text-green-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">LoRA</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Low-Rank Adaptation using trainable low-rank matrices for efficient adaptation.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Parameter efficient</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Fast training</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Easy deployment</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Memory efficient</li>
+                                </ul>
+                            </div>
+
+                            <!-- QLoRA -->
+                            <div class="technique-card bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-memory text-2xl text-purple-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">QLoRA</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Quantized LoRA combining quantization with low-rank adaptation for extreme efficiency.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>4-bit quantization</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Double quantization</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Ultra-low memory</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>GPU efficient</li>
+                                </ul>
+                            </div>
+
+                            <!-- AdaLoRA -->
+                            <div class="technique-card bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-adjust text-2xl text-orange-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">AdaLoRA</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Adaptive LoRA that dynamically adjusts rank allocation based on importance scores.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Dynamic rank allocation</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Importance-based pruning</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Optimal parameter usage</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Better performance</li>
+                                </ul>
+                            </div>
+
+                            <!-- Prefix Tuning -->
+                            <div class="technique-card bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-plus text-2xl text-red-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Prefix Tuning</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Adds trainable prefix tokens to input sequences for task-specific adaptation.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Minimal parameters</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Task-specific</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Easy implementation</li>
+                                    <li><i class="fas fa-times text-red-500 mr-2"></i>Limited to prefix</li>
+                                </ul>
+                            </div>
+
+                            <!-- Prompt Tuning -->
+                            <div class="technique-card bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-lightbulb text-2xl text-gray-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Prompt Tuning</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Optimizes soft prompts in embedding space while keeping model weights frozen.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Extremely lightweight</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>No model modification</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Fast adaptation</li>
+                                    <li><i class="fas fa-times text-red-500 mr-2"></i>Limited capacity</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Implementation Examples -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-code text-deep-blue mr-3"></i>
+                            Implementation Examples
+                        </h2>
+                        
+                        <!-- LoRA Implementation -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">LoRA Fine-tuning with PEFT</h3>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="text-gray-300 font-medium">lora_finetuning.py</span>
+                                    <button class="copy-btn" onclick="copyCode('lora-code')">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre id="lora-code" class="language-python"><code>import torch
+from transformers import (
+    AutoModelForCausalLM, 
+    AutoTokenizer, 
+    TrainingArguments, 
+    Trainer,
+    DataCollatorForLanguageModeling,
+    BitsAndBytesConfig
+)
+from peft import LoraConfig, get_peft_model, TaskType, PeftModel
+from datasets import Dataset, load_dataset
+import pandas as pd
+from typing import Dict, List, Any, Optional
+from dataclasses import dataclass
+import json
+import os
+from datetime import datetime
+
+@dataclass
+class LoRAConfig:
+    """Configuration for LoRA fine-tuning"""
+    model_name: str = "microsoft/DialoGPT-medium"
+    task_type: TaskType = TaskType.CAUSAL_LM
+    r: int = 16  # Rank
+    lora_alpha: int = 32  # Scaling parameter
+    lora_dropout: float = 0.1
+    target_modules: List[str] = None  # Auto-detected if None
+    bias: str = "none"  # "none", "all", "lora_only"
+    
+    # Training parameters
+    per_device_train_batch_size: int = 4
+    per_device_eval_batch_size: int = 4
+    gradient_accumulation_steps: int = 4
+    warmup_steps: int = 100
+    max_steps: int = 1000
+    learning_rate: float = 3e-4
+    fp16: bool = True
+    logging_steps: int = 10
+    evaluation_strategy: str = "steps"
+    eval_steps: int = 100
+    save_steps: int = 100
+    output_dir: str = "./lora_finetuned"
+
+class LoRAFineTuner:
+    """LoRA fine-tuning pipeline for language models"""
+    
+    def __init__(self, config: LoRAConfig):
+        self.config = config
+        self.model = None
+        self.tokenizer = None
+        self.peft_model = None
+        self.trainer = None
+        
+        # Create output directory
+        os.makedirs(config.output_dir, exist_ok=True)
+        
+        # Save config
+        config_path = os.path.join(config.output_dir, "config.json")
+        with open(config_path, 'w') as f:
+            json.dump(config.__dict__, f, indent=2)
+    
+    def load_model_and_tokenizer(self):
+        """Load base model and tokenizer"""
+        print(f"Loading model: {self.config.model_name}")
+        
+        # Load tokenizer
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            self.config.model_name,
+            trust_remote_code=True
+        )
+        
+        # Add padding token if not present
+        if self.tokenizer.pad_token is None:
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+        
+        # Load model
+        self.model = AutoModelForCausalLM.from_pretrained(
+            self.config.model_name,
+            torch_dtype=torch.float16 if self.config.fp16 else torch.float32,
+            device_map="auto",
+            trust_remote_code=True
+        )
+        
+        print("Model and tokenizer loaded successfully!")
+        return self.model, self.tokenizer
+    
+    def setup_lora(self):
+        """Setup LoRA configuration and apply to model"""
+        print("Setting up LoRA configuration...")
+        
+        # Auto-detect target modules if not specified
+        if self.config.target_modules is None:
+            self.config.target_modules = self._auto_detect_target_modules()
+        
+        lora_config = LoraConfig(
+            task_type=self.config.task_type,
+            r=self.config.r,
+            lora_alpha=self.config.lora_alpha,
+            lora_dropout=self.config.lora_dropout,
+            target_modules=self.config.target_modules,
+            bias=self.config.bias
+        )
+        
+        # Apply LoRA to model
+        self.peft_model = get_peft_model(self.model, lora_config)
+        
+        # Print trainable parameters
+        self._print_trainable_parameters()
+        
+        return self.peft_model
+    
+    def _auto_detect_target_modules(self):
+        """Auto-detect target modules for LoRA based on model architecture"""
+        model_name = self.config.model_name.lower()
+        
+        # Common patterns for different model architectures
+        if "gpt" in model_name or "dialogpt" in model_name:
+            return ["c_attn", "c_proj", "c_fc"]
+        elif "llama" in model_name:
+            return ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+        elif "bloom" in model_name:
+            return ["query_key_value", "dense", "dense_h_to_4h", "dense_4h_to_h"]
+        else:
+            # Default: try common attention patterns
+            return ["q_proj", "v_proj", "k_proj", "o_proj"]
+    
+    def _print_trainable_parameters(self):
+        """Print information about trainable parameters"""
+        def count_parameters(model):
+            return sum(p.numel() for p in model.parameters())
+        
+        trainable_params = count_parameters(self.peft_model)
+        total_params = count_parameters(self.model)
+        percentage = (trainable_params / total_params) * 100
+        
+        print(f"\nParameter Information:")
+        print(f"Total parameters: {total_params:,}")
+        print(f"Trainable parameters: {trainable_params:,}")
+        print(f"Percentage of trainable parameters: {percentage:.2f}%")
+    
+    def prepare_dataset(
+        self, 
+        dataset: List[Dict[str, str]], 
+        text_column: str = "text",
+        max_length: int = 512
+    ) -> Dataset:
+        """Prepare dataset for training"""
+        print("Preparing dataset...")
+        
+        def tokenize_function(examples):
+            # Tokenize texts
+            tokenized = self.tokenizer(
+                examples[text_column],
+                truncation=True,
+                padding=True,
+                max_length=max_length,
+                return_tensors=None
+            )
+            
+            # For causal LM, labels are the same as input_ids
+            tokenized["labels"] = tokenized["input_ids"].copy()
+            
+            return tokenized
+        
+        # Convert to HuggingFace dataset
+        hf_dataset = Dataset.from_pandas(pd.DataFrame(dataset))
+        
+        # Tokenize dataset
+        tokenized_dataset = hf_dataset.map(
+            tokenize_function,
+            batched=True,
+            remove_columns=hf_dataset.column_names
+        )
+        
+        print(f"Dataset prepared with {len(tokenized_dataset)} examples")
+        return tokenized_dataset
+    
+    def create_training_arguments(self) -> TrainingArguments:
+        """Create training arguments"""
+        return TrainingArguments(
+            output_dir=self.config.output_dir,
+            per_device_train_batch_size=self.config.per_device_train_batch_size,
+            per_device_eval_batch_size=self.config.per_device_eval_batch_size,
+            gradient_accumulation_steps=self.config.gradient_accumulation_steps,
+            warmup_steps=self.config.warmup_steps,
+            max_steps=self.config.max_steps,
+            learning_rate=self.config.learning_rate,
+            fp16=self.config.fp16,
+            logging_steps=self.config.logging_steps,
+            evaluation_strategy=self.config.evaluation_strategy,
+            eval_steps=self.config.eval_steps,
+            save_steps=self.config.save_steps,
+            remove_unused_columns=False,
+            push_to_hub=False,
+            report_to=["tensorboard"],
+            load_best_model_at_end=True,
+            metric_for_best_model="eval_loss",
+            greater_is_better=False
+        )
+    
+    def fine_tune(
+        self, 
+        train_dataset: Dataset, 
+        eval_dataset: Optional[Dataset] = None,
+        resume_from_checkpoint: Optional[str] = None
+    ):
+        """Execute fine-tuning process"""
+        print("Starting fine-tuning process...")
+        
+        # Create data collator
+        data_collator = DataCollatorForLanguageModeling(
+            tokenizer=self.tokenizer,
+            mlm=False  # For causal LM
+        )
+        
+        # Create training arguments
+        training_args = self.create_training_arguments()
+        
+        # Create trainer
+        self.trainer = Trainer(
+            model=self.peft_model,
+            args=training_args,
+            train_dataset=train_dataset,
+            eval_dataset=eval_dataset,
+            tokenizer=self.tokenizer,
+            data_collator=data_collator,
+        )
+        
+        # Start training
+        print("Starting training...")
+        self.trainer.train(resume_from_checkpoint=resume_from_checkpoint)
+        
+        # Save final model
+        print("Saving final model...")
+        self.trainer.save_model(self.config.output_dir)
+        
+        print(f"Fine-tuning completed! Model saved to {self.config.output_dir}")
+        
+        return self.trainer
+    
+    def evaluate(self, eval_dataset: Dataset) -> Dict[str, float]:
+        """Evaluate the fine-tuned model"""
+        if self.trainer is None:
+            raise ValueError("Model not trained yet. Call fine_tune() first.")
+        
+        print("Evaluating model...")
+        eval_results = self.trainer.evaluate(eval_dataset=eval_dataset)
+        
+        print("Evaluation Results:")
+        for key, value in eval_results.items():
+            print(f"  {key}: {value:.4f}")
+        
+        return eval_results
+    
+    def generate_response(
+        self, 
+        prompt: str, 
+        max_length: int = 100,
+        temperature: float = 0.7,
+        do_sample: bool = True
+    ) -> str:
+        """Generate response using the fine-tuned model"""
+        # Tokenize input
+        inputs = self.tokenizer(prompt, return_tensors="pt")
+        
+        # Generate
+        with torch.no_grad():
+            outputs = self.peft_model.generate(
+                **inputs,
+                max_length=max_length,
+                temperature=temperature,
+                do_sample=do_sample,
+                pad_token_id=self.tokenizer.eos_token_id
+            )
+        
+        # Decode response
+        response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+        
+        # Remove the original prompt from response
+        if response.startswith(prompt):
+            response = response[len(prompt):].strip()
+        
+        return response
+    
+    def save_model(self, path: str):
+        """Save the fine-tuned model"""
+        self.peft_model.save_pretrained(path)
+        self.tokenizer.save_pretrained(path)
+        print(f"Model saved to {path}")
+    
+    @classmethod
+    def load_model(cls, path: str, base_model_name: str):
+        """Load a fine-tuned LoRA model"""
+        # Load base model
+        model = AutoModelForCausalLM.from_pretrained(
+            base_model_name,
+            torch_dtype=torch.float16,
+            device_map="auto"
+        )
+        
+        # Load LoRA adapter
+        peft_model = PeftModel.from_pretrained(model, path)
+        
+        # Load tokenizer
+        tokenizer = AutoTokenizer.from_pretrained(path)
+        
+        return peft_model, tokenizer
+
+# Data preparation utilities
+class DataProcessor:
+    """Utility class for preparing fine-tuning datasets"""
+    
+    @staticmethod
+    def prepare_instruction_dataset(
+        instructions: List[str],
+        responses: List[str],
+        system_prompt: Optional[str] = None
+    ) -> List[Dict[str, str]]:
+        """Prepare instruction-following dataset"""
+        dataset = []
+        
+        for instruction, response in zip(instructions, responses):
+            if system_prompt:
+                text = f"<s>[INST] <<SYS>>\\n{system_prompt}\\n<</SYS>>\\n\\n{instruction} [/INST] {response} </s>"
+            else:
+                text = f"<s>[INST] {instruction} [/INST] {response} </s>"
+            
+            dataset.append({"text": text})
+        
+        return dataset
+    
+    @staticmethod
+    def prepare_conversation_dataset(
+        conversations: List[List[Dict[str, str]]],
+        system_prompt: Optional[str] = None
+    ) -> List[Dict[str, str]]:
+        """Prepare conversation dataset"""
+        dataset = []
+        
+        for conversation in conversations:
+            text = ""
+            
+            # Add system prompt if provided
+            if system_prompt:
+                text = f"<s>[INST] <<SYS>>\\n{system_prompt}\\n<</SYS>>\\n\\n"
+            
+            # Build conversation
+            for i, turn in enumerate(conversation):
+                if turn["role"] == "user":
+                    if i == 0 and not system_prompt:
+                        text += "<s>[INST] "
+                    else:
+                        text += "[INST] "
+                    text += turn["content"] + " [/INST] "
+                elif turn["role"] == "assistant":
+                    text += turn["content"] + " </s>"
+                    if i < len(conversation) - 1:
+                        text += "<s>"
+            
+            dataset.append({"text": text})
+        
+        return dataset
+    
+    @staticmethod
+    def prepare_classification_dataset(
+        texts: List[str],
+        labels: List[str],
+        label_descriptions: Dict[str, str]
+    ) -> List[Dict[str, str]]:
+        """Prepare text classification dataset"""
+        dataset = []
+        
+        for text, label in zip(texts, labels):
+            prompt = f"Classify the following text: {text}\\n\\nLabels: {', '.join(label_descriptions.keys())}\\n\\nClassification:"
+            response = label
+            
+            dataset.append({
+                "text": f"<s>[INST] {prompt} [/INST] {response} </s>"
+            })
+        
+        return dataset
+
+# Usage Example
+def main():
+    # Example configuration
+    config = LoRAConfig(
+        model_name="microsoft/DialoGPT-medium",
+        r=16,
+        lora_alpha=32,
+        max_steps=500,
+        learning_rate=3e-4,
+        output_dir="./lora_models/chatbot_v1"
+    )
+    
+    # Initialize fine-tuner
+    fine_tuner = LoRAFineTuner(config)
+    
+    # Load model and tokenizer
+    model, tokenizer = fine_tuner.load_model_and_tokenizer()
+    
+    # Setup LoRA
+    peft_model = fine_tuner.setup_lora()
+    
+    # Prepare sample dataset
+    sample_data = [
+        {"instruction": "What is machine learning?", "response": "Machine learning is a subset of AI that enables computers to learn from data without explicit programming."},
+        {"instruction": "Explain neural networks", "response": "Neural networks are computing systems inspired by biological neural networks, consisting of interconnected nodes."},
+        {"instruction": "What is deep learning?", "response": "Deep learning uses neural networks with multiple layers to model complex patterns in data."},
+        {"instruction": "How does natural language processing work?", "response": "NLP combines computational linguistics with AI to enable computers to understand human language."},
+        {"instruction": "What is computer vision?", "response": "Computer vision enables machines to interpret and understand visual information from images and videos."}
+    ]
+    
+    # Prepare dataset
+    instructions = [item["instruction"] for item in sample_data]
+    responses = [item["response"] for item in sample_data]
+    
+    dataset = DataProcessor.prepare_instruction_dataset(instructions, responses)
+    
+    # For demonstration, create a small tokenized dataset
+    # In practice, you would use a much larger dataset
+    tokenized_dataset = fine_tuner.prepare_dataset(
+        dataset, 
+        text_column="text",
+        max_length=256
+    )
+    
+    # Split into train and eval (simplified)
+    train_size = int(0.8 * len(tokenized_dataset))
+    train_dataset = tokenized_dataset.select(range(train_size))
+    eval_dataset = tokenized_dataset.select(range(train_size, len(tokenized_dataset)))
+    
+    print(f"Training set size: {len(train_dataset)}")
+    print(f"Evaluation set size: {len(eval_dataset)}")
+    
+    # Demonstrate model before fine-tuning
+    print("\nModel response before fine-tuning:")
+    test_prompt = "What is machine learning?"
+    response = fine_tuner.generate_response(test_prompt, max_length=100)
+    print(f"Prompt: {test_prompt}")
+    print(f"Response: {response}")
+    
+    # Note: In a real scenario, you would call fine_tune() here
+    # For demonstration, we'll skip the actual training
+    print("\nSkipping actual fine-tuning for demonstration...")
+    print("In production, you would call: fine_tuner.fine_tune(train_dataset, eval_dataset)")
+    
+    # Save model
+    model_path = os.path.join(config.output_dir, "final_model")
+    fine_tuner.save_model(model_path)
+    
+    print(f"\nDemo completed! Model would be saved to: {model_path}")
+
+# Run the example
+if __name__ == "__main__":
+    main()</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- QLoRA Implementation -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">QLoRA with 4-bit Quantization</h3>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="text-gray-300 font-medium">qlora_finetuning.py</span>
+                                    <button class="copy-btn" onclick="copyCode('qlora-code')">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre id="qlora-code" class="language-python"><code>import torch
+from transformers import (
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    TrainingArguments,
+    Trainer,
+    DataCollatorForLanguageModeling,
+    BitsAndBytesConfig
+)
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from datasets import Dataset
+import pandas as pd
+from typing import Dict, List, Any, Optional
+from dataclasses import dataclass
+import json
+import os
+
+@dataclass
+class QLoRAConfig:
+    """Configuration for QLoRA fine-tuning"""
+    model_name: str = "meta-llama/Llama-2-7b-hf"
+    
+    # Quantization config
+    load_in_4bit: bool = True
+    bnb_4bit_quant_type: str = "nf4"  # "nf4" or "fp4"
+    bnb_4bit_compute_dtype: torch.dtype = torch.bfloat16
+    bnb_4bit_use_double_quant: bool = True
+    
+    # LoRA config
+    r: int = 64
+    lora_alpha: int = 16
+    lora_dropout: float = 0.1
+    bias: str = "none"
+    
+    # Training parameters
+    per_device_train_batch_size: int = 4
+    per_device_eval_batch_size: int = 4
+    gradient_accumulation_steps: int = 1
+    warmup_steps: int = 5
+    max_steps: int = 100
+    learning_rate: float = 2e-4
+    fp16: bool = False  # QLoRA uses bf16
+    bf16: bool = True
+    logging_steps: int = 1
+    evaluation_strategy: str = "no"  # Simplified for demo
+    save_strategy: str = "no"
+    output_dir: str = "./qlora_finetuned"
+    optim: str = "paged_adamw_8bit"  # Optimizer for QLoRA
+
+class QLoRAFineTuner:
+    """QLoRA fine-tuning pipeline with 4-bit quantization"""
+    
+    def __init__(self, config: QLoRAConfig):
+        self.config = config
+        self.model = None
+        self.tokenizer = None
+        self.peft_model = None
+        self.trainer = None
+        
+        # Create output directory
+        os.makedirs(config.output_dir, exist_ok=True)
+        
+        # Save config
+        config_path = os.path.join(config.output_dir, "config.json")
+        with open(config_path, 'w') as f:
+            config_dict = config.__dict__.copy()
+            # Convert torch dtype to string for JSON serialization
+            config_dict['bnb_4bit_compute_dtype'] = str(config_dict['bnb_4bit_compute_dtype'])
+            json.dump(config_dict, f, indent=2)
+    
+    def create_quantization_config(self) -> BitsAndBytesConfig:
+        """Create quantization configuration"""
+        return BitsAndBytesConfig(
+            load_in_4bit=self.config.load_in_4bit,
+            bnb_4bit_quant_type=self.config.bnb_4bit_quant_type,
+            bnb_4bit_compute_dtype=self.config.bnb_4bit_compute_dtype,
+            bnb_4bit_use_double_quant=self.config.bnb_4bit_use_double_quant
+        )
+    
+    def load_model_and_tokenizer(self):
+        """Load quantized model and tokenizer"""
+        print(f"Loading quantized model: {self.config.model_name}")
+        
+        # Create quantization config
+        quantization_config = self.create_quantization_config()
+        
+        # Load tokenizer
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            self.config.model_name,
+            trust_remote_code=True
+        )
+        
+        # Add padding token if not present
+        if self.tokenizer.pad_token is None:
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+        
+        # Load model with quantization
+        self.model = AutoModelForCausalLM.from_pretrained(
+            self.config.model_name,
+            quantization_config=quantization_config,
+            device_map="auto",
+            trust_remote_code=True
+        )
+        
+        # Prepare model for k-bit training
+        self.model = prepare_model_for_kbit_training(self.model)
+        
+        print("Quantized model and tokenizer loaded successfully!")
+        print(f"Model device: {self.model.device}")
+        print(f"Model dtype: {self.model.dtype}")
+        
+        return self.model, self.tokenizer
+    
+    def setup_qlora(self):
+        """Setup QLoRA configuration and apply to quantized model"""
+        print("Setting up QLoRA configuration...")
+        
+        # Auto-detect target modules
+        target_modules = self._auto_detect_target_modules()
+        
+        lora_config = LoraConfig(
+            r=self.config.r,
+            lora_alpha=self.config.lora_alpha,
+            lora_dropout=self.config.lora_dropout,
+            target_modules=target_modules,
+            bias=self.config.bias,
+            task_type=TaskType.CAUSAL_LM
+        )
+        
+        # Apply LoRA to quantized model
+        self.peft_model = get_peft_model(self.model, lora_config)
+        
+        # Print trainable parameters
+        self._print_trainable_parameters()
+        
+        return self.peft_model
+    
+    def _auto_detect_target_modules(self):
+        """Auto-detect target modules for LoRA based on model architecture"""
+        model_name = self.config.model_name.lower()
+        
+        if "llama" in model_name:
+            return ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+        elif "gpt" in model_name or "dialogpt" in model_name:
+            return ["c_attn", "c_proj", "c_fc"]
+        elif "bloom" in model_name:
+            return ["query_key_value", "dense", "dense_h_to_4h", "dense_4h_to_h"]
+        else:
+            # Try to find linear layers
+            return self._find_linear_layers()
+    
+    def _find_linear_layers(self):
+        """Find linear layers in the model for LoRA targeting"""
+        linear_layers = []
+        for name, module in self.model.named_modules():
+            if isinstance(module, torch.nn.Linear):
+                # Skip output layers and embedding layers
+                if not any(x in name.lower() for x in ["lm_head", "embed", "norm"]):
+                    linear_layers.append(name)
+        
+        # Take the first few linear layers
+        return linear_layers[:8]  # Limit to avoid too many parameters
+    
+    def _print_trainable_parameters(self):
+        """Print information about trainable parameters"""
+        def count_parameters(model):
+            return sum(p.numel() for p in model.parameters())
+        
+        # Calculate trainable parameters in LoRA layers
+        trainable_params = 0
+        for name, param in self.peft_model.named_parameters():
+            if param.requires_grad:
+                trainable_params += param.numel()
+        
+        total_params = count_parameters(self.model)
+        percentage = (trainable_params / total_params) * 100
+        
+        print(f"\nParameter Information:")
+        print(f"Total model parameters: {total_params:,}")
+        print(f"Trainable LoRA parameters: {trainable_params:,}")
+        print(f"Percentage of trainable parameters: {percentage:.4f}%")
+        
+        # Memory usage estimation
+        if torch.cuda.is_available():
+            memory_used = torch.cuda.max_memory_allocated() / 1024**3  # GB
+            print(f"Peak GPU memory usage: {memory_used:.2f} GB")
+    
+    def prepare_dataset(
+        self, 
+        dataset: List[Dict[str, str]], 
+        text_column: str = "text",
+        max_length: int = 512
+    ) -> Dataset:
+        """Prepare dataset for QLoRA training"""
+        print("Preparing dataset for QLoRA training...")
+        
+        def tokenize_function(examples):
+            # Tokenize texts
+            tokenized = self.tokenizer(
+                examples[text_column],
+                truncation=True,
+                padding=False,  # No padding here, will pad in data collator
+                max_length=max_length,
+                return_tensors=None
+            )
+            
+            # For causal LM, labels are the same as input_ids
+            tokenized["labels"] = tokenized["input_ids"].copy()
+            
+            return tokenized
+        
+        # Convert to HuggingFace dataset
+        hf_dataset = Dataset.from_pandas(pd.DataFrame(dataset))
+        
+        # Tokenize dataset
+        tokenized_dataset = hf_dataset.map(
+            tokenize_function,
+            batched=True,
+            remove_columns=hf_dataset.column_names
+        )
+        
+        print(f"Dataset prepared with {len(tokenized_dataset)} examples")
+        return tokenized_dataset
+    
+    def create_training_arguments(self) -> TrainingArguments:
+        """Create training arguments optimized for QLoRA"""
+        return TrainingArguments(
+            output_dir=self.config.output_dir,
+            per_device_train_batch_size=self.config.per_device_train_batch_size,
+            per_device_eval_batch_size=self.config.per_device_eval_batch_size,
+            gradient_accumulation_steps=self.config.gradient_accumulation_steps,
+            warmup_steps=self.config.warmup_steps,
+            max_steps=self.config.max_steps,
+            learning_rate=self.config.learning_rate,
+            fp16=self.config.fp16,
+            bf16=self.config.bf16,
+            logging_steps=self.config.logging_steps,
+            evaluation_strategy=self.config.evaluation_strategy,
+            save_strategy=self.config.save_strategy,
+            optim=self.config.optim,
+            remove_unused_columns=False,
+            push_to_hub=False,
+            report_to=["tensorboard"],
+            ddp_find_unused_parameters=False if torch.cuda.device_count() > 1 else None,
+        )
+    
+    def fine_tune(
+        self, 
+        train_dataset: Dataset, 
+        eval_dataset: Optional[Dataset] = None,
+        resume_from_checkpoint: Optional[str] = None
+    ):
+        """Execute QLoRA fine-tuning process"""
+        print("Starting QLoRA fine-tuning process...")
+        
+        # Create data collator
+        data_collator = DataCollatorForLanguageModeling(
+            tokenizer=self.tokenizer,
+            mlm=False  # For causal LM
+        )
+        
+        # Create training arguments
+        training_args = self.create_training_arguments()
+        
+        # Create trainer
+        self.trainer = Trainer(
+            model=self.peft_model,
+            args=training_args,
+            train_dataset=train_dataset,
+            eval_dataset=eval_dataset,
+            tokenizer=self.tokenizer,
+            data_collator=data_collator,
+        )
+        
+        # Start training
+        print("Starting QLoRA training...")
+        self.trainer.train(resume_from_checkpoint=resume_from_checkpoint)
+        
+        # Save final model
+        print("Saving final QLoRA model...")
+        self.trainer.save_model(self.config.output_dir)
+        
+        # Save LoRA adapter separately
+        adapter_path = os.path.join(self.config.output_dir, "adapter")
+        self.peft_model.save_pretrained(adapter_path)
+        
+        print(f"QLoRA fine-tuning completed!")
+        print(f"Full model saved to: {self.config.output_dir}")
+        print(f"LoRA adapter saved to: {adapter_path}")
+        
+        return self.trainer
+    
+    def merge_and_save(self, output_path: str):
+        """Merge LoRA adapter with base model and save"""
+        print("Merging LoRA adapter with base model...")
+        
+        # Merge the adapter
+        merged_model = self.peft_model.merge_and_unload()
+        
+        # Save merged model
+        merged_model.save_pretrained(output_path)
+        self.tokenizer.save_pretrained(output_path)
+        
+        print(f"Merged model saved to: {output_path}")
+        return merged_model
+    
+    def generate_response(
+        self, 
+        prompt: str, 
+        max_length: int = 100,
+        temperature: float = 0.7,
+        do_sample: bool = True
+    ) -> str:
+        """Generate response using the QLoRA fine-tuned model"""
+        # Tokenize input
+        inputs = self.tokenizer(prompt, return_tensors="pt")
+        
+        # Move to same device as model
+        inputs = {k: v.to(self.peft_model.device) for k, v in inputs.items()}
+        
+        # Generate
+        with torch.no_grad():
+            outputs = self.peft_model.generate(
+                **inputs,
+                max_new_tokens=max_length,
+                temperature=temperature,
+                do_sample=do_sample,
+                pad_token_id=self.tokenizer.eos_token_id,
+                top_p=0.95,
+                top_k=50
+            )
+        
+        # Decode response
+        response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+        
+        # Remove the original prompt from response
+        if response.startswith(prompt):
+            response = response[len(prompt):].strip()
+        
+        return response
+    
+    def benchmark_memory(self, prompt: str, num_runs: int = 10) -> Dict[str, Any]:
+        """Benchmark memory usage and generation speed"""
+        if not torch.cuda.is_available():
+            return {"error": "CUDA not available for benchmarking"}
+        
+        # Clear cache
+        torch.cuda.empty_cache()
+        
+        # Warmup
+        self.generate_response(prompt, max_length=50)
+        
+        # Benchmark
+        times = []
+        memory_peaks = []
+        
+        for _ in range(num_runs):
+            torch.cuda.reset_peak_memory_stats()
+            start_time = torch.cuda.Event(enable_timing=True)
+            end_time = torch.cuda.Event(enable_timing=True)
+            
+            start_time.record()
+            self.generate_response(prompt, max_length=50)
+            end_time.record()
+            
+            torch.cuda.synchronize()
+            elapsed_time = start_time.elapsed_time(end_time) / 1000  # Convert to seconds
+            
+            times.append(elapsed_time)
+            memory_peaks.append(torch.cuda.max_memory_allocated() / 1024**3)  # GB
+        
+        return {
+            "avg_generation_time": sum(times) / len(times),
+            "std_generation_time": torch.tensor(times).std().item(),
+            "avg_peak_memory": sum(memory_peaks) / len(memory_peaks),
+            "std_peak_memory": torch.tensor(memory_peaks).std().item(),
+            "num_runs": num_runs
+        }
+
+# Usage Example
+def main():
+    # Example QLoRA configuration
+    config = QLoRAConfig(
+        model_name="microsoft/DialoGPT-medium",  # Using a smaller model for demo
+        r=64,
+        lora_alpha=16,
+        max_steps=50,  # Reduced for demo
+        learning_rate=2e-4,
+        output_dir="./qlora_models/demo_v1"
+    )
+    
+    # Initialize QLoRA fine-tuner
+    print("Initializing QLoRA Fine-Tuner...")
+    fine_tuner = QLoRAFineTuner(config)
+    
+    # Load quantized model and tokenizer
+    model, tokenizer = fine_tuner.load_model_and_tokenizer()
+    
+    # Setup QLoRA
+    peft_model = fine_tuner.setup_qlora()
+    
+    # Prepare sample dataset
+    sample_data = [
+        {"text": "Human: What is artificial intelligence?\\nAssistant: Artificial intelligence is the simulation of human intelligence in machines."},
+        {"text": "Human: How does machine learning work?\\nAssistant: Machine learning uses algorithms to learn patterns from data and make predictions."},
+        {"text": "Human: What is deep learning?\\nAssistant: Deep learning uses neural networks with multiple layers to model complex patterns."},
+        {"text": "Human: Explain natural language processing.\\nAssistant: NLP enables computers to understand, interpret, and generate human language."},
+        {"text": "Human: What are neural networks?\\nAssistant: Neural networks are computing systems inspired by biological neural networks."},
+    ]
+    
+    # Prepare dataset
+    tokenized_dataset = fine_tuner.prepare_dataset(
+        sample_data, 
+        text_column="text",
+        max_length=256
+    )
+    
+    # For demonstration, create train/eval split
+    train_size = int(0.8 * len(tokenized_dataset))
+    train_dataset = tokenized_dataset.select(range(train_size))
+    eval_dataset = tokenized_dataset.select(range(train_size, len(tokenized_dataset)))
+    
+    print(f"Training set size: {len(train_dataset)}")
+    print(f"Evaluation set size: {len(eval_dataset)}")
+    
+    # Demonstrate model before fine-tuning
+    test_prompt = "Human: What is artificial intelligence?\\nAssistant:"
+    print(f"\\nModel response before QLoRA fine-tuning:")
+    print(f"Prompt: {test_prompt}")
+    
+    response = fine_tuner.generate_response(test_prompt, max_length=100)
+    print(f"Response: {response}")
+    
+    # Note: In a real scenario, you would call fine_tune() here
+    print("\\nSkipping actual QLoRA fine-tuning for demonstration...")
+    print("In production, you would call: fine_tuner.fine_tune(train_dataset, eval_dataset)")
+    
+    # Demonstrate memory benchmarking
+    print("\\nBenchmarking memory usage...")
+    benchmark_results = fine_tuner.benchmark_memory(test_prompt, num_runs=3)
+    
+    if "error" not in benchmark_results:
+        print(f"Average generation time: {benchmark_results['avg_generation_time']:.3f}s")
+        print(f"Average peak memory: {benchmark_results['avg_peak_memory']:.2f} GB")
+    else:
+        print(f"Benchmark error: {benchmark_results['error']}")
+    
+    # Save model
+    model_path = os.path.join(config.output_dir, "final_model")
+    fine_tuner.save_model(model_path)
+    
+    print(f"\\nDemo completed! Model would be saved to: {model_path}")
+
+# Run the example
+if __name__ == "__main__":
+    main()</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Best Practices -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-star text-deep-blue mr-3"></i>
+                            Fine-tuning Best Practices
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-6">
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                                    <h4 class="font-semibold text-blue-800 mb-2">
+                                        <i class="fas fa-database mr-2"></i>
+                                        Data Quality
+                                    </h4>
+                                    <p class="text-blue-700 text-sm">
+                                        Ensure high-quality, diverse, and representative training data. 
+                                        Clean datasets and balance class distributions appropriately.
+                                    </p>
+                                </div>
+
+                                <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                                    <h4 class="font-semibold text-green-800 mb-2">
+                                        <i class="fas fa-sliders-h mr-2"></i>
+                                        Hyperparameter Tuning
+                                    </h4>
+                                    <p class="text-green-700 text-sm">
+                                        Optimize learning rates, batch sizes, and LoRA parameters. 
+                                        Use validation sets for hyperparameter selection.
+                                    </p>
+                                </div>
+
+                                <div class="bg-purple-50 border-l-4 border-purple-500 p-4">
+                                    <h4 class="font-semibold text-purple-800 mb-2">
+                                        <i class="fas fa-chart-line mr-2"></i>
+                                        Monitoring & Evaluation
+                                    </h4>
+                                    <p class="text-purple-700 text-sm">
+                                        Track training metrics, evaluate on holdout sets, 
+                                        and monitor for overfitting or catastrophic forgetting.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="bg-orange-50 border-l-4 border-orange-500 p-4">
+                                    <h4 class="font-semibold text-orange-800 mb-2">
+                                        <i class="fas fa-shield-alt mr-2"></i>
+                                        Regularization
+                                    </h4>
+                                    <p class="text-orange-700 text-sm">
+                                        Use appropriate regularization techniques, dropout, 
+                                        and early stopping to prevent overfitting.
+                                    </p>
+                                </div>
+
+                                <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                                    <h4 class="font-semibold text-red-800 mb-2">
+                                        <i class="fas fa-save mr-2"></i>
+                                        Checkpointing
+                                    </h4>
+                                    <p class="text-red-700 text-sm">
+                                        Save model checkpoints regularly, implement recovery mechanisms, 
+                                        and version control fine-tuned models.
+                                    </p>
+                                </div>
+
+                                <div class="bg-teal-50 border-l-4 border-teal-500 p-4">
+                                    <h4 class="font-semibold text-teal-800 mb-2">
+                                        <i class="fas fa-balance-scale mr-2"></i>
+                                        Ethical Considerations
+                                    </h4>
+                                    <p class="text-teal-700 text-sm">
+                                        Evaluate for biases, ensure fairness, 
+                                        and consider the ethical implications of fine-tuned models.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-between items-center bg-white rounded-lg shadow-lg p-6">
+                        <a href="topic-retrieval-systems.html" class="text-gray-500 hover:text-deep-blue transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: Retrieval Systems
+                        </a>
+                        <div class="flex space-x-4">
+                            <a href="topic-evaluation-framework.html" class="bg-deep-blue text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+                                Next: Evaluation Framework
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const icon = document.getElementById(sectionId + '-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('expanded');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const text = codeElement.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                // Show feedback
+                const btn = event.target.closest('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+
+        // Create fine-tuning process diagram
+        function createFineTuningProcess() {
+            const data = [{
+                type: 'sankey',
+                node: {
+                    pad: 15,
+                    thickness: 20,
+                    line: { color: "black", width: 0.5 },
+                    label: [
+                        "Pre-trained Model", "Dataset Preparation", "LoRA/QLoRA Setup", "Training Configuration",
+                        "Fine-tuning Process", "Validation", "Model Evaluation", "Performance Metrics",
+                        "Model Deployment", "Production Monitoring"
+                    ],
+                    color: [
+                        "#3b82f6", "#60a5fa", "#93c5fd", "#dbeafe",
+                        "#10b981", "#34d399", "#6ee7b7", "#d1fae5",
+                        "#8b5cf6", "#a78bfa"
+                    ]
+                },
+                link: {
+                    source: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    target: [2, 2, 4, 4, 5, 6, 7, 8, 9, 4],
+                    value: [10, 10, 8, 8, 10, 8, 8, 8, 10, 6]
+                }
+            }];
+
+            const layout = {
+                title: "Fine-tuning Pipeline Process",
+                font: { size: 12 },
+                margin: { l: 0, r: 0, t: 50, b: 0 }
+            };
+
+            Plotly.newPlot('fine-tuning-process', data, layout, {responsive: true});
+        }
+
+        // Initialize diagrams when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createFineTuningProcess();
+        });
+    </script>
+</body>
+</html>

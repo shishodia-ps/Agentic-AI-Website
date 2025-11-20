@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring & Observability - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            overflow-x: hidden;
+        }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        .hero-overlay { 
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.95) 0%, rgba(217, 119, 6, 0.95) 100%);
+        }
+        .topic-card { 
+            transition: all 0.3s ease; 
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .topic-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 10px;
+            height: 8px;
+            transition: width 0.3s ease;
+        }
+        .code-block {
+            background: #1a202c;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .pillar-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #f59e0b;
+            transition: all 0.3s ease;
+        }
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        .metric-type {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .type-golden { background: #fef3c7; color: #d97706; }
+        .type-silver { background: #e5e7eb; color: #374151; }
+        .type-sla { background: #fecaca; color: #dc2626; }
+        .type-business { background: #d1fae5; color: #059669; }
+        .health-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        .health-healthy { background: #10b981; }
+        .health-warning { background: #f59e0b; }
+        .health-critical { background: #ef4444; }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            background-color: rgba(245, 158, 11, 0.1);
+            transform: translateX(4px);
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .monitoring-dashboard {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+        .dashboard-metric {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .dashboard-metric:hover {
+            background: #f1f5f9;
+            transform: scale(1.02);
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        .metric-trend {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .trend-up { color: #10b981; }
+        .trend-down { color: #ef4444; }
+        .trend-stable { color: #6b7280; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-brain text-2xl text-indigo-600 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-900">Agentic AI Hub</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="topics.html" class="nav-link text-gray-700 hover:text-indigo-600">Topics</a>
+                    <a href="about.html" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
+                    <a href="manage.html" class="nav-link text-gray-700 hover:text-indigo-600">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative h-64 hero-overlay flex items-center justify-center">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="relative z-10 text-center text-white">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 stagger-item">Monitoring & Observability</h1>
+            <p class="text-xl md:text-2xl stagger-item">See inside your AI systems with comprehensive visibility</p>
+        </div>
+        <div class="floating-element absolute top-10 right-10 text-white opacity-20">
+            <i class="fas fa-search text-6xl"></i>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Introduction -->
+        <div class="mb-12 stagger-item">
+            <div class="highlight-box">
+                <h2 class="text-2xl font-bold mb-4">What is Monitoring & Observability?</h2>
+                <p class="text-lg leading-relaxed">
+                    Monitoring and observability are critical practices for understanding the health, performance, and behavior 
+                    of AI systems in production. While monitoring tells you when something is wrong, observability helps you 
+                    understand why it's wrong by providing deep insights into system internals.
+                </p>
+            </div>
+        </div>
+
+        <!-- Three Pillars -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Three Pillars of Observability</h2>
+            
+            <div class="pillar-grid">
+                <div class="pillar-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-chart-line text-2xl text-yellow-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">Metrics</h3>
+                        <span class="metric-type type-golden">Golden Signals</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Numerical measurements collected over time that provide quantitative insights into system performance and health.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <span class="health-indicator health-healthy"></span>
+                            <span class="text-sm text-gray-700">Latency: 95th percentile response times</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="health-indicator health-warning"></span>
+                            <span class="text-sm text-gray-700">Traffic: Requests per second</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="health-indicator health-healthy"></span>
+                            <span class="text-sm text-gray-700">Errors: Error rate percentage</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="health-indicator health-critical"></span>
+                            <span class="text-sm text-gray-700">Saturation: Resource utilization</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-file-alt text-2xl text-gray-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">Logs</h3>
+                        <span class="metric-type type-silver">Structured Data</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Detailed records of events and activities within the system, providing context and narrative for understanding behavior.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Application logs with correlation IDs</li>
+                        <li>• Error logs with stack traces</li>
+                        <li>• Audit logs for compliance</li>
+                        <li>• Performance logs with timing data</li>
+                        <li>• Security logs for threat detection</li>
+                    </ul>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-project-diagram text-2xl text-red-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">Traces</h3>
+                        <span class="metric-type type-sla">Distributed</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        End-to-end request flow tracking across distributed systems, showing the path and timing of operations.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Request journey across services</li>
+                        <li>• Service dependency mapping</li>
+                        <li>• Performance bottleneck identification</li>
+                        <li>• Error propagation tracking</li>
+                        <li>• Latency distribution analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI-Specific Monitoring -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">AI-Specific Monitoring Metrics</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-blue-700">
+                        <i class="fas fa-brain mr-2"></i>Model Performance Metrics
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium">Prediction Accuracy</span>
+                            <span class="text-sm text-green-600">94.2%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium">Model Confidence</span>
+                            <span class="text-sm text-blue-600">87.5%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium">Inference Latency</span>
+                            <span class="text-sm text-yellow-600">145ms</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium">Throughput</span>
+                            <span class="text-sm text-green-600">1,250 req/s</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-green-700">
+                        <i class="fas fa-database mr-2"></i>Data Quality Metrics
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium">Data Freshness</span>
+                            <span class="text-sm text-green-600">2.3 hours</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium">Missing Values</span>
+                            <span class="text-sm text-yellow-600">3.1%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium">Feature Drift</span>
+                            <span class="text-sm text-red-600">0.23</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium">Label Quality</span>
+                            <span class="text-sm text-green-600">96.8%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Monitoring Dashboard -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Live Monitoring Dashboard</h2>
+            
+            <div class="monitoring-dashboard">
+                <h3 class="text-xl font-bold mb-6">System Health Overview</h3>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div class="dashboard-metric">
+                        <div class="text-sm text-gray-600">CPU Usage</div>
+                        <div class="metric-value text-blue-600">68%</div>
+                        <div class="metric-trend trend-up">
+                            <i class="fas fa-arrow-up mr-1"></i>+5.2%
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-metric">
+                        <div class="text-sm text-gray-600">Memory</div>
+                        <div class="metric-value text-green-600">45%</div>
+                        <div class="metric-trend trend-stable">
+                            <i class="fas fa-minus mr-1"></i>0%
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-metric">
+                        <div class="text-sm text-gray-600">Error Rate</div>
+                        <div class="metric-value text-red-600">2.3%</div>
+                        <div class="metric-trend trend-down">
+                            <i class="fas fa-arrow-down mr-1"></i>-1.1%
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-metric">
+                        <div class="text-sm text-gray-600">Uptime</div>
+                        <div class="metric-value text-green-600">99.7%</div>
+                        <div class="metric-trend trend-up">
+                            <i class="fas fa-arrow-up mr-1"></i>+0.2%
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold mb-4">Request Volume Over Time</h4>
+                        <div id="requestChart" style="height: 250px;"></div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-4">Error Distribution</h4>
+                        <div id="errorChart" style="height: 250px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerting & Incident Response -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Alerting & Incident Response</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="topic-card p-6">
+                    <h3 class="text-lg font-bold mb-4 text-red-700">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>Critical Alerts
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-red-50 border border-red-200 rounded-lg">
+                            <div class="font-semibold text-red-800 text-sm">Model Accuracy Drop</div>
+                            <div class="text-red-600 text-xs">Accuracy below 90% threshold</div>
+                            <div class="text-red-500 text-xs mt-1">Triggered 5 minutes ago</div>
+                        </div>
+                        
+                        <div class="p-3 bg-red-50 border border-red-200 rounded-lg">
+                            <div class="font-semibold text-red-800 text-sm">High Error Rate</div>
+                            <div class="text-red-600 text-xs">Error rate above 5% threshold</div>
+                            <div class="text-red-500 text-xs mt-1">Triggered 12 minutes ago</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-lg font-bold mb-4 text-yellow-700">
+                        <i class="fas fa-exclamation-circle mr-2"></i>Warning Alerts
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <div class="font-semibold text-yellow-800 text-sm">High Memory Usage</div>
+                            <div class="text-yellow-600 text-xs">Memory usage above 80%</div>
+                            <div class="text-yellow-500 text-xs mt-1">Triggered 23 minutes ago</div>
+                        </div>
+                        
+                        <div class="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <div class="font-semibold text-yellow-800 text-sm">Slow Response Time</div>
+                            <div class="text-yellow-600 text-xs">P95 latency above 500ms</div>
+                            <div class="text-yellow-500 text-xs mt-1">Triggered 1 hour ago</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-lg font-bold mb-4 text-green-700">
+                        <i class="fas fa-info-circle mr-2"></i>Info Alerts
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="font-semibold text-green-800 text-sm">Model Updated</div>
+                            <div class="text-green-600 text-xs">New model version deployed</div>
+                            <div class="text-green-500 text-xs mt-1">Triggered 2 hours ago</div>
+                        </div>
+                        
+                        <div class="p-3 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="font-semibold text-green-800 text-sm">Scheduled Maintenance</div>
+                            <div class="text-green-600 text-xs">System maintenance completed</div>
+                            <div class="text-green-500 text-xs mt-1">Triggered 4 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Monitoring Best Practices</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-blue-700">
+                        <i class="fas fa-lightbulb mr-2"></i>Design Principles
+                    </h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Start with Business Objectives:</strong> Monitor what matters to your users and business goals.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Use the Three Pillars:</strong> Combine metrics, logs, and traces for complete visibility.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Implement Gradual Rollout:</strong> Start with basic monitoring and add complexity incrementally.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Automate Everything:</strong> Use automated alerting, dashboards, and response procedures.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-green-700">
+                        <i class="fas fa-tools mr-2"></i>Implementation Tips
+                    </h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Standardize Naming:</strong> Use consistent naming conventions for metrics and alerts.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Set Meaningful Thresholds:</strong> Base alerts on historical data and business impact.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Test Your Monitoring:</strong> Regularly verify that alerts and dashboards work correctly.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Document Everything:</strong> Maintain runbooks and documentation for all alerts.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-12 stagger-item">
+            <a href="topic-deployment-strategies.html" class="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Previous: Deployment Strategies
+            </a>
+            <div class="flex space-x-4">
+                <a href="topics.html" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    All Topics
+                </a>
+            </div>
+            <a href="topic-scaling-performance.html" class="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors">
+                Next: Scaling & Performance
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 Agentic AI Knowledge Hub. Empowering the future of artificial intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize animations
+        anime({
+            targets: '.stagger-item',
+            opacity: [0, 1],
+            translateY: [30, 0],
+            delay: anime.stagger(100),
+            duration: 800,
+            easing: 'easeOutQuart'
+        });
+
+        // Request Volume Chart
+        const requestChart = echarts.init(document.getElementById('requestChart'));
+        const requestOption = {
+            tooltip: { trigger: 'axis' },
+            xAxis: {
+                type: 'category',
+                data: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00']
+            },
+            yAxis: { type: 'value', name: 'Requests/sec' },
+            series: [{
+                name: 'Request Volume',
+                type: 'line',
+                data: [120, 180, 450, 680, 520, 380, 210],
+                itemStyle: { color: '#f59e0b' },
+                areaStyle: { color: 'rgba(245, 158, 11, 0.1)' }
+            }]
+        };
+        requestChart.setOption(requestOption);
+
+        // Error Distribution Chart
+        const errorChart = echarts.init(document.getElementById('errorChart'));
+        const errorOption = {
+            tooltip: { trigger: 'item' },
+            series: [{
+                name: 'Error Types',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                data: [
+                    { value: 45, name: 'Timeout Errors', itemStyle: { color: '#ef4444' } },
+                    { value: 30, name: 'Validation Errors', itemStyle: { color: '#f59e0b' } },
+                    { value: 15, name: 'Model Errors', itemStyle: { color: '#3b82f6' } },
+                    { value: 10, name: 'Network Errors', itemStyle: { color: '#10b981' } }
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        };
+        errorChart.setOption(errorOption);
+
+        // Responsive charts
+        window.addEventListener('resize', function() {
+            requestChart.resize();
+            errorChart.resize();
+        });
+    </script>
+</body>
+</html>

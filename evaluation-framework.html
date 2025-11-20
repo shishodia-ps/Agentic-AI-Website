@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation Framework - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, #f8f6f0 0%, #e8e4dc 100%); }
+        .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .code-block { background: #2d3748; color: #e2e8f0; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .note-box { background: #fef5e7; border-left: 4px solid #f6ad55; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .warning-box { background: #fed7d7; border-left: 4px solid #fc8181; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .tip-box { background: #e6fffa; border-left: 4px solid #4fd1c7; padding: 1rem; border-radius: 0 8px 8px 0; }
+        .info-box { background: #ebf8ff; border-left: 4px solid #63b3ed; padding: 1rem; border-radius: 0 8px 8px 0; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                        <i class="fas fa-brain text-2xl text-blue-600"></i>
+                        <span class="font-semibold text-xl">Agentic AI Hub</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-gray-900 font-medium">Home</a>
+                    <a href="ai-stack.html" class="text-gray-600 hover:text-gray-900 font-medium">AI Stack</a>
+                    <a href="visual-editor.html" class="text-blue-600 hover:text-blue-800 font-medium">Visual Editor</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-shadow">
+                    Evaluation Framework
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Comprehensive evaluation methodologies for AI systems, covering model performance, 
+                    bias detection, robustness testing, and real-world deployment assessment.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="sticky top-24">
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Quick Navigation</h3>
+                        <nav class="space-y-2">
+                            <a href="#overview" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Overview</a>
+                            <a href="#metrics" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Evaluation Metrics</a>
+                            <a href="#bias-detection" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Bias Detection</a>
+                            <a href="#robustness" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Robustness Testing</a>
+                            <a href="#deployment" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Deployment Assessment</a>
+                            <a href="#tools" class="block text-sm text-gray-600 hover:text-blue-600 py-1">Evaluation Tools</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Overview Section -->
+                <section id="overview" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Overview</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        AI evaluation frameworks provide systematic approaches to assess model performance, fairness, 
+                        robustness, and real-world applicability. These frameworks are essential for building 
+                        reliable and trustworthy AI systems.
+                    </p>
+                    
+                    <div class="info-box mb-6">
+                        <h4 class="font-semibold text-blue-800 mb-2">
+                            <i class="fas fa-info-circle mr-2"></i>Key Principle
+                        </h4>
+                        <p class="text-blue-700">
+                            A comprehensive evaluation framework should cover multiple dimensions: accuracy, 
+                            fairness, robustness, interpretability, and real-world performance.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-chart-line text-2xl text-green-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Performance Metrics</h3>
+                            </div>
+                            <p class="text-gray-600">Quantitative measures of model accuracy and effectiveness</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-balance-scale text-2xl text-purple-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Fairness Assessment</h3>
+                            </div>
+                            <p class="text-gray-600">Detection and mitigation of algorithmic bias</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-shield-alt text-2xl text-red-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Robustness Testing</h3>
+                            </div>
+                            <p class="text-gray-600">Adversarial and edge case evaluation</p>
+                        </div>
+                        <div class="hover-lift bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-eye text-2xl text-blue-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">Interpretability</h3>
+                            </div>
+                            <p class="text-gray-600">Model explainability and transparency</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Evaluation Metrics -->
+                <section id="metrics" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Evaluation Metrics</h2>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Classification Metrics</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="font-semibold text-lg mb-3">Accuracy</h4>
+                                <div class="code-block">
+                                    <code>accuracy = (TP + TN) / (TP + TN + FP + FN)</code>
+                                </div>
+                                <p class="text-gray-600 mt-3">Overall correctness of predictions</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="font-semibold text-lg mb-3">Precision & Recall</h4>
+                                <div class="code-block">
+                                    <code>precision = TP / (TP + FP)<br>
+                                    recall = TP / (TP + FN)</code>
+                                </div>
+                                <p class="text-gray-600 mt-3">Trade-off between false positives and false negatives</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="font-semibold text-lg mb-3">F1-Score</h4>
+                                <div class="code-block">
+                                    <code>f1 = 2 * (precision * recall) / (precision + recall)</code>
+                                </div>
+                                <p class="text-gray-600 mt-3">Harmonic mean of precision and recall</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="font-semibold text-lg mb-3">AUC-ROC</h4>
+                                <div class="code-block">
+                                    <code>Area under the ROC curve</code>
+                                </div>
+                                <p class="text-gray-600 mt-3">Model's ability to distinguish between classes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note-box mb-6">
+                        <h4 class="font-semibold text-yellow-800 mb-2">
+                            <i class="fas fa-lightbulb mr-2"></i>Best Practice
+                        </h4>
+                        <p class="text-yellow-700">
+                            Always use multiple metrics to get a complete picture of model performance. 
+                            Single metrics can be misleading, especially with imbalanced datasets.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Bias Detection -->
+                <section id="bias-detection" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Bias Detection & Fairness</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Types of Bias</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-red-400 pl-4">
+                                <h4 class="font-semibold text-lg">Selection Bias</h4>
+                                <p class="text-gray-600">Non-representative training data leading to poor generalization</p>
+                            </div>
+                            <div class="border-l-4 border-orange-400 pl-4">
+                                <h4 class="font-semibold text-lg">Confirmation Bias</h4>
+                                <p class="text-gray-600">Model reinforces existing stereotypes or prejudices</p>
+                            </div>
+                            <div class="border-l-4 border-yellow-400 pl-4">
+                                <h4 class="font-semibold text-lg">Algorithmic Bias</h4>
+                                <p class="text-gray-600">Systematic errors in model predictions across demographic groups</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Fairness Metrics</h3>
+                        <div class="code-block">
+                            <pre><code># Demographic Parity
+P(Ŷ = 1 | A = 0) = P(Ŷ = 1 | A = 1)
+
+# Equalized Odds
+P(Ŷ = 1 | Y = y, A = 0) = P(Ŷ = 1 | Y = y, A = 1) for y ∈ {0, 1}
+
+# Individual Fairness
+D(f(x₁), f(x₂)) ≤ d(x₁, x₂) for all x₁, x₂</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4 class="font-semibold text-red-800 mb-2">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>Important Consideration
+                        </h4>
+                        <p class="text-red-700">
+                            Different fairness metrics can be incompatible. Choose metrics based on your 
+                            specific use case and ethical considerations.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Robustness Testing -->
+                <section id="robustness" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Robustness Testing</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Adversarial Testing</h3>
+                        <p class="text-gray-600 text-lg mb-4">
+                            Test model resilience against intentionally crafted inputs designed to cause misclassification.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="font-semibold text-lg mb-3">FGSM Attack</h4>
+                                <div class="code-block">
+                                    <code>x' = x + ε * sign(∇x J(θ, x, y))</code>
+                                </div>
+                                <p class="text-gray-600 mt-3">Fast Gradient Sign Method for generating adversarial examples</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <h4 class="font-semibold text-lg mb-3">PGD Attack</h4>
+                                <div class="code-block">
+                                    <code>x' = Π(x + α * sign(∇x J(θ, x, y)))</code>
+                                </div>
+                                <p class="text-gray-600 mt-3">Projected Gradient Descent for stronger attacks</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Edge Case Testing</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                <span>Noise injection and data corruption scenarios</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                <span>Out-of-distribution samples</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                <span>Extreme value testing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                <span>Concept drift simulation</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Deployment Assessment -->
+                <section id="deployment" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Real-World Deployment Assessment</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Performance Monitoring</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="hover-lift bg-blue-50 rounded-lg p-6">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-tachometer-alt text-2xl text-blue-600 mr-3"></i>
+                                    <h4 class="text-lg font-semibold">Latency</h4>
+                                </div>
+                                <p class="text-gray-600">Response time under different load conditions</p>
+                            </div>
+                            <div class="hover-lift bg-green-50 rounded-lg p-6">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-memory text-2xl text-green-600 mr-3"></i>
+                                    <h4 class="text-lg font-semibold">Resource Usage</h4>
+                                </div>
+                                <p class="text-gray-600">CPU, memory, and GPU utilization patterns</p>
+                            </div>
+                            <div class="hover-lift bg-purple-50 rounded-lg p-6">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-chart-bar text-2xl text-purple-600 mr-3"></i>
+                                    <h4 class="text-lg font-semibold">Throughput</h4>
+                                </div>
+                                <p class="text-gray-600">Requests per second and processing capacity</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">A/B Testing Framework</h3>
+                        <div class="code-block">
+                            <pre><code>class ABTestFramework:
+    def __init__(self, control_model, treatment_model):
+        self.control = control_model
+        self.treatment = treatment_model
+        self.results = {}
+    
+    def run_test(self, test_data, metrics):
+        control_results = self.evaluate_model(self.control, test_data, metrics)
+        treatment_results = self.evaluate_model(self.treatment, test_data, metrics)
+        
+        return self.statistical_analysis(control_results, treatment_results)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <h4 class="font-semibold text-teal-800 mb-2">
+                            <i class="fas fa-lightbulb mr-2"></i>Pro Tip
+                        </h4>
+                        <p class="text-teal-700">
+                            Implement canary deployments with gradual traffic shifting to monitor 
+                            real-world performance before full rollout.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Evaluation Tools -->
+                <section id="tools" class="bg-white rounded-lg shadow-sm p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Evaluation Tools & Frameworks</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="hover-lift bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fab fa-python text-2xl text-blue-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">What-If Tool</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Interactive model analysis and fairness evaluation</p>
+                            <div class="code-block">
+                                <code>pip install witwidget</code>
+                            </div>
+                        </div>
+                        
+                        <div class="hover-lift bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-shield-alt text-2xl text-green-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">AI Fairness 360</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Comprehensive bias detection and mitigation toolkit</p>
+                            <div class="code-block">
+                                <code>pip install aif360</code>
+                            </div>
+                        </div>
+                        
+                        <div class="hover-lift bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-chart-line text-2xl text-purple-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">TensorBoard</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Model visualization and performance monitoring</p>
+                            <div class="code-block">
+                                <code>pip install tensorboard</code>
+                            </div>
+                        </div>
+                        
+                        <div class="hover-lift bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-bug text-2xl text-red-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">CleverHans</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Adversarial example library for robustness testing</p>
+                            <div class="code-block">
+                                <code>pip install cleverhans</code>
+                            </div>
+                        </div>
+                        
+                        <div class="hover-lift bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-search text-2xl text-orange-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">LIME</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Local interpretable model-agnostic explanations</p>
+                            <div class="code-block">
+                                <code>pip install lime</code>
+                            </div>
+                        </div>
+                        
+                        <div class="hover-lift bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-eye text-2xl text-teal-600 mr-3"></i>
+                                <h3 class="text-lg font-semibold">SHAP</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">SHapley Additive exPlanations for model interpretability</p>
+                            <div class="code-block">
+                                <code>pip install shap</code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Summary</h2>
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        A comprehensive evaluation framework is essential for building reliable AI systems. 
+                        By combining multiple evaluation approaches—from basic performance metrics to 
+                        advanced bias detection and robustness testing—we can ensure our models are 
+                        not only accurate but also fair, robust, and ready for real-world deployment.
+                    </p>
+                    
+                    <div class="mt-6 flex flex-wrap gap-4">
+                        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                            Performance Metrics
+                        </span>
+                        <span class="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                            Bias Detection
+                        </span>
+                        <span class="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+                            Robustness Testing
+                        </span>
+                        <span class="px-4 py-2 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
+                            Real-world Assessment
+                        </span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <i class="fas fa-brain text-2xl text-blue-400"></i>
+                    <span class="text-xl font-semibold">Agentic AI Knowledge Hub</span>
+                </div>
+                <p class="text-gray-400">
+                    © 2024 Agentic AI Knowledge Hub. Empowering AI engineering excellence.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active navigation item
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-600', 'font-semibold');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-blue-600', 'font-semibold');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

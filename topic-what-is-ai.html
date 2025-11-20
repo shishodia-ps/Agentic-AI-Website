@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Artificial Intelligence? - Agentic AI Knowledge Hub</title>
+    <meta name="description" content="Learn the fundamentals of Artificial Intelligence, its history, types, and applications in modern technology.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --sage-deep: #2D5A3D;
+            --charcoal-warm: #3A3A3A;
+            --cream-soft: #F8F6F0;
+            --copper-accent: #B87333;
+            --teal-muted: #4A7C7E;
+            --lavender-soft: #B8A9C9;
+            --gray-warm: #8B8680;
+            --success-green: #6B8E5A;
+            --warning-amber: #D4A574;
+            --error-coral: #C67B5C;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream-soft);
+            color: var(--charcoal-warm);
+            line-height: 1.6;
+        }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Navigation */
+        .nav-glass {
+            background: rgba(248, 246, 240, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--copper-accent);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--copper-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 320px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        
+        .topic-header {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .topic-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .topic-content h2 {
+            color: var(--sage-deep);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--copper-accent);
+        }
+        
+        .topic-content h3 {
+            color: var(--charcoal-warm);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+        
+        .topic-content h4 {
+            color: var(--charcoal-warm);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem 0;
+        }
+        
+        .topic-content p {
+            margin-bottom: 1rem;
+            color: var(--charcoal-warm);
+        }
+        
+        .topic-content ul, .topic-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        
+        .topic-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .topic-content strong {
+            color: var(--sage-deep);
+            font-weight: 600;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background: #1a1a1a;
+            color: #e5e5e5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin: 1.5rem 0;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+        
+        /* Info Boxes */
+        .info-box {
+            background: rgba(184, 115, 51, 0.1);
+            border-left: 4px solid var(--copper-accent);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .info-box h4 {
+            color: var(--copper-accent);
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        .warning-box {
+            background: rgba(212, 165, 116, 0.1);
+            border-left: 4px solid var(--warning-amber);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box h4 {
+            color: var(--warning-amber);
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        /* Progress and Navigation */
+        .topic-progress {
+            background: rgba(45, 90, 61, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .progress-bar {
+            width: 200px;
+            height: 8px;
+            background: rgba(45, 90, 61, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--copper-accent);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .topic-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--copper-accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: var(--sage-deep);
+            transform: translateY(-2px);
+        }
+        
+        .nav-button.secondary {
+            background: rgba(45, 90, 61, 0.1);
+            color: var(--charcoal-warm);
+        }
+        
+        .nav-button.secondary:hover {
+            background: rgba(45, 90, 61, 0.2);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            
+            .topic-header,
+            .topic-content {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Sidebar Styles */
+        .sidebar-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 320px;
+            height: 100vh;
+            background: rgba(248, 246, 240, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(45, 90, 61, 0.1);
+            z-index: 1000;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .sidebar-header h3 {
+            color: var(--sage-deep);
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin: 0;
+        }
+        
+        .sidebar-toggle {
+            background: none;
+            border: none;
+            color: var(--charcoal-warm);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .sidebar-toggle:hover {
+            background: rgba(45, 90, 61, 0.1);
+        }
+        
+        .sidebar-content {
+            padding: 0 0 2rem 0;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-section-title {
+            padding: 0.75rem 1.5rem;
+            margin: 0;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--charcoal-warm);
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: background-color 0.2s ease;
+        }
+        
+        .sidebar-section-title:hover {
+            background: rgba(45, 90, 61, 0.05);
+        }
+        
+        .sidebar-section-title.active {
+            background: rgba(184, 115, 51, 0.1);
+            color: var(--copper-accent);
+        }
+        
+        .sidebar-section-title .chevron {
+            width: 1rem;
+            height: 1rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .sidebar-section-title.active .chevron {
+            transform: rotate(180deg);
+        }
+        
+        .sidebar-section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .sidebar-section-content.active {
+            max-height: 1000px;
+        }
+        
+        .sidebar-section-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-section-content li {
+            margin: 0;
+        }
+        
+        .sidebar-section-content a {
+            display: block;
+            padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+            color: var(--charcoal-warm);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar-section-content a:hover {
+            background: rgba(184, 115, 51, 0.05);
+            color: var(--copper-accent);
+            border-left-color: var(--copper-accent);
+        }
+        
+        .sidebar-section-content a.active {
+            background: rgba(184, 115, 51, 0.1);
+            color: var(--copper-accent);
+            border-left-color: var(--copper-accent);
+            font-weight: 500;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .sidebar-nav {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar-nav.mobile-open {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div id="sidebarContainer"></div>
+    
+    <!-- Main Navigation -->
+    <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <button class="sidebar-toggle md:hidden" id="mobileSidebarToggle">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <h1 class="text-xl font-bold text-sage-deep">Agentic AI Hub</h1>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="index.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Home</a>
+                        <a href="topics.html" class="nav-link text-copper-accent font-semibold">Topics</a>
+                        <a href="manage.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Manage</a>
+                        <a href="about.html" class="nav-link text-charcoal-warm hover:text-copper-accent">About</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="text-sm text-gray-warm hover:text-copper-accent" onclick="toggleSidebar()">
+                        Toggle Sidebar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content pt-20">
+        <div class="topic-header">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <span class="inline-block px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full mb-2">Fundamentals</span>
+                    <h1 class="text-4xl font-bold text-charcoal-warm mb-2">What is Artificial Intelligence?</h1>
+                    <p class="text-xl text-gray-warm">Understanding the fundamentals of AI, its history, and applications</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm text-gray-warm mb-1">Difficulty Level</div>
+                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">Beginner</span>
+                </div>
+            </div>
+            
+            <div class="topic-progress">
+                <div>
+                    <span class="text-sm font-medium text-charcoal-warm">Learning Progress</span>
+                    <div class="text-xs text-gray-warm mt-1">Complete this topic to unlock the next one</div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="text-sm font-medium text-charcoal-warm">0%</span>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Artificial Intelligence</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Machine Learning</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">AI Fundamentals</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Neural Networks</span>
+            </div>
+        </div>
+        
+        <div class="topic-content">
+            <h2>Introduction to Artificial Intelligence</h2>
+            
+            <p>Artificial Intelligence (AI) is one of the most transformative technologies of our time, revolutionizing industries and changing the way we interact with technology. But what exactly is AI, and how did it evolve to become what it is today?</p>
+            
+            <h3>What is Artificial Intelligence?</h3>
+            
+            <p>Artificial Intelligence refers to the simulation of human intelligence in machines that are programmed to think and learn like humans. The term can also be applied to any machine that exhibits traits associated with a human mind, such as learning and problem-solving.</p>
+            
+            <div class="info-box">
+                <h4>💡 Key Insight</h4>
+                <p>AI is not just about creating intelligent machines; it's about creating systems that can perform tasks that typically require human intelligence, such as visual perception, speech recognition, decision-making, and language translation.</p>
+            </div>
+            
+            <h3>The History of AI</h3>
+            
+            <p>The concept of artificial intelligence dates back to ancient times, but the modern field of AI research began in the 1950s:</p>
+            
+            <ul>
+                <li><strong>1950:</strong> Alan Turing proposes the Turing Test</li>
+                <li><strong>1956:</strong> The term "Artificial Intelligence" is coined at the Dartmouth Conference</li>
+                <li><strong>1960s-70s:</strong> Early AI programs and expert systems</li>
+                <li><strong>1980s-90s:</strong> Machine learning and neural networks gain prominence</li>
+                <li><strong>2000s:</strong> Big data and improved algorithms lead to AI breakthroughs</li>
+                <li><strong>2010s-present:</strong> Deep learning revolution and modern AI applications</li>
+            </ul>
+            
+            <h3>Types of Artificial Intelligence</h3>
+            
+            <p>AI can be categorized based on its capabilities and functionality:</p>
+            
+            <h4>Based on Capabilities:</h4>
+            
+            <ol>
+                <li><strong>Narrow AI (Weak AI):</strong> AI systems designed to perform specific tasks</li>
+                <li><strong>General AI (Strong AI):</strong> AI systems with human-level intelligence across all domains</li>
+                <li><strong>Super AI:</strong> AI systems that surpass human intelligence in all aspects</li>
+            </ol>
+            
+            <h4>Based on Functionality:</h4>
+            
+            <ol>
+                <li><strong>Reactive Machines:</strong> AI that responds to current situations without memory</li>
+                <li><strong>Limited Memory:</strong> AI that can use past experiences to inform decisions</li>
+                <li><strong>Theory of Mind:</strong> AI that can understand human emotions and beliefs</li>
+                <li><strong>Self-Aware:</strong> AI that has consciousness and self-awareness</li>
+            </ol>
+            
+            <h3>Core Components of AI</h3>
+            
+            <div class="info-box">
+                <h4>🔧 Technical Components</h4>
+                <p>Modern AI systems typically include these key components: data ingestion, preprocessing, model training, inference engines, and feedback loops for continuous improvement.</p>
+            </div>
+            
+            <h4>1. Machine Learning</h4>
+            <p>The foundation of modern AI, machine learning enables systems to learn from data without being explicitly programmed for every scenario.</p>
+            
+            <h4>2. Neural Networks</h4>
+            <p>Inspired by the human brain, neural networks are computational models that can learn complex patterns from data.</p>
+            
+            <h4>3. Natural Language Processing (NLP)</h4>
+            <p>The ability of AI systems to understand, interpret, and generate human language.</p>
+            
+            <h4>4. Computer Vision</h4>
+            <p>The field of AI that enables machines to interpret and understand visual information from the world.</p>
+            
+            <h4>5. Robotics</h4>
+            <p>The integration of AI with physical machines to perform tasks in the real world.</p>
+            
+            <h3>Applications of AI</h3>
+            
+            <p>AI has found applications across numerous industries and domains:</p>
+            
+            <ul>
+                <li><strong>Healthcare:</strong> Medical diagnosis, drug discovery, personalized treatment</li>
+                <li><strong>Finance:</strong> Fraud detection, algorithmic trading, risk assessment</li>
+                <li><strong>Transportation:</strong> Autonomous vehicles, traffic optimization, route planning</li>
+                <li><strong>Education:</strong> Personalized learning, automated grading, educational content</li>
+                <li><strong>Entertainment:</strong> Content recommendation, game AI, creative tools</li>
+                <li><strong>Business:</strong> Customer service, process automation, decision support</li>
+            </ul>
+            
+            <h3>Challenges and Considerations</h3>
+            
+            <div class="warning-box">
+                <h4>⚠️ Important Considerations</h4>
+                <p>As AI becomes more powerful, we must address ethical concerns, bias in algorithms, privacy issues, and the potential impact on employment and society.</p>
+            </div>
+            
+            <h4>Technical Challenges:</h4>
+            <ul>
+                <li>Data quality and availability</li>
+                <li>Algorithm bias and fairness</li>
+                <li>Interpretability and explainability</li>
+                <li>Computational resources and energy consumption</li>
+                <li>Safety and reliability</li>
+            </ul>
+            
+            <h4>Ethical Considerations:</h4>
+            <ul>
+                <li>Privacy and data protection</li>
+                <li>Transparency in decision-making</li>
+                <li>Accountability for AI actions</li>
+                <li>Impact on employment</li>
+                <li>Dual-use concerns</li>
+            </ul>
+            
+            <h3>The Future of AI</h3>
+            
+            <p>The field of AI continues to evolve rapidly, with several key trends shaping its future:</p>
+            
+            <ul>
+                <li><strong>Multimodal AI:</strong> Systems that can process multiple types of data simultaneously</li>
+                <li><strong>Federated Learning:</strong> Training AI models without centralizing data</li>
+                <li><strong>Edge AI:</strong> Running AI models on local devices for faster response times</li>
+                <li><strong>Explainable AI:</strong> Making AI decisions more transparent and understandable</li>
+                <li><strong>AI Safety:</strong> Ensuring AI systems are aligned with human values</li>
+            </ul>
+            
+            <div class="info-box">
+                <h4>🚀 Looking Ahead</h4>
+                <p>The future of AI holds tremendous promise, from solving complex scientific problems to enhancing human creativity. As we continue to develop more sophisticated AI systems, the focus will be on creating beneficial AI that augments human capabilities rather than replacing them.</p>
+            </div>
+            
+            <h3>Getting Started with AI</h3>
+            
+            <p>If you're interested in learning more about AI and getting hands-on experience, here are some recommended next steps:</p>
+            
+            <ol>
+                <li>Learn the basics of programming (Python is highly recommended)</li>
+                <li>Study mathematics, particularly linear algebra and statistics</li>
+                <li>Take online courses in machine learning and AI</li>
+                <li>Practice with AI frameworks like TensorFlow or PyTorch</li>
+                <li>Join AI communities and participate in projects</li>
+                <li>Stay updated with the latest research and developments</li>
+            </ol>
+            
+            <div class="topic-navigation">
+                <a href="index.html" class="nav-button secondary">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Back to Home
+                </a>
+                
+                <a href="topic-types-of-ai.html" class="nav-button">
+                    Next: Types of AI
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Load sidebar navigation
+        fetch('sidebar-navigation.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('sidebarContainer').innerHTML = html;
+                initializeSidebar();
+            })
+            .catch(error => {
+                console.log('Sidebar not found, creating basic version');
+                createBasicSidebar();
+            });
+        
+        function initializeSidebar() {
+            // Set current page as active
+            const currentPage = window.location.pathname.split('/').pop() || 'topic-what-is-ai.html';
+            const links = document.querySelectorAll('.sidebar-section-content a');
+            links.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                    // Open the parent section
+                    const section = link.closest('.sidebar-section-content');
+                    const title = section.previousElementSibling;
+                    if (title) {
+                        title.classList.add('active');
+                        section.classList.add('active');
+                    }
+                }
+            });
+            
+            // Mobile sidebar toggle
+            const mobileToggle = document.getElementById('mobileSidebarToggle');
+            const sidebar = document.querySelector('.sidebar-nav');
+            
+            if (mobileToggle && sidebar) {
+                mobileToggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('mobile-open');
+                });
+            }
+        }
+        
+        function createBasicSidebar() {
+            const sidebarHTML = `
+                <nav class="sidebar-nav">
+                    <div class="sidebar-header">
+                        <h3>AI Knowledge Hub</h3>
+                    </div>
+                    <div class="sidebar-content">
+                        <div class="p-4">
+                            <h4>Navigation</h4>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="topics.html">All Topics</a></li>
+                                <li><a href="manage.html">Manage Content</a></li>
+                                <li><a href="about.html">About</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            `;
+            document.getElementById('sidebarContainer').innerHTML = sidebarHTML;
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar-nav');
+            if (sidebar) {
+                sidebar.classList.toggle('mobile-open');
+            }
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate content on load
+            anime({
+                targets: '.topic-header, .topic-content',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                delay: anime.stagger(200),
+                duration: 600,
+                easing: 'easeOutQuart'
+            });
+            
+            // Add smooth scrolling for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

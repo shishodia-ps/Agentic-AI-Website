@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Trends - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            overflow-x: hidden;
+        }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        .hero-overlay { 
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.95) 0%, rgba(16, 185, 129, 0.95) 100%);
+        }
+        .topic-card { 
+            transition: all 0.3s ease; 
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .topic-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 10px;
+            height: 8px;
+            transition: width 0.3s ease;
+        }
+        .code-block {
+            background: #1a202c;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .trend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .trend-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #22c55e;
+            transition: all 0.3s ease;
+        }
+        .trend-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        .maturity-level {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .level-emerging { background: #fef3c7; color: #d97706; }
+        .level-growing { background: #dbeafe; color: #1e40af; }
+        .level-mature { background: #dcfce7; color: #166534; }
+        .level-future { background: #fce7f3; color: #be185d; }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #22c55e;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.25rem;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: #e5e7eb;
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            background-color: rgba(34, 197, 94, 0.1);
+            transform: translateX(4px);
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .prediction-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .impact-indicator {
+            display: inline-block;
+            width: 60px;
+            height: 8px;
+            border-radius: 4px;
+            background: #e5e7eb;
+            overflow: hidden;
+        }
+        .impact-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-brain text-2xl text-indigo-600 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-900">Agentic AI Hub</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="topics.html" class="nav-link text-gray-700 hover:text-indigo-600">Topics</a>
+                    <a href="about.html" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
+                    <a href="manage.html" class="nav-link text-gray-700 hover:text-indigo-600">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative h-64 hero-overlay flex items-center justify-center">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="relative z-10 text-center text-white">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 stagger-item">Future Trends</h1>
+            <p class="text-xl md:text-2xl stagger-item">The next frontier of artificial intelligence</p>
+        </div>
+        <div class="floating-element absolute top-10 right-10 text-white opacity-20">
+            <i class="fas fa-rocket text-6xl"></i>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Introduction -->
+        <div class="mb-12 stagger-item">
+            <div class="highlight-box">
+                <h2 class="text-2xl font-bold mb-4">The Future of AI</h2>
+                <p class="text-lg leading-relaxed">
+                    Artificial Intelligence is evolving at an unprecedented pace, with new breakthroughs emerging 
+                    regularly. From quantum-enhanced AI to artificial general intelligence, the next decade promises 
+                    revolutionary advances that will transform how we interact with technology and solve complex problems.
+                </p>
+            </div>
+        </div>
+
+        <!-- Emerging Trends -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Emerging AI Trends</h2>
+            
+            <div class="trend-grid">
+                <div class="trend-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold">Artificial General Intelligence (AGI)</h3>
+                        <span class="maturity-level level-future">Future</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        AI systems with human-level cognitive abilities across diverse tasks, reasoning, and learning domains.
+                    </p>
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Technical Complexity</span>
+                            <div class="impact-indicator">
+                                <div class="impact-fill bg-red-500" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Market Readiness</span>
+                            <div class="impact-indicator">
+                                <div class="impact-fill bg-yellow-500" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Societal Impact</span>
+                            <div class="impact-indicator">
+                                <div class="impact-fill bg-red-500" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Cross-domain knowledge transfer</li>
+                        <li>• Abstract reasoning capabilities</li>
+                        <li>• Creative problem solving</li>
+                        <li>• Ethical decision making</li>
+                    </ul>
+                </div>
+
+                <div class="trend-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold">Quantum AI</h3>
+                        <span class="maturity-level level-emerging">Emerging</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Leveraging quantum computing principles to enhance AI algorithms and solve complex optimization problems.
+                    </p>
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Technical Complexity</span>
+                            <div class="impact-indicator">
+                                <div class="impact-fill bg-red-500" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Market Readiness</span>
+                            <div class="impact-indicator">
+                                <div class="impact-fill bg-yellow-500" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Societal Impact</span>
+                            <div class="impact-indicator">
+                                <div class="impact-fill bg-orange-500" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Quantum machine learning algorithms</li>
+                        <li>• Exponential speedup for certain problems</li>
+                        <li>• Enhanced cryptographic applications</li>
+                        <li>• Quantum neural networks</li>
+                    </ul>
+                </div>
+
+                <div class="trend-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold">Neuromorphic Computing</h3>
+                        <span class="maturity-level level-growing">Growing</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Brain-inspired computing architectures that mimic neural networks for ultra-low power AI processing.
+                    </p>
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Technical Complexity</span>
+                            <div class="impact-indicator">
+                                <div class="impact-fill bg-orange-500" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Market Readiness</span>
+                            <div class="impact-indicator">
+                                <div class="impact-fill bg-blue-500" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Societal Impact</span>
+                            <div class="impact-indicator">
+                                <div class="impact-fill bg-green-500" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Event-driven processing</li>
+                        <li>• Real-time learning capabilities</li>
+                        <li>• Ultra-low power consumption</li>
+                        <li>• Edge AI applications</li>
+                    </ul>
+                </div>
+
+                <div class="trend-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold">Multimodal AI</h3>
+                        <span class="maturity-level level-mature">Mature</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        AI systems that can understand and process multiple types of data simultaneously (text, images, audio, video).
+                    </p>
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Technical Complexity</span>
+                            <div class="impact-indicator">
+                                <div class="impact-fill bg-yellow-500" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Market Readiness</span>
+                            <div class="impact-indicator">
+                                <div class="impact-fill bg-green-500" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Societal Impact</span>
+                            <div class="impact-indicator">
+                                <div class="impact-fill bg-green-500" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Cross-modal understanding</li>
+                        <li>• Unified representation learning</li>
+                        <li>• Enhanced human-AI interaction</li>
+                        <li>• Creative content generation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Timeline -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">AI Evolution Timeline</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="timeline-item">
+                    <div class="bg-white rounded-lg p-6 shadow-lg">
+                        <h3 class="text-xl font-bold text-green-700 mb-2">2024-2025: Foundation Models</h3>
+                        <p class="text-gray-700 mb-3">
+                            Continued advancement in large language models, improved reasoning capabilities, and better alignment techniques.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• GPT-5 and beyond with enhanced reasoning</li>
+                            <li>• Multimodal integration becoming standard</li>
+                            <li>• Improved efficiency and cost reduction</li>
+                            <li>• Better safety and alignment mechanisms</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="bg-white rounded-lg p-6 shadow-lg">
+                        <h3 class="text-xl font-bold text-blue-700 mb-2">2026-2027: Specialized AI</h3>
+                        <p class="text-gray-700 mb-3">
+                            AI systems specialized for specific domains with expert-level knowledge and capabilities.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• AI scientists and researchers</li>
+                            <li>• Autonomous software development</li>
+                            <li>• Advanced robotics integration</li>
+                            <li>• Personalized AI assistants</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="bg-white rounded-lg p-6 shadow-lg">
+                        <h3 class="text-xl font-bold text-purple-700 mb-2">2028-2029: AI-Human Collaboration</h3>
+                        <p class="text-gray-700 mb-3">
+                            Seamless collaboration between humans and AI in creative and intellectual endeavors.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• AI creative partners</li>
+                            <li>• Enhanced decision-making systems</li>
+                            <li>• Collaborative problem-solving</li>
+                            <li>• Emotional intelligence in AI</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="bg-white rounded-lg p-6 shadow-lg">
+                        <h3 class="text-xl font-bold text-red-700 mb-2">2030+: AGI Emergence</h3>
+                        <p class="text-gray-700 mb-3">
+                            Potential emergence of artificial general intelligence with human-level cognitive abilities.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Cross-domain intelligence</li>
+                            <li>• Autonomous learning and adaptation</li>
+                            <li>• Ethical reasoning capabilities</li>
+                            <li>• Societal transformation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Predictions & Forecasts -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Expert Predictions</h2>
+            
+            <div class="prediction-card">
+                <h3 class="text-xl font-bold mb-4 text-blue-800">
+                    <i class="fas fa-crystal-ball mr-2"></i>Technology Forecasts
+                </h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-blue-800 mb-3">Near-term (2024-2026)</h4>
+                        <ul class="text-blue-700 text-sm space-y-2">
+                            <li>• 100x improvement in model efficiency</li>
+                            <li>• Real-time multimodal AI assistants</li>
+                            <li>• Autonomous AI research systems</li>
+                            <li>• Quantum-classical hybrid algorithms</li>
+                            <li>• Neuromorphic chip commercialization</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-blue-800 mb-3">Long-term (2027-2030)</h4>
+                        <ul class="text-blue-700 text-sm space-y-2">
+                            <li>• Human-level AI in narrow domains</li>
+                            <li>• AI-designed AI systems</li>
+                            <li>• Brain-computer interfaces</li>
+                            <li>• Molecular-level AI simulation</li>
+                            <li>• AI governance frameworks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prediction-card">
+                <h3 class="text-xl font-bold mb-4 text-green-800">
+                    <i class="fas fa-chart-line mr-2"></i>Market Predictions
+                </h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-green-800">$1.3T</div>
+                        <div class="text-green-700 text-sm">Global AI market by 2030</div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-800">40%</div>
+                        <div class="text-blue-700 text-sm">Productivity increase potential</div>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-800">300M</div>
+                        <div class="text-purple-700 text-sm">Jobs augmented by AI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Impact Analysis -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Societal Impact Analysis</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-green-700">
+                        <i class="fas fa-thumbs-up mr-2"></i>Positive Impacts
+                    </h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Healthcare Revolution:</strong> AI-driven drug discovery, personalized medicine, and early disease detection.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Scientific Discovery:</strong> Accelerated research in physics, chemistry, and materials science.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Climate Solutions:</strong> Optimized energy systems, carbon capture, and environmental monitoring.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Education Enhancement:</strong> Personalized learning, intelligent tutoring, and accessibility improvements.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-red-700">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>Challenges & Risks
+                    </h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation-circle text-red-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Job Displacement:</strong> Automation may eliminate certain roles while creating new ones.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation-circle text-red-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Privacy Concerns:</strong> Increased data collection and surveillance capabilities.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation-circle text-red-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Algorithmic Bias:</strong> Potential for discrimination and unfair decision-making.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation-circle text-red-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Security Risks:</strong> New attack vectors and vulnerabilities in AI systems.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Future Skills -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Future Skills & Career Paths</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="topic-card p-6">
+                    <h3 class="text-lg font-bold mb-4 text-blue-700">
+                        <i class="fas fa-code mr-2"></i>Technical Roles
+                    </h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li>• AI Research Scientists</li>
+                        <li>• Machine Learning Engineers</li>
+                        <li>• AI Ethics Specialists</li>
+                        <li>• Quantum AI Developers</li>
+                        <li>• Neuromorphic Engineers</li>
+                        <li>• AI Safety Researchers</li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-lg font-bold mb-4 text-green-700">
+                        <i class="fas fa-users mr-2"></i>Interdisciplinary Roles
+                    </h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li>• AI Policy Advisors</li>
+                        <li>• Human-AI Interaction Designers</li>
+                        <li>• AI Business Strategists</li>
+                        <li>• AI Educators and Trainers</li>
+                        <li>• AI Governance Specialists</li>
+                        <li>• AI Translators</li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-lg font-bold mb-4 text-purple-700">
+                        <i class="fas fa-lightbulb mr-2"></i>Emerging Specializations
+                    </h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li>• AI Consciousness Researchers</li>
+                        <li>• AI Rights Advocates</li>
+                        <li>• AI Psychologists</li>
+                        <li>• AI Artists and Creatives</li>
+                        <li>• AI Therapists</li>
+                        <li>• AI Anthropologists</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-12 stagger-item">
+            <a href="topic-security-privacy.html" class="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Previous: Security & Privacy
+            </a>
+            <div class="flex space-x-4">
+                <a href="topics.html" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    All Topics
+                </a>
+            </div>
+            <a href="index.html" class="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors">
+                Back to Home
+                <i class="fas fa-home ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 Agentic AI Knowledge Hub. Empowering the future of artificial intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize animations
+        anime({
+            targets: '.stagger-item',
+            opacity: [0, 1],
+            translateY: [30, 0],
+            delay: anime.stagger(100),
+            duration: 800,
+            easing: 'easeOutQuart'
+        });
+    </script>
+</body>
+</html>

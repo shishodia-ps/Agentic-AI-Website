@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Foundations - AI Engineering Knowledge Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'deep-blue': '#1e3a8a',
+                        'soft-gray': '#f8fafc',
+                        'accent-blue': '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .code-block { 
+            background: #1a1a1a; 
+            border-radius: 8px; 
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .code-header { 
+            background: #2d2d2d; 
+            padding: 0.75rem 1rem; 
+            display: flex; 
+            justify-content: between; 
+            align-items: center;
+            border-bottom: 1px solid #404040;
+        }
+        .copy-btn { 
+            background: #4a5568; 
+            color: white; 
+            border: none; 
+            padding: 0.25rem 0.75rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover { background: #718096; }
+        .progress-bar { 
+            width: 100%; 
+            height: 4px; 
+            background: #e2e8f0; 
+            border-radius: 2px; 
+            overflow: hidden;
+        }
+        .progress-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, #3b82f6, #1e40af); 
+            transition: width 0.3s ease;
+        }
+        .model-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .model-card:hover {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-soft-gray font-sans">
+    <div class="min-h-screen flex">
+        <!-- Sidebar Navigation -->
+        <div class="w-80 bg-white shadow-lg border-r border-gray-200 flex flex-col">
+            <!-- Sidebar Header -->
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-brain text-2xl text-deep-blue mr-3"></i>
+                    <h1 class="text-xl font-bold text-gray-800">AI Engineering Hub</h1>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="sidebarSearch" 
+                        placeholder="Search topics..." 
+                        class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-blue focus:border-transparent"
+                    >
+                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Navigation Content -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <!-- Modern AI-Engineering Stack Section -->
+                <div class="sidebar-section rounded-lg mb-4">
+                    <div class="section-header p-4 bg-blue-50 rounded-lg" onclick="toggleSection('modern-stack')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-layer-group text-deep-blue mr-3"></i>
+                                <span class="font-semibold text-gray-800">Modern AI-Engineering Stack</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 transition-transform" id="modern-stack-icon"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-1 ml-6">Core architecture components</p>
+                    </div>
+                    <div class="section-content" id="modern-stack-content">
+                        <div class="p-2">
+                            <a href="topic-ai-stack-overview.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-sitemap text-blue-500 mr-2"></i>AI Engineering Stack Overview
+                            </a>
+                            <a href="topic-llm-foundations.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700 bg-blue-100 border-l-4 border-deep-blue">
+                                <i class="fas fa-brain text-green-500 mr-2"></i>LLM Foundations
+                            </a>
+                            <a href="topic-vector-databases.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-database text-purple-500 mr-2"></i>Vector Databases
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto">
+            <!-- Header -->
+            <div class="bg-white shadow-sm border-b border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-800">LLM Foundations</h1>
+                        <p class="text-gray-600 mt-2">Large Language Models: architecture, training, and capabilities</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-right">
+                            <div class="text-sm text-gray-500">Progress</div>
+                            <div class="text-lg font-semibold text-deep-blue">85%</div>
+                        </div>
+                        <div class="progress-bar w-32">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Introduction -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                            <i class="fas fa-brain text-deep-blue mr-3"></i>
+                            Understanding Large Language Models
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Large Language Models (LLMs) represent a revolutionary breakthrough in artificial intelligence, 
+                            enabling machines to understand, generate, and manipulate human language with unprecedented capability. 
+                            These models form the backbone of modern AI applications, from chatbots and content generation to 
+                            code completion and complex reasoning tasks.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            At their core, LLMs are neural networks trained on vast amounts of text data, learning patterns, 
+                            relationships, and structures inherent in human language. This training enables them to perform 
+                            a wide range of natural language processing tasks without task-specific fine-tuning.
+                        </p>
+
+                        <!-- LLM Architecture Visualization -->
+                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">LLM Architecture Overview</h3>
+                            <div id="llm-architecture" style="height: 400px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- LLM Architecture -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-layer-group text-deep-blue mr-3"></i>
+                            Core Architecture Components
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <!-- Transformer Architecture -->
+                            <div class="model-card bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-network-wired text-2xl text-blue-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Transformer Architecture</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    The foundation of modern LLMs, using self-attention mechanisms to process sequences in parallel.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Multi-head attention</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Positional encoding</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Feed-forward networks</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Layer normalization</li>
+                                </ul>
+                            </div>
+
+                            <!-- Attention Mechanism -->
+                            <div class="model-card bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-eye text-2xl text-green-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Attention Mechanism</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Enables models to focus on relevant parts of input sequences when making predictions.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Scaled dot-product attention</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Key-value queries</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Attention weights</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Context vectors</li>
+                                </ul>
+                            </div>
+
+                            <!-- Tokenization -->
+                            <div class="model-card bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-puzzle-piece text-2xl text-purple-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Tokenization</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Converts text into numerical representations that models can process.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Byte Pair Encoding (BPE)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>WordPiece tokenization</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Subword algorithms</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Vocabulary management</li>
+                                </ul>
+                            </div>
+
+                            <!-- Training Process -->
+                            <div class="model-card bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-graduation-cap text-2xl text-orange-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Training Process</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Large-scale pre-training followed by fine-tuning for specific tasks.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Unsupervised pre-training</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Supervised fine-tuning</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Reinforcement learning</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Human feedback integration</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Popular LLM Models -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-star text-deep-blue mr-3"></i>
+                            Popular LLM Models & Comparison
+                        </h2>
+                        
+                        <div class="overflow-x-auto mb-6">
+                            <table class="w-full border-collapse border border-gray-300">
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Model</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Parameters</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Context Window</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Developer</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Key Features</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">GPT-4</td>
+                                        <td class="border border-gray-300 px-4 py-3">~1.7T</td>
+                                        <td class="border border-gray-300 px-4 py-3">128K tokens</td>
+                                        <td class="border border-gray-300 px-4 py-3">OpenAI</td>
+                                        <td class="border border-gray-300 px-4 py-3">Multimodal, reasoning</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">Claude 3</td>
+                                        <td class="border border-gray-300 px-4 py-3">~175B</td>
+                                        <td class="border border-gray-300 px-4 py-3">200K tokens</td>
+                                        <td class="border border-gray-300 px-4 py-3">Anthropic</td>
+                                        <td class="border border-gray-300 px-4 py-3">Constitutional AI, safety</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">LLaMA 2</td>
+                                        <td class="border border-gray-300 px-4 py-3">7B-70B</td>
+                                        <td class="border border-gray-300 px-4 py-3">4K tokens</td>
+                                        <td class="border border-gray-300 px-4 py-3">Meta</td>
+                                        <td class="border border-gray-300 px-4 py-3">Open source, customizable</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">Gemini Pro</td>
+                                        <td class="border border-gray-300 px-4 py-3">~540B</td>
+                                        <td class="border border-gray-300 px-4 py-3">32K tokens</td>
+                                        <td class="border border-gray-300 px-4 py-3">Google</td>
+                                        <td class="border border-gray-300 px-4 py-3">Multimodal, Google integration</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Model Performance Chart -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Model Performance Comparison</h3>
+                            <div id="performance-chart" style="height: 400px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Implementation Examples -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-code text-deep-blue mr-3"></i>
+                            Implementation Examples
+                        </h2>
+                        
+                        <!-- OpenAI API Example -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">OpenAI API Integration</h3>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="text-gray-300 font-medium">openai_integration.py</span>
+                                    <button class="copy-btn" onclick="copyCode('openai-code')">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre id="openai-code" class="language-python"><code>import openai
+import asyncio
+from typing import List, Dict, Any
+from dataclasses import dataclass
+
+@dataclass
+class OpenAIConfig:
+    api_key: str
+    model: str = "gpt-4"
+    temperature: float = 0.7
+    max_tokens: int = 1000
+    top_p: float = 1.0
+    frequency_penalty: float = 0.0
+    presence_penalty: float = 0.0
+
+class OpenAILLM:
+    """
+    OpenAI LLM integration with comprehensive error handling and retry logic
+    """
+    
+    def __init__(self, config: OpenAIConfig):
+        self.config = config
+        openai.api_key = config.api_key
+        self.client = openai.AsyncOpenAI()
+    
+    async def generate(
+        self, 
+        prompt: str, 
+        system_message: str = None,
+        **kwargs
+    ) -> Dict[str, Any]:
+        """
+        Generate text using OpenAI's API with comprehensive error handling
+        """
+        try:
+            # Prepare messages
+            messages = []
+            if system_message:
+                messages.append({"role": "system", "content": system_message})
+            messages.append({"role": "user", "content": prompt})
+            
+            # Make API call
+            response = await self.client.chat.completions.create(
+                model=self.config.model,
+                messages=messages,
+                temperature=kwargs.get('temperature', self.config.temperature),
+                max_tokens=kwargs.get('max_tokens', self.config.max_tokens),
+                top_p=kwargs.get('top_p', self.config.top_p),
+                frequency_penalty=kwargs.get('frequency_penalty', self.config.frequency_penalty),
+                presence_penalty=kwargs.get('presence_penalty', self.config.presence_penalty)
+            )
+            
+            return {
+                "success": True,
+                "content": response.choices[0].message.content,
+                "usage": {
+                    "prompt_tokens": response.usage.prompt_tokens,
+                    "completion_tokens": response.usage.completion_tokens,
+                    "total_tokens": response.usage.total_tokens
+                },
+                "model": response.model,
+                "finish_reason": response.choices[0].finish_reason
+            }
+            
+        except openai.RateLimitError:
+            return {
+                "success": False,
+                "error": "Rate limit exceeded. Please try again later.",
+                "retry_after": 60
+            }
+        except openai.APIError as e:
+            return {
+                "success": False,
+                "error": f"API error: {str(e)}",
+                "retry_after": 5
+            }
+        except Exception as e:
+            return {
+                "success": False,
+                "error": f"Unexpected error: {str(e)}",
+                "retry_after": None
+            }
+    
+    async def generate_streaming(
+        self, 
+        prompt: str, 
+        system_message: str = None,
+        **kwargs
+    ):
+        """
+        Generate text with streaming responses for real-time applications
+        """
+        messages = []
+        if system_message:
+            messages.append({"role": "system", "content": system_message})
+        messages.append({"role": "user", "content": prompt})
+        
+        stream = await self.client.chat.completions.create(
+            model=self.config.model,
+            messages=messages,
+            stream=True,
+            **kwargs
+        )
+        
+        async for chunk in stream:
+            if chunk.choices[0].delta.content is not None:
+                yield chunk.choices[0].delta.content
+    
+    async def batch_generate(
+        self, 
+        prompts: List[str], 
+        system_messages: List[str] = None,
+        max_concurrent: int = 5
+    ) -> List[Dict[str, Any]]:
+        """
+        Generate responses for multiple prompts concurrently
+        """
+        if system_messages is None:
+            system_messages = [None] * len(prompts)
+        
+        semaphore = asyncio.Semaphore(max_concurrent)
+        
+        async def generate_with_semaphore(prompt, system_msg):
+            async with semaphore:
+                return await self.generate(prompt, system_msg)
+        
+        tasks = [
+            generate_with_semaphore(prompt, sys_msg)
+            for prompt, sys_msg in zip(prompts, system_messages)
+        ]
+        
+        return await asyncio.gather(*tasks)
+
+# Usage Example
+async def main():
+    # Initialize OpenAI LLM
+    config = OpenAIConfig(
+        api_key="your-api-key-here",
+        model="gpt-4",
+        temperature=0.7
+    )
+    
+    llm = OpenAILLM(config)
+    
+    # Single generation
+    result = await llm.generate(
+        "Explain the concept of transformer architecture in simple terms.",
+        system_message="You are a helpful AI assistant explaining complex topics simply."
+    )
+    
+    if result["success"]:
+        print(f"Generated content: {result['content']}")
+        print(f"Tokens used: {result['usage']['total_tokens']}")
+    else:
+        print(f"Error: {result['error']}")
+    
+    # Streaming generation
+    print("\nStreaming response:")
+    async for chunk in llm.generate_streaming(
+        "Write a short story about AI.",
+        system_message="You are a creative writer."
+    ):
+        print(chunk, end="", flush=True)
+    
+    # Batch generation
+    prompts = [
+        "What is machine learning?",
+        "Explain neural networks.",
+        "What is deep learning?"
+    ]
+    
+    batch_results = await llm.batch_generate(prompts)
+    for i, result in enumerate(batch_results):
+        if result["success"]:
+            print(f"\nPrompt {i+1}: {result['content'][:100]}...")
+
+# Run the example
+if __name__ == "__main__":
+    asyncio.run(main())</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Hugging Face Example -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Hugging Face Transformers</h3>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="text-gray-300 font-medium">huggingface_integration.py</span>
+                                    <button class="copy-btn" onclick="copyCode('hf-code')">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre id="hf-code" class="language-python"><code>from transformers import (
+    AutoTokenizer, 
+    AutoModelForCausalLM, 
+    pipeline,
+    GenerationConfig
+)
+import torch
+from typing import List, Dict, Any
+
+class HuggingFaceLLM:
+    """
+    Hugging Face Transformers integration for local LLM deployment
+    """
+    
+    def __init__(self, model_name: str, device: str = "auto"):
+        self.model_name = model_name
+        self.device = self._get_device(device)
+        
+        # Load tokenizer and model
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        
+        if self.tokenizer.pad_token is None:
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+        
+        self.model = AutoModelForCausalLM.from_pretrained(
+            model_name,
+            torch_dtype=torch.float16 if self.device != "cpu" else torch.float32,
+            device_map="auto" if device == "auto" else None
+        )
+        
+        # Create generation pipeline
+        self.pipeline = pipeline(
+            "text-generation",
+            model=self.model,
+            tokenizer=self.tokenizer,
+            device=0 if self.device != "cpu" else -1
+        )
+    
+    def _get_device(self, device: str) -> str:
+        """Determine the best available device"""
+        if device == "auto":
+            if torch.cuda.is_available():
+                return "cuda"
+            elif torch.backends.mps.is_available():
+                return "mps"
+            else:
+                return "cpu"
+        return device
+    
+    def generate(
+        self, 
+        prompt: str, 
+        max_length: int = 100,
+        temperature: float = 0.7,
+        top_p: float = 0.9,
+        top_k: int = 50,
+        num_return_sequences: int = 1,
+        do_sample: bool = True,
+        **kwargs
+    ) -> List[Dict[str, Any]]:
+        """
+        Generate text using the loaded model
+        """
+        generation_config = GenerationConfig(
+            max_length=max_length,
+            temperature=temperature,
+            top_p=top_p,
+            top_k=top_k,
+            num_return_sequences=num_return_sequences,
+            do_sample=do_sample,
+            pad_token_id=self.tokenizer.pad_token_id,
+            eos_token_id=self.tokenizer.eos_token_id,
+            **kwargs
+        )
+        
+        # Generate response
+        outputs = self.pipeline(
+            prompt,
+            generation_config=generation_config,
+            return_full_text=False
+        )
+        
+        return outputs
+    
+    def chat_completion(
+        self, 
+        messages: List[Dict[str, str]], 
+        max_length: int = 100,
+        **kwargs
+    ) -> str:
+        """
+        Generate chat completion from message history
+        """
+        # Format messages into a single prompt
+        prompt = self._format_chat_prompt(messages)
+        
+        response = self.generate(
+            prompt,
+            max_length=max_length,
+            num_return_sequences=1,
+            **kwargs
+        )
+        
+        return response[0]["generated_text"].strip()
+    
+    def _format_chat_prompt(self, messages: List[Dict[str, str]]) -> str:
+        """Format chat messages into a prompt"""
+        prompt_parts = []
+        for message in messages:
+            role = message["role"]
+            content = message["content"]
+            
+            if role == "system":
+                prompt_parts.append(f"System: {content}")
+            elif role == "user":
+                prompt_parts.append(f"Human: {content}")
+            elif role == "assistant":
+                prompt_parts.append(f"Assistant: {content}")
+        
+        prompt_parts.append("Assistant:")
+        return "\n\n".join(prompt_parts)
+    
+    def get_model_info(self) -> Dict[str, Any]:
+        """Get information about the loaded model"""
+        return {
+            "model_name": self.model_name,
+            "device": self.device,
+            "vocab_size": len(self.tokenizer),
+            "model_size": sum(p.numel() for p in self.model.parameters()),
+            "trainable_parameters": sum(p.numel() for p in self.model.parameters() if p.requires_grad)
+        }
+
+# Usage Example
+def main():
+    # Initialize Hugging Face LLM
+    llm = HuggingFaceLLM(
+        model_name="microsoft/DialoGPT-medium",
+        device="auto"
+    )
+    
+    # Get model information
+    info = llm.get_model_info()
+    print(f"Model info: {info}")
+    
+    # Simple text generation
+    prompt = "The future of artificial intelligence is"
+    responses = llm.generate(
+        prompt,
+        max_length=50,
+        temperature=0.8,
+        num_return_sequences=3
+    )
+    
+    print(f"\nPrompt: {prompt}")
+    for i, response in enumerate(responses):
+        print(f"Response {i+1}: {response['generated_text']}")
+    
+    # Chat completion
+    messages = [
+        {"role": "system", "content": "You are a helpful AI assistant."},
+        {"role": "user", "content": "What is machine learning?"},
+        {"role": "assistant", "content": "Machine learning is a subset of AI that enables computers to learn without explicit programming."},
+        {"role": "user", "content": "Can you give me an example?"}
+    ]
+    
+    chat_response = llm.chat_completion(messages, max_length=100)
+    print(f"\nChat response: {chat_response}")
+
+if __name__ == "__main__":
+    main()</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Best Practices -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-star text-deep-blue mr-3"></i>
+                            LLM Integration Best Practices
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-6">
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                                    <h4 class="font-semibold text-blue-800 mb-2">
+                                        <i class="fas fa-shield-alt mr-2"></i>
+                                        Error Handling
+                                    </h4>
+                                    <p class="text-blue-700 text-sm">
+                                        Implement comprehensive error handling for API failures, rate limits, 
+                                        and network issues. Use exponential backoff for retries.
+                                    </p>
+                                </div>
+
+                                <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                                    <h4 class="font-semibold text-green-800 mb-2">
+                                        <i class="fas fa-tachometer-alt mr-2"></i>
+                                        Performance Optimization
+                                    </h4>
+                                    <p class="text-green-700 text-sm">
+                                        Use streaming for real-time applications, implement caching for 
+                                        repeated queries, and batch requests when possible.
+                                    </p>
+                                </div>
+
+                                <div class="bg-purple-50 border-l-4 border-purple-500 p-4">
+                                    <h4 class="font-semibold text-purple-800 mb-2">
+                                        <i class="fas fa-dollar-sign mr-2"></i>
+                                        Cost Management
+                                    </h4>
+                                    <p class="text-purple-700 text-sm">
+                                        Monitor token usage, implement request throttling, and use 
+                                        appropriate model sizes for your use case.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="bg-orange-50 border-l-4 border-orange-500 p-4">
+                                    <h4 class="font-semibold text-orange-800 mb-2">
+                                        <i class="fas fa-lock mr-2"></i>
+                                        Security & Privacy
+                                    </h4>
+                                    <p class="text-orange-700 text-sm">
+                                        Sanitize inputs, implement content filtering, and ensure 
+                                        compliance with data protection regulations.
+                                    </p>
+                                </div>
+
+                                <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                                    <h4 class="font-semibold text-red-800 mb-2">
+                                        <i class="fas fa-chart-line mr-2"></i>
+                                        Monitoring & Analytics
+                                    </h4>
+                                    <p class="text-red-700 text-sm">
+                                        Track response times, error rates, and usage patterns. 
+                                        Implement comprehensive logging and alerting.
+                                    </p>
+                                </div>
+
+                                <div class="bg-teal-50 border-l-4 border-teal-500 p-4">
+                                    <h4 class="font-semibold text-teal-800 mb-2">
+                                        <i class="fas fa-cogs mr-2"></i>
+                                        Configuration Management
+                                    </h4>
+                                    <p class="text-teal-700 text-sm">
+                                        Use environment variables for API keys, implement configuration 
+                                        validation, and support multiple environments.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-between items-center bg-white rounded-lg shadow-lg p-6">
+                        <a href="topic-ai-stack-overview.html" class="text-gray-500 hover:text-deep-blue transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: AI Stack Overview
+                        </a>
+                        <div class="flex space-x-4">
+                            <a href="topic-vector-databases.html" class="bg-deep-blue text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+                                Next: Vector Databases
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const icon = document.getElementById(sectionId + '-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('expanded');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const text = codeElement.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                // Show feedback
+                const btn = event.target.closest('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+
+        // Create LLM architecture diagram
+        function createLLMArchitecture() {
+            const data = [{
+                type: 'sankey',
+                node: {
+                    pad: 15,
+                    thickness: 20,
+                    line: { color: "black", width: 0.5 },
+                    label: [
+                        "Input Text", "Tokenization", "Embedding Layer", "Positional Encoding",
+                        "Transformer Blocks", "Multi-Head Attention", "Feed Forward", 
+                        "Layer Norm", "Output Layer", "Generated Text", "Loss Calculation"
+                    ],
+                    color: [
+                        "#3b82f6", "#60a5fa", "#93c5fd", "#dbeafe",
+                        "#10b981", "#34d399", "#6ee7b7", "#d1fae5",
+                        "#8b5cf6", "#a78bfa", "#f59e0b"
+                    ]
+                },
+                link: {
+                    source: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    target: [1, 2, 4, 4, 5, 6, 7, 4, 9, 10, 8],
+                    value: [10, 10, 10, 10, 8, 8, 8, 8, 10, 10, 8]
+                }
+            }];
+
+            const layout = {
+                title: "LLM Architecture Flow",
+                font: { size: 12 },
+                margin: { l: 0, r: 0, t: 50, b: 0 }
+            };
+
+            Plotly.newPlot('llm-architecture', data, layout, {responsive: true});
+        }
+
+        // Create performance comparison chart
+        function createPerformanceChart() {
+            const models = ['GPT-4', 'Claude 3', 'LLaMA 2', 'Gemini Pro'];
+            const reasoning = [95, 92, 85, 88];
+            const creativity = [90, 88, 82, 85];
+            const speed = [75, 80, 90, 85];
+            const cost_efficiency = [60, 70, 95, 75];
+
+            const data = [
+                {
+                    x: models,
+                    y: reasoning,
+                    name: 'Reasoning',
+                    type: 'bar',
+                    marker: { color: '#3b82f6' }
+                },
+                {
+                    x: models,
+                    y: creativity,
+                    name: 'Creativity',
+                    type: 'bar',
+                    marker: { color: '#10b981' }
+                },
+                {
+                    x: models,
+                    y: speed,
+                    name: 'Speed',
+                    type: 'bar',
+                    marker: { color: '#f59e0b' }
+                },
+                {
+                    x: models,
+                    y: cost_efficiency,
+                    name: 'Cost Efficiency',
+                    type: 'bar',
+                    marker: { color: '#8b5cf6' }
+                }
+            ];
+
+            const layout = {
+                title: 'LLM Performance Comparison',
+                xaxis: { title: 'Models' },
+                yaxis: { title: 'Score (0-100)' },
+                barmode: 'group',
+                margin: { l: 50, r: 50, t: 50, b: 50 }
+            };
+
+            Plotly.newPlot('performance-chart', data, layout, {responsive: true});
+        }
+
+        // Initialize charts when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createLLMArchitecture();
+            createPerformanceChart();
+        });
+    </script>
+</body>
+</html>

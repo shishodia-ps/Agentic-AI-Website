@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scaling & Performance - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            overflow-x: hidden;
+        }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        .hero-overlay { 
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.95) 0%, rgba(139, 92, 246, 0.95) 100%);
+        }
+        .topic-card { 
+            transition: all 0.3s ease; 
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .topic-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 10px;
+            height: 8px;
+            transition: width 0.3s ease;
+        }
+        .code-block {
+            background: #1a202c;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .scaling-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .scaling-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #a855f7;
+            transition: all 0.3s ease;
+        }
+        .scaling-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        .scaling-type {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .type-horizontal { background: #dbeafe; color: #1e40af; }
+        .type-vertical { background: #dcfce7; color: #166534; }
+        .type-auto { background: #fef3c7; color: #d97706; }
+        .type-diagonal { background: #fce7f3; color: #be185d; }
+        .performance-indicator {
+            display: inline-block;
+            width: 60px;
+            height: 8px;
+            border-radius: 4px;
+            background: #e5e7eb;
+            overflow: hidden;
+        }
+        .performance-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            background-color: rgba(168, 85, 247, 0.1);
+            transform: translateX(4px);
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .optimization-technique {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid #10b981;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .bottleneck-analysis {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .metric-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .metric-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        .metric-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-brain text-2xl text-indigo-600 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-900">Agentic AI Hub</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="topics.html" class="nav-link text-gray-700 hover:text-indigo-600">Topics</a>
+                    <a href="about.html" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
+                    <a href="manage.html" class="nav-link text-gray-700 hover:text-indigo-600">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative h-64 hero-overlay flex items-center justify-center">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="relative z-10 text-center text-white">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 stagger-item">Scaling & Performance</h1>
+            <p class="text-xl md:text-2xl stagger-item">Optimizing AI systems for speed and efficiency</p>
+        </div>
+        <div class="floating-element absolute top-10 right-10 text-white opacity-20">
+            <i class="fas fa-tachometer-alt text-6xl"></i>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Introduction -->
+        <div class="mb-12 stagger-item">
+            <div class="highlight-box">
+                <h2 class="text-2xl font-bold mb-4">What is Scaling & Performance Optimization?</h2>
+                <p class="text-lg leading-relaxed">
+                    Scaling and performance optimization are critical aspects of deploying AI systems that can handle 
+                    increasing workloads efficiently. Scaling involves adding resources to handle more requests, while 
+                    performance optimization focuses on making individual operations faster and more resource-efficient.
+                </p>
+            </div>
+        </div>
+
+        <!-- Scaling Strategies -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Scaling Strategies</h2>
+            
+            <div class="scaling-grid">
+                <div class="scaling-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold">Horizontal Scaling</h3>
+                        <span class="scaling-type type-horizontal">Horizontal</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Add more instances of your AI service to distribute the load across multiple machines or containers.
+                    </p>
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Scalability</span>
+                            <div class="performance-indicator">
+                                <div class="performance-fill bg-green-500" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Complexity</span>
+                            <div class="performance-indicator">
+                                <div class="performance-fill bg-yellow-500" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Cost</span>
+                            <div class="performance-indicator">
+                                <div class="performance-fill bg-yellow-500" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Load balancing across instances</li>
+                        <li>• Fault tolerance and redundancy</li>
+                        <li>• Auto-scaling based on demand</li>
+                        <li>• Geographic distribution</li>
+                    </ul>
+                </div>
+
+                <div class="scaling-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold">Vertical Scaling</h3>
+                        <span class="scaling-type type-vertical">Vertical</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Increase the resources (CPU, memory) of existing instances to handle more load per machine.
+                    </p>
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Simplicity</span>
+                            <div class="performance-indicator">
+                                <div class="performance-fill bg-green-500" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Limits</span>
+                            <div class="performance-indicator">
+                                <div class="performance-fill bg-red-500" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Downtime</span>
+                            <div class="performance-indicator">
+                                <div class="performance-fill bg-red-500" style="width: 50%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Simple implementation</li>
+                        <li>• No architectural changes needed</li>
+                        <li>• Single point of failure risk</li>
+                        <li>• Hardware limitations</li>
+                    </ul>
+                </div>
+
+                <div class="scaling-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold">Auto-scaling</h3>
+                        <span class="scaling-type type-auto">Auto</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Automatically adjust the number of instances based on real-time demand and predefined metrics.
+                    </p>
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Efficiency</span>
+                            <div class="performance-indicator">
+                                <div class="performance-fill bg-green-500" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Cost Optimization</span>
+                            <div class="performance-indicator">
+                                <div class="performance-fill bg-green-500" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Setup Complexity</span>
+                            <div class="performance-indicator">
+                                <div class="performance-fill bg-red-500" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Dynamic resource allocation</li>
+                        <li>• Cost-effective scaling</li>
+                        <li>• Response to traffic spikes</li>
+                        <li>• Predictive scaling algorithms</li>
+                    </ul>
+                </div>
+
+                <div class="scaling-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold">Diagonal Scaling</h3>
+                        <span class="scaling-type type-diagonal">Diagonal</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Combine horizontal and vertical scaling for optimal performance and cost-effectiveness.
+                    </p>
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Flexibility</span>
+                            <div class="performance-indicator">
+                                <div class="performance-fill bg-green-500" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Optimization</span>
+                            <div class="performance-indicator">
+                                <div class="performance-fill bg-green-500" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-gray-600">Management</span>
+                            <div class="performance-indicator">
+                                <div class="performance-fill bg-red-500" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Best of both approaches</li>
+                        <li>• Intelligent resource allocation</li>
+                        <li>• Complex management</li>
+                        <li>• Advanced orchestration required</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Optimization Techniques -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Performance Optimization Techniques</h2>
+            
+            <div class="optimization-technique">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-tachometer-alt text-2xl text-green-600 mr-3"></i>
+                    <h3 class="text-xl font-bold">Model Optimization</h3>
+                </div>
+                <p class="text-gray-700 mb-4">
+                    Optimize AI models for faster inference and lower resource consumption without significantly impacting accuracy.
+                </p>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">Quantization</h4>
+                        <p class="text-green-700 text-sm">Reduce model precision from 32-bit to 16-bit or 8-bit for faster computation.</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-blue-800 mb-2">Pruning</h4>
+                        <p class="text-blue-700 text-sm">Remove unnecessary connections and neurons to reduce model size.</p>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-purple-800 mb-2">Knowledge Distillation</h4>
+                        <p class="text-purple-700 text-sm">Train smaller models to mimic larger, more complex models.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="optimization-technique">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-memory text-2xl text-blue-600 mr-3"></i>
+                    <h3 class="text-xl font-bold">Caching Strategies</h3>
+                </div>
+                <p class="text-gray-700 mb-4">
+                    Implement intelligent caching to reduce redundant computations and improve response times.
+                </p>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-yellow-800 mb-2">Result Caching</h4>
+                        <p class="text-yellow-700 text-sm">Cache prediction results for identical inputs.</p>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-red-800 mb-2">Feature Caching</h4>
+                        <p class="text-red-700 text-sm">Cache intermediate feature representations.</p>
+                    </div>
+                    <div class="bg-indigo-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-indigo-800 mb-2">Model Caching</h4>
+                        <p class="text-indigo-700 text-sm">Keep frequently used models in memory.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottleneck Analysis -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Performance Bottleneck Analysis</h2>
+            
+            <div class="bottleneck-analysis">
+                <h3 class="text-xl font-bold mb-4 text-yellow-800">
+                    <i class="fas fa-search mr-2"></i>Common AI Performance Bottlenecks
+                </h3>
+                <p class="text-gray-700 mb-6">
+                    Identify and resolve performance bottlenecks that limit your AI system's scalability and efficiency.
+                </p>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-yellow-800 mb-3">CPU Bottlenecks</h4>
+                        <ul class="text-yellow-700 text-sm space-y-2">
+                            <li>• Complex mathematical operations</li>
+                            <li>• Inefficient algorithm implementations</li>
+                            <li>• Excessive data preprocessing</li>
+                            <li>• Poor parallelization</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold text-yellow-800 mb-3">Memory Bottlenecks</h4>
+                        <ul class="text-yellow-700 text-sm space-y-2">
+                            <li>• Large model loading times</li>
+                            <li>• Inefficient data structures</li>
+                            <li>• Memory leaks in inference</li>
+                            <li>• Excessive data copying</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold text-yellow-800 mb-3">I/O Bottlenecks</h4>
+                        <ul class="text-yellow-700 text-sm space-y-2">
+                            <li>• Slow data loading from storage</li>
+                            <li>• Network latency in distributed systems</li>
+                            <li>• Database query performance</li>
+                            <li>• File system operations</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold text-yellow-800 mb-3">Network Bottlenecks</h4>
+                        <ul class="text-yellow-700 text-sm space-y-2">
+                            <li>• High latency between services</li>
+                            <li>• Bandwidth limitations</li>
+                            <li>• Serialization overhead</li>
+                            <li>• Load balancer configuration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Metrics Comparison -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Performance Metrics Comparison</h2>
+            
+            <div class="metric-comparison">
+                <div class="metric-item">
+                    <div class="metric-value text-blue-600">145ms</div>
+                    <div class="metric-label">Average Response Time</div>
+                    <div class="text-sm text-green-600 mt-1">
+                        <i class="fas fa-arrow-down"></i> -23% vs last week
+                    </div>
+                </div>
+                
+                <div class="metric-item">
+                    <div class="metric-value text-green-600">1,250</div>
+                    <div class="metric-label">Requests/sec</div>
+                    <div class="text-sm text-green-600 mt-1">
+                        <i class="fas fa-arrow-up"></i> +45% vs last week
+                    </div>
+                </div>
+                
+                <div class="metric-item">
+                    <div class="metric-value text-yellow-600">2.3%</div>
+                    <div class="metric-label">Error Rate</div>
+                    <div class="text-sm text-red-600 mt-1">
+                        <i class="fas fa-arrow-up"></i> +0.8% vs last week
+                    </div>
+                </div>
+                
+                <div class="metric-item">
+                    <div class="metric-value text-purple-600">68%</div>
+                    <div class="metric-label">CPU Utilization</div>
+                    <div class="text-sm text-yellow-600 mt-1">
+                        <i class="fas fa-arrow-up"></i> +12% vs last week
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Visualization -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Performance Analysis</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4">Scaling Performance Comparison</h3>
+                    <div id="scalingChart" style="height: 300px;"></div>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4">Resource Utilization</h3>
+                    <div id="resourceChart" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Scaling Best Practices</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-blue-700">
+                        <i class="fas fa-rocket mr-2"></i>Performance Optimization
+                    </h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Profile Before Optimizing:</strong> Use profiling tools to identify actual bottlenecks before making changes.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Implement Caching:</strong> Cache results, features, and models to reduce redundant computations.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Use Async Processing:</strong> Implement asynchronous operations for I/O-bound tasks.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Optimize Data Formats:</strong> Use efficient data formats and compression for storage and transmission.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-green-700">
+                        <i class="fas fa-expand-arrows-alt mr-2"></i>Scaling Strategies
+                    </h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Start Small, Scale Gradually:</strong> Begin with vertical scaling and move to horizontal as needed.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Implement Auto-scaling:</strong> Use automated scaling based on real-time metrics and thresholds.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Monitor Continuously:</strong> Track performance metrics and scaling effectiveness in real-time.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                            <div>
+                                <strong>Test Scaling Scenarios:</strong> Regularly test your scaling strategies under various load conditions.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-12 stagger-item">
+            <a href="topic-monitoring-observability.html" class="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Previous: Monitoring & Observability
+            </a>
+            <div class="flex space-x-4">
+                <a href="topics.html" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    All Topics
+                </a>
+            </div>
+            <a href="topic-security-privacy.html" class="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors">
+                Next: Security & Privacy
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 Agentic AI Knowledge Hub. Empowering the future of artificial intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize animations
+        anime({
+            targets: '.stagger-item',
+            opacity: [0, 1],
+            translateY: [30, 0],
+            delay: anime.stagger(100),
+            duration: 800,
+            easing: 'easeOutQuart'
+        });
+
+        // Scaling Performance Chart
+        const scalingChart = echarts.init(document.getElementById('scalingChart'));
+        const scalingOption = {
+            tooltip: { trigger: 'axis' },
+            legend: { data: ['Vertical Scaling', 'Horizontal Scaling', 'Auto-scaling'] },
+            xAxis: {
+                type: 'category',
+                data: ['1K', '5K', '10K', '50K', '100K', '500K']
+            },
+            yAxis: { type: 'value', name: 'Requests/sec' },
+            series: [
+                { name: 'Vertical Scaling', type: 'line', data: [100, 300, 500, 800, 1000, 1200], itemStyle: { color: '#3b82f6' } },
+                { name: 'Horizontal Scaling', type: 'line', data: [100, 450, 850, 3200, 6200, 28000], itemStyle: { color: '#10b981' } },
+                { name: 'Auto-scaling', type: 'line', data: [100, 480, 920, 4500, 8900, 42000], itemStyle: { color: '#f59e0b' } }
+            ]
+        };
+        scalingChart.setOption(scalingOption);
+
+        // Resource Utilization Chart
+        const resourceChart = echarts.init(document.getElementById('resourceChart'));
+        const resourceOption = {
+            tooltip: { trigger: 'item' },
+            series: [{
+                name: 'Resource Usage',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                data: [
+                    { value: 35, name: 'Model Inference', itemStyle: { color: '#8b5cf6' } },
+                    { value: 25, name: 'Data Processing', itemStyle: { color: '#10b981' } },
+                    { value: 20, name: 'I/O Operations', itemStyle: { color: '#f59e0b' } },
+                    { value: 15, name: 'Network Communication', itemStyle: { color: '#3b82f6' } },
+                    { value: 5, name: 'Other', itemStyle: { color: '#6b7280' } }
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        };
+        resourceChart.setOption(resourceOption);
+
+        // Responsive charts
+        window.addEventListener('resize', function() {
+            scalingChart.resize();
+            resourceChart.resize();
+        });
+    </script>
+</body>
+</html>

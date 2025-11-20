@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engineering Framework - AI Engineering Knowledge Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'deep-blue': '#1e3a8a',
+                        'soft-gray': '#f8fafc',
+                        'accent-blue': '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .code-block { 
+            background: #1a1a1a; 
+            border-radius: 8px; 
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .code-header { 
+            background: #2d2d2d; 
+            padding: 0.75rem 1rem; 
+            display: flex; 
+            justify-content: between; 
+            align-items: center;
+            border-bottom: 1px solid #404040;
+        }
+        .copy-btn { 
+            background: #4a5568; 
+            color: white; 
+            border: none; 
+            padding: 0.25rem 0.75rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover { background: #718096; }
+        .progress-bar { 
+            width: 100%; 
+            height: 4px; 
+            background: #e2e8f0; 
+            border-radius: 2px; 
+            overflow: hidden;
+        }
+        .progress-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, #3b82f6, #1e40af); 
+            transition: width 0.3s ease;
+        }
+        .technique-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .technique-card:hover {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-soft-gray font-sans">
+    <div class="min-h-screen flex">
+        <!-- Sidebar Navigation -->
+        <div class="w-80 bg-white shadow-lg border-r border-gray-200 flex flex-col">
+            <!-- Sidebar Header -->
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-brain text-2xl text-deep-blue mr-3"></i>
+                    <h1 class="text-xl font-bold text-gray-800">AI Engineering Hub</h1>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="sidebarSearch" 
+                        placeholder="Search topics..." 
+                        class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-blue focus:border-transparent"
+                    >
+                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Navigation Content -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <!-- Modern AI-Engineering Stack Section -->
+                <div class="sidebar-section rounded-lg mb-4">
+                    <div class="section-header p-4 bg-blue-50 rounded-lg" onclick="toggleSection('modern-stack')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-layer-group text-deep-blue mr-3"></i>
+                                <span class="font-semibold text-gray-800">Modern AI-Engineering Stack</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 transition-transform" id="modern-stack-icon"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-1 ml-6">Core architecture components</p>
+                    </div>
+                    <div class="section-content" id="modern-stack-content">
+                        <div class="p-2">
+                            <a href="topic-ai-stack-overview.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-sitemap text-blue-500 mr-2"></i>AI Engineering Stack Overview
+                            </a>
+                            <a href="topic-llm-foundations.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-brain text-green-500 mr-2"></i>LLM Foundations
+                            </a>
+                            <a href="topic-vector-databases.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-database text-purple-500 mr-2"></i>Vector Databases
+                            </a>
+                            <a href="topic-embedding-models.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-vector-square text-orange-500 mr-2"></i>Embedding Models
+                            </a>
+                            <a href="topic-prompt-engineering.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700 bg-blue-100 border-l-4 border-deep-blue">
+                                <i class="fas fa-comment-dots text-pink-500 mr-2"></i>Prompt Engineering Framework
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto">
+            <!-- Header -->
+            <div class="bg-white shadow-sm border-b border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-800">Prompt Engineering Framework</h1>
+                        <p class="text-gray-600 mt-2">Systematic approaches to prompt design and optimization</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-right">
+                            <div class="text-sm text-gray-500">Progress</div>
+                            <div class="text-lg font-semibold text-deep-blue">95%</div>
+                        </div>
+                        <div class="progress-bar w-32">
+                            <div class="progress-fill" style="width: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Introduction -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                            <i class="fas fa-comment-dots text-deep-blue mr-3"></i>
+                            Understanding Prompt Engineering
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Prompt engineering is the systematic art and science of designing, structuring, and optimizing 
+                            inputs to large language models to elicit desired outputs with maximum accuracy, consistency, 
+                            and reliability. It represents a critical discipline in modern AI engineering, bridging the gap 
+                            between human intent and machine understanding.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            As AI systems become more powerful and integrated into production applications, the ability to 
+                            craft effective prompts has evolved from an intuitive skill to a formal engineering practice. 
+                            Mastering prompt engineering enables developers to build robust AI applications, improve model 
+                            performance, and create more predictable and controllable AI systems.
+                        </p>
+
+                        <!-- Prompt Engineering Process -->
+                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Prompt Engineering Process</h3>
+                            <div id="prompt-process" style="height: 400px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Core Techniques -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-tools text-deep-blue mr-3"></i>
+                            Core Prompt Engineering Techniques
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <!-- Zero-shot Prompting -->
+                            <div class="technique-card bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-bullseye text-2xl text-blue-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Zero-shot Prompting</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Direct instructions without examples, relying on the model's pre-trained knowledge 
+                                    and generalization capabilities.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Clear task definition</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Specific constraints</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Output format specification</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Context setting</li>
+                                </ul>
+                            </div>
+
+                            <!-- Few-shot Prompting -->
+                            <div class="technique-card bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-graduation-cap text-2xl text-green-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Few-shot Prompting</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Providing examples to demonstrate the desired task format, style, and expected outputs.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Input-output examples</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Pattern demonstration</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Style transfer guidance</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Task boundary definition</li>
+                                </ul>
+                            </div>
+
+                            <!-- Chain-of-Thought -->
+                            <div class="technique-card bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-link text-2xl text-purple-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Chain-of-Thought</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Encouraging step-by-step reasoning by asking the model to explain its thinking process.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Reasoning trace</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Intermediate steps</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Self-explanation</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Logical progression</li>
+                                </ul>
+                            </div>
+
+                            <!-- Role-based Prompting -->
+                            <div class="technique-card bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-user-tie text-2xl text-orange-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Role-based Prompting</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Assigning specific personas or expert roles to guide the model's response style and content.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Expert persona assignment</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Tone and style control</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Domain expertise simulation</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Response framework</li>
+                                </ul>
+                            </div>
+
+                            <!-- Structured Output -->
+                            <div class="technique-card bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-sitemap text-2xl text-red-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Structured Output</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Defining specific output formats like JSON, tables, or custom schemas for consistent results.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>JSON schema definition</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Table formatting</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Custom templates</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Validation rules</li>
+                                </ul>
+                            </div>
+
+                            <!-- Iterative Refinement -->
+                            <div class="technique-card bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-sync-alt text-2xl text-gray-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Iterative Refinement</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Multi-turn conversations that build upon previous responses to achieve desired outcomes.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Multi-turn dialogue</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Feedback incorporation</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Progressive improvement</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Context accumulation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Techniques -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-rocket text-deep-blue mr-3"></i>
+                            Advanced Prompt Engineering Techniques
+                        </h2>
+                        
+                        <div class="space-y-8">
+                            <!-- Self-Consistency -->
+                            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border-l-4 border-blue-500">
+                                <h3 class="text-xl font-semibold text-blue-800 mb-3">
+                                    <i class="fas fa-balance-scale mr-2"></i>
+                                    Self-Consistency
+                                </h3>
+                                <p class="text-blue-700 mb-4">
+                                    Generate multiple reasoning paths and select the most consistent answer to improve 
+                                    accuracy on complex reasoning tasks.
+                                </p>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Implementation Pattern:</h4>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• Generate multiple independent reasoning chains</li>
+                                        <li>• Extract final answers from each chain</li>
+                                        <li>• Select the most frequent or consistent answer</li>
+                                        <li>• Use majority voting or confidence scoring</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Tree of Thoughts -->
+                            <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-lg border-l-4 border-green-500">
+                                <h3 class="text-xl font-semibold text-green-800 mb-3">
+                                    <i class="fas fa-tree mr-2"></i>
+                                    Tree of Thoughts
+                                </h3>
+                                <p class="text-green-700 mb-4">
+                                    Explore multiple reasoning paths simultaneously, evaluate progress, and backtrack 
+                                    when necessary to solve complex problems.
+                                </p>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Key Components:</h4>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• Thought decomposition into manageable steps</li>
+                                        <li>• Tree search algorithms (BFS, DFS, A*)</li>
+                                        <li>• State evaluation heuristics</li>
+                                        <li>• Pruning and backtracking strategies</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Reflexion -->
+                            <div class="bg-gradient-to-r from-purple-50 to-violet-50 p-6 rounded-lg border-l-4 border-purple-500">
+                                <h3 class="text-xl font-semibold text-purple-800 mb-3">
+                                    <i class="fas fa-mirror mr-2"></i>
+                                    Reflexion
+                                </h3>
+                                <p class="text-purple-700 mb-4">
+                                    Enable language models to reflect on their own outputs, learn from mistakes, 
+                                    and improve performance through self-evaluation.
+                                </p>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Reflection Loop:</h4>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• Generate initial attempt</li>
+                                        <li>• Self-evaluate the attempt</li>
+                                        <li>• Generate reflection and critique</li>
+                                        <li>• Produce improved response</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Implementation Examples -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-code text-deep-blue mr-3"></i>
+                            Implementation Examples
+                        </h2>
+                        
+                        <!-- Prompt Template System -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Advanced Prompt Template System</h3>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="text-gray-300 font-medium">prompt_framework.py</span>
+                                    <button class="copy-btn" onclick="copyCode('prompt-framework')">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre id="prompt-framework" class="language-python"><code>from typing import Dict, List, Any, Optional, Union
+from dataclasses import dataclass, field
+from enum import Enum
+import json
+import re
+from abc import ABC, abstractmethod
+
+class PromptType(Enum):
+    ZERO_SHOT = "zero_shot"
+    FEW_SHOT = "few_shot"
+    CHAIN_OF_THOUGHT = "chain_of_thought"
+    ROLE_BASED = "role_based"
+    STRUCTURED = "structured"
+
+@dataclass
+class PromptTemplate:
+    """Base class for prompt templates"""
+    name: str
+    description: str
+    template: str
+    variables: List[str] = field(default_factory=list)
+    examples: List[Dict[str, Any]] = field(default_factory=list)
+    constraints: List[str] = field(default_factory=list)
+    
+    def render(self, **kwargs) -> str:
+        """Render the template with provided variables"""
+        # Validate required variables
+        missing_vars = [var for var in self.variables if var not in kwargs]
+        if missing_vars:
+            raise ValueError(f"Missing required variables: {missing_vars}")
+        
+        # Render template
+        prompt = self.template.format(**kwargs)
+        
+        # Add examples if available
+        if self.examples:
+            prompt += "\n\nExamples:\n"
+            for i, example in enumerate(self.examples, 1):
+                prompt += f"{i}. Input: {example.get('input', '')}\n"
+                prompt += f"   Output: {example.get('output', '')}\n\n"
+        
+        # Add constraints
+        if self.constraints:
+            prompt += "\nConstraints:\n"
+            for constraint in self.constraints:
+                prompt += f"- {constraint}\n"
+        
+        return prompt.strip()
+
+class PromptOptimizer:
+    """Advanced prompt optimization and evaluation system"""
+    
+    def __init__(self):
+        self.templates: Dict[str, PromptTemplate] = {}
+        self.performance_history: List[Dict[str, Any]] = []
+    
+    def register_template(self, template: PromptTemplate):
+        """Register a new prompt template"""
+        self.templates[template.name] = template
+    
+    def create_zero_shot_template(
+        self,
+        task_description: str,
+        output_format: str,
+        context: Optional[str] = None,
+        constraints: Optional[List[str]] = None
+    ) -> PromptTemplate:
+        """Create a zero-shot prompt template"""
+        template_str = f"""
+Task: {task_description}
+
+Output Format: {output_format}
+"""
+        
+        if context:
+            template_str = f"Context: {context}\n\n" + template_str
+        
+        variables = []
+        if "{" in task_description:
+            variables.extend(self._extract_variables(task_description))
+        if "{" in str(context):
+            variables.extend(self._extract_variables(str(context)))
+        
+        return PromptTemplate(
+            name=f"zero_shot_{len(self.templates)}",
+            description="Zero-shot prompt template",
+            template=template_str.strip(),
+            variables=list(set(variables)),
+            constraints=constraints or []
+        )
+    
+    def create_few_shot_template(
+        self,
+        task_description: str,
+        examples: List[Dict[str, str]],
+        output_format: str,
+        context: Optional[str] = None
+    ) -> PromptTemplate:
+        """Create a few-shot prompt template"""
+        template_str = f"""
+Task: {task_description}
+
+Learn from the following examples and apply the same pattern:
+"""
+        
+        if context:
+            template_str = f"Context: {context}\n\n" + template_str
+        
+        variables = []
+        if "{" in task_description:
+            variables.extend(self._extract_variables(task_description))
+        if "{" in str(context):
+            variables.extend(self._extract_variables(str(context)))
+        
+        return PromptTemplate(
+            name=f"few_shot_{len(self.templates)}",
+            description="Few-shot prompt template",
+            template=template_str.strip(),
+            variables=list(set(variables)),
+            examples=examples
+        )
+    
+    def create_chain_of_thought_template(
+        self,
+        problem_statement: str,
+        reasoning_steps: List[str],
+        final_question: str
+    ) -> PromptTemplate:
+        """Create a chain-of-thought prompt template"""
+        template_str = f"""
+Problem: {problem_statement}
+
+Let's solve this step by step:
+"""
+        
+        for i, step in enumerate(reasoning_steps, 1):
+            template_str += f"{i}. {step}\n"
+        
+        template_str += f"\nFinal Question: {final_question}\n"
+        template_str += "Answer: Let's think through this carefully...\n\n"
+        
+        variables = []
+        if "{" in problem_statement:
+            variables.extend(self._extract_variables(problem_statement))
+        if "{" in final_question:
+            variables.extend(self._extract_variables(final_question))
+        
+        return PromptTemplate(
+            name=f"cot_{len(self.templates)}",
+            description="Chain-of-thought prompt template",
+            template=template_str.strip(),
+            variables=list(set(variables))
+        )
+    
+    def create_role_based_template(
+        self,
+        role: str,
+        expertise: str,
+        task: str,
+        tone: str = "professional"
+    ) -> PromptTemplate:
+        """Create a role-based prompt template"""
+        template_str = f"""
+You are a {role} with expertise in {expertise}.
+
+Your task: {task}
+
+Please respond in a {tone} tone and provide detailed, accurate information.
+
+Response:
+"""
+        
+        variables = []
+        if "{" in task:
+            variables.extend(self._extract_variables(task))
+        
+        return PromptTemplate(
+            name=f"role_based_{len(self.templates)}",
+            description="Role-based prompt template",
+            template=template_str.strip(),
+            variables=list(set(variables))
+        )
+    
+    def create_structured_output_template(
+        self,
+        task: str,
+        output_schema: Dict[str, Any],
+        json_mode: bool = True
+    ) -> PromptTemplate:
+        """Create a structured output prompt template"""
+        schema_str = json.dumps(output_schema, indent=2)
+        
+        template_str = f"""
+Task: {task}
+
+Please provide the output in the following {'JSON' if json_mode else 'structured'} format:
+
+{schema_str}
+
+Ensure all fields are populated correctly and maintain the specified structure.
+"""
+        
+        variables = []
+        if "{" in task:
+            variables.extend(self._extract_variables(task))
+        
+        constraints = [
+            f"Output must follow the specified {'JSON' if json_mode else 'structured'} schema",
+            "All required fields must be included",
+            "Data types should match the schema specification"
+        ]
+        
+        return PromptTemplate(
+            name=f"structured_{len(self.templates)}",
+            description="Structured output prompt template",
+            template=template_str.strip(),
+            variables=list(set(variables)),
+            constraints=constraints
+        )
+    
+    def _extract_variables(self, text: str) -> List[str]:
+        """Extract variable names from template text"""
+        return re.findall(r'\{(\w+)\}', text)
+    
+    def evaluate_prompt(
+        self,
+        template_name: str,
+        test_cases: List[Dict[str, Any]],
+        evaluation_metrics: List[str]
+    ) -> Dict[str, Any]:
+        """Evaluate prompt performance on test cases"""
+        if template_name not in self.templates:
+            raise ValueError(f"Template '{template_name}' not found")
+        
+        template = self.templates[template_name]
+        results = {
+            "template_name": template_name,
+            "total_cases": len(test_cases),
+            "metrics": {},
+            "per_case_results": []
+        }
+        
+        for i, test_case in enumerate(test_cases):
+            try:
+                # Render prompt with test case inputs
+                prompt = template.render(**test_case.get("inputs", {}))
+                
+                # Here you would typically call the LLM API
+                # For demonstration, we'll simulate the response
+                simulated_response = self._simulate_llm_response(prompt, test_case)
+                
+                # Evaluate response against expected output
+                case_result = {
+                    "case_id": i + 1,
+                    "prompt": prompt,
+                    "response": simulated_response,
+                    "expected": test_case.get("expected_output", ""),
+                    "metrics": {}
+                }
+                
+                # Calculate metrics
+                for metric in evaluation_metrics:
+                    if metric == "exact_match":
+                        case_result["metrics"][metric] = simulated_response.strip() == test_case.get("expected_output", "").strip()
+                    elif metric == "contains_keywords":
+                        keywords = test_case.get("expected_keywords", [])
+                        case_result["metrics"][metric] = all(keyword.lower() in simulated_response.lower() for keyword in keywords)
+                    elif metric == "format_valid":
+                        case_result["metrics"][metric] = self._validate_format(simulated_response, test_case.get("expected_format", ""))
+                
+                results["per_case_results"].append(case_result)
+                
+            except Exception as e:
+                results["per_case_results"].append({
+                    "case_id": i + 1,
+                    "error": str(e),
+                    "success": False
+                })
+        
+        # Aggregate metrics
+        for metric in evaluation_metrics:
+            metric_scores = [case["metrics"].get(metric, 0) for case in results["per_case_results"] if "metrics" in case]
+            if metric_scores:
+                results["metrics"][metric] = {
+                    "average": sum(metric_scores) / len(metric_scores),
+                    "count": sum(metric_scores)
+                }
+        
+        # Store in history
+        self.performance_history.append(results)
+        
+        return results
+    
+    def _simulate_llm_response(self, prompt: str, test_case: Dict[str, Any]) -> str:
+        """Simulate LLM response for demonstration"""
+        # This is a placeholder - in real implementation, you would call the actual LLM API
+        task_type = test_case.get("task_type", "general")
+        
+        if task_type == "classification":
+            return test_case.get("expected_output", "Positive")
+        elif task_type == "extraction":
+            return test_case.get("expected_output", "Extracted: sample text")
+        elif task_type == "generation":
+            return test_case.get("expected_output", "Generated response based on prompt")
+        else:
+            return test_case.get("expected_output", "Simulated LLM response")
+    
+    def _validate_format(self, response: str, expected_format: str) -> bool:
+        """Validate response format"""
+        if expected_format == "json":
+            try:
+                json.loads(response)
+                return True
+            except:
+                return False
+        return True  # Simplified validation
+    
+    def optimize_prompt(
+        self,
+        template_name: str,
+        optimization_strategy: str = "iterative",
+        max_iterations: int = 10
+    ) -> Dict[str, Any]:
+        """Optimize prompt based on performance history"""
+        # This is a simplified optimization process
+        # Real implementation would use more sophisticated techniques
+        
+        relevant_history = [
+            hist for hist in self.performance_history 
+            if hist["template_name"] == template_name
+        ]
+        
+        if not relevant_history:
+            return {"error": "No performance history available for optimization"}
+        
+        latest_performance = relevant_history[-1]
+        
+        optimization_suggestions = []
+        
+        # Analyze performance and suggest improvements
+        for metric, results in latest_performance["metrics"].items():
+            if results["average"] < 0.8:  # Below 80% performance
+                if metric == "exact_match":
+                    optimization_suggestions.append("Consider adding more specific constraints or examples")
+                elif metric == "contains_keywords":
+                    optimization_suggestions.append("Add keyword requirements to the prompt")
+                elif metric == "format_valid":
+                    optimization_suggestions.append("Improve format specification in the prompt")
+        
+        return {
+            "template_name": template_name,
+            "current_performance": latest_performance["metrics"],
+            "optimization_suggestions": optimization_suggestions,
+            "iterations_needed": len(relevant_history)
+        }
+
+# Usage Example
+def main():
+    # Initialize prompt optimizer
+    optimizer = PromptOptimizer()
+    
+    # Create various prompt templates
+    print("Creating prompt templates...")
+    
+    # Zero-shot template
+    zero_shot = optimizer.create_zero_shot_template(
+        task_description="Classify the sentiment of the following text: {text}",
+        output_format="Respond with either 'Positive', 'Negative', or 'Neutral'",
+        constraints=["Only use the three specified labels", "Do not add explanations"]
+    )
+    optimizer.register_template(zero_shot)
+    
+    # Few-shot template
+    few_shot_examples = [
+        {"input": "I love this product!", "output": "Positive"},
+        {"input": "This is terrible.", "output": "Negative"},
+        {"input": "It's okay.", "output": "Neutral"}
+    ]
+    
+    few_shot = optimizer.create_few_shot_template(
+        task_description="Classify the sentiment of the given text",
+        examples=few_shot_examples,
+        output_format="Respond with either 'Positive', 'Negative', or 'Neutral'"
+    )
+    optimizer.register_template(few_shot)
+    
+    # Chain-of-thought template
+    cot = optimizer.create_chain_of_thought_template(
+        problem_statement="Solve the following math problem: {problem}",
+        reasoning_steps=[
+            "Identify what is given",
+            "Determine what needs to be found",
+            "Choose the appropriate method",
+            "Perform calculations step by step",
+            "Verify the answer makes sense"
+        ],
+        final_question="What is the final answer?"
+    )
+    optimizer.register_template(cot)
+    
+    # Role-based template
+    role_based = optimizer.create_role_based_template(
+        role="Software Architecture Expert",
+        expertise="System design, scalability, and performance optimization",
+        task="Review the following system architecture and provide recommendations: {architecture}",
+        tone="professional and technical"
+    )
+    optimizer.register_template(role_based)
+    
+    # Structured output template
+    output_schema = {
+        "sentiment": {"type": "string", "enum": ["Positive", "Negative", "Neutral"]},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "explanation": {"type": "string", "maxLength": 200}
+    }
+    
+    structured = optimizer.create_structured_output_template(
+        task="Analyze the sentiment of: {text}",
+        output_schema=output_schema
+    )
+    optimizer.register_template(structured)
+    
+    print(f"Created {len(optimizer.templates)} templates")
+    
+    # Test cases for evaluation
+    test_cases = [
+        {
+            "inputs": {"text": "This movie was absolutely fantastic!"},
+            "expected_output": "Positive",
+            "expected_keywords": ["positive"],
+            "task_type": "classification"
+        },
+        {
+            "inputs": {"text": "I didn't like the service at all."},
+            "expected_output": "Negative",
+            "expected_keywords": ["negative"],
+            "task_type": "classification"
+        },
+        {
+            "inputs": {"text": "The product is fine, nothing special."},
+            "expected_output": "Neutral",
+            "expected_keywords": ["neutral"],
+            "task_type": "classification"
+        }
+    ]
+    
+    # Evaluate zero-shot template
+    print("\nEvaluating zero-shot template...")
+    evaluation_results = optimizer.evaluate_prompt(
+        template_name="zero_shot_0",
+        test_cases=test_cases,
+        evaluation_metrics=["contains_keywords", "format_valid"]
+    )
+    
+    print(f"Evaluation Results:")
+    print(f"Total test cases: {evaluation_results['total_cases']}")
+    for metric, results in evaluation_results['metrics'].items():
+        print(f"{metric}: {results['count']}/{len(test_cases)} ({results['average']:.2%})")
+    
+    # Optimize prompt based on results
+    print("\nOptimizing prompt...")
+    optimization_results = optimizer.optimize_prompt("zero_shot_0")
+    
+    print("Optimization Suggestions:")
+    for suggestion in optimization_results['optimization_suggestions']:
+        print(f"- {suggestion}")
+    
+    # Demonstrate template rendering
+    print("\nRendering example prompts:")
+    
+    for template_name, template in optimizer.templates.items():
+        if template.variables:  # Only show templates with variables
+            print(f"\n{template.name} ({template.description}):")
+            
+            # Create sample variables
+            sample_vars = {}
+            for var in template.variables:
+                if var == "text":
+                    sample_vars[var] = "This product is amazing!"
+                elif var == "problem":
+                    sample_vars[var] "If a train travels 60 miles in 1.5 hours, what is its speed?"
+                elif var == "architecture":
+                    sample_vars[var] = "Microservices with API gateway"
+                else:
+                    sample_vars[var] = f"sample_{var}"
+            
+            try:
+                rendered_prompt = template.render(**sample_vars)
+                print(f"Rendered Prompt:\n{rendered_prompt}")
+                print("-" * 50)
+            except Exception as e:
+                print(f"Error rendering template: {e}")
+
+# Run the example
+if __name__ == "__main__":
+    main()</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Best Practices -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-star text-deep-blue mr-3"></i>
+                            Prompt Engineering Best Practices
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-6">
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                                    <h4 class="font-semibold text-blue-800 mb-2">
+                                        <i class="fas fa-bullseye mr-2"></i>
+                                        Clarity & Specificity
+                                    </h4>
+                                    <p class="text-blue-700 text-sm">
+                                        Be explicit about what you want. Use specific instructions, 
+                                        clear constraints, and unambiguous language to guide the model.
+                                    </p>
+                                </div>
+
+                                <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                                    <h4 class="font-semibold text-green-800 mb-2">
+                                        <i class="fas fa-layer-group mr-2"></i>
+                                        Context Provision
+                                    </h4>
+                                    <p class="text-green-700 text-sm">
+                                        Provide sufficient background information and context. 
+                                        Help the model understand the domain, audience, and purpose.
+                                    </p>
+                                </div>
+
+                                <div class="bg-purple-50 border-l-4 border-purple-500 p-4">
+                                    <h4 class="font-semibold text-purple-800 mb-2">
+                                        <i class="fas fa-vial mr-2"></i>
+                                        Iterative Testing
+                                    </h4>
+                                    <p class="text-purple-700 text-sm">
+                                        Test prompts with diverse inputs and edge cases. 
+                                        Iterate based on results and systematically improve performance.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="bg-orange-50 border-l-4 border-orange-500 p-4">
+                                    <h4 class="font-semibold text-orange-800 mb-2">
+                                        <i class="fas fa-shield-alt mr-2"></i>
+                                        Safety & Ethics
+                                    </h4>
+                                    <p class="text-orange-700 text-sm">
+                                        Include safety constraints and ethical guidelines. 
+                                        Test for potential biases, harmful outputs, and edge cases.
+                                    </p>
+                                </div>
+
+                                <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                                    <h4 class="font-semibold text-red-800 mb-2">
+                                        <i class="fas fa-chart-line mr-2"></i>
+                                        Performance Monitoring
+                                    </h4>
+                                    <p class="text-red-700 text-sm">
+                                        Track prompt performance metrics. Measure accuracy, 
+                                        consistency, and latency to identify optimization opportunities.
+                                    </p>
+                                </div>
+
+                                <div class="bg-teal-50 border-l-4 border-teal-500 p-4">
+                                    <h4 class="font-semibold text-teal-800 mb-2">
+                                        <i class="fas fa-code-branch mr-2"></i>
+                                        Version Control
+                                    </h4>
+                                    <p class="text-teal-700 text-sm">
+                                        Maintain version control for prompts. Track changes, 
+                                        performance impact, and enable rollback when needed.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-between items-center bg-white rounded-lg shadow-lg p-6">
+                        <a href="topic-embedding-models.html" class="text-gray-500 hover:text-deep-blue transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: Embedding Models
+                        </a>
+                        <div class="flex space-x-4">
+                            <a href="topic-retrieval-systems.html" class="bg-deep-blue text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+                                Next: Retrieval Systems
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const icon = document.getElementById(sectionId + '-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('expanded');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const text = codeElement.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                // Show feedback
+                const btn = event.target.closest('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+
+        // Create prompt engineering process diagram
+        function createPromptProcess() {
+            const data = [{
+                type: 'sankey',
+                node: {
+                    pad: 15,
+                    thickness: 20,
+                    line: { color: "black", width: 0.5 },
+                    label: [
+                        "Task Definition", "Prompt Design", "Context Setting", "Example Selection",
+                        "Template Creation", "Variable Insertion", "Prompt Rendering", "LLM Processing",
+                        "Output Generation", "Response Parsing", "Quality Evaluation", "Performance Optimization"
+                    ],
+                    color: [
+                        "#3b82f6", "#60a5fa", "#93c5fd", "#dbeafe",
+                        "#10b981", "#34d399", "#6ee7b7", "#d1fae5",
+                        "#8b5cf6", "#a78bfa", "#f59e0b", "#fbbf24"
+                    ]
+                },
+                link: {
+                    source: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                    target: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 4],
+                    value: [10, 10, 8, 8, 10, 8, 10, 10, 8, 8, 10, 6]
+                }
+            }];
+
+            const layout = {
+                title: "Prompt Engineering Workflow",
+                font: { size: 12 },
+                margin: { l: 0, r: 0, t: 50, b: 0 }
+            };
+
+            Plotly.newPlot('prompt-process', data, layout, {responsive: true});
+        }
+
+        // Initialize diagrams when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createPromptProcess();
+        });
+    </script>
+</body>
+</html>

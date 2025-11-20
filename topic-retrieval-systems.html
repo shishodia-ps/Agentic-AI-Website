@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrieval Systems - AI Engineering Knowledge Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'deep-blue': '#1e3a8a',
+                        'soft-gray': '#f8fafc',
+                        'accent-blue': '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .code-block { 
+            background: #1a1a1a; 
+            border-radius: 8px; 
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .code-header { 
+            background: #2d2d2d; 
+            padding: 0.75rem 1rem; 
+            display: flex; 
+            justify-content: between; 
+            align-items: center;
+            border-bottom: 1px solid #404040;
+        }
+        .copy-btn { 
+            background: #4a5568; 
+            color: white; 
+            border: none; 
+            padding: 0.25rem 0.75rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover { background: #718096; }
+        .progress-bar { 
+            width: 100%; 
+            height: 4px; 
+            background: #e2e8f0; 
+            border-radius: 2px; 
+            overflow: hidden;
+        }
+        .progress-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, #3b82f6, #1e40af); 
+            transition: width 0.3s ease;
+        }
+        .system-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .system-card:hover {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-soft-gray font-sans">
+    <div class="min-h-screen flex">
+        <!-- Sidebar Navigation -->
+        <div class="w-80 bg-white shadow-lg border-r border-gray-200 flex flex-col">
+            <!-- Sidebar Header -->
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-brain text-2xl text-deep-blue mr-3"></i>
+                    <h1 class="text-xl font-bold text-gray-800">AI Engineering Hub</h1>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="sidebarSearch" 
+                        placeholder="Search topics..." 
+                        class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-blue focus:border-transparent"
+                    >
+                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Navigation Content -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <!-- Modern AI-Engineering Stack Section -->
+                <div class="sidebar-section rounded-lg mb-4">
+                    <div class="section-header p-4 bg-blue-50 rounded-lg" onclick="toggleSection('modern-stack')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-layer-group text-deep-blue mr-3"></i>
+                                <span class="font-semibold text-gray-800">Modern AI-Engineering Stack</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 transition-transform" id="modern-stack-icon"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-1 ml-6">Core architecture components</p>
+                    </div>
+                    <div class="section-content" id="modern-stack-content">
+                        <div class="p-2">
+                            <a href="topic-ai-stack-overview.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-sitemap text-blue-500 mr-2"></i>AI Engineering Stack Overview
+                            </a>
+                            <a href="topic-llm-foundations.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-brain text-green-500 mr-2"></i>LLM Foundations
+                            </a>
+                            <a href="topic-vector-databases.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-database text-purple-500 mr-2"></i>Vector Databases
+                            </a>
+                            <a href="topic-embedding-models.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-vector-square text-orange-500 mr-2"></i>Embedding Models
+                            </a>
+                            <a href="topic-prompt-engineering.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-comment-dots text-pink-500 mr-2"></i>Prompt Engineering Framework
+                            </a>
+                            <a href="topic-retrieval-systems.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700 bg-blue-100 border-l-4 border-deep-blue">
+                                <i class="fas fa-search text-indigo-500 mr-2"></i>Retrieval Systems
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto">
+            <!-- Header -->
+            <div class="bg-white shadow-sm border-b border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-800">Retrieval Systems</h1>
+                        <p class="text-gray-600 mt-2">Information retrieval mechanisms and RAG architectures</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-right">
+                            <div class="text-sm text-gray-500">Progress</div>
+                            <div class="text-lg font-semibold text-deep-blue">88%</div>
+                        </div>
+                        <div class="progress-bar w-32">
+                            <div class="progress-fill" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Introduction -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                            <i class="fas fa-search text-deep-blue mr-3"></i>
+                            Understanding Retrieval Systems
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Retrieval systems form the backbone of modern AI applications, enabling intelligent access to 
+                            vast amounts of information through sophisticated search and ranking mechanisms. These systems 
+                            bridge the gap between user queries and relevant content, powering everything from traditional 
+                            search engines to advanced retrieval-augmented generation (RAG) applications.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            In the context of AI engineering, retrieval systems have evolved from simple keyword matching 
+                            to complex semantic search mechanisms that understand user intent, context, and content meaning. 
+                            They enable AI models to access external knowledge, maintain up-to-date information, and provide 
+                            accurate, grounded responses to user queries.
+                        </p>
+
+                        <!-- RAG Architecture -->
+                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">RAG Architecture Overview</h3>
+                            <div id="rag-architecture" style="height: 400px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Retrieval System Types -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-layer-group text-deep-blue mr-3"></i>
+                            Types of Retrieval Systems
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <!-- Keyword-based Retrieval -->
+                            <div class="system-card bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-key text-2xl text-blue-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Keyword-based</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Traditional retrieval using exact keyword matching, Boolean operators, 
+                                    and term frequency analysis.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>BM25 algorithm</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>TF-IDF scoring</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Boolean queries</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Inverted indexing</li>
+                                </ul>
+                            </div>
+
+                            <!-- Semantic Retrieval -->
+                            <div class="system-card bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-brain text-2xl text-green-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Semantic Retrieval</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Vector-based retrieval using embedding models to capture 
+                                    semantic meaning and context.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Dense embeddings</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Cosine similarity</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>ANN algorithms</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Contextual search</li>
+                                </ul>
+                            </div>
+
+                            <!-- Hybrid Retrieval -->
+                            <div class="system-card bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-puzzle-piece text-2xl text-purple-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Hybrid Retrieval</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Combines multiple retrieval methods to leverage strengths 
+                                    and compensate for weaknesses.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Score fusion</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Reciprocal rank fusion</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Cross-encoder reranking</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Multi-stage retrieval</li>
+                                </ul>
+                            </div>
+
+                            <!-- Learning-to-Rank -->
+                            <div class="system-card bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-chart-line text-2xl text-orange-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Learning-to-Rank</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Machine learning-based ranking that learns from user behavior 
+                                    and relevance feedback.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Pointwise methods</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Pairwise methods</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Listwise methods</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Feature engineering</li>
+                                </ul>
+                            </div>
+
+                            <!-- Neural Retrieval -->
+                            <div class="system-card bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-network-wired text-2xl text-red-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Neural Retrieval</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Deep learning-based retrieval using neural networks for 
+                                    query and document representation.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>ColBERT models</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>DPR (Dense Passage Retrieval)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>ANCE (Approximate nearest neighbor)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Cross-encoders</li>
+                                </ul>
+                            </div>
+
+                            <!-- Multi-modal Retrieval -->
+                            <div class="system-card bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-images text-2xl text-gray-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Multi-modal Retrieval</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Retrieval across different modalities including text, images, 
+                                    audio, and video content.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>CLIP embeddings</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Cross-modal search</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Joint embedding spaces</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Modal fusion techniques</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RAG Implementation -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-cogs text-deep-blue mr-3"></i>
+                            RAG Implementation Strategies
+                        </h2>
+                        
+                        <div class="space-y-8">
+                            <!-- Basic RAG -->
+                            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border-l-4 border-blue-500">
+                                <h3 class="text-xl font-semibold text-blue-800 mb-3">
+                                    <i class="fas fa-play mr-2"></i>
+                                    Basic RAG Pipeline
+                                </h3>
+                                <p class="text-blue-700 mb-4">
+                                    Simple retrieval-augmented generation that fetches relevant documents and 
+                                    incorporates them into the prompt for answer generation.
+                                </p>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Flow:</h4>
+                                    <ol class="text-sm text-gray-600 space-y-1">
+                                        <li>1. User query → Embedding generation</li>
+                                        <li>2. Vector similarity search</li>
+                                        <li>3. Retrieve top-k documents</li>
+                                        <li>4. Construct augmented prompt</li>
+                                        <li>5. Generate answer using LLM</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <!-- Advanced RAG -->
+                            <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-lg border-l-4 border-green-500">
+                                <h3 class="text-xl font-semibold text-green-800 mb-3">
+                                    <i class="fas fa-layer-group mr-2"></i>
+                                    Advanced RAG Patterns
+                                </h3>
+                                <p class="text-green-700 mb-4">
+                                    Sophisticated RAG implementations with multiple retrieval strategies, 
+                                    reranking, and iterative refinement.
+                                </p>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Advanced Features:</h4>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• Multi-stage retrieval (coarse → fine)</li>
+                                        <li>• Cross-encoder reranking</li>
+                                        <li>• Query expansion and reformulation</li>
+                                        <li>• Iterative retrieval with feedback</li>
+                                        <li>• Confidence scoring and uncertainty handling</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Agentic RAG -->
+                            <div class="bg-gradient-to-r from-purple-50 to-violet-50 p-6 rounded-lg border-l-4 border-purple-500">
+                                <h3 class="text-xl font-semibold text-purple-800 mb-3">
+                                    <i class="fas fa-robot mr-2"></i>
+                                    Agentic RAG
+                                </h3>
+                                <p class="text-purple-700 mb-4">
+                                    Autonomous agents that can perform multiple retrieval operations, 
+                                    reason about results, and take actions to fulfill complex queries.
+                                </p>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Agent Capabilities:</h4>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• Multi-step reasoning and planning</li>
+                                        <li>• Tool usage (search, calculator, APIs)</li>
+                                        <li>• Self-correction and verification</li>
+                                        <li>• Dynamic retrieval strategy selection</li>
+                                        <li>• Memory and context management</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Implementation Examples -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-code text-deep-blue mr-3"></i>
+                            Implementation Examples
+                        </h2>
+                        
+                        <!-- Basic RAG Implementation -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Basic RAG System</h3>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="text-gray-300 font-medium">rag_system.py</span>
+                                    <button class="copy-btn" onclick="copyCode('rag-system')">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre id="rag-system" class="language-python"><code>from typing import List, Dict, Any, Optional, Tuple
+import numpy as np
+from dataclasses import dataclass
+from abc import ABC, abstractmethod
+import openai
+from sentence_transformers import SentenceTransformer
+import asyncio
+
+@dataclass
+class Document:
+    """Represents a searchable document"""
+    id: str
+    content: str
+    metadata: Dict[str, Any] = None
+    embedding: Optional[List[float]] = None
+    
+    def __post_init__(self):
+        if self.metadata is None:
+            self.metadata = {}
+
+@dataclass
+class SearchResult:
+    """Represents a search result"""
+    document: Document
+    score: float
+    rank: int
+
+class EmbeddingModel(ABC):
+    """Abstract base class for embedding models"""
+    
+    @abstractmethod
+    async def embed(self, texts: List[str]) -> List[List[float]]:
+        pass
+    
+    @abstractmethod
+    def get_dimension(self) -> int:
+        pass
+
+class OpenAIEmbeddingModel(EmbeddingModel):
+    """OpenAI embedding model implementation"""
+    
+    def __init__(self, api_key: str, model: str = "text-embedding-ada-002"):
+        self.api_key = api_key
+        self.model = model
+        openai.api_key = api_key
+        self.client = openai.AsyncOpenAI()
+    
+    async def embed(self, texts: List[str]) -> List[List[float]]:
+        """Generate embeddings for texts"""
+        try:
+            response = await self.client.embeddings.create(
+                model=self.model,
+                input=texts
+            )
+            return [data.embedding for data in response.data]
+        except Exception as e:
+            print(f"Error generating embeddings: {e}")
+            return []
+    
+    def get_dimension(self) -> int:
+        return 1536  # OpenAI ada-002 dimension
+
+class LocalEmbeddingModel(EmbeddingModel):
+    """Local sentence transformer model"""
+    
+    def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
+        self.model = SentenceTransformer(model_name)
+    
+    async def embed(self, texts: List[str]) -> List[List[float]]:
+        """Generate embeddings using local model"""
+        embeddings = self.model.encode(texts, convert_to_numpy=True)
+        return embeddings.tolist()
+    
+    def get_dimension(self) -> int:
+        return self.model.get_sentence_embedding_dimension()
+
+class VectorStore(ABC):
+    """Abstract base class for vector stores"""
+    
+    @abstractmethod
+    async def add_documents(self, documents: List[Document]) -> None:
+        pass
+    
+    @abstractmethod
+    async def search(
+        self, 
+        query_embedding: List[float], 
+        top_k: int = 10,
+        filter_dict: Optional[Dict] = None
+    ) -> List[SearchResult]:
+        pass
+    
+    @abstractmethod
+    async def delete_documents(self, doc_ids: List[str]) -> None:
+        pass
+
+class InMemoryVectorStore(VectorStore):
+    """Simple in-memory vector store for demonstration"""
+    
+    def __init__(self, embedding_model: EmbeddingModel):
+        self.embedding_model = embedding_model
+        self.documents: Dict[str, Document] = {}
+        self.embeddings: List[List[float]] = []
+        self.doc_ids: List[str] = []
+    
+    async def add_documents(self, documents: List[Document]) -> None:
+        """Add documents to the store"""
+        # Generate embeddings for documents without embeddings
+        texts_to_embed = []
+        docs_to_process = []
+        
+        for doc in documents:
+            if doc.embedding is None:
+                texts_to_embed.append(doc.content)
+                docs_to_process.append(doc)
+        
+        # Generate embeddings in batches
+        if texts_to_embed:
+            embeddings = await self.embedding_model.embed(texts_to_embed)
+            for doc, embedding in zip(docs_to_process, embeddings):
+                doc.embedding = embedding
+        
+        # Add documents to store
+        for doc in documents:
+            self.documents[doc.id] = doc
+            if doc.id not in self.doc_ids:
+                self.doc_ids.append(doc.id)
+                self.embeddings.append(doc.embedding)
+    
+    async def search(
+        self, 
+        query_embedding: List[float], 
+        top_k: int = 10,
+        filter_dict: Optional[Dict] = None
+    ) -> List[SearchResult]:
+        """Search for similar documents"""
+        if not self.embeddings:
+            return []
+        
+        # Calculate similarities
+        similarities = []
+        query_vec = np.array(query_embedding)
+        
+        for i, embedding in enumerate(self.embeddings):
+            doc_vec = np.array(embedding)
+            similarity = np.dot(query_vec, doc_vec) / (
+                np.linalg.norm(query_vec) * np.linalg.norm(doc_vec)
+            )
+            similarities.append((i, similarity))
+        
+        # Sort by similarity and get top-k
+        similarities.sort(key=lambda x: x[1], reverse=True)
+        top_indices = similarities[:top_k]
+        
+        # Create search results
+        results = []
+        for rank, (idx, score) in enumerate(top_indices, 1):
+            doc_id = self.doc_ids[idx]
+            doc = self.documents[doc_id]
+            
+            # Apply metadata filter if provided
+            if filter_dict and not self._matches_filter(doc.metadata, filter_dict):
+                continue
+            
+            results.append(SearchResult(
+                document=doc,
+                score=score,
+                rank=rank
+            ))
+        
+        return results
+    
+    def _matches_filter(self, metadata: Dict, filter_dict: Dict) -> bool:
+        """Check if document matches filter criteria"""
+        for key, value in filter_dict.items():
+            if key not in metadata or metadata[key] != value:
+                return False
+        return True
+    
+    async def delete_documents(self, doc_ids: List[str]) -> None:
+        """Delete documents from store"""
+        for doc_id in doc_ids:
+            if doc_id in self.documents:
+                del self.documents[doc_id]
+                idx = self.doc_ids.index(doc_id)
+                del self.doc_ids[idx]
+                del self.embeddings[idx]
+
+class RAGSystem:
+    """Retrieval-Augmented Generation System"""
+    
+    def __init__(
+        self,
+        vector_store: VectorStore,
+        llm_client: Any,
+        embedding_model: EmbeddingModel,
+        retrieval_top_k: int = 5
+    ):
+        self.vector_store = vector_store
+        self.llm_client = llm_client
+        self.embedding_model = embedding_model
+        self.retrieval_top_k = retrieval_top_k
+    
+    async def add_documents(self, documents: List[Document]) -> None:
+        """Add documents to the RAG system"""
+        await self.vector_store.add_documents(documents)
+    
+    async def query(
+        self,
+        query: str,
+        system_prompt: Optional[str] = None,
+        retrieval_filter: Optional[Dict] = None,
+        max_tokens: int = 1000,
+        temperature: float = 0.7
+    ) -> Dict[str, Any]:
+        """
+        Query the RAG system
+        
+        Returns:
+            Dictionary containing answer, retrieved documents, and metadata
+        """
+        try:
+            # Step 1: Generate query embedding
+            query_embeddings = await self.embedding_model.embed([query])
+            if not query_embeddings:
+                return {"error": "Failed to generate query embedding"}
+            
+            query_embedding = query_embeddings[0]
+            
+            # Step 2: Retrieve relevant documents
+            search_results = await self.vector_store.search(
+                query_embedding=query_embedding,
+                top_k=self.retrieval_top_k,
+                filter_dict=retrieval_filter
+            )
+            
+            if not search_results:
+                return {"answer": "No relevant documents found.", "documents": []}
+            
+            # Step 3: Construct augmented prompt
+            context = self._build_context(search_results)
+            augmented_prompt = self._build_augmented_prompt(
+                query=query,
+                context=context,
+                system_prompt=system_prompt
+            )
+            
+            # Step 4: Generate answer using LLM
+            answer = await self._generate_answer(
+                prompt=augmented_prompt,
+                max_tokens=max_tokens,
+                temperature=temperature
+            )
+            
+            # Step 5: Format response
+            response = {
+                "query": query,
+                "answer": answer,
+                "retrieved_documents": [
+                    {
+                        "id": result.document.id,
+                        "content": result.document.content[:200] + "..." if len(result.document.content) > 200 else result.document.content,
+                        "score": result.score,
+                        "rank": result.rank,
+                        "metadata": result.document.metadata
+                    }
+                    for result in search_results
+                ],
+                "num_documents_retrieved": len(search_results),
+                "context_length": len(context)
+            }
+            
+            return response
+            
+        except Exception as e:
+            return {"error": f"Query failed: {str(e)}"}
+    
+    def _build_context(self, search_results: List[SearchResult]) -> str:
+        """Build context string from search results"""
+        context_parts = []
+        for result in search_results:
+            context_parts.append(f"[Document {result.rank} (Score: {result.score:.3f})]\n{result.document.content}\n")
+        
+        return "\n".join(context_parts)
+    
+    def _build_augmented_prompt(
+        self,
+        query: str,
+        context: str,
+        system_prompt: Optional[str] = None
+    ) -> str:
+        """Build the augmented prompt with context"""
+        if system_prompt:
+            prompt = f"{system_prompt}\n\n"
+        else:
+            prompt = """You are a helpful AI assistant. Use the following context to answer the user's question.
+If the answer cannot be found in the context, say so.
+
+"""
+        
+        prompt += f"Context:\n{context}\n\n"
+        prompt += f"Question: {query}\n\n"
+        prompt += "Answer:"
+        
+        return prompt
+    
+    async def _generate_answer(
+        self,
+        prompt: str,
+        max_tokens: int,
+        temperature: float
+    ) -> str:
+        """Generate answer using the LLM"""
+        try:
+            response = await self.llm_client.chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=max_tokens,
+                temperature=temperature
+            )
+            
+            return response.choices[0].message.content.strip()
+        except Exception as e:
+            return f"Error generating answer: {str(e)}"
+    
+    async def batch_query(
+        self,
+        queries: List[str],
+        batch_size: int = 5
+    ) -> List[Dict[str, Any]]:
+        """Process multiple queries in batches"""
+        results = []
+        
+        for i in range(0, len(queries), batch_size):
+            batch = queries[i:i + batch_size]
+            batch_results = await asyncio.gather(*[
+                self.query(query) for query in batch
+            ])
+            results.extend(batch_results)
+        
+        return results
+
+# Usage Example
+async def main():
+    # Initialize components
+    print("Initializing RAG system...")
+    
+    # Embedding model
+    embedding_model = LocalEmbeddingModel("all-MiniLM-L6-v2")
+    
+    # Vector store
+    vector_store = InMemoryVectorStore(embedding_model)
+    
+    # LLM client (OpenAI)
+    openai.api_key = "your-api-key-here"
+    llm_client = openai.AsyncOpenAI()
+    
+    # RAG system
+    rag_system = RAGSystem(
+        vector_store=vector_store,
+        llm_client=llm_client,
+        embedding_model=embedding_model,
+        retrieval_top_k=3
+    )
+    
+    # Sample documents
+    sample_documents = [
+        Document(
+            id="doc1",
+            content="Machine learning is a subset of artificial intelligence that enables computers to learn and make decisions from data without being explicitly programmed for every scenario.",
+            metadata={"category": "AI", "type": "definition"}
+        ),
+        Document(
+            id="doc2",
+            content="Deep learning uses neural networks with multiple layers to model complex patterns in data. It has achieved remarkable success in areas like image recognition and natural language processing.",
+            metadata={"category": "AI", "type": "explanation"}
+        ),
+        Document(
+            id="doc3",
+            content="Natural language processing (NLP) is a field of AI that focuses on the interaction between computers and human language. It enables machines to understand, interpret, and generate human language.",
+            metadata={"category": "AI", "type": "definition"}
+        ),
+        Document(
+            id="doc4",
+            content="Retrieval-augmented generation (RAG) combines the power of pre-trained language models with external knowledge retrieval. This approach helps generate more accurate and up-to-date responses.",
+            metadata={"category": "AI", "type": "concept"}
+        ),
+        Document(
+            id="doc5",
+            content="Vector databases are specialized systems designed to store and retrieve high-dimensional vector embeddings efficiently. They are essential for semantic search and similarity matching applications.",
+            metadata={"category": "Databases", "type": "definition"}
+        )
+    ]
+    
+    # Add documents to RAG system
+    print("Adding documents to vector store...")
+    await rag_system.add_documents(sample_documents)
+    
+    # Test queries
+    test_queries = [
+        "What is machine learning?",
+        "How does RAG work?",
+        "What are vector databases used for?",
+        "Explain deep learning in simple terms"
+    ]
+    
+    print("\nProcessing queries...")
+    for query in test_queries:
+        print(f"\nQuery: {query}")
+        print("-" * 50)
+        
+        result = await rag_system.query(
+            query=query,
+            max_tokens=200,
+            temperature=0.3
+        )
+        
+        if "error" in result:
+            print(f"Error: {result['error']}")
+        else:
+            print(f"Answer: {result['answer']}")
+            print(f"\nRetrieved {result['num_documents_retrieved']} documents:")
+            for doc in result['retrieved_documents']:
+                print(f"  [{doc['rank']}] Score: {doc['score']:.3f} - {doc['content'][:100]}...")
+    
+    # Performance statistics
+    print(f"\n\nRAG System Statistics:")
+    print(f"Documents in store: {len(sample_documents)}")
+    print(f"Embedding dimension: {embedding_model.get_dimension()}")
+    print(f"Max retrieval results: {rag_system.retrieval_top_k}")
+
+# Run the example
+if __name__ == "__main__":
+    asyncio.run(main())</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Advanced RAG with LangChain -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Advanced RAG with LangChain</h3>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="text-gray-300 font-medium">langchain_rag.py</span>
+                                    <button class="copy-btn" onclick="copyCode('langchain-rag')">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre id="langchain-rag" class="language-python"><code>from langchain.schema import BaseRetriever, Document
+from langchain.llms import OpenAI
+from langchain.chains import RetrievalQA, ConversationalRetrievalChain
+from langchain.memory import ConversationBufferMemory
+from langchain.prompts import PromptTemplate
+from langchain.schema import BaseChatMessageHistory
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.vectorstores import Chroma, FAISS
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.embeddings import HuggingFaceEmbeddings
+from typing import List, Dict, Any, Optional
+import asyncio
+
+class AdvancedRAGSystem:
+    """Advanced RAG implementation using LangChain"""
+    
+    def __init__(
+        self,
+        vectorstore_type: str = "chroma",
+        embedding_type: str = "openai",
+        llm_type: str = "openai",
+        chunk_size: int = 1000,
+        chunk_overlap: int = 200
+    ):
+        self.vectorstore_type = vectorstore_type
+        self.embedding_type = embedding_type
+        self.llm_type = llm_type
+        self.chunk_size = chunk_size
+        self.chunk_overlap = chunk_overlap
+        
+        # Initialize components
+        self.embeddings = self._initialize_embeddings()
+        self.llm = self._initialize_llm()
+        self.vectorstore = None
+        self.retriever = None
+        self.qa_chain = None
+        self.conversational_chain = None
+        self.memory = ConversationBufferMemory(
+            memory_key="chat_history",
+            return_messages=True
+        )
+    
+    def _initialize_embeddings(self):
+        """Initialize embeddings based on type"""
+        if self.embedding_type == "openai":
+            return OpenAIEmbeddings()
+        elif self.embedding_type == "huggingface":
+            return HuggingFaceEmbeddings(
+                model_name="all-MiniLM-L6-v2"
+            )
+        else:
+            raise ValueError(f"Unsupported embedding type: {self.embedding_type}")
+    
+    def _initialize_llm(self):
+        """Initialize LLM based on type"""
+        if self.llm_type == "openai":
+            return OpenAI(temperature=0.3)
+        else:
+            raise ValueError(f"Unsupported LLM type: {self.llm_type}")
+    
+    def _initialize_vectorstore(self):
+        """Initialize vector store"""
+        if self.vectorstore_type == "chroma":
+            return Chroma(embedding_function=self.embeddings)
+        elif self.vectorstore_type == "faiss":
+            return FAISS(embedding_function=self.embeddings)
+        else:
+            raise ValueError(f"Unsupported vectorstore type: {self.vectorstore_type}")
+    
+    def add_documents(
+        self, 
+        documents: List[str], 
+        metadatas: Optional[List[Dict]] = None,
+        ids: Optional[List[str]] = None
+    ) -> None:
+        """Add documents to the RAG system"""
+        # Initialize vectorstore if not exists
+        if self.vectorstore is None:
+            self.vectorstore = self._initialize_vectorstore()
+        
+        # Split documents into chunks
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=self.chunk_size,
+            chunk_overlap=self.chunk_overlap,
+            length_function=len,
+        )
+        
+        # Create LangChain documents
+        lc_documents = []
+        for i, doc_content in enumerate(documents):
+            metadata = metadatas[i] if metadatas else {}
+            doc_id = ids[i] if ids else f"doc_{i}"
+            
+            # Split into chunks
+            chunks = text_splitter.split_text(doc_content)
+            
+            for j, chunk in enumerate(chunks):
+                chunk_metadata = metadata.copy()
+                chunk_metadata["chunk_id"] = j
+                chunk_metadata["total_chunks"] = len(chunks)
+                
+                lc_documents.append(Document(
+                    page_content=chunk,
+                    metadata=chunk_metadata
+                ))
+        
+        # Add to vectorstore
+        if hasattr(self.vectorstore, 'add_documents'):
+            self.vectorstore.add_documents(lc_documents)
+        else:
+            # For FAISS, use add_texts
+            texts = [doc.page_content for doc in lc_documents]
+            self.vectorstore.add_texts(texts, metadatas=[doc.metadata for doc in lc_documents])
+        
+        # Update retriever
+        self.retriever = self.vectorstore.as_retriever(
+            search_kwargs={"k": 5}
+        )
+        
+        # Update chains
+        self._update_chains()
+    
+    def _update_chains(self):
+        """Update QA and conversational chains"""
+        if self.retriever is None:
+            return
+        
+        # Custom prompt template
+        custom_template = """You are a helpful AI assistant. Use the following pieces of context to answer the question at the end.
+If you don't know the answer, just say that you don't know, don't try to make up an answer.
+
+Context:
+{context}
+
+Question: {question}
+
+Helpful Answer:"""
+        
+        PROMPT = PromptTemplate(
+            template=custom_template,
+            input_variables=["context", "question"]
+        )
+        
+        # Basic QA chain
+        self.qa_chain = RetrievalQA.from_chain_type(
+            llm=self.llm,
+            chain_type="stuff",
+            retriever=self.retriever,
+            return_source_documents=True,
+            chain_type_kwargs={"prompt": PROMPT}
+        )
+        
+        # Conversational chain
+        self.conversational_chain = ConversationalRetrievalChain.from_llm(
+            llm=self.llm,
+            retriever=self.retriever,
+            memory=self.memory,
+            combine_docs_chain_kwargs={"prompt": PROMPT}
+        )
+    
+    def query(self, question: str, return_source_documents: bool = True) -> Dict[str, Any]:
+        """Query the RAG system"""
+        if self.qa_chain is None:
+            return {"error": "No documents loaded. Please add documents first."}
+        
+        try:
+            result = self.qa_chain({"query": question})
+            
+            response = {
+                "question": question,
+                "answer": result["result"],
+                "source_documents": []
+            }
+            
+            if return_source_documents and "source_documents" in result:
+                for doc in result["source_documents"]:
+                    response["source_documents"].append({
+                        "content": doc.page_content[:200] + "..." if len(doc.page_content) > 200 else doc.page_content,
+                        "metadata": doc.metadata
+                    })
+            
+            return response
+            
+        except Exception as e:
+            return {"error": f"Query failed: {str(e)}"}
+    
+    def conversational_query(self, question: str) -> Dict[str, Any]:
+        """Query with conversation memory"""
+        if self.conversational_chain is None:
+            return {"error": "No documents loaded. Please add documents first."}
+        
+        try:
+            result = self.conversational_chain({"question": question})
+            
+            return {
+                "question": question,
+                "answer": result["answer"],
+                "chat_history": [
+                    {
+                        "type": msg.type,
+                        "content": msg.content
+                    }
+                    for msg in self.memory.chat_memory.messages[-10:]  # Last 10 messages
+                ]
+            }
+            
+        except Exception as e:
+            return {"error": f"Conversational query failed: {str(e)}"}
+    
+    def similarity_search(
+        self, 
+        query: str, 
+        k: int = 4,
+        filter_dict: Optional[Dict] = None
+    ) -> List[Dict[str, Any]]:
+        """Perform similarity search without LLM"""
+        if self.vectorstore is None:
+            return []
+        
+        # Get relevant documents
+        if filter_dict:
+            docs = self.vectorstore.similarity_search(
+                query, 
+                k=k, 
+                filter=filter_dict
+            )
+        else:
+            docs = self.vectorstore.similarity_search(query, k=k)
+        
+        return [
+            {
+                "content": doc.page_content,
+                "metadata": doc.metadata
+            }
+            for doc in docs
+        ]
+    
+    def get_statistics(self) -> Dict[str, Any]:
+        """Get system statistics"""
+        stats = {
+            "vectorstore_type": self.vectorstore_type,
+            "embedding_type": self.embedding_type,
+            "llm_type": self.llm_type,
+            "chunk_size": self.chunk_size,
+            "chunk_overlap": self.chunk_overlap
+        }
+        
+        if self.vectorstore:
+            try:
+                # Try to get document count (method varies by vectorstore)
+                if hasattr(self.vectorstore, '_collection'):
+                    stats["document_count"] = len(self.vectorstore._collection.get()['ids'])
+                else:
+                    stats["document_count"] = "Unknown"
+            except:
+                stats["document_count"] = "Unknown"
+        else:
+            stats["document_count"] = 0
+        
+        return stats
+
+# Advanced RAG with multiple retrieval strategies
+class MultiStrategyRAG:
+    """RAG system with multiple retrieval strategies"""
+    
+    def __init__(self, base_rag: AdvancedRAGSystem):
+        self.base_rag = base_rag
+        self.retrieval_strategies = {
+            "semantic": self.semantic_search,
+            "keyword": self.keyword_search,
+            "hybrid": self.hybrid_search
+        }
+    
+    def semantic_search(self, query: str, k: int = 4) -> List[Document]:
+        """Pure semantic search"""
+        return self.base_rag.vectorstore.similarity_search(query, k=k)
+    
+    def keyword_search(self, query: str, k: int = 4) -> List[Document]:
+        """Keyword-based search (simplified)"""
+        # This would typically use a different index
+        # For now, return semantic search results
+        return self.semantic_search(query, k)
+    
+    def hybrid_search(self, query: str, k: int = 4) -> List[Document]:
+        """Combine multiple search strategies"""
+        semantic_results = self.semantic_search(query, k=k//2)
+        keyword_results = self.keyword_search(query, k=k//2)
+        
+        # Combine and deduplicate
+        all_results = semantic_results + keyword_results
+        seen = set()
+        unique_results = []
+        
+        for doc in all_results:
+            if doc.page_content not in seen:
+                seen.add(doc.page_content)
+                unique_results.append(doc)
+        
+        return unique_results[:k]
+    
+    def query_with_strategy(
+        self, 
+        question: str, 
+        strategy: str = "hybrid",
+        k: int = 4
+    ) -> Dict[str, Any]:
+        """Query using specific retrieval strategy"""
+        if strategy not in self.retrieval_strategies:
+            return {"error": f"Unknown strategy: {strategy}"}
+        
+        # Get documents using specified strategy
+        docs = self.retrieval_strategies[strategy](question, k)
+        
+        # Use these documents for generation
+        # This would require modifying the chain to accept pre-retrieved documents
+        # For demonstration, return the retrieved documents
+        return {
+            "strategy": strategy,
+            "retrieved_documents": [
+                {
+                    "content": doc.page_content[:200] + "..." if len(doc.page_content) > 200 else doc.page_content,
+                    "metadata": doc.metadata
+                }
+                for doc in docs
+            ],
+            "count": len(docs)
+        }
+
+# Usage Example
+def main():
+    # Initialize advanced RAG system
+    print("Initializing Advanced RAG System...")
+    
+    rag_system = AdvancedRAGSystem(
+        vectorstore_type="chroma",
+        embedding_type="openai",
+        llm_type="openai",
+        chunk_size=1000,
+        chunk_overlap=200
+    )
+    
+    # Sample documents
+    documents = [
+        """
+        Machine Learning Fundamentals
+        Machine learning is a subset of artificial intelligence that provides systems the ability to 
+        automatically learn and improve from experience without being explicitly programmed. It focuses 
+        on the development of computer programs that can access data and use it to learn for themselves.
+        """,
+        """
+        Deep Learning Architecture
+        Deep learning is part of a broader family of machine learning methods based on artificial neural 
+        networks with representation learning. Learning can be supervised, semi-supervised or unsupervised.
+        Deep learning architectures such as deep neural networks, deep belief networks, and recurrent neural 
+        networks have been applied to fields including computer vision, speech recognition, natural language 
+        processing, audio recognition, social network filtering, machine translation, bioinformatics, and more.
+        """,
+        """
+        Natural Language Processing
+        Natural language processing (NLP) is a subfield of linguistics, computer science, and artificial intelligence 
+        concerned with the interactions between computers and human language, in particular how to program computers 
+        to process and analyze large amounts of natural language data. The goal is a computer capable of understanding 
+        the contents of documents, including the contextual nuances of the language within them.
+        """,
+        """
+        Retrieval-Augmented Generation
+        Retrieval-augmented generation (RAG) is a technique for enhancing the accuracy and reliability of generative AI 
+        models with facts fetched from external sources. RAG enables language models to access real-world, up-to-date 
+        information beyond their training data, reducing the likelihood of generating incorrect or outdated responses.
+        """,
+        """
+        Vector Embeddings and Search
+        Vector embeddings are numerical representations of words, phrases, or documents in a high-dimensional space. 
+        These embeddings capture semantic meaning and relationships between concepts, enabling similarity search and 
+        other advanced NLP tasks. Vector search uses these embeddings to find semantically similar items in a database.
+        """
+    ]
+    
+    # Add documents
+    print("Adding documents to vector store...")
+    rag_system.add_documents(documents)
+    
+    # Test basic query
+    print("\nTesting basic query...")
+    result = rag_system.query("What is machine learning?")
+    
+    if "error" not in result:
+        print(f"Question: {result['question']}")
+        print(f"Answer: {result['answer']}")
+        print(f"\nSource documents: {len(result['source_documents'])}")
+        for i, doc in enumerate(result['source_documents'], 1):
+            print(f"  {i}. {doc['content'][:100]}...")
+    else:
+        print(f"Error: {result['error']}")
+    
+    # Test conversational query
+    print("\n\nTesting conversational query...")
+    conv_result = rag_system.conversational_query("How does deep learning relate to machine learning?")
+    
+    if "error" not in conv_result:
+        print(f"Question: {conv_result['question']}")
+        print(f"Answer: {conv_result['answer']}")
+        print(f"Chat history length: {len(conv_result['chat_history'])}")
+    
+    # Test similarity search
+    print("\n\nTesting similarity search...")
+    similar_docs = rag_system.similarity_search("neural networks", k=3)
+    
+    print(f"Found {len(similar_docs)} similar documents:")
+    for i, doc in enumerate(similar_docs, 1):
+        print(f"  {i}. {doc['content'][:150]}...")
+        print(f"     Metadata: {doc['metadata']}\n")
+    
+    # System statistics
+    print("\n\nSystem Statistics:")
+    stats = rag_system.get_statistics()
+    for key, value in stats.items():
+        print(f"{key}: {value}")
+
+# Run the example
+if __name__ == "__main__":
+    main()</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Best Practices -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-star text-deep-blue mr-3"></i>
+                            Retrieval System Best Practices
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-6">
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                                    <h4 class="font-semibold text-blue-800 mb-2">
+                                        <i class="fas fa-layer-group mr-2"></i>
+                                        Document Processing
+                                    </h4>
+                                    <p class="text-blue-700 text-sm">
+                                        Implement proper chunking strategies, metadata extraction, 
+                                and preprocessing to optimize retrieval quality.
+                                    </p>
+                                </div>
+
+                                <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                                    <h4 class="font-semibold text-green-800 mb-2">
+                                        <i class="fas fa-search mr-2"></i>
+                                        Retrieval Optimization
+                                    </h4>
+                                    <p class="text-green-700 text-sm">
+                                        Use appropriate embedding models, implement hybrid search, 
+                                        and optimize vector database performance.
+                                    </p>
+                                </div>
+
+                                <div class="bg-purple-50 border-l-4 border-purple-500 p-4">
+                                    <h4 class="font-semibold text-purple-800 mb-2">
+                                        <i class="fas fa-chart-line mr-2"></i>
+                                        Evaluation & Monitoring
+                                    </h4>
+                                    <p class="text-purple-700 text-sm">
+                                        Track retrieval metrics, evaluate answer quality, 
+                                        and monitor system performance continuously.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="bg-orange-50 border-l-4 border-orange-500 p-4">
+                                    <h4 class="font-semibold text-orange-800 mb-2">
+                                        <i class="fas fa-sync-alt mr-2"></i>
+                                        Update Strategies
+                                    </h4>
+                                    <p class="text-orange-700 text-sm">
+                                        Plan for incremental updates, handle document versioning, 
+                                        and implement efficient re-indexing processes.
+                                    </p>
+                                </div>
+
+                                <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                                    <h4 class="font-semibold text-red-800 mb-2">
+                                        <i class="fas fa-shield-alt mr-2"></i>
+                                        Security & Privacy
+                                    </h4>
+                                    <p class="text-red-700 text-sm">
+                                        Implement access controls, handle sensitive data appropriately, 
+                                        and ensure compliance with privacy regulations.
+                                    </p>
+                                </div>
+
+                                <div class="bg-teal-50 border-l-4 border-teal-500 p-4">
+                                    <h4 class="font-semibold text-teal-800 mb-2">
+                                        <i class="fas fa-expand-arrows-alt mr-2"></i>
+                                        Scalability Planning
+                                    </h4>
+                                    <p class="text-teal-700 text-sm">
+                                        Design for horizontal scaling, implement load balancing, 
+                                        and plan for growing document collections.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-between items-center bg-white rounded-lg shadow-lg p-6">
+                        <a href="topic-prompt-engineering.html" class="text-gray-500 hover:text-deep-blue transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: Prompt Engineering Framework
+                        </a>
+                        <div class="flex space-x-4">
+                            <a href="topic-fine-tuning-pipeline.html" class="bg-deep-blue text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+                                Next: Fine-tuning Pipeline
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const icon = document.getElementById(sectionId + '-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('expanded');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const text = codeElement.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                // Show feedback
+                const btn = event.target.closest('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+
+        // Create RAG architecture diagram
+        function createRAGArchitecture() {
+            const data = [{
+                type: 'sankey',
+                node: {
+                    pad: 15,
+                    thickness: 20,
+                    line: { color: "black", width: 0.5 },
+                    label: [
+                        "User Query", "Query Embedding", "Vector Search", "Document Store",
+                        "Retrieved Documents", "Context Building", "Augmented Prompt",
+                        "LLM Processing", "Generated Answer", "Response to User"
+                    ],
+                    color: [
+                        "#3b82f6", "#60a5fa", "#93c5fd", "#dbeafe",
+                        "#10b981", "#34d399", "#6ee7b7", "#d1fae5",
+                        "#8b5cf6", "#a78bfa"
+                    ]
+                },
+                link: {
+                    source: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    target: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
+                    value: [10, 10, 10, 8, 10, 8, 10, 10, 8, 10]
+                }
+            }];
+
+            const layout = {
+                title: "RAG System Architecture",
+                font: { size: 12 },
+                margin: { l: 0, r: 0, t: 50, b: 0 }
+            };
+
+            Plotly.newPlot('rag-architecture', data, layout, {responsive: true});
+        }
+
+        // Initialize diagrams when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createRAGArchitecture();
+        });
+    </script>
+</body>
+</html>

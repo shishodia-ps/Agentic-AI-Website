@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Topics - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        .topic-card { 
+            transition: all 0.3s ease; 
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .topic-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-brain text-2xl text-indigo-600 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-900">Agentic AI Hub</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="topics.html" class="text-gray-700 hover:text-indigo-600">Topics</a>
+                    <a href="about.html" class="text-gray-700 hover:text-indigo-600">About</a>
+                    <a href="manage.html" class="text-gray-700 hover:text-indigo-600">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">All Available Topics</h1>
+            <p class="text-xl md:text-2xl">Comprehensive AI and Agentic AI Knowledge Base</p>
+        </div>
+    </div>
+
+    <!-- Topics Grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">What is Artificial Intelligence?</h3>
+                <p class="text-gray-600 text-sm mb-4">Comprehensive introduction to AI concepts, history, and fundamental principles</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Beginner</span>
+                    <a href="topic-what-is-ai.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Types of AI: Narrow vs General</h3>
+                <p class="text-gray-600 text-sm mb-4">Understanding different types of AI systems and their capabilities</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Beginner</span>
+                    <a href="topic-types-of-ai.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Machine Learning Fundamentals</h3>
+                <p class="text-gray-600 text-sm mb-4">Core concepts of machine learning algorithms and methodologies</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-machine-learning-fundamentals.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Deep Learning Concepts</h3>
+                <p class="text-gray-600 text-sm mb-4">Neural networks, backpropagation, and deep learning architectures</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-deep-learning-concepts.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Neural Networks Architecture</h3>
+                <p class="text-gray-600 text-sm mb-4">Advanced neural network architectures and design patterns</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-neural-networks-architecture.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Natural Language Processing Basics</h3>
+                <p class="text-gray-600 text-sm mb-4">Text processing, tokenization, and language understanding</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-nlp-basics.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Computer Vision Fundamentals</h3>
+                <p class="text-gray-600 text-sm mb-4">Image processing, object detection, and visual recognition</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-computer-vision-fundamentals.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Agent Architecture</h3>
+                <p class="text-gray-600 text-sm mb-4">Design patterns and architectures for intelligent agents</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-red-100 text-red-800 text-xs rounded-full">Advanced</span>
+                    <a href="topic-agent-architecture.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Multi-Agent Systems</h3>
+                <p class="text-gray-600 text-sm mb-4">Coordination, communication, and collaboration between multiple agents</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-red-100 text-red-800 text-xs rounded-full">Advanced</span>
+                    <a href="topic-multi-agent-systems.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">LangChain Framework</h3>
+                <p class="text-gray-600 text-sm mb-4">Building applications with LangChain for LLM integration</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-langchain-framework.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">AutoGen Framework</h3>
+                <p class="text-gray-600 text-sm mb-4">Microsoft's framework for multi-agent conversation and collaboration</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-autogen-framework.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">CrewAI Framework</h3>
+                <p class="text-gray-600 text-sm mb-4">Orchestrating role-playing autonomous AI agents for collaborative tasks</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-crewai-framework.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">RAG Implementation</h3>
+                <p class="text-gray-600 text-sm mb-4">Retrieval-Augmented Generation for enhanced AI responses</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-rag-implementation.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Vector Databases</h3>
+                <p class="text-gray-600 text-sm mb-4">Specialized databases for storing and searching vector embeddings</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-vector-databases.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Fine-tuning Techniques</h3>
+                <p class="text-gray-600 text-sm mb-4">Optimizing models for specific tasks and domains</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-red-100 text-red-800 text-xs rounded-full">Advanced</span>
+                    <a href="topic-fine-tuning-techniques.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Prompt Engineering</h3>
+                <p class="text-gray-600 text-sm mb-4">Crafting effective prompts to guide AI model behavior</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-prompt-engineering.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">AI Safety & Ethics</h3>
+                <p class="text-gray-600 text-sm mb-4">Ensuring responsible and ethical AI development and deployment</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-ai-safety-ethics.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Evaluation Metrics</h3>
+                <p class="text-gray-600 text-sm mb-4">Measuring AI performance across different domains and tasks</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-evaluation-metrics.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Deployment Strategies</h3>
+                <p class="text-gray-600 text-sm mb-4">Strategies for deploying AI models to production environments</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-red-100 text-red-800 text-xs rounded-full">Advanced</span>
+                    <a href="topic-deployment-strategies.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Monitoring & Observability</h3>
+                <p class="text-gray-600 text-sm mb-4">Tracking AI system performance and health in production</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-monitoring-observability.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Scaling & Performance</h3>
+                <p class="text-gray-600 text-sm mb-4">Optimizing AI systems for speed and efficiency at scale</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-red-100 text-red-800 text-xs rounded-full">Advanced</span>
+                    <a href="topic-scaling-performance.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Security & Privacy</h3>
+                <p class="text-gray-600 text-sm mb-4">Protecting AI systems and user data from threats</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-red-100 text-red-800 text-xs rounded-full">Advanced</span>
+                    <a href="topic-security-privacy.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="topic-card p-6 rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Future Trends</h3>
+                <p class="text-gray-600 text-sm mb-4">Emerging trends and future directions in AI development</p>
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Intermediate</span>
+                    <a href="topic-future-trends.html" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn More →</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Summary -->
+        <div class="mt-12 bg-white rounded-lg p-6 shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Knowledge Hub Summary</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-blue-600">23</div>
+                    <div class="text-gray-600">Topic Pages</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-600">1000+</div>
+                    <div class="text-gray-600">Words per Topic</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-purple-600">100+</div>
+                    <div class="text-gray-600">Total Topics Planned</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 Agentic AI Knowledge Hub. Empowering the future of artificial intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            anime({
+                targets: '.stagger-item',
+                opacity: [0, 1],
+                translateY: [30, 0],
+                delay: anime.stagger(100),
+                duration: 800,
+                easing: 'easeOutQuart'
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<script>
+        // Real topics that we've created - linking to actual HTML pages
+        const testTopics = [
+            {
+                id: 1,
+                title: "What is Artificial Intelligence?",
+                category: "fundamentals",
+                difficulty: "beginner",
+                description: "Comprehensive introduction to AI concepts, history, and fundamental principles",
+                concepts: ["AI Definition", "History", "Types", "Applications"],
+                featured: true,
+                progress: 0,
+                content: "Introduction to AI fundamentals...",
+                url: "topic-what-is-ai.html"
+            },
+            {
+                id: 2,
+                title: "Types of AI: Narrow vs General",
+                category: "fundamentals",
+                difficulty: "beginner",
+                description: "Understanding different types of AI systems and their capabilities",
+                concepts: ["Narrow AI", "General AI", "Super AI", "Capabilities"],
+                featured: true,
+                progress: 0,
+                content: "Types of AI systems...",
+                url: "topic-types-of-ai.html"
+            },
+            {
+                id: 3,
+                title: "Machine Learning Fundamentals",
+                category: "fundamentals",
+                difficulty: "intermediate",
+                description: "Core concepts of machine learning algorithms and methodologies",
+                concepts: ["Supervised", "Unsupervised", "Reinforcement", "Algorithms"],
+                featured: true,
+                progress: 0,
+                content: "Machine learning basics...",
+                url: "topic-machine-learning-fundamentals.html"
+            },
+            {
+                id: 4,
+                title: "Deep Learning Concepts",
+                category: "fundamentals",
+                difficulty: "intermediate",
+                description: "Neural networks, backpropagation, and deep learning architectures",
+                concepts: ["Neural Networks", "Backpropagation", "Activation Functions", "Layers"],
+                featured: true,
+                progress: 0,
+                content: "Deep learning concepts...",
+                url: "topic-deep-learning-concepts.html"
+            },
+            {
+                id: 5,
+                title: "Neural Networks Architecture",
+                category: "fundamentals",
+                difficulty: "intermediate",
+                description: "Advanced neural network architectures and design patterns",
+                concepts: ["CNN", "RNN", "LSTM", "Transformers"],
+                featured: true,
+                progress: 0,
+                content: "Neural network architectures...",
+                url: "topic-neural-networks-architecture.html"
+            },
+            {
+                id: 6,
+                title: "Natural Language Processing Basics",
+                category: "fundamentals",
+                difficulty: "intermediate",
+                description: "Text processing, tokenization, and language understanding",
+                concepts: ["Tokenization", "NER", "Sentiment Analysis", "Text Classification"],
+                featured: false,
+                progress: 0,
+                content: "NLP fundamentals...",
+                url: "topic-nlp-basics.html"
+            },
+            {
+                id: 7,
+                title: "Computer Vision Fundamentals",
+                category: "fundamentals",
+                difficulty: "intermediate",
+                description: "Image processing, object detection, and visual recognition",
+                concepts: ["Image Processing", "CNN", "Object Detection", "Segmentation"],
+                featured: false,
+                progress: 0,
+                content: "Computer vision basics...",
+                url: "topic-computer-vision-fundamentals.html"
+            },
+            {
+                id: 8,
+                title: "Agent Architecture",
+                category: "agentic-ai",
+                difficulty: "advanced",
+                description: "Design patterns and architectures for intelligent agents",
+                concepts: ["Agent Types", "Architecture Patterns", "Decision Making", "Learning"],
+                featured: true,
+                progress: 0,
+                content: "Agent architecture design...",
+                url: "topic-agent-architecture.html"
+            },
+            {
+                id: 9,
+                title: "Multi-Agent Systems",
+                category: "agentic-ai",
+                difficulty: "advanced",
+                description: "Coordination, communication, and collaboration between multiple agents",
+                concepts: ["Coordination", "Communication", "Negotiation", "Emergent Behavior"],
+                featured: true,
+                progress: 0,
+                content: "Multi-agent systems...",
+                url: "topic-multi-agent-systems.html"
+            },
+            {
+                id: 10,
+                title: "LangChain Framework",
+                category: "agentic-ai",
+                difficulty: "intermediate",
+                description: "Building applications with LangChain for LLM integration",
+                concepts: ["Chains", "Agents", "Memory", "Tools"],
+                featured: true,
+                progress: 0,
+                content: "LangChain framework...",
+                url: "topic-langchain-framework.html"
+            },
+            {
+                id: 11,
+                title: "AutoGen Framework",
+                category: "agentic-ai",
+                difficulty: "intermediate",
+                description: "Microsoft's framework for multi-agent conversation and collaboration",
+                concepts: ["Conversable Agents", "Multi-Agent Conversation", "Code Generation", "Human Proxy"],
+                featured: true,
+                progress: 0,
+                content: "AutoGen framework...",
+                url: "topic-autogen-framework.html"
+            },
+            {
+                id: 12,
+                title: "CrewAI Framework",
+                category: "agentic-ai",
+                difficulty: "intermediate",
+                description: "Orchestrating role-playing autonomous AI agents for collaborative tasks",
+                concepts: ["Roles", "Goals", "Tasks", "Crews"],
+                featured: false,
+                progress: 0,
+                content: "CrewAI framework...",
+                url: "topic-crewai-framework.html"
+            },
+            {
+                id: 13,
+                title: "RAG Implementation",
+                category: "implementation",
+                difficulty: "intermediate",
+                description: "Retrieval-Augmented Generation for enhanced AI responses",
+                concepts: ["Retrieval", "Augmentation", "Vector Stores", "Embedding"],
+                featured: true,
+                progress: 0,
+                content: "RAG implementation...",
+                url: "topic-rag-implementation.html"
+            },
+            {
+                id: 14,
+                title: "Vector Databases",
+                category: "implementation",
+                difficulty: "intermediate",
+                description: "Specialized databases for storing and searching vector embeddings",
+                concepts: ["Pinecone", "Chroma", "Weaviate", "Similarity Search"],
+                featured: false,
+                progress: 0,
+                content: "Vector databases...",
+                url: "topic-vector-databases.html"
+            },
+            {
+                id: 15,
+                title: "Fine-tuning Techniques",
+                category: "implementation",
+                difficulty: "advanced",
+                description: "Optimizing models for specific tasks and domains",
+                concepts: ["LoRA", "QLoRA", "Full Fine-tuning", "PEFT"],
+                featured: false,
+                progress: 0,
+                content: "Fine-tuning techniques...",
+                url: "topic-fine-tuning-techniques.html"
+            },
+            {
+                id: 16,
+                title: "Prompt Engineering",
+                category: "implementation",
+                difficulty: "intermediate",
+                description: "Crafting effective prompts to guide AI model behavior",
+                concepts: ["Prompt Design", "Context", "Few-shot Learning", "Chain of Thought"],
+                featured: true,
+                progress: 0,
+                content: "Prompt engineering...",
+                url: "topic-prompt-engineering.html"
+            },
+            {
+                id: 17,
+                title: "AI Safety & Ethics",
+                category: "governance",
+                difficulty: "intermediate",
+                description: "Ensuring responsible and ethical AI development and deployment",
+                concepts: ["Fairness", "Transparency", "Privacy", "Accountability"],
+                featured: false,
+                progress: 0,
+                content: "AI safety and ethics...",
+                url: "topic-ai-safety-ethics.html"
+            },
+            {
+                id: 18,
+                title: "Evaluation Metrics",
+                category: "implementation",
+                difficulty: "intermediate",
+                description: "Measuring AI performance across different domains and tasks",
+                concepts: ["Accuracy", "Precision", "Recall", "F1-Score", "BLEU", "ROUGE"],
+                featured: false,
+                progress: 0,
+                content: "Evaluation metrics...",
+                url: "topic-evaluation-metrics.html"
+            },
+            {
+                id: 19,
+                title: "Deployment Strategies",
+                category: "implementation",
+                difficulty: "advanced",
+                description: "Strategies for deploying AI models to production environments",
+                concepts: ["Cloud Deployment", "Edge Computing", "Auto-scaling", "CI/CD"],
+                featured: false,
+                progress: 0,
+                content: "Deployment strategies...",
+                url: "topic-deployment-strategies.html"
+            },
+            {
+                id: 20,
+                title: "Monitoring & Observability",
+                category: "operations",
+                difficulty: "intermediate",
+                description: "Tracking AI system performance and health in production",
+                concepts: ["Metrics", "Logs", "Traces", "Alerting", "Dashboards"],
+                featured: false,
+                progress: 0,
+                content: "Monitoring and observability...",
+                url: "topic-monitoring-observability.html"
+            },
+            {
+                id: 21,
+                title: "Scaling & Performance",
+                category: "operations",
+                difficulty: "advanced",
+                description: "Optimizing AI systems for speed and efficiency at scale",
+                concepts: ["Horizontal Scaling", "Vertical Scaling", "Caching", "Optimization"],
+                featured: false,
+                progress: 0,
+                content: "Scaling and performance...",
+                url: "topic-scaling-performance.html"
+            },
+            {
+                id: 22,
+                title: "Security & Privacy",
+                category: "governance",
+                difficulty: "advanced",
+                description: "Protecting AI systems and user data from threats",
+                concepts: ["Adversarial Attacks", "Data Poisoning", "Privacy Preservation", "Compliance"],
+                featured: false,
+                progress: 0,
+                content: "Security and privacy...",
+                url: "topic-security-privacy.html"
+            },
+            {
+                id: 23,
+                title: "Future Trends",
+                category: "future",
+                difficulty: "intermediate",
+                description: "Emerging trends and future directions in AI development",
+                concepts: ["AGI", "Quantum AI", "Neuromorphic Computing", "Multimodal AI"],
+                featured: false,
+                progress: 0,
+                content: "Future trends...",
+                url: "topic-future-trends.html"
+            }
+        ];
+        
+        // Make topics available globally
+        window.allTopics = testTopics;
+        console.log('Loaded', testTopics.length, 'topics for testing');
+    </script>

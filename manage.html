@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Management - Agentic AI Knowledge Hub</title>
+    <meta name="description" content="Manage AI topics, add new content, and organize your knowledge base with comprehensive editing tools.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --sage-deep: #2D5A3D;
+            --charcoal-warm: #3A3A3A;
+            --cream-soft: #F8F6F0;
+            --copper-accent: #B87333;
+            --teal-muted: #4A7C7E;
+            --lavender-soft: #B8A9C9;
+            --gray-warm: #8B8680;
+            --success-green: #6B8E5A;
+            --warning-amber: #D4A574;
+            --error-coral: #C67B5C;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream-soft);
+            color: var(--charcoal-warm);
+        }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Navigation */
+        .nav-glass {
+            background: rgba(248, 246, 240, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--copper-accent);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--copper-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Dashboard Cards */
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(45, 90, 61, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(45, 90, 61, 0.1);
+        }
+        
+        /* Editor Styles */
+        .editor-container {
+            background: white;
+            border: 1px solid rgba(45, 90, 61, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .editor-toolbar {
+            background: rgba(45, 90, 61, 0.05);
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+            padding: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .editor-content {
+            padding: 2rem;
+            min-height: 400px;
+            outline: none;
+            line-height: 1.6;
+        }
+        
+        .editor-content:focus {
+            background: rgba(184, 115, 51, 0.02);
+        }
+        
+        /* Toolbar Buttons */
+        .toolbar-btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid rgba(45, 90, 61, 0.2);
+            border-radius: 6px;
+            background: white;
+            color: var(--charcoal-warm);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .toolbar-btn:hover {
+            background: var(--copper-accent);
+            color: white;
+            border-color: var(--copper-accent);
+        }
+        
+        .toolbar-btn.active {
+            background: var(--sage-deep);
+            color: white;
+            border-color: var(--sage-deep);
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--charcoal-warm);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid rgba(45, 90, 61, 0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--copper-accent);
+            box-shadow: 0 0 0 4px rgba(184, 115, 51, 0.1);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid rgba(45, 90, 61, 0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: var(--copper-accent);
+            box-shadow: 0 0 0 4px rgba(184, 115, 51, 0.1);
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid rgba(45, 90, 61, 0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 120px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--copper-accent);
+            box-shadow: 0 0 0 4px rgba(184, 115, 51, 0.1);
+        }
+        
+        /* Action Buttons */
+        .action-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .action-btn-primary {
+            background: var(--copper-accent);
+            color: white;
+        }
+        
+        .action-btn-primary:hover {
+            background: var(--sage-deep);
+            transform: translateY(-1px);
+        }
+        
+        .action-btn-secondary {
+            background: rgba(45, 90, 61, 0.1);
+            color: var(--sage-deep);
+        }
+        
+        .action-btn-secondary:hover {
+            background: rgba(45, 90, 61, 0.2);
+        }
+        
+        .action-btn-danger {
+            background: var(--error-coral);
+            color: white;
+        }
+        
+        .action-btn-danger:hover {
+            background: #b8654a;
+        }
+        
+        /* Topic List */
+        .topic-item {
+            background: white;
+            border: 1px solid rgba(45, 90, 61, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .topic-item:hover {
+            border-color: var(--copper-accent);
+            box-shadow: 0 4px 12px rgba(184, 115, 51, 0.1);
+        }
+        
+        .topic-item.selected {
+            border-color: var(--copper-accent);
+            background: rgba(184, 115, 51, 0.05);
+        }
+        
+        /* Difficulty Badges */
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .difficulty-beginner {
+            background: rgba(107, 142, 90, 0.1);
+            color: var(--success-green);
+        }
+        
+        .difficulty-intermediate {
+            background: rgba(212, 165, 116, 0.1);
+            color: var(--warning-amber);
+        }
+        
+        .difficulty-advanced {
+            background: rgba(198, 123, 92, 0.1);
+            color: var(--error-coral);
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(45, 90, 61, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--copper-accent);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Stats Cards */
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--copper-accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--gray-warm);
+            font-size: 0.875rem;
+        }
+        
+        /* Tabs */
+        .tab-container {
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .tab-button {
+            padding: 1rem 1.5rem;
+            border: none;
+            background: none;
+            color: var(--gray-warm);
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button:hover {
+            color: var(--copper-accent);
+        }
+        
+        .tab-button.active {
+            color: var(--copper-accent);
+            border-bottom-color: var(--copper-accent);
+        }
+        
+        /* Auto-save Indicator */
+        .autosave-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--gray-warm);
+        }
+        
+        .autosave-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success-green);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-card {
+                padding: 1.5rem;
+            }
+            
+            .editor-content {
+                padding: 1.5rem;
+                min-height: 300px;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-xl font-bold text-sage-deep">Agentic AI Hub</h1>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="index.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Home</a>
+                        <a href="topics.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Topics</a>
+                        <a href="#" class="nav-link text-copper-accent font-semibold">Manage</a>
+                        <a href="about.html" class="nav-link text-charcoal-warm hover:text-copper-accent">About</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="autosave-indicator" id="autosaveIndicator">
+                        <div class="autosave-dot"></div>
+                        <span>Auto-saving...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="pt-20 min-h-screen">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <!-- Header -->
+            <div class="mb-8 fade-in">
+                <h1 class="text-4xl font-bold text-charcoal-warm mb-4">Content Management</h1>
+                <p class="text-xl text-gray-warm">
+                    Manage your AI knowledge base, add new topics, and organize content with comprehensive editing tools.
+                </p>
+            </div>
+            
+            <!-- Dashboard Stats -->
+            <div class="grid md:grid-cols-4 gap-6 mb-8 fade-in">
+                <div class="dashboard-card">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalTopics">0</div>
+                        <div class="stat-label">Total Topics</div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="stat-card">
+                        <div class="stat-number" id="publishedTopics">0</div>
+                        <div class="stat-label">Published</div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="stat-card">
+                        <div class="stat-number" id="draftTopics">0</div>
+                        <div class="stat-label">Drafts</div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="stat-card">
+                        <div class="stat-number" id="recentActivity">0</div>
+                        <div class="stat-label">This Week</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="tab-container fade-in">
+                <button class="tab-button active" data-tab="topics">Topic Manager</button>
+                <button class="tab-button" data-tab="editor">Content Editor</button>
+                <button class="tab-button" data-tab="analytics">Analytics</button>
+                <button class="tab-button" data-tab="settings">Settings</button>
+            </div>
+            
+            <!-- Topic Manager Tab -->
+            <div class="tab-content active" id="topics-tab">
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Topic List -->
+                    <div class="lg:col-span-1">
+                        <div class="dashboard-card">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-xl font-bold text-charcoal-warm">Topics</h3>
+                                <button class="action-btn action-btn-primary" id="addTopicBtn">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                    </svg>
+                                    Add Topic
+                                </button>
+                            </div>
+                            
+                            <div class="space-y-3" id="topicList">
+                                <!-- Topic items will be dynamically generated -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Topic Editor -->
+                    <div class="lg:col-span-2">
+                        <div class="dashboard-card">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-xl font-bold text-charcoal-warm" id="editorTitle">Select a topic to edit</h3>
+                                <div class="flex space-x-2" id="editorActions" style="display: none;">
+                                    <button class="action-btn action-btn-secondary" id="previewBtn">Preview</button>
+                                    <button class="action-btn action-btn-primary" id="saveBtn">Save Changes</button>
+                                    <button class="action-btn action-btn-danger" id="deleteBtn">Delete</button>
+                                </div>
+                            </div>
+                            
+                            <div id="topicEditor" style="display: none;">
+                                <form id="topicForm">
+                                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Topic Title</label>
+                                            <input type="text" class="form-input" id="topicTitle" placeholder="Enter topic title" required>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="form-label">Category</label>
+                                            <select class="form-select" id="topicCategory" required>
+                                                <option value="">Select Category</option>
+                                                <option value="fundamentals">AI Fundamentals</option>
+                                                <option value="architecture">Agent Architecture</option>
+                                                <option value="frameworks">Frameworks & Tools</option>
+                                                <option value="implementation">Implementation</option>
+                                                <option value="advanced">Advanced Concepts</option>
+                                                <option value="applications">Industry Applications</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Difficulty Level</label>
+                                            <select class="form-select" id="topicDifficulty" required>
+                                                <option value="">Select Difficulty</option>
+                                                <option value="beginner">Beginner</option>
+                                                <option value="intermediate">Intermediate</option>
+                                                <option value="advanced">Advanced</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="form-label">Status</label>
+                                            <select class="form-select" id="topicStatus">
+                                                <option value="published">Published</option>
+                                                <option value="draft">Draft</option>
+                                                <option value="archived">Archived</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Description</label>
+                                        <textarea class="form-textarea" id="topicDescription" placeholder="Brief description of the topic" required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Key Concepts (comma-separated)</label>
+                                        <input type="text" class="form-input" id="topicConcepts" placeholder="e.g., neural networks, machine learning, deep learning">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Featured Topic</label>
+                                        <label class="flex items-center space-x-3 cursor-pointer">
+                                            <input type="checkbox" id="topicFeatured" class="w-4 h-4 text-copper-accent">
+                                            <span>Show this topic in featured section</span>
+                                        </label>
+                                    </div>
+                                </form>
+                                
+                                <!-- Rich Text Editor -->
+                                <div class="editor-container mt-6">
+                                    <div class="editor-toolbar">
+                                        <button class="toolbar-btn" data-command="bold" title="Bold">
+                                            <strong>B</strong>
+                                        </button>
+                                        <button class="toolbar-btn" data-command="italic" title="Italic">
+                                            <em>I</em>
+                                        </button>
+                                        <button class="toolbar-btn" data-command="underline" title="Underline">
+                                            <u>U</u>
+                                        </button>
+                                        <div class="border-l border-gray-300 mx-2"></div>
+                                        <button class="toolbar-btn" data-command="h1" title="Heading 1">H1</button>
+                                        <button class="toolbar-btn" data-command="h2" title="Heading 2">H2</button>
+                                        <button class="toolbar-btn" data-command="h3" title="Heading 3">H3</button>
+                                        <div class="border-l border-gray-300 mx-2"></div>
+                                        <button class="toolbar-btn" data-command="ul" title="Bullet List">• List</button>
+                                        <button class="toolbar-btn" data-command="ol" title="Numbered List">1. List</button>
+                                        <div class="border-l border-gray-300 mx-2"></div>
+                                        <button class="toolbar-btn" data-command="code" title="Code Block">{}</button>
+                                        <button class="toolbar-btn" data-command="quote" title="Quote">" "</button>
+                                    </div>
+                                    
+                                    <div class="editor-content" id="topicContent" contenteditable="true" data-placeholder="Start writing your topic content here...">
+                                        <p>Start writing your topic content here...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="emptyState" class="text-center py-20">
+                                <div class="text-6xl mb-4">📚</div>
+                                <h3 class="text-2xl font-bold text-charcoal-warm mb-2">No Topic Selected</h3>
+                                <p class="text-gray-warm mb-6">Choose a topic from the list to start editing, or create a new one.</p>
+                                <button class="action-btn action-btn-primary" onclick="document.getElementById('addTopicBtn').click()">
+                                    Create Your First Topic
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Editor Tab -->
+            <div class="tab-content" id="editor-tab">
+                <div class="dashboard-card">
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-6">Bulk Content Editor</h3>
+                    <p class="text-gray-warm mb-6">
+                        Use this editor to make bulk changes to multiple topics or import/export your content.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold text-charcoal-warm mb-4">Export Content</h4>
+                            <p class="text-sm text-gray-warm mb-4">
+                                Export all your topics as JSON for backup or migration purposes.
+                            </p>
+                            <button class="action-btn action-btn-secondary" id="exportBtn">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                                Export All Topics
+                            </button>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-charcoal-warm mb-4">Import Content</h4>
+                            <p class="text-sm text-gray-warm mb-4">
+                                Import topics from a JSON file to restore or merge content.
+                            </p>
+                            <input type="file" id="importFile" accept=".json" style="display: none;">
+                            <button class="action-btn action-btn-primary" id="importBtn">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
+                                </svg>
+                                Import Topics
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Analytics Tab -->
+            <div class="tab-content" id="analytics-tab">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="dashboard-card">
+                        <h3 class="text-xl font-bold text-charcoal-warm mb-6">Topic Distribution</h3>
+                        <div id="categoryChart" style="height: 300px;"></div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h3 class="text-xl font-bold text-charcoal-warm mb-6">Difficulty Levels</h3>
+                        <div id="difficultyChart" style="height: 300px;"></div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card mt-8">
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-6">Recent Activity</h3>
+                    <div class="space-y-4" id="activityLog">
+                        <!-- Activity items will be dynamically generated -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settings-tab">
+                <div class="dashboard-card">
+                    <h3 class="text-xl font-bold text-charcoal-warm mb-6">Content Settings</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="form-group">
+                            <label class="form-label">Auto-save Interval</label>
+                            <select class="form-select" id="autosaveInterval">
+                                <option value="30">30 seconds</option>
+                                <option value="60" selected>1 minute</option>
+                                <option value="300">5 minutes</option>
+                                <option value="0">Disabled</option>
+                            </select>
+                            <p class="text-sm text-gray-warm mt-2">How often to automatically save your changes</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Default Difficulty Level</label>
+                            <select class="form-select" id="defaultDifficulty">
+                                <option value="beginner" selected>Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" id="enableFeatured" class="w-4 h-4 text-copper-accent" checked>
+                                <span>Enable featured topics by default</span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" id="enableProgress" class="w-4 h-4 text-copper-accent" checked>
+                                <span>Enable progress tracking for topics</span>
+                            </label>
+                        </div>
+                        
+                        <div class="border-t border-gray-200 pt-6">
+                            <h4 class="font-semibold text-charcoal-warm mb-4">Danger Zone</h4>
+                            <p class="text-sm text-gray-warm mb-4">These actions cannot be undone</p>
+                            <button class="action-btn action-btn-danger" id="clearAllBtn">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                                Clear All Topics
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Content Management JavaScript
+        class ContentManager {
+            constructor() {
+                this.topics = this.loadTopics();
+                this.currentTopic = null;
+                this.autosaveTimer = null;
+                this.settings = this.loadSettings();
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.renderTopicList();
+                this.updateStats();
+                this.initializeCharts();
+                this.loadActivityLog();
+                this.startAutosave();
+                this.checkEditParam();
+            }
+
+            loadTopics() {
+                const savedTopics = localStorage.getItem('ai-topics');
+                return savedTopics ? JSON.parse(savedTopics) : [];
+            }
+
+            saveTopics() {
+                localStorage.setItem('ai-topics', JSON.stringify(this.topics));
+                this.updateStats();
+                this.showAutosaveIndicator();
+            }
+
+            loadSettings() {
+                const savedSettings = localStorage.getItem('ai-settings');
+                return savedSettings ? JSON.parse(savedSettings) : {
+                    autosaveInterval: 60,
+                    defaultDifficulty: 'beginner',
+                    enableFeatured: true,
+                    enableProgress: true
+                };
+            }
+
+            saveSettings() {
+                localStorage.setItem('ai-settings', JSON.stringify(this.settings));
+            }
+
+            setupEventListeners() {
+                // Tab switching
+                document.querySelectorAll('.tab-button').forEach(button => {
+                    button.addEventListener('click', (e) => this.switchTab(e.target.dataset.tab));
+                });
+
+                // Topic management
+                document.getElementById('addTopicBtn')?.addEventListener('click', () => this.addNewTopic());
+                document.getElementById('saveBtn')?.addEventListener('click', () => this.saveCurrentTopic());
+                document.getElementById('deleteBtn')?.addEventListener('click', () => this.deleteCurrentTopic());
+                document.getElementById('previewBtn')?.addEventListener('click', () => this.previewTopic());
+
+                // Form changes
+                document.getElementById('topicForm')?.addEventListener('input', () => this.markAsDirty());
+                document.getElementById('topicContent')?.addEventListener('input', () => this.markAsDirty());
+
+                // Toolbar
+                document.querySelectorAll('.toolbar-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.execCommand(e.target.dataset.command));
+                });
+
+                // Import/Export
+                document.getElementById('exportBtn')?.addEventListener('click', () => this.exportTopics());
+                document.getElementById('importBtn')?.addEventListener('click', () => this.importTopics());
+                document.getElementById('importFile')?.addEventListener('change', (e) => this.handleImportFile(e));
+
+                // Settings
+                document.getElementById('clearAllBtn')?.addEventListener('click', () => this.clearAllTopics());
+                document.getElementById('autosaveInterval')?.addEventListener('change', (e) => this.updateSetting('autosaveInterval', parseInt(e.target.value)));
+                document.getElementById('defaultDifficulty')?.addEventListener('change', (e) => this.updateSetting('defaultDifficulty', e.target.value));
+                document.getElementById('enableFeatured')?.addEventListener('change', (e) => this.updateSetting('enableFeatured', e.target.checked));
+                document.getElementById('enableProgress')?.addEventListener('change', (e) => this.updateSetting('enableProgress', e.target.checked));
+            }
+
+            switchTab(tabName) {
+                // Update tab buttons
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.tab === tabName);
+                });
+
+                // Update tab content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.toggle('active', content.id === `${tabName}-tab`);
+                });
+
+                // Initialize charts if analytics tab is selected
+                if (tabName === 'analytics') {
+                    setTimeout(() => this.initializeCharts(), 100);
+                }
+            }
+
+            renderTopicList() {
+                const topicList = document.getElementById('topicList');
+                if (!topicList) return;
+
+                if (this.topics.length === 0) {
+                    topicList.innerHTML = `
+                        <div class="text-center py-8 text-gray-warm">
+                            <div class="text-4xl mb-2">📚</div>
+                            <p>No topics yet. Create your first topic to get started!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                topicList.innerHTML = this.topics.map(topic => `
+                    <div class="topic-item ${this.currentTopic?.id === topic.id ? 'selected' : ''}" 
+                         onclick="contentManager.selectTopic(${topic.id})">
+                        <div class="flex items-start justify-between mb-2">
+                            <h4 class="font-semibold text-charcoal-warm line-clamp-1">${topic.title}</h4>
+                            <div class="difficulty-badge difficulty-${topic.difficulty}">
+                                ${topic.difficulty}
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-warm line-clamp-2 mb-2">${topic.description}</p>
+                        <div class="flex items-center justify-between text-xs text-gray-warm">
+                            <span class="capitalize">${topic.category.replace('-', ' ')}</span>
+                            <span>${topic.progress}% complete</span>
+                        </div>
+                        <div class="progress-bar mt-2">
+                            <div class="progress-fill" style="width: ${topic.progress}%"></div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            selectTopic(topicId) {
+                this.currentTopic = this.topics.find(t => t.id === topicId);
+                this.populateEditor();
+                this.renderTopicList(); // Re-render to update selection
+            }
+
+            populateEditor() {
+                const topic = this.currentTopic;
+                if (!topic) return;
+
+                // Show editor, hide empty state
+                document.getElementById('topicEditor').style.display = 'block';
+                document.getElementById('emptyState').style.display = 'none';
+                document.getElementById('editorActions').style.display = 'flex';
+
+                // Update title
+                document.getElementById('editorTitle').textContent = `Editing: ${topic.title}`;
+
+                // Populate form
+                document.getElementById('topicTitle').value = topic.title;
+                document.getElementById('topicCategory').value = topic.category;
+                document.getElementById('topicDifficulty').value = topic.difficulty;
+                document.getElementById('topicStatus').value = topic.status || 'published';
+                document.getElementById('topicDescription').value = topic.description;
+                document.getElementById('topicConcepts').value = topic.concepts?.join(', ') || '';
+                document.getElementById('topicFeatured').checked = topic.featured || false;
+
+                // Populate content
+                const contentElement = document.getElementById('topicContent');
+                contentElement.innerHTML = topic.content || '<p>Start writing your topic content here...</p>';
+
+                this.isDirty = false;
+            }
+
+            addNewTopic() {
+                const newTopic = {
+                    id: Date.now(),
+                    title: 'New Topic',
+                    category: '',
+                    difficulty: this.settings.defaultDifficulty,
+                    description: '',
+                    concepts: [],
+                    content: '<p>Start writing your topic content here...</p>',
+                    featured: this.settings.enableFeatured,
+                    progress: 0,
+                    status: 'draft',
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString()
+                };
+
+                this.topics.push(newTopic);
+                this.saveTopics();
+                this.renderTopicList();
+                this.selectTopic(newTopic.id);
+                this.showNotification('New topic created!', 'success');
+            }
+
+            saveCurrentTopic() {
+                if (!this.currentTopic) return;
+
+                const topic = this.currentTopic;
+                topic.title = document.getElementById('topicTitle').value;
+                topic.category = document.getElementById('topicCategory').value;
+                topic.difficulty = document.getElementById('topicDifficulty').value;
+                topic.status = document.getElementById('topicStatus').value;
+                topic.description = document.getElementById('topicDescription').value;
+                topic.concepts = document.getElementById('topicConcepts').value.split(',').map(c => c.trim()).filter(c => c);
+                topic.featured = document.getElementById('topicFeatured').checked;
+                topic.content = document.getElementById('topicContent').innerHTML;
+                topic.updatedAt = new Date().toISOString();
+
+                this.saveTopics();
+                this.renderTopicList();
+                this.isDirty = false;
+                this.showNotification('Topic saved successfully!', 'success');
+            }
+
+            deleteCurrentTopic() {
+                if (!this.currentTopic) return;
+
+                if (confirm(`Are you sure you want to delete "${this.currentTopic.title}"? This action cannot be undone.`)) {
+                    this.topics = this.topics.filter(t => t.id !== this.currentTopic.id);
+                    this.saveTopics();
+                    this.currentTopic = null;
+                    this.showEmptyState();
+                    this.renderTopicList();
+                    this.showNotification('Topic deleted successfully!', 'success');
+                }
+            }
+
+            showEmptyState() {
+                document.getElementById('topicEditor').style.display = 'none';
+                document.getElementById('emptyState').style.display = 'block';
+                document.getElementById('editorActions').style.display = 'none';
+                document.getElementById('editorTitle').textContent = 'Select a topic to edit';
+            }
+
+            execCommand(command) {
+                const content = document.getElementById('topicContent');
+                content.focus();
+
+                switch (command) {
+                    case 'bold':
+                        document.execCommand('bold');
+                        break;
+                    case 'italic':
+                        document.execCommand('italic');
+                        break;
+                    case 'underline':
+                        document.execCommand('underline');
+                        break;
+                    case 'h1':
+                        document.execCommand('formatBlock', false, 'h1');
+                        break;
+                    case 'h2':
+                        document.execCommand('formatBlock', false, 'h2');
+                        break;
+                    case 'h3':
+                        document.execCommand('formatBlock', false, 'h3');
+                        break;
+                    case 'ul':
+                        document.execCommand('insertUnorderedList');
+                        break;
+                    case 'ol':
+                        document.execCommand('insertOrderedList');
+                        break;
+                    case 'code':
+                        document.execCommand('formatBlock', false, 'pre');
+                        break;
+                    case 'quote':
+                        document.execCommand('formatBlock', false, 'blockquote');
+                        break;
+                }
+
+                this.markAsDirty();
+            }
+
+            markAsDirty() {
+                this.isDirty = true;
+            }
+
+            startAutosave() {
+                if (this.autosaveTimer) {
+                    clearInterval(this.autosaveTimer);
+                }
+
+                if (this.settings.autosaveInterval > 0) {
+                    this.autosaveTimer = setInterval(() => {
+                        if (this.isDirty && this.currentTopic) {
+                            this.saveCurrentTopic();
+                        }
+                    }, this.settings.autosaveInterval * 1000);
+                }
+            }
+
+            showAutosaveIndicator() {
+                const indicator = document.getElementById('autosaveIndicator');
+                if (indicator) {
+                    indicator.style.opacity = '1';
+                    setTimeout(() => {
+                        indicator.style.opacity = '0.5';
+                    }, 2000);
+                }
+            }
+
+            updateStats() {
+                const total = this.topics.length;
+                const published = this.topics.filter(t => t.status === 'published').length;
+                const drafts = this.topics.filter(t => t.status === 'draft').length;
+                const thisWeek = this.topics.filter(t => {
+                    const created = new Date(t.createdAt);
+                    const weekAgo = new Date();
+                    weekAgo.setDate(weekAgo.getDate() - 7);
+                    return created > weekAgo;
+                }).length;
+
+                document.getElementById('totalTopics').textContent = total;
+                document.getElementById('publishedTopics').textContent = published;
+                document.getElementById('draftTopics').textContent = drafts;
+                document.getElementById('recentActivity').textContent = thisWeek;
+            }
+
+            initializeCharts() {
+                this.renderCategoryChart();
+                this.renderDifficultyChart();
+            }
+
+            renderCategoryChart() {
+                const chartElement = document.getElementById('categoryChart');
+                if (!chartElement) return;
+
+                const categories = this.topics.reduce((acc, topic) => {
+                    acc[topic.category] = (acc[topic.category] || 0) + 1;
+                    return acc;
+                }, {});
+
+                const chart = echarts.init(chartElement);
+                const option = {
+                    tooltip: { trigger: 'item' },
+                    series: [{
+                        type: 'pie',
+                        radius: '70%',
+                        data: Object.entries(categories).map(([name, value]) => ({
+                            name: name.replace('-', ' '),
+                            value
+                        })),
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        },
+                        color: ['#2D5A3D', '#B87333', '#4A7C7E', '#6B8E5A', '#D4A574', '#B8A9C9']
+                    }]
+                };
+                chart.setOption(option);
+            }
+
+            renderDifficultyChart() {
+                const chartElement = document.getElementById('difficultyChart');
+                if (!chartElement) return;
+
+                const difficulties = this.topics.reduce((acc, topic) => {
+                    acc[topic.difficulty] = (acc[topic.difficulty] || 0) + 1;
+                    return acc;
+                }, {});
+
+                const chart = echarts.init(chartElement);
+                const option = {
+                    tooltip: { trigger: 'axis' },
+                    xAxis: {
+                        type: 'category',
+                        data: Object.keys(difficulties).map(d => d.charAt(0).toUpperCase() + d.slice(1))
+                    },
+                    yAxis: { type: 'value' },
+                    series: [{
+                        data: Object.values(difficulties),
+                        type: 'bar',
+                        itemStyle: { color: '#B87333' }
+                    }]
+                };
+                chart.setOption(option);
+            }
+
+            exportTopics() {
+                const data = {
+                    topics: this.topics,
+                    exportedAt: new Date().toISOString(),
+                    version: '1.0'
+                };
+
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `ai-topics-export-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                this.showNotification('Topics exported successfully!', 'success');
+            }
+
+            importTopics() {
+                document.getElementById('importFile').click();
+            }
+
+            handleImportFile(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        if (data.topics && Array.isArray(data.topics)) {
+                            if (confirm('This will merge imported topics with existing ones. Continue?')) {
+                                this.topics = [...this.topics, ...data.topics];
+                                this.saveTopics();
+                                this.renderTopicList();
+                                this.updateStats();
+                                this.showNotification('Topics imported successfully!', 'success');
+                            }
+                        } else {
+                            throw new Error('Invalid file format');
+                        }
+                    } catch (error) {
+                        this.showNotification('Error importing file: ' + error.message, 'error');
+                    }
+                };
+                reader.readAsText(file);
+            }
+
+            clearAllTopics() {
+                if (confirm('Are you sure you want to delete ALL topics? This action cannot be undone.')) {
+                    if (confirm('This will permanently delete all your content. Are you absolutely sure?')) {
+                        this.topics = [];
+                        this.saveTopics();
+                        this.currentTopic = null;
+                        this.showEmptyState();
+                        this.renderTopicList();
+                        this.showNotification('All topics cleared!', 'success');
+                    }
+                }
+            }
+
+            updateSetting(key, value) {
+                this.settings[key] = value;
+                this.saveSettings();
+                
+                if (key === 'autosaveInterval') {
+                    this.startAutosave();
+                }
+            }
+
+            checkEditParam() {
+                const params = new URLSearchParams(window.location.search);
+                const editId = params.get('edit');
+                
+                if (editId) {
+                    const topic = this.topics.find(t => t.id === parseInt(editId));
+                    if (topic) {
+                        this.switchTab('topics');
+                        this.selectTopic(topic.id);
+                    }
+                }
+            }
+
+            loadActivityLog() {
+                const activityLog = document.getElementById('activityLog');
+                if (!activityLog) return;
+
+                const recentTopics = this.topics
+                    .sort((a, b) => new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt))
+                    .slice(0, 10);
+
+                if (recentTopics.length === 0) {
+                    activityLog.innerHTML = '<p class="text-gray-warm text-center py-8">No recent activity</p>';
+                    return;
+                }
+
+                activityLog.innerHTML = recentTopics.map(topic => {
+                    const date = new Date(topic.updatedAt || topic.createdAt);
+                    const action = topic.updatedAt ? 'Updated' : 'Created';
+                    
+                    return `
+                        <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                            <div>
+                                <span class="font-semibold text-charcoal-warm">${action}:</span>
+                                <span class="text-gray-warm">${topic.title}</span>
+                            </div>
+                            <div class="text-sm text-gray-warm">
+                                ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            previewTopic() {
+                if (!this.currentTopic) return;
+                
+                // Save current topic before preview
+                this.saveCurrentTopic();
+                
+                // Open topics page with this topic selected
+                localStorage.setItem('selectedTopicId', this.currentTopic.id);
+                window.open('topics.html', '_blank');
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg text-white font-semibold transform translate-x-full transition-transform duration-300`;
+                notification.style.background = type === 'success' ? 'var(--success-green)' : 
+                                               type === 'error' ? 'var(--error-coral)' : 'var(--copper-accent)';
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(0)';
+                }, 100);
+                
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize the content manager
+        let contentManager;
+        document.addEventListener('DOMContentLoaded', () => {
+            contentManager = new ContentManager();
+        });
+    </script>
+    
+    <script>
+        // Add test topics data for management interface
+        window.testTopics = [
+            {
+                id: 1,
+                title: "Introduction to Generative AI",
+                category: "fundamentals",
+                difficulty: "beginner",
+                description: "Learn the fundamentals of generative AI, how Large Language Models work, and their core capabilities in content generation.",
+                concepts: ["Generative AI", "LLMs", "Content Generation", "AI Fundamentals"],
+                featured: true,
+                progress: 0,
+                status: "published",
+                content: "Introduction to Generative AI content..."
+            },
+            {
+                id: 2,
+                title: "Exploring and Comparing LLMs",
+                category: "fundamentals",
+                difficulty: "beginner",
+                description: "Understand different types of Large Language Models, compare their capabilities, and learn how to select the right model for your use case.",
+                concepts: ["Model Comparison", "GPT", "Claude", "Llama", "Model Selection"],
+                featured: true,
+                progress: 0,
+                status: "published",
+                content: "Exploring and Comparing LLMs content..."
+            },
+            {
+                id: 3,
+                title: "Using Generative AI Responsibly",
+                category: "fundamentals",
+                difficulty: "beginner",
+                description: "Learn the principles of Responsible AI, ethical considerations, and best practices for building trustworthy AI applications.",
+                concepts: ["Responsible AI", "Ethics", "Bias", "Fairness", "Transparency"],
+                featured: false,
+                progress: 0,
+                status: "draft",
+                content: "Using Generative AI Responsibly content..."
+            }
+        ];
+        console.log('Management interface loaded with', window.testTopics.length, 'test topics');
+    </script>
+</body>
+</html>

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineering Stack Overview - AI Engineering Knowledge Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'deep-blue': '#1e3a8a',
+                        'soft-gray': '#f8fafc',
+                        'accent-blue': '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .code-block { 
+            background: #1a1a1a; 
+            border-radius: 8px; 
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .code-header { 
+            background: #2d2d2d; 
+            padding: 0.75rem 1rem; 
+            display: flex; 
+            justify-content: between; 
+            align-items: center;
+            border-bottom: 1px solid #404040;
+        }
+        .copy-btn { 
+            background: #4a5568; 
+            color: white; 
+            border: none; 
+            padding: 0.25rem 0.75rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover { background: #718096; }
+        .progress-bar { 
+            width: 100%; 
+            height: 4px; 
+            background: #e2e8f0; 
+            border-radius: 2px; 
+            overflow: hidden;
+        }
+        .progress-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, #3b82f6, #1e40af); 
+            transition: width 0.3s ease;
+        }
+        .architecture-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .architecture-card:hover {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-soft-gray font-sans">
+    <div class="min-h-screen flex">
+        <!-- Sidebar Navigation -->
+        <div class="w-80 bg-white shadow-lg border-r border-gray-200 flex flex-col">
+            <!-- Sidebar Header -->
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-brain text-2xl text-deep-blue mr-3"></i>
+                    <h1 class="text-xl font-bold text-gray-800">AI Engineering Hub</h1>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="sidebarSearch" 
+                        placeholder="Search topics..." 
+                        class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-blue focus:border-transparent"
+                    >
+                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Navigation Content -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <!-- Modern AI-Engineering Stack Section -->
+                <div class="sidebar-section rounded-lg mb-4">
+                    <div class="section-header p-4 bg-blue-50 rounded-lg" onclick="toggleSection('modern-stack')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-layer-group text-deep-blue mr-3"></i>
+                                <span class="font-semibold text-gray-800">Modern AI-Engineering Stack</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 transition-transform" id="modern-stack-icon" style="transform: rotate(180deg);"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-1 ml-6">Core architecture components</p>
+                    </div>
+                    <div class="section-content expanded" id="modern-stack-content">
+                        <div class="p-2">
+                            <a href="topic-ai-stack-overview.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700 bg-blue-100 border-l-4 border-deep-blue">
+                                <i class="fas fa-sitemap text-blue-500 mr-2"></i>AI Engineering Stack Overview
+                            </a>
+                            <a href="topic-llm-foundations.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-brain text-green-500 mr-2"></i>LLM Foundations
+                            </a>
+                            <a href="topic-vector-databases.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-database text-purple-500 mr-2"></i>Vector Databases
+                            </a>
+                            <a href="topic-embedding-models.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-vector-square text-orange-500 mr-2"></i>Embedding Models
+                            </a>
+                            <a href="topic-prompt-engineering.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-comment-dots text-pink-500 mr-2"></i>Prompt Engineering Framework
+                            </a>
+                            <a href="topic-retrieval-systems.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-search text-indigo-500 mr-2"></i>Retrieval Systems
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Python & Tooling Section -->
+                <div class="sidebar-section rounded-lg mb-4">
+                    <div class="section-header p-4 bg-green-50 rounded-lg" onclick="toggleSection('python-tooling')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fab fa-python text-green-600 mr-3"></i>
+                                <span class="font-semibold text-gray-800">Python & Tooling Deep-Dive</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 transition-transform" id="python-tooling-icon"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-1 ml-6">Essential Python libraries and tools</p>
+                    </div>
+                    <div class="section-content" id="python-tooling-content">
+                        <div class="p-2">
+                            <a href="topic-python-fundamentals-ai.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fab fa-python text-blue-500 mr-2"></i>Python for AI Engineering
+                            </a>
+                            <a href="topic-numpy-pandas.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-table text-green-500 mr-2"></i>NumPy & Pandas Mastery
+                            </a>
+                            <a href="topic-pytorch-fundamentals.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-fire text-orange-500 mr-2"></i>PyTorch Fundamentals
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto">
+            <!-- Header -->
+            <div class="bg-white shadow-sm border-b border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-800">AI Engineering Stack Overview</h1>
+                        <p class="text-gray-600 mt-2">Complete architecture of modern AI engineering systems</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-right">
+                            <div class="text-sm text-gray-500">Progress</div>
+                            <div class="text-lg font-semibold text-deep-blue">100%</div>
+                        </div>
+                        <div class="progress-bar w-32">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Introduction -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                            <i class="fas fa-sitemap text-deep-blue mr-3"></i>
+                            Introduction to AI Engineering Stack
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            The modern AI engineering stack represents a sophisticated ecosystem of interconnected components designed to build, 
+                            deploy, and scale artificial intelligence applications. This comprehensive architecture encompasses everything from 
+                            data ingestion and model training to deployment infrastructure and monitoring systems.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Understanding this stack is crucial for AI engineers, as it provides the foundation for building robust, 
+                            scalable, and maintainable AI systems. Each component plays a vital role in the overall pipeline, 
+                            and mastering their interactions enables the creation of production-ready AI applications.
+                        </p>
+
+                        <!-- Architecture Diagram -->
+                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">AI Engineering Stack Architecture</h3>
+                            <div id="architecture-diagram" style="height: 500px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Core Components -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-cogs text-deep-blue mr-3"></i>
+                            Core Components
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <!-- Data Layer -->
+                            <div class="architecture-card bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-database text-2xl text-blue-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Data Layer</h3>
+                                </div>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Data Ingestion</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Data Processing</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Vector Databases</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Data Quality</li>
+                                </ul>
+                            </div>
+
+                            <!-- Model Layer -->
+                            <div class="architecture-card bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-brain text-2xl text-green-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Model Layer</h3>
+                                </div>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>LLM Foundation</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Embedding Models</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Fine-tuning</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Model Serving</li>
+                                </ul>
+                            </div>
+
+                            <!-- Application Layer -->
+                            <div class="architecture-card bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-code text-2xl text-purple-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Application Layer</h3>
+                                </div>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Prompt Engineering</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Retrieval Systems</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>API Frameworks</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>UI/UX Interfaces</li>
+                                </ul>
+                            </div>
+
+                            <!-- Infrastructure Layer -->
+                            <div class="architecture-card bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-server text-2xl text-orange-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Infrastructure Layer</h3>
+                                </div>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Cloud Platforms</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Container Orchestration</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Load Balancing</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Auto-scaling</li>
+                                </ul>
+                            </div>
+
+                            <!-- Operations Layer -->
+                            <div class="architecture-card bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-chart-line text-2xl text-red-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Operations Layer</h3>
+                                </div>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Monitoring</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Observability</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Logging</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Alerting</li>
+                                </ul>
+                            </div>
+
+                            <!-- Security Layer -->
+                            <div class="architecture-card bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-shield-alt text-2xl text-gray-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Security Layer</h3>
+                                </div>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Authentication</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Authorization</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Data Privacy</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Compliance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Implementation Example -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-code text-deep-blue mr-3"></i>
+                            Implementation Example
+                        </h2>
+                        
+                        <p class="text-gray-600 mb-6">
+                            Here's a comprehensive example demonstrating how these components work together in a typical 
+                            AI engineering stack implementation:
+                        </p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="text-gray-300 font-medium">ai_stack_implementation.py</span>
+                                <button class="copy-btn" onclick="copyCode('stack-code')">
+                                    <i class="fas fa-copy mr-1"></i>Copy
+                                </button>
+                            </div>
+                            <pre id="stack-code" class="language-python"><code>from typing import Dict, List, Any
+import asyncio
+from dataclasses import dataclass
+from abc import ABC, abstractmethod
+
+# Data Layer Components
+class DataIngestionInterface(ABC):
+    @abstractmethod
+    async def ingest(self, source: str) -> List[Dict[str, Any]]:
+        pass
+
+class VectorDatabaseInterface(ABC):
+    @abstractmethod
+    async def store_vectors(self, vectors: List[List[float]], metadata: List[Dict]):
+        pass
+    
+    @abstractmethod
+    async def search_vectors(self, query_vector: List[float], top_k: int) -> List[Dict]:
+        pass
+
+# Model Layer Components
+class LLMInterface(ABC):
+    @abstractmethod
+    async def generate(self, prompt: str, **kwargs) -> str:
+        pass
+
+class EmbeddingModelInterface(ABC):
+    @abstractmethod
+    async def embed(self, texts: List[str]) -> List[List[float]]:
+        pass
+
+# Application Layer Components
+class PromptTemplateInterface(ABC):
+    @abstractmethod
+    def format(self, **kwargs) -> str:
+        pass
+
+class RetrievalSystemInterface(ABC):
+    @abstractmethod
+    async def retrieve(self, query: str, top_k: int = 5) -> List[Dict]:
+        pass
+
+# Infrastructure Layer Components
+class DeploymentInterface(ABC):
+    @abstractmethod
+    async def deploy(self, model_path: str, config: Dict) -> str:
+        pass
+
+# Core AI Engineering Stack
+@dataclass
+class AIEngineeringStack:
+    """
+    Main orchestrator for the AI Engineering Stack
+    Coordinates all components to provide a unified interface
+    """
+    data_ingestion: DataIngestionInterface
+    vector_db: VectorDatabaseInterface
+    llm: LLMInterface
+    embedding_model: EmbeddingModelInterface
+    prompt_template: PromptTemplateInterface
+    retrieval_system: RetrievalSystemInterface
+    deployment: DeploymentInterface
+    
+    async def process_query(self, user_query: str) -> Dict[str, Any]:
+        """
+        Complete query processing pipeline
+        """
+        try:
+            # Step 1: Generate embedding for the query
+            query_embedding = await self.embedding_model.embed([user_query])
+            
+            # Step 2: Retrieve relevant information
+            retrieved_docs = await self.retrieval_system.retrieve(user_query, top_k=5)
+            
+            # Step 3: Format prompt with context
+            context = self._format_context(retrieved_docs)
+            formatted_prompt = self.prompt_template.format(
+                query=user_query,
+                context=context
+            )
+            
+            # Step 4: Generate response using LLM
+            response = await self.llm.generate(formatted_prompt)
+            
+            return {
+                "query": user_query,
+                "response": response,
+                "context": retrieved_docs,
+                "status": "success"
+            }
+            
+        except Exception as e:
+            return {
+                "query": user_query,
+                "error": str(e),
+                "status": "error"
+            }
+    
+    def _format_context(self, docs: List[Dict]) -> str:
+        """Format retrieved documents as context"""
+        context_parts = []
+        for i, doc in enumerate(docs, 1):
+            context_parts.append(f"[{i}] {doc.get('content', '')}")
+        return "\n\n".join(context_parts)
+    
+    async def update_knowledge_base(self, new_data_source: str):
+        """
+        Update the knowledge base with new data
+        """
+        # Step 1: Ingest new data
+        new_data = await self.data_ingestion.ingest(new_data_source)
+        
+        # Step 2: Generate embeddings
+        texts = [item.get('content', '') for item in new_data]
+        embeddings = await self.embedding_model.embed(texts)
+        
+        # Step 3: Store in vector database
+        await self.vector_db.store_vectors(embeddings, new_data)
+        
+        return {"updated_documents": len(new_data)}
+
+# Example Implementation Classes
+class SimpleDataIngestion(DataIngestionInterface):
+    async def ingest(self, source: str) -> List[Dict[str, Any]]:
+        # Simulate data ingestion
+        return [
+            {"id": f"doc_{i}", "content": f"Sample document {i} from {source}"}
+            for i in range(10)
+        ]
+
+class SimpleVectorDB(VectorDatabaseInterface):
+    def __init__(self):
+        self.vectors = []
+        self.metadata = []
+    
+    async def store_vectors(self, vectors: List[List[float]], metadata: List[Dict]):
+        self.vectors.extend(vectors)
+        self.metadata.extend(metadata)
+    
+    async def search_vectors(self, query_vector: List[float], top_k: int) -> List[Dict]:
+        # Simplified similarity search
+        return self.metadata[:top_k]
+
+class SimpleLLM(LLMInterface):
+    async def generate(self, prompt: str, **kwargs) -> str:
+        # Simulate LLM response
+        return f"Generated response based on: {prompt[:50]}..."
+
+class SimpleEmbeddingModel(EmbeddingModelInterface):
+    async def embed(self, texts: List[str]) -> List[List[float]]:
+        # Simulate embedding generation
+        return [[0.1] * 384 for _ in texts]  # 384-dimensional embeddings
+
+class SimplePromptTemplate(PromptTemplateInterface):
+    def format(self, **kwargs) -> str:
+        return f"Context: {kwargs.get('context', '')}\n\nQuery: {kwargs.get('query', '')}\n\nResponse:"
+
+class SimpleRetrievalSystem(RetrievalSystemInterface):
+    def __init__(self, vector_db: VectorDatabaseInterface):
+        self.vector_db = vector_db
+    
+    async def retrieve(self, query: str, top_k: int = 5) -> List[Dict]:
+        # Simulate retrieval
+        return [{"content": f"Retrieved document {i} for query: {query}"} for i in range(top_k)]
+
+class SimpleDeployment(DeploymentInterface):
+    async def deploy(self, model_path: str, config: Dict) -> str:
+        return f"Model deployed successfully at: {model_path}"
+
+# Usage Example
+async def main():
+    # Initialize all components
+    stack = AIEngineeringStack(
+        data_ingestion=SimpleDataIngestion(),
+        vector_db=SimpleVectorDB(),
+        llm=SimpleLLM(),
+        embedding_model=SimpleEmbeddingModel(),
+        prompt_template=SimplePromptTemplate(),
+        retrieval_system=SimpleRetrievalSystem(SimpleVectorDB()),
+        deployment=SimpleDeployment()
+    )
+    
+    # Process a user query
+    result = await stack.process_query("What is AI engineering?")
+    print(f"Response: {result['response']}")
+    
+    # Update knowledge base
+    update_result = await stack.update_knowledge_base("new_data_source")
+    print(f"Updated {update_result['updated_documents']} documents")
+
+# Run the example
+if __name__ == "__main__":
+    asyncio.run(main())</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Best Practices -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-star text-deep-blue mr-3"></i>
+                            Best Practices & Design Principles
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-6">
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                                    <h4 class="font-semibold text-blue-800 mb-2">
+                                        <i class="fas fa-layer-group mr-2"></i>
+                                        Layered Architecture
+                                    </h4>
+                                    <p class="text-blue-700 text-sm">
+                                        Maintain clear separation between data, model, application, and infrastructure layers. 
+                                        This promotes modularity and makes the system easier to maintain and scale.
+                                    </p>
+                                </div>
+
+                                <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                                    <h4 class="font-semibold text-green-800 mb-2">
+                                        <i class="fas fa-shield-alt mr-2"></i>
+                                    Security First
+                                    </h4>
+                                    <p class="text-green-700 text-sm">
+                                        Implement security at every layer - from data encryption to API authentication. 
+                                        Regular security audits and compliance checks are essential.
+                                    </p>
+                                </div>
+
+                                <div class="bg-purple-50 border-l-4 border-purple-500 p-4">
+                                    <h4 class="font-semibold text-purple-800 mb-2">
+                                        <i class="fas fa-chart-line mr-2"></i>
+                                        Observability
+                                    </h4>
+                                    <p class="text-purple-700 text-sm">
+                                        Implement comprehensive monitoring, logging, and tracing. 
+                                        Use metrics to drive decisions and identify bottlenecks.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="bg-orange-50 border-l-4 border-orange-500 p-4">
+                                    <h4 class="font-semibold text-orange-800 mb-2">
+                                        <i class="fas fa-expand-arrows-alt mr-2"></i>
+                                        Scalability
+                                    </h4>
+                                    <p class="text-orange-700 text-sm">
+                                        Design for horizontal scaling from the start. 
+                                        Use containerization and orchestration platforms like Kubernetes.
+                                    </p>
+                                </div>
+
+                                <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                                    <h4 class="font-semibold text-red-800 mb-2">
+                                        <i class="fas fa-dollar-sign mr-2"></i>
+                                        Cost Optimization
+                                    </h4>
+                                    <p class="text-red-700 text-sm">
+                                        Monitor and optimize resource usage. 
+                                        Use spot instances, auto-scaling, and efficient model architectures.
+                                    </p>
+                                </div>
+
+                                <div class="bg-teal-50 border-l-4 border-teal-500 p-4">
+                                    <h4 class="font-semibold text-teal-800 mb-2">
+                                        <i class="fas fa-sync-alt mr-2"></i>
+                                        Automation
+                                    </h4>
+                                    <p class="text-teal-700 text-sm">
+                                        Automate testing, deployment, and operations. 
+                                        Use CI/CD pipelines and infrastructure as code.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technology Stack Comparison -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-balance-scale text-deep-blue mr-3"></i>
+                            Technology Stack Comparison
+                        </h2>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-gray-300">
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Component</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Open Source</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Cloud Native</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Enterprise</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Best For</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">Vector Database</td>
+                                        <td class="border border-gray-300 px-4 py-3">Chroma, FAISS</td>
+                                        <td class="border border-gray-300 px-4 py-3">Pinecone, Weaviate</td>
+                                        <td class="border border-gray-300 px-4 py-3">Elasticsearch, Vespa</td>
+                                        <td class="border border-gray-300 px-4 py-3">Scale dependent</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">LLM Framework</td>
+                                        <td class="border border-gray-300 px-4 py-3">Hugging Face</td>
+                                        <td class="border border-gray-300 px-4 py-3">OpenAI API</td>
+                                        <td class="border border-gray-300 px-4 py-3">Anthropic Claude</td>
+                                        <td class="border border-gray-300 px-4 py-3">Use case specific</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">Orchestration</td>
+                                        <td class="border border-gray-300 px-4 py-3">Kubernetes</td>
+                                        <td class="border border-gray-300 px-4 py-3">AWS ECS</td>
+                                        <td class="border border-gray-300 px-4 py-3">Google GKE</td>
+                                        <td class="border border-gray-300 px-4 py-3">Team expertise</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">Monitoring</td>
+                                        <td class="border border-gray-300 px-4 py-3">Prometheus</td>
+                                        <td class="border border-gray-300 px-4 py-3">CloudWatch</td>
+                                        <td class="border border-gray-300 px-4 py-3">Datadog</td>
+                                        <td class="border border-gray-300 px-4 py-3">Budget & needs</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-between items-center bg-white rounded-lg shadow-lg p-6">
+                        <div class="text-gray-500">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: Getting Started
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="topic-llm-foundations.html" class="bg-deep-blue text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+                                Next: LLM Foundations
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const icon = document.getElementById(sectionId + '-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('expanded');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const text = codeElement.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                // Show feedback
+                const btn = event.target.closest('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+
+        // Create architecture diagram
+        function createArchitectureDiagram() {
+            const data = [{
+                type: 'sankey',
+                node: {
+                    pad: 15,
+                    thickness: 20,
+                    line: { color: "black", width: 0.5 },
+                    label: [
+                        "Data Sources", "Raw Data", "Data Processing", "Vector DB", 
+                        "Embedding Models", "LLMs", "Prompt Templates", 
+                        "Retrieval System", "API Layer", "Frontend", 
+                        "Monitoring", "Security", "Deployment"
+                    ],
+                    color: [
+                        "#3b82f6", "#60a5fa", "#93c5fd", "#dbeafe",
+                        "#10b981", "#34d399", "#6ee7b7", "#d1fae5",
+                        "#8b5cf6", "#a78bfa", "#c4b5fd", "#ede9fe",
+                        "#f59e0b", "#fbbf24", "#fcd34d", "#fef3c7"
+                    ]
+                },
+                link: {
+                    source: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                    target: [1, 2, 3, 7, 7, 7, 8, 8, 9, 10, 11, 12, 11],
+                    value: [10, 10, 8, 6, 6, 6, 8, 8, 8, 8, 4, 4, 4]
+                }
+            }];
+
+            const layout = {
+                title: "AI Engineering Stack Data Flow",
+                font: { size: 12 },
+                margin: { l: 0, r: 0, t: 50, b: 0 }
+            };
+
+            Plotly.newPlot('architecture-diagram', data, layout, {responsive: true});
+        }
+
+        // Initialize diagram when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createArchitectureDiagram();
+        });
+    </script>
+</body>
+</html>

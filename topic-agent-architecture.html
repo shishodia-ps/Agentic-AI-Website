@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Architecture | Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .code-block { background: #1e293b; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .progress-bar { background: linear-gradient(90deg, #10b981 0%, #34d399 100%); }
+        .agent-diagram { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-brain text-2xl gradient-text mr-3"></i>
+                    <h1 class="text-xl font-bold text-slate-900">Agentic AI Hub</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors">Home</a>
+                    <a href="topics.html" class="text-slate-600 hover:text-slate-900 transition-colors">Topics</a>
+                    <a href="about.html" class="text-slate-600 hover:text-slate-900 transition-colors">About</a>
+                    <a href="manage.html" class="text-slate-600 hover:text-slate-900 transition-colors">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Agent Architecture
+                </h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Explore the fundamental building blocks of intelligent agents and multi-agent systems
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+                        <span class="text-white text-sm">Progress: </span>
+                        <div class="inline-block w-32 h-2 bg-white/20 rounded-full ml-2">
+                            <div class="progress-bar h-full rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Learning Path</h3>
+                    <nav class="space-y-2">
+                        <a href="topic-what-is-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>What is AI?
+                        </a>
+                        <a href="topic-types-of-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Types of AI
+                        </a>
+                        <a href="topic-machine-learning-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Machine Learning
+                        </a>
+                        <a href="topic-deep-learning-concepts.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Deep Learning
+                        </a>
+                        <a href="topic-neural-networks-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Neural Networks
+                        </a>
+                        <a href="topic-nlp-basics.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>NLP Basics
+                        </a>
+                        <a href="topic-computer-vision-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Computer Vision
+                        </a>
+                        <a href="#" class="block px-3 py-2 text-sm bg-blue-50 text-blue-900 rounded-md font-medium">
+                            <i class="fas fa-play-circle text-blue-500 mr-2"></i>Agent Architecture
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Introduction -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">What is an Intelligent Agent?</h2>
+                    <p class="text-lg text-slate-700 mb-6">
+                        An intelligent agent is an autonomous entity that observes its environment through sensors and acts upon that environment through actuators to achieve specific goals. Agents can be simple reflex systems or complex reasoning entities with learning capabilities.
+                    </p>
+                    <div class="bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-400 p-6 mb-6 rounded-r-lg">
+                        <p class="text-blue-800">
+                            <strong>Key Insight:</strong> The fundamental principle of agent design is the perception-action cycle: agents perceive their environment, process information, make decisions, and execute actions to achieve their objectives.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Agent Architecture Diagram -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Agent Architecture Components</h2>
+                    <div class="agent-diagram p-8 rounded-lg mb-6">
+                        <div class="flex justify-center items-center">
+                            <svg width="800" height="500" viewBox="0 0 800 500" class="border border-slate-200 rounded-lg">
+                                <!-- Environment -->
+                                <rect x="50" y="50" width="700" height="400" fill="#e2e8f0" stroke="#64748b" stroke-width="2" rx="10"/>
+                                <text x="400" y="35" text-anchor="middle" class="text-lg font-bold">Environment</text>
+                                
+                                <!-- Agent -->
+                                <rect x="150" y="150" width="500" height="200" fill="#f1f5f9" stroke="#475569" stroke-width="2" rx="10"/>
+                                <text x="400" y="140" text-anchor="middle" class="text-lg font-bold">Intelligent Agent</text>
+                                
+                                <!-- Sensors -->
+                                <circle cx="120" cy="250" r="25" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/>
+                                <text x="120" y="255" text-anchor="middle" class="text-white text-sm font-bold">S</text>
+                                <text x="120" y="290" text-anchor="middle" class="text-xs">Sensors</text>
+                                
+                                <!-- Actuators -->
+                                <circle cx="680" cy="250" r="25" fill="#ef4444" stroke="#dc2626" stroke-width="2"/>
+                                <text x="680" y="255" text-anchor="middle" class="text-white text-sm font-bold">A</text>
+                                <text x="680" y="290" text-anchor="middle" class="text-xs">Actuators</text>
+                                
+                                <!-- Perception Module -->
+                                <rect x="200" y="180" width="120" height="60" fill="#10b981" stroke="#059669" stroke-width="2" rx="5"/>
+                                <text x="260" y="210" text-anchor="middle" class="text-white text-sm font-bold">Perception</text>
+                                <text x="260" y="225" text-anchor="middle" class="text-white text-xs">Processing</text>
+                                
+                                <!-- Knowledge Base -->
+                                <rect x="340" y="180" width="120" height="60" fill="#8b5cf6" stroke="#7c3aed" stroke-width="2" rx="5"/>
+                                <text x="400" y="210" text-anchor="middle" class="text-white text-sm font-bold">Knowledge</text>
+                                <text x="400" y="225" text-anchor="middle" class="text-white text-xs">Base</text>
+                                
+                                <!-- Decision Making -->
+                                <rect x="480" y="180" width="120" height="60" fill="#f59e0b" stroke="#d97706" stroke-width="2" rx="5"/>
+                                <text x="540" y="210" text-anchor="middle" class="text-white text-sm font-bold">Decision</text>
+                                <text x="540" y="225" text-anchor="middle" class="text-white text-xs">Making</text>
+                                
+                                <!-- Learning Module -->
+                                <rect x="270" y="280" width="160" height="40" fill="#06b6d4" stroke="#0891b2" stroke-width="2" rx="5"/>
+                                <text x="350" y="305" text-anchor="middle" class="text-white text-sm font-bold">Learning Module</text>
+                                
+                                <!-- Arrows -->
+                                <path d="M 145 250 L 200 220" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 320 210 L 340 210" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 460 210 L 480 210" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 600 210 L 655 250" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 260 240 L 300 280" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 430 280 L 470 240" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                
+                                <!-- Arrow marker definition -->
+                                <defs>
+                                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                        <polygon points="0 0, 10 3.5, 0 7" fill="#374151"/>
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-center text-slate-600 text-sm">The agent architecture shows the flow from perception to action through various processing modules</p>
+                </div>
+
+                <!-- Types of Agents -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Types of Intelligent Agents</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-bolt text-blue-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Simple Reflex Agents</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Agents that act based on current percept only, using condition-action rules.</p>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <strong>Example:</strong> Thermostat that turns heating on/off based on temperature
+                            </div>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-memory text-green-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Model-Based Reflex Agents</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Agents that maintain internal state to track aspects of the world not visible in current percept.</p>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <strong>Example:</strong> Self-driving car tracking other vehicles' positions
+                            </div>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-bullseye text-purple-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Goal-Based Agents</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Agents that consider future consequences of actions to achieve specific goals.</p>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <strong>Example:</strong> Chess program planning moves to achieve checkmate
+                            </div>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-chart-line text-orange-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Utility-Based Agents</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Agents that choose actions based on utility functions to maximize expected performance.</p>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <strong>Example:</strong> Trading bot maximizing profit while minimizing risk
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Characteristics -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Key Agent Characteristics</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-slate-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                <i class="fas fa-eye text-blue-600 mr-2"></i>
+                                Perception
+                            </h3>
+                            <ul class="space-y-2 text-slate-700 text-sm">
+                                <li>• Sensor capabilities and limitations</li>
+                                <li>• Data preprocessing and filtering</li>
+                                <li>• Feature extraction from raw inputs</li>
+                                <li>• Handling noisy or incomplete data</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                <i class="fas fa-brain text-green-600 mr-2"></i>
+                                Cognition
+                            </h3>
+                            <ul class="space-y-2 text-slate-700 text-sm">
+                                <li>• Knowledge representation methods</li>
+                                <li>• Reasoning and inference mechanisms</li>
+                                <li>• Planning and decision-making</li>
+                                <li>• Learning from experience</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                <i class="fas fa-hand-paper text-purple-600 mr-2"></i>
+                                Action
+                            </h3>
+                            <ul class="space-y-2 text-slate-700 text-sm">
+                                <li>• Actuator control and coordination</li>
+                                <li>• Action planning and execution</li>
+                                <li>• Feedback and adaptation</li>
+                                <li>• Safety and constraint handling</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Environment Types -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Agent Environment Types</h2>
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="border-l-4 border-blue-400 pl-6">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-2">Fully Observable vs Partially Observable</h3>
+                                <p class="text-slate-700 text-sm mb-2">
+                                    <strong>Fully Observable:</strong> Agent has complete access to environment state (e.g., chess game)
+                                </p>
+                                <p class="text-slate-700 text-sm">
+                                    <strong>Partially Observable:</strong> Agent has limited sensors, must infer hidden state (e.g., self-driving car)
+                                </p>
+                            </div>
+                            <div class="border-l-4 border-green-400 pl-6">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-2">Deterministic vs Stochastic</h3>
+                                <p class="text-slate-700 text-sm mb-2">
+                                    <strong>Deterministic:</strong> Next state completely determined by current state and action
+                                </p>
+                                <p class="text-slate-700 text-sm">
+                                    <strong>Stochastic:</strong> Environment has uncertainty, multiple possible outcomes
+                                </p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="border-l-4 border-purple-400 pl-6">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-2">Episodic vs Sequential</h3>
+                                <p class="text-slate-700 text-sm mb-2">
+                                    <strong>Episodic:</strong> Agent experience divided into independent episodes
+                                </p>
+                                <p class="text-slate-700 text-sm">
+                                    <strong>Sequential:</strong> Current decisions affect future opportunities
+                                </p>
+                            </div>
+                            <div class="border-l-4 border-orange-400 pl-6">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-2">Static vs Dynamic</h3>
+                                <p class="text-slate-700 text-sm mb-2">
+                                    <strong>Static:</strong> Environment remains unchanged while agent deliberates
+                                </p>
+                                <p class="text-slate-700 text-sm">
+                                    <strong>Dynamic:</strong> Environment changes during agent's decision process
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Design Principles -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Agent Design Principles</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Rationality Principles</h3>
+                            <div class="space-y-4">
+                                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                                    <h4 class="font-semibold text-slate-900">Performance Measure</h4>
+                                    <p class="text-slate-700 text-sm">Objective criteria for evaluating agent success</p>
+                                </div>
+                                <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg">
+                                    <h4 class="font-semibold text-slate-900">Prior Knowledge</h4>
+                                    <p class="text-slate-700 text-sm">Initial information about the environment</p>
+                                </div>
+                                <div class="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-r-lg">
+                                    <h4 class="font-semibold text-slate-900">Possible Actions</h4>
+                                    <p class="text-slate-700 text-sm">Available actions the agent can perform</p>
+                                </div>
+                                <div class="bg-orange-50 border-l-4 border-orange-400 p-4 rounded-r-lg">
+                                    <h4 class="font-semibold text-slate-900">Percept Sequence</h4>
+                                    <p class="text-slate-700 text-sm">Complete history of everything the agent has perceived</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Design Considerations</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-slate-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Autonomy</h4>
+                                    <p class="text-slate-700 text-sm">Degree of independent operation from human intervention</p>
+                                </div>
+                                <div class="border-l-4 border-slate-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Reactivity</h4>
+                                    <p class="text-slate-700 text-sm">Ability to respond to immediate environment changes</p>
+                                </div>
+                                <div class="border-l-4 border-slate-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Proactivity</h4>
+                                    <p class="text-slate-700 text-sm">Capability to take initiative and pursue goals</p>
+                                </div>
+                                <div class="border-l-4 border-slate-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Social Ability</h4>
+                                    <p class="text-slate-700 text-sm">Capacity to interact and cooperate with other agents</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simple Agent Implementation -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Simple Agent Implementation</h2>
+                    <div class="code-block">
+                        <pre class="text-green-400 text-sm"><code># Basic Intelligent Agent Framework
+from abc import ABC, abstractmethod
+from typing import Any, List, Dict
+import random
+
+class Percept:
+    def __init__(self, data: Dict[str, Any]):
+        self.data = data
+        self.timestamp = time.time()
+
+class Action:
+    def __init__(self, action_type: str, parameters: Dict[str, Any]):
+        self.type = action_type
+        self.parameters = parameters
+
+class Environment:
+    def __init__(self):
+        self.state = {}
+        self.agents = []
+    
+    def add_agent(self, agent):
+        self.agents.append(agent)
+    
+    def get_percept(self, agent):
+        return Percept(self.state.copy())
+    
+    def execute_action(self, action: Action, agent):
+        # Update environment based on action
+        if action.type == "move":
+            self.state['agent_position'] = action.parameters.get('position')
+        elif action.type == "sense":
+            self.state['last_sensed'] = time.time()
+
+class IntelligentAgent(ABC):
+    def __init__(self, name: str):
+        self.name = name
+        self.knowledge_base = {}
+        self.learning_history = []
+    
+    @abstractmethod
+    def perceive(self, percept: Percept) -> Dict[str, Any]:
+        """Process sensory input"""
+        pass
+    
+    @abstractmethod
+    def think(self, processed_percept: Dict[str, Any]) -> Action:
+        """Decision-making process"""
+        pass
+    
+    @abstractmethod
+    def act(self, action: Action, environment: Environment):
+        """Execute chosen action"""
+        pass
+    
+    def learn(self, experience: Dict[str, Any]):
+        """Update knowledge based on experience"""
+        self.learning_history.append(experience)
+        self.update_knowledge_base(experience)
+    
+    def update_knowledge_base(self, experience: Dict[str, Any]):
+        """Abstract method for knowledge updates"""
+        pass
+
+class SimpleReflexAgent(IntelligentAgent):
+    def __init__(self, name: str, rules: Dict):
+        super().__init__(name)
+        self.rules = rules  # condition-action rules
+    
+    def perceive(self, percept: Percept) -> Dict[str, Any]:
+        # Simple perception - just pass through the data
+        return percept.data
+    
+    def think(self, processed_percept: Dict[str, Any]) -> Action:
+        # Rule-based decision making
+        for condition, action in self.rules.items():
+            if self.evaluate_condition(condition, processed_percept):
+                return action
+        
+        # Default action if no rule matches
+        return Action("idle", {})
+    
+    def evaluate_condition(self, condition: str, percept: Dict[str, Any]) -> bool:
+        # Simple condition evaluation
+        if condition == "low_temperature" and percept.get("temperature", 0) < 20:
+            return True
+        elif condition == "high_temperature" and percept.get("temperature", 0) > 25:
+            return True
+        return False
+    
+    def act(self, action: Action, environment: Environment):
+        print(f"{self.name} executing action: {action.type}")
+        environment.execute_action(action, self)
+    
+    def update_knowledge_base(self, experience: Dict[str, Any]):
+        # Simple reflex agents don't learn from experience
+        pass
+
+class LearningAgent(IntelligentAgent):
+    def __init__(self, name: str, learning_rate: float = 0.1):
+        super().__init__(name)
+        self.learning_rate = learning_rate
+        self.q_table = {}  # Q-learning table
+    
+    def perceive(self, percept: Percept) -> Dict[str, Any]:
+        # More sophisticated perception
+        processed = percept.data.copy()
+        processed['features'] = self.extract_features(percept.data)
+        return processed
+    
+    def extract_features(self, data: Dict[str, Any]) -> List[float]:
+        # Extract relevant features from raw percept
+        features = []
+        if "temperature" in data:
+            features.append(data["temperature"] / 100.0)  # Normalize
+        if "light" in data:
+            features.append(1.0 if data["light"] > 50 else 0.0)  # Binary feature
+        return features
+    
+    def think(self, processed_percept: Dict[str, Any]) -> Action:
+        state = self.get_state_representation(processed_percept)
+        
+        # Choose action using epsilon-greedy policy
+        if random.random() < 0.1:  # 10% exploration
+            action_type = random.choice(["move", "sense", "idle"])
+        else:
+            action_type = self.get_best_action(state)
+        
+        return Action(action_type, {"state": state})
+    
+    def get_state_representation(self, percept: Dict[str, Any]) -> str:
+        # Convert percept to state string
+        temp = percept.get("temperature", 0)
+        if temp < 20:
+            temp_cat = "cold"
+        elif temp < 25:
+            temp_cat = "comfortable"
+        else:
+            temp_cat = "hot"
+        return f"temp_{temp_cat}"
+    
+    def get_best_action(self, state: str) -> str:
+        if state not in self.q_table:
+            self.q_table[state] = {"move": 0, "sense": 0, "idle": 0}
+        return max(self.q_table[state], key=self.q_table[state].get)
+    
+    def update_knowledge_base(self, experience: Dict[str, Any]):
+        # Q-learning update
+        state = experience["state"]
+        action = experience["action"]
+        reward = experience["reward"]
+        next_state = experience["next_state"]
+        
+        if state not in self.q_table:
+            self.q_table[state] = {"move": 0, "sense": 0, "idle": 0}
+        
+        # Q-learning formula
+        old_q = self.q_table[state][action]
+        next_max_q = max(self.q_table.get(next_state, {"move": 0, "sense": 0, "idle": 0}).values())
+        new_q = old_q + self.learning_rate * (reward + 0.9 * next_max_q - old_q)
+        
+        self.q_table[state][action] = new_q
+
+# Example usage
+def run_agent_simulation():
+    # Create environment
+    env = Environment()
+    env.state = {"temperature": 22, "light": 60}
+    
+    # Create simple reflex agent
+    reflex_rules = {
+        "low_temperature": Action("heat", {"intensity": 0.8}),
+        "high_temperature": Action("cool", {"intensity": 0.6})
+    }
+    reflex_agent = SimpleReflexAgent("Thermostat", reflex_rules)
+    
+    # Create learning agent
+    learning_agent = LearningAgent("AdaptiveController")
+    
+    # Add agents to environment
+    env.add_agent(reflex_agent)
+    env.add_agent(learning_agent)
+    
+    # Run simulation
+    for step in range(10):
+        print(f"\nStep {step + 1}:")
+        
+        # Each agent perceives and acts
+        for agent in [reflex_agent, learning_agent]:
+            percept = env.get_percept(agent)
+            processed_percept = agent.perceive(percept)
+            action = agent.think(processed_percept)
+            agent.act(action, env)
+            
+            # Simulate learning experience
+            experience = {
+                "state": agent.get_state_representation(processed_percept) if hasattr(agent, 'get_state_representation') else "unknown",
+                "action": action.type,
+                "reward": random.uniform(-1, 1),
+                "next_state": "next_state"
+            }
+            agent.learn(experience)
+
+if __name__ == "__main__":
+    run_agent_simulation()</code></pre>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center">
+                        <a href="topic-computer-vision-fundamentals.html" class="flex items-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: Computer Vision
+                        </a>
+                        <div class="flex space-x-2">
+                            <button onclick="markComplete('agent-architecture')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                                <i class="fas fa-check mr-2"></i>Mark Complete
+                            </button>
+                            <a href="topic-multi-agent-systems.html" class="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                                Next: Multi-Agent Systems
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Agentic AI Knowledge Hub</h3>
+                <p class="text-slate-400 mb-6">Master the future of artificial intelligence</p>
+                <p class="text-slate-500 text-sm">© 2024 Agentic AI Knowledge Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate progress bar
+            anime({
+                targets: '.progress-bar',
+                width: '75%',
+                duration: 2000,
+                easing: 'easeOutQuart'
+            });
+
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.card-hover');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            translateY: [30, 0],
+                            opacity: [0, 1],
+                            duration: 800,
+                            easing: 'easeOutQuart'
+                        });
+                    }
+                });
+            });
+
+            cards.forEach(card => observer.observe(card));
+        });
+
+        // Mark topic as complete
+        function markComplete(topicId) {
+            localStorage.setItem(`topic_${topicId}_complete`, 'true');
+            
+            // Show success message
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Completed!';
+            button.classList.remove('bg-green-600', 'hover:bg-green-700');
+            button.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-500');
+                button.classList.add('bg-green-600', 'hover:bg-green-700');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

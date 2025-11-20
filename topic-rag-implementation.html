@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Implementation | Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .code-block { background: #1e293b; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .progress-bar { background: linear-gradient(90deg, #10b981 0%, #34d399 100%); }
+        .rag-diagram { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-brain text-2xl gradient-text mr-3"></i>
+                    <h1 class="text-xl font-bold text-slate-900">Agentic AI Hub</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors">Home</a>
+                    <a href="topics.html" class="text-slate-600 hover:text-slate-900 transition-colors">Topics</a>
+                    <a href="about.html" class="text-slate-600 hover:text-slate-900 transition-colors">About</a>
+                    <a href="manage.html" class="text-slate-600 hover:text-slate-900 transition-colors">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    RAG Implementation
+                </h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Master Retrieval-Augmented Generation for building knowledge-aware AI systems
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+                        <span class="text-white text-sm">Progress: </span>
+                        <div class="inline-block w-32 h-2 bg-white/20 rounded-full ml-2">
+                            <div class="progress-bar h-full rounded-full" style="width: 15%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Learning Path</h3>
+                    <nav class="space-y-2">
+                        <a href="topic-what-is-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>What is AI?
+                        </a>
+                        <a href="topic-types-of-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Types of AI
+                        </a>
+                        <a href="topic-machine-learning-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Machine Learning
+                        </a>
+                        <a href="topic-deep-learning-concepts.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Deep Learning
+                        </a>
+                        <a href="topic-neural-networks-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Neural Networks
+                        </a>
+                        <a href="topic-nlp-basics.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>NLP Basics
+                        </a>
+                        <a href="topic-computer-vision-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Computer Vision
+                        </a>
+                        <a href="topic-agent-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Agent Architecture
+                        </a>
+                        <a href="topic-multi-agent-systems.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Multi-Agent Systems
+                        </a>
+                        <a href="topic-langchain-framework.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>LangChain Framework
+                        </a>
+                        <a href="topic-autogen-framework.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>AutoGen Framework
+                        </a>
+                        <a href="topic-crewai-framework.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>CrewAI Framework
+                        </a>
+                        <a href="#" class="block px-3 py-2 text-sm bg-blue-50 text-blue-900 rounded-md font-medium">
+                            <i class="fas fa-play-circle text-blue-500 mr-2"></i>RAG Implementation
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Introduction -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">What is Retrieval-Augmented Generation?</h2>
+                    <p class="text-lg text-slate-700 mb-6">
+                        Retrieval-Augmented Generation (RAG) is a powerful technique that combines the strengths of Large Language Models (LLMs) with external knowledge retrieval systems. It enables AI systems to access and utilize up-to-date, domain-specific information that wasn't included in their training data, resulting in more accurate, relevant, and trustworthy responses.
+                    </p>
+                    <div class="bg-gradient-to-r from-purple-50 to-blue-50 border-l-4 border-purple-400 p-6 mb-6 rounded-r-lg">
+                        <p class="text-purple-800">
+                            <strong>Key Insight:</strong> RAG addresses the knowledge cutoff limitations of LLMs by dynamically retrieving relevant information from external sources, enabling AI systems to provide current, factual, and contextually appropriate responses.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- RAG Architecture -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">RAG Architecture Components</h2>
+                    <div class="rag-diagram p-8 rounded-lg mb-6">
+                        <div class="flex justify-center items-center">
+                            <svg width="900" height="600" viewBox="0 0 900 600" class="border border-slate-200 rounded-lg">
+                                <!-- User Query -->
+                                <rect x="400" y="50" width="100" height="40" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2" rx="5"/>
+                                <text x="450" y="75" text-anchor="middle" class="text-white text-sm font-bold">User Query</text>
+                                
+                                <!-- Retriever -->
+                                <rect x="200" y="150" width="120" height="60" fill="#10b981" stroke="#059669" stroke-width="2" rx="5"/>
+                                <text x="260" y="180" text-anchor="middle" class="text-white text-sm font-bold">Retriever</text>
+                                <text x="260" y="195" text-anchor="middle" class="text-white text-xs">Embeddings</text>
+                                
+                                <!-- Vector Store -->
+                                <rect x="50" y="250" width="150" height="80" fill="#8b5cf6" stroke="#7c3aed" stroke-width="2" rx="10"/>
+                                <text x="125" y="280" text-anchor="middle" class="text-white text-sm font-bold">Vector Store</text>
+                                <text x="125" y="300" text-anchor="middle" class="text-white text-xs">ChromaDB/Pinecone</text>
+                                <text x="125" y="315" text-anchor="middle" class="text-white text-xs">FAISS/Weaviate</text>
+                                
+                                <!-- Document Processing -->
+                                <rect x="250" y="250" width="150" height="80" fill="#f59e0b" stroke="#d97706" stroke-width="2" rx="10"/>
+                                <text x="325" y="280" text-anchor="middle" class="text-white text-sm font-bold">Documents</text>
+                                <text x="325" y="300" text-anchor="middle" class="text-white text-xs">Loaders & Splitters</text>
+                                <text x="325" y="315" text-anchor="middle" class="text-white text-xs">PDF/Web/Text</text>
+                                
+                                <!-- Context Builder -->
+                                <rect x="450" y="150" width="120" height="60" fill="#ef4444" stroke="#dc2626" stroke-width="2" rx="5"/>
+                                <text x="510" y="180" text-anchor="middle" class="text-white text-sm font-bold">Context</text>
+                                <text x="510" y="195" text-anchor="middle" class="text-white text-xs">Builder</text>
+                                
+                                <!-- LLM -->
+                                <rect x="650" y="150" width="120" height="60" fill="#06b6d4" stroke="#0891b2" stroke-width="2" rx="5"/>
+                                <text x="710" y="180" text-anchor="middle" class="text-white text-sm font-bold">LLM</text>
+                                <text x="710" y="195" text-anchor="middle" class="text-white text-xs">GPT-4/Claude</text>
+                                
+                                <!-- Response -->
+                                <rect x="650" y="300" width="120" height="40" fill="#84cc16" stroke="#65a30d" stroke-width="2" rx="5"/>
+                                <text x="710" y="325" text-anchor="middle" class="text-white text-sm font-bold">Response</text>
+                                
+                                <!-- Data Flow Arrows -->
+                                <path d="M 450 90 L 260 150" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 200 210 L 125 250" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 260 210 L 325 250" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 125 330 L 510 180" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 510 210 L 650 150" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 710 210 L 710 300" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                
+                                <!-- Embeddings Process -->
+                                <rect x="50" y="400" width="150" height="60" fill="#e2e8f0" stroke="#64748b" stroke-width="2" rx="10"/>
+                                <text x="125" y="430" text-anchor="middle" class="text-sm font-bold">Embeddings Model</text>
+                                <text x="125" y="445" text-anchor="middle" class="text-xs">OpenAI/BERT</text>
+                                
+                                <!-- Chunking Process -->
+                                <rect x="250" y="400" width="150" height="60" fill="#e2e8f0" stroke="#64748b" stroke-width="2" rx="10"/>
+                                <text x="325" y="430" text-anchor="middle" class="text-sm font-bold">Text Processing</text>
+                                <text x="325" y="445" text-anchor="middle" class="text-xs">Chunking & Cleaning</text>
+                                
+                                <!-- Arrow marker definition -->
+                                <defs>
+                                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                        <polygon points="0 0, 10 3.5, 0 7" fill="#374151"/>
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-center text-slate-600 text-sm">RAG architecture combines retrieval systems with LLMs to provide contextually enriched responses</p>
+                </div>
+
+                <!-- RAG Workflow -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">RAG Implementation Workflow</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+                        <div class="text-center">
+                            <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-database text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-sm font-semibold text-slate-900 mb-1">1. Data Ingestion</h3>
+                            <p class="text-xs text-slate-600">Load and process documents</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-cut text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-sm font-semibold text-slate-900 mb-1">2. Chunking</h3>
+                            <p class="text-xs text-slate-600">Split into manageable pieces</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-vector-square text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-sm font-semibold text-slate-900 mb-1">3. Embedding</h3>
+                            <p class="text-xs text-slate-600">Convert to vector representations</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-search text-orange-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-sm font-semibold text-slate-900 mb-1">4. Retrieval</h3>
+                            <p class="text-xs text-slate-600">Find relevant context</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-brain text-red-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-sm font-semibold text-slate-900 mb-1">5. Generation</h3>
+                            <p class="text-xs text-slate-600">Create contextual response</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Components -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Key RAG Components</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-file-import text-blue-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Document Loaders</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Components that load and parse various document formats for processing.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• PDF loaders</li>
+                                <li>• Web page scrapers</li>
+                                <li>• Database connectors</li>
+                                <li>• File system readers</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-cut text-green-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Text Splitters</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Algorithms that break documents into optimal chunks for embedding and retrieval.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Recursive character splitting</li>
+                                <li>• Semantic chunking</li>
+                                <li>• Token-based splitting</li>
+                                <li>• Overlap strategies</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-vector-square text-purple-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Embedding Models</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Models that convert text into numerical vector representations for similarity search.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• OpenAI embeddings</li>
+                                <li>• Sentence Transformers</li>
+                                <li>• BERT-based models</li>
+                                <li>• Custom embeddings</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-database text-orange-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Vector Stores</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Databases optimized for storing and searching high-dimensional vector embeddings.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• ChromaDB</li>
+                                <li>• Pinecone</li>
+                                <li>• FAISS</li>
+                                <li>• Weaviate</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Implementation Examples -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">RAG Implementation Examples</h2>
+                    
+                    <!-- Basic RAG -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-code text-blue-600 mr-3"></i>
+                            Basic RAG Implementation
+                        </h3>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># Basic RAG Implementation with LangChain
+from langchain.document_loaders import WebBaseLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.vectorstores import Chroma
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.chains import RetrievalQA
+from langchain.llms import OpenAI
+
+# Step 1: Load documents
+loader = WebBaseLoader("https://example.com/docs")
+documents = loader.load()
+
+# Step 2: Split documents into chunks
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200,
+    length_function=len
+)
+texts = text_splitter.split_documents(documents)
+
+# Step 3: Create embeddings and vector store
+embeddings = OpenAIEmbeddings()
+vectorstore = Chroma.from_documents(texts, embeddings)
+
+# Step 4: Create RAG chain
+qa_chain = RetrievalQA.from_chain_type(
+    llm=OpenAI(temperature=0),
+    chain_type="stuff",
+    retriever=vectorstore.as_retriever(
+        search_kwargs={"k": 4}  # Retrieve top 4 documents
+    ),
+    return_source_documents=True
+)
+
+# Step 5: Query the system
+query = "What are the main features of this product?"
+result = qa_chain({"query": query})
+
+print(f"Answer: {result['result']}")
+print("\nSource Documents:")
+for doc in result['source_documents']:
+    print(f"- {doc.metadata.get('source', 'Unknown')}")</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Advanced RAG -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-cogs text-green-600 mr-3"></i>
+                            Advanced RAG with Multiple Retrievers
+                        </h3>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># Advanced RAG with Ensemble Retriever
+from langchain.retrievers import EnsembleRetriever
+from langchain.retrievers import BM25Retriever
+from langchain.schema import BaseRetriever
+from langchain.vectorstores import FAISS
+from langchain.embeddings import HuggingFaceEmbeddings
+
+# Create multiple retrievers
+# 1. Vector-based retriever
+embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+vectorstore = FAISS.from_documents(texts, embeddings)
+vector_retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+
+# 2. BM25 (keyword-based) retriever
+bm25_retriever = BM25Retriever.from_documents(texts)
+bm25_retriever.k = 3
+
+# 3. Create ensemble retriever
+ensemble_retriever = EnsembleRetriever(
+    retrievers=[vector_retriever, bm25_retriever],
+    weights=[0.7, 0.3]  # Weight vector search more heavily
+)
+
+# Create advanced RAG chain
+from langchain.chains import ConversationalRetrievalChain
+from langchain.memory import ConversationBufferMemory
+
+memory = ConversationBufferMemory(
+    memory_key="chat_history",
+    return_messages=True
+)
+
+conversational_chain = ConversationalRetrievalChain.from_llm(
+    llm=OpenAI(temperature=0.7),
+    retriever=ensemble_retriever,
+    memory=memory,
+    verbose=True
+)
+
+# Use the conversational chain
+result = conversational_chain({"question": "What are the key benefits?"})
+print(f"Answer: {result['answer']}")</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- RAG with Custom Prompts -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-file-alt text-purple-600 mr-3"></i>
+                            RAG with Custom Prompt Templates
+                        </h3>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># RAG with Custom Prompt Template
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+from langchain.schema.runnable import RunnablePassthrough
+from langchain.schema.output_parser import StrOutputParser
+
+# Create custom prompt template
+custom_template = """You are an expert assistant specializing in {domain}.
+Use the following pieces of context to answer the question at the end.
+If you don't know the answer, just say that you don't know, don't try to make up an answer.
+
+Context:
+{context}
+
+Question: {question}
+
+Expert Answer:"""
+
+CUSTOM_PROMPT = PromptTemplate(
+    template=custom_template,
+    input_variables=["context", "question", "domain"]
+)
+
+# Create RAG chain with custom prompt
+def format_docs(docs):
+    return "\n\n".join(doc.page_content for doc in docs)
+
+rag_chain = (
+    {"context": ensemble_retriever | format_docs, "question": RunnablePassthrough(), "domain": RunnablePassthrough()}
+    | CUSTOM_PROMPT
+    | OpenAI(temperature=0)
+    | StrOutputParser()
+)
+
+# Use the RAG chain
+result = rag_chain.invoke({
+    "question": "What are the implementation steps?",
+    "domain": "software development"
+})
+
+print(f"Expert Answer: {result}")</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- RAG Evaluation -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-chart-bar text-orange-600 mr-3"></i>
+                            RAG System Evaluation
+                        </h3>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># RAG System Evaluation and Metrics
+from langchain.evaluation import QAEvalChain
+from langchain.schema import Document
+import json
+
+# Prepare evaluation dataset
+eval_questions = [
+    "What is the main purpose of RAG?",
+    "How does RAG improve LLM responses?",
+    "What are the key components of RAG?",
+    "What are the limitations of traditional LLMs?",
+    "How is context integrated in RAG?"
+]
+
+# Ground truth answers (for evaluation)
+ground_truths = [
+    "RAG combines LLMs with external knowledge retrieval to provide accurate, up-to-date responses.",
+    "RAG improves responses by retrieving relevant context from external sources.",
+    "Key components include retrievers, vector stores, embedding models, and LLMs.",
+    "Traditional LLMs have knowledge cutoffs and may provide outdated or hallucinated information.",
+    "Context is retrieved based on semantic similarity and added to the prompt."
+]
+
+# Generate predictions
+predictions = []
+for question in eval_questions:
+    result = qa_chain({"query": question})
+    predictions.append(result['result'])
+
+# Create evaluation chain
+eval_chain = QAEvalChain.from_llm(
+    llm=OpenAI(temperature=0),
+    prompt=PromptTemplate(
+        template="""Given the following question, ground truth answer, and predicted answer, evaluate the prediction.
+
+Question: {query}
+Ground Truth: {answer}
+Predicted Answer: {result}
+
+Evaluation (correct/incorrect and explanation):""",
+        input_variables=["query", "answer", "result"]
+    )
+)
+
+# Evaluate predictions
+eval_results = eval_chain.evaluate(
+    examples=[{"query": q, "answer": a} for q, a in zip(eval_questions, ground_truths)],
+    predictions=[{"result": p} for p in predictions],
+    question_key="query",
+    answer_key="answer",
+    prediction_key="result"
+)
+
+# Print evaluation results
+for i, result in enumerate(eval_results):
+    print(f"Question {i+1}: {eval_questions[i]}")
+    print(f"Evaluation: {result['text']}")
+    print("-" * 50)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RAG Optimization Techniques -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">RAG Optimization Techniques</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Retrieval Optimization</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-blue-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Hybrid Search</h4>
+                                    <p class="text-slate-700 text-sm">Combine semantic and keyword search for better retrieval</p>
+                                </div>
+                                <div class="border-l-4 border-green-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Re-ranking</h4>
+                                    <p class="text-slate-700 text-sm">Use cross-encoders to re-rank retrieved documents</p>
+                                </div>
+                                <div class="border-l-4 border-purple-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Query Expansion</h4>
+                                    <p class="text-slate-700 text-sm">Expand queries with synonyms and related terms</p>
+                                </div>
+                                <div class="border-l-4 border-orange-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Contextual Compression</h4>
+                                    <p class="text-slate-700 text-sm">Compress retrieved documents to relevant information only</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Generation Enhancement</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-red-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Iterative Refinement</h4>
+                                    <p class="text-slate-700 text-sm">Refine answers through multiple retrieval-generation cycles</p>
+                                </div>
+                                <div class="border-l-4 border-indigo-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Self-Consistency</h4>
+                                    <p class="text-slate-700 text-sm">Generate multiple answers and select the most consistent</p>
+                                </div>
+                                <div class="border-l-4 border-pink-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Citation Generation</h4>
+                                    <p class="text-slate-700 text-sm">Include citations and source references in responses</p>
+                                </div>
+                                <div class="border-l-4 border-teal-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Uncertainty Quantification</h4>
+                                    <p class="text-slate-700 text-sm">Indicate confidence levels in generated responses</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RAG Applications -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">RAG Applications</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg text-center">
+                            <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-question-circle text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Question Answering</h3>
+                            <p class="text-slate-700 text-sm">Answer questions based on specific document collections or knowledge bases</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg text-center">
+                            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-robot text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Customer Support</h3>
+                            <p class="text-slate-700 text-sm">Provide accurate, context-aware support using company documentation</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg text-center">
+                            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-search text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Research Assistance</h3>
+                            <p class="text-slate-700 text-sm">Help researchers find relevant information from large document collections</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg text-center">
+                            <div class="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-book text-orange-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Educational Tools</h3>
+                            <p class="text-slate-700 text-sm">Create personalized learning experiences from educational content</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg text-center">
+                            <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-file-alt text-red-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Document Analysis</h3>
+                            <p class="text-slate-700 text-sm">Extract insights and summarize large volumes of documents</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg text-center">
+                            <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-code text-indigo-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Code Documentation</h3>
+                            <p class="text-slate-700 text-sm">Generate documentation and explanations for codebases</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center">
+                        <a href="topic-crewai-framework.html" class="flex items-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: CrewAI Framework
+                        </a>
+                        <div class="flex space-x-2">
+                            <button onclick="markComplete('rag-implementation')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                                <i class="fas fa-check mr-2"></i>Mark Complete
+                            </button>
+                            <a href="topic-vector-databases.html" class="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                                Next: Vector Databases
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Agentic AI Knowledge Hub</h3>
+                <p class="text-slate-400 mb-6">Master the future of artificial intelligence</p>
+                <p class="text-slate-500 text-sm">© 2024 Agentic AI Knowledge Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate progress bar
+            anime({
+                targets: '.progress-bar',
+                width: '15%',
+                duration: 2000,
+                easing: 'easeOutQuart'
+            });
+
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.card-hover');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            translateY: [30, 0],
+                            opacity: [0, 1],
+                            duration: 800,
+                            easing: 'easeOutQuart'
+                        });
+                    }
+                });
+            });
+
+            cards.forEach(card => observer.observe(card));
+
+            // Animate workflow steps
+            const workflowSteps = document.querySelectorAll('.text-center');
+            workflowSteps.forEach((step, index) => {
+                anime({
+                    targets: step,
+                    scale: [0, 1],
+                    duration: 500,
+                    delay: index * 200,
+                    easing: 'easeOutBack'
+                });
+            });
+        });
+
+        // Mark topic as complete
+        function markComplete(topicId) {
+            localStorage.setItem(`topic_${topicId}_complete`, 'true');
+            
+            // Show success message
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Completed!';
+            button.classList.remove('bg-green-600', 'hover:bg-green-700');
+            button.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-500');
+                button.classList.add('bg-green-600', 'hover:bg-green-700');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

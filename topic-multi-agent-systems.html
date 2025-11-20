@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Agent Systems | Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .code-block { background: #1e293b; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .progress-bar { background: linear-gradient(90deg, #10b981 0%, #34d399 100%); }
+        .multi-agent-diagram { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-brain text-2xl gradient-text mr-3"></i>
+                    <h1 class="text-xl font-bold text-slate-900">Agentic AI Hub</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors">Home</a>
+                    <a href="topics.html" class="text-slate-600 hover:text-slate-900 transition-colors">Topics</a>
+                    <a href="about.html" class="text-slate-600 hover:text-slate-900 transition-colors">About</a>
+                    <a href="manage.html" class="text-slate-600 hover:text-slate-900 transition-colors">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Multi-Agent Systems
+                </h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Discover how multiple intelligent agents collaborate, compete, and coordinate to solve complex problems
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+                        <span class="text-white text-sm">Progress: </span>
+                        <div class="inline-block w-32 h-2 bg-white/20 rounded-full ml-2">
+                            <div class="progress-bar h-full rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Learning Path</h3>
+                    <nav class="space-y-2">
+                        <a href="topic-what-is-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>What is AI?
+                        </a>
+                        <a href="topic-types-of-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Types of AI
+                        </a>
+                        <a href="topic-machine-learning-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Machine Learning
+                        </a>
+                        <a href="topic-deep-learning-concepts.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Deep Learning
+                        </a>
+                        <a href="topic-neural-networks-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Neural Networks
+                        </a>
+                        <a href="topic-nlp-basics.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>NLP Basics
+                        </a>
+                        <a href="topic-computer-vision-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Computer Vision
+                        </a>
+                        <a href="topic-agent-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Agent Architecture
+                        </a>
+                        <a href="#" class="block px-3 py-2 text-sm bg-blue-50 text-blue-900 rounded-md font-medium">
+                            <i class="fas fa-play-circle text-blue-500 mr-2"></i>Multi-Agent Systems
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Introduction -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">What are Multi-Agent Systems?</h2>
+                    <p class="text-lg text-slate-700 mb-6">
+                        Multi-Agent Systems (MAS) are systems composed of multiple interacting intelligent agents that work together to solve problems that are beyond the capabilities of individual agents. These systems enable complex problem-solving through distributed intelligence, collaboration, and emergent behaviors.
+                    </p>
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-400 p-6 mb-6 rounded-r-lg">
+                        <p class="text-green-800">
+                            <strong>Key Insight:</strong> Multi-agent systems leverage the principle that the whole is greater than the sum of its parts—through coordination and specialization, multiple simple agents can solve complex problems that individual agents cannot.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Multi-Agent System Architecture -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Multi-Agent System Architecture</h2>
+                    <div class="multi-agent-diagram p-8 rounded-lg mb-6">
+                        <div class="flex justify-center items-center">
+                            <svg width="800" height="600" viewBox="0 0 800 600" class="border border-slate-200 rounded-lg">
+                                <!-- Environment -->
+                                <rect x="50" y="50" width="700" height="500" fill="#e2e8f0" stroke="#64748b" stroke-width="2" rx="10"/>
+                                <text x="400" y="35" text-anchor="middle" class="text-lg font-bold">Multi-Agent Environment</text>
+                                
+                                <!-- Agent 1 -->
+                                <circle cx="200" cy="150" r="40" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/>
+                                <text x="200" y="155" text-anchor="middle" class="text-white text-sm font-bold">Agent 1</text>
+                                <text x="200" y="210" text-anchor="middle" class="text-xs">Coordinator</text>
+                                
+                                <!-- Agent 2 -->
+                                <circle cx="400" cy="150" r="40" fill="#10b981" stroke="#059669" stroke-width="2"/>
+                                <text x="400" y="155" text-anchor="middle" class="text-white text-sm font-bold">Agent 2</text>
+                                <text x="400" y="210" text-anchor="middle" class="text-xs">Executor</text>
+                                
+                                <!-- Agent 3 -->
+                                <circle cx="600" cy="150" r="40" fill="#8b5cf6" stroke="#7c3aed" stroke-width="2"/>
+                                <text x="600" y="155" text-anchor="middle" class="text-white text-sm font-bold">Agent 3</text>
+                                <text x="600" y="210" text-anchor="middle" class="text-xs">Monitor</text>
+                                
+                                <!-- Agent 4 -->
+                                <circle cx="200" cy="350" r="40" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+                                <text x="200" y="355" text-anchor="middle" class="text-white text-sm font-bold">Agent 4</text>
+                                <text x="200" y="410" text-anchor="middle" class="text-xs">Learner</text>
+                                
+                                <!-- Agent 5 -->
+                                <circle cx="400" cy="350" r="40" fill="#ef4444" stroke="#dc2626" stroke-width="2"/>
+                                <text x="400" y="355" text-anchor="middle" class="text-white text-sm font-bold">Agent 5</text>
+                                <text x="400" y="410" text-anchor="middle" class="text-xs">Analyzer</text>
+                                
+                                <!-- Agent 6 -->
+                                <circle cx="600" cy="350" r="40" fill="#06b6d4" stroke="#0891b2" stroke-width="2"/>
+                                <text x="600" y="355" text-anchor="middle" class="text-white text-sm font-bold">Agent 6</text>
+                                <text x="600" y="410" text-anchor="middle" class="text-xs">Communicator</text>
+                                
+                                <!-- Communication Lines -->
+                                <line x1="240" y1="150" x2="360" y2="150" stroke="#374151" stroke-width="2"/>
+                                <line x1="440" y1="150" x2="560" y2="150" stroke="#374151" stroke-width="2"/>
+                                <line x1="200" y1="190" x2="200" y2="310" stroke="#374151" stroke-width="2"/>
+                                <line x1="400" y1="190" x2="400" y2="310" stroke="#374151" stroke-width="2"/>
+                                <line x1="600" y1="190" x2="600" y2="310" stroke="#374151" stroke-width="2"/>
+                                <line x1="240" y1="350" x2="360" y2="350" stroke="#374151" stroke-width="2"/>
+                                <line x1="440" y1="350" x2="560" y2="350" stroke="#374151" stroke-width="2"/>
+                                
+                                <!-- Communication Hub -->
+                                <rect x="350" y="250" width="100" height="60" fill="#f1f5f9" stroke="#475569" stroke-width="2" rx="10"/>
+                                <text x="400" y="280" text-anchor="middle" class="text-sm font-bold">Communication</text>
+                                <text x="400" y="295" text-anchor="middle" class="text-sm font-bold">Hub</text>
+                                
+                                <!-- Shared Memory -->
+                                <rect x="300" y="450" width="200" height="60" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="10"/>
+                                <text x="400" y="480" text-anchor="middle" class="text-sm font-bold">Shared Knowledge Base</text>
+                                <text x="400" y="495" text-anchor="middle" class="text-xs">Blackboard Architecture</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-center text-slate-600 text-sm">Multi-agent systems consist of multiple autonomous agents that communicate and coordinate to achieve common goals</p>
+                </div>
+
+                <!-- Agent Interaction Patterns -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Agent Interaction Patterns</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-handshake text-blue-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Cooperative</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Agents work together toward common goals, sharing information and resources.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Shared utility functions</li>
+                                <li>• Collaborative problem solving</li>
+                                <li>• Resource sharing</li>
+                                <li>• Joint planning</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-trophy text-green-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Competitive</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Agents have conflicting goals and compete for limited resources or outcomes.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Adversarial strategies</li>
+                                <li>• Resource competition</li>
+                                <li>• Game-theoretic approaches</li>
+                                <li>• Zero-sum games</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-balance-scale text-purple-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Negotiation-Based</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Agents negotiate to reach mutually beneficial agreements or compromises.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Contract net protocols</li>
+                                <li>• Auction mechanisms</li>
+                                <li>• Bargaining strategies</li>
+                                <li>• Mediation processes</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-users text-orange-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Team-Based</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Agents form teams with specialized roles to accomplish complex tasks.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Role specialization</li>
+                                <li>• Team formation protocols</li>
+                                <li>• Distributed task allocation</li>
+                                <li>• Coordination mechanisms</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coordination Mechanisms -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Coordination Mechanisms</h2>
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-slate-50 p-6 rounded-lg">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                    <i class="fas fa-comments text-blue-600 mr-2"></i>
+                                    Communication
+                                </h3>
+                                <ul class="space-y-2 text-slate-700 text-sm">
+                                    <li>• Direct message passing</li>
+                                    <li>• Broadcast communication</li>
+                                    <li>• Shared memory spaces</li>
+                                    <li>• Publish-subscribe patterns</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-50 p-6 rounded-lg">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                    <i class="fas fa-sitemap text-green-600 mr-2"></i>
+                                    Organization
+                                </h3>
+                                <ul class="space-y-2 text-slate-700 text-sm">
+                                    <li>• Hierarchical structures</li>
+                                    <li>• Peer-to-peer networks</li>
+                                    <li>• Market-based organizations</li>
+                                    <li>• Team formations</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-50 p-6 rounded-lg">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                    <i class="fas fa-cogs text-purple-600 mr-2"></i>
+                                    Synchronization
+                                </h3>
+                                <ul class="space-y-2 text-slate-700 text-sm">
+                                    <li>• Mutual exclusion protocols</li>
+                                    <li>• Deadlock prevention</li>
+                                    <li>• Consensus algorithms</li>
+                                    <li>• Temporal coordination</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-Agent Applications -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Real-World Applications</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg text-center">
+                            <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-traffic-light text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Traffic Management</h3>
+                            <p class="text-slate-700 text-sm">Coordinated traffic light control, route optimization, congestion management</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg text-center">
+                            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-robot text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Swarm Robotics</h3>
+                            <p class="text-slate-700 text-sm">Coordinated robot swarms for search, rescue, construction, exploration</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg text-center">
+                            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-network-wired text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Distributed Computing</h3>
+                            <p class="text-slate-700 text-sm">Load balancing, resource allocation, distributed problem solving</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg text-center">
+                            <div class="bg-orange-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-shopping-cart text-orange-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">E-commerce</h3>
+                            <p class="text-slate-700 text-sm">Automated negotiations, supply chain management, dynamic pricing</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg text-center">
+                            <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-gamepad text-red-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Gaming & Simulation</h3>
+                            <p class="text-slate-700 text-sm">AI opponents, virtual worlds, training simulations, social modeling</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg text-center">
+                            <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-chart-line text-indigo-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 mb-2">Financial Markets</h3>
+                            <p class="text-slate-700 text-sm">Trading algorithms, risk assessment, portfolio optimization</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-Agent System Challenges -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Challenges in Multi-Agent Systems</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Technical Challenges</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-red-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Communication Overhead</h4>
+                                    <p class="text-slate-700 text-sm">Managing message complexity and network bandwidth</p>
+                                </div>
+                                <div class="border-l-4 border-orange-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Scalability Issues</h4>
+                                    <p class="text-slate-700 text-sm">Performance degradation as number of agents increases</p>
+                                </div>
+                                <div class="border-l-4 border-yellow-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Consistency Maintenance</h4>
+                                    <p class="text-slate-700 text-sm">Ensuring shared knowledge remains consistent</p>
+                                </div>
+                                <div class="border-l-4 border-purple-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Fault Tolerance</h4>
+                                    <p class="text-slate-700 text-sm">Handling agent failures and network partitions</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Coordination Challenges</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-blue-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Emergent Behavior</h4>
+                                    <p class="text-slate-700 text-sm">Unpredictable system-level behaviors from local interactions</p>
+                                </div>
+                                <div class="border-l-4 border-green-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Conflict Resolution</h4>
+                                    <p class="text-slate-700 text-sm">Managing competing interests and resource conflicts</p>
+                                </div>
+                                <div class="border-l-4 border-indigo-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Consensus Building</h4>
+                                    <p class="text-slate-700 text-sm">Reaching agreement in distributed decision-making</p>
+                                </div>
+                                <div class="border-l-4 border-pink-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Security & Trust</h4>
+                                    <p class="text-slate-700 text-sm">Ensuring secure communication and trustworthy interactions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-Agent System Implementation -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Multi-Agent System Implementation</h2>
+                    <div class="code-block">
+                        <pre class="text-green-400 text-sm"><code># Multi-Agent System Framework
+import asyncio
+import random
+from typing import List, Dict, Any, Optional
+from dataclasses import dataclass
+from enum import Enum
+
+class MessageType(Enum):
+    REQUEST = "request"
+    INFORM = "inform"
+    PROPOSE = "propose"
+    ACCEPT = "accept"
+    REJECT = "reject"
+
+@dataclass
+class Message:
+    sender_id: str
+    receiver_id: str
+    message_type: MessageType
+    content: Dict[str, Any]
+    timestamp: float
+
+class MultiAgentEnvironment:
+    def __init__(self):
+        self.agents = {}
+        self.message_queue = asyncio.Queue()
+        self.global_state = {}
+        self.communication_log = []
+    
+    def add_agent(self, agent):
+        self.agents[agent.agent_id] = agent
+        agent.environment = self
+    
+    async def send_message(self, message: Message):
+        await self.message_queue.put(message)
+        self.communication_log.append(message)
+    
+    async def broadcast_message(self, sender_id: str, message_type: MessageType, content: Dict[str, Any]):
+        for agent_id in self.agents:
+            if agent_id != sender_id:
+                message = Message(
+                    sender_id=sender_id,
+                    receiver_id=agent_id,
+                    message_type=message_type,
+                    content=content,
+                    timestamp=asyncio.get_event_loop().time()
+                )
+                await self.send_message(message)
+    
+    async def process_messages(self):
+        while True:
+            try:
+                message = await asyncio.wait_for(self.message_queue.get(), timeout=1.0)
+                if message.receiver_id in self.agents:
+                    await self.agents[message.receiver_id].receive_message(message)
+            except asyncio.TimeoutError:
+                break
+
+class MultiAgentBase:
+    def __init__(self, agent_id: str, agent_type: str):
+        self.agent_id = agent_id
+        self.agent_type = agent_type
+        self.environment = None
+        self.local_state = {}
+        self.message_history = []
+        self.neighbors = []
+    
+    async def send_message(self, receiver_id: str, message_type: MessageType, content: Dict[str, Any]):
+        if self.environment:
+            message = Message(
+                sender_id=self.agent_id,
+                receiver_id=receiver_id,
+                message_type=message_type,
+                content=content,
+                timestamp=asyncio.get_event_loop().time()
+            )
+            await self.environment.send_message(message)
+    
+    async def broadcast(self, message_type: MessageType, content: Dict[str, Any]):
+        if self.environment:
+            await self.environment.broadcast_message(self.agent_id, message_type, content)
+    
+    async def receive_message(self, message: Message):
+        self.message_history.append(message)
+        await self.process_message(message)
+    
+    @abstractmethod
+    async def process_message(self, message: Message):
+        pass
+    
+    @abstractmethod
+    async def run(self):
+        pass
+
+class CoordinatorAgent(MultiAgentBase):
+    def __init__(self, agent_id: str):
+        super().__init__(agent_id, "coordinator")
+        self.tasks = []
+        self.agent_capabilities = {}
+    
+    async def process_message(self, message: Message):
+        if message.message_type == MessageType.INFORM:
+            if "capabilities" in message.content:
+                self.agent_capabilities[message.sender_id] = message.content["capabilities"]
+    
+    async def run(self):
+        while True:
+            # Periodically check for tasks to assign
+            if self.tasks:
+                task = self.tasks.pop(0)
+                suitable_agents = self.find_suitable_agents(task)
+                if suitable_agents:
+                    chosen_agent = random.choice(suitable_agents)
+                    await self.send_message(
+                        chosen_agent,
+                        MessageType.REQUEST,
+                        {"task": task, "deadline": "2 hours"}
+                    )
+            await asyncio.sleep(5)
+    
+    def find_suitable_agents(self, task: Dict[str, Any]) -> List[str]:
+        suitable = []
+        for agent_id, capabilities in self.agent_capabilities.items():
+            if task.get("required_skill") in capabilities.get("skills", []):
+                suitable.append(agent_id)
+        return suitable
+    
+    async def assign_task(self, task: Dict[str, Any]):
+        self.tasks.append(task)
+
+class WorkerAgent(MultiAgentBase):
+    def __init__(self, agent_id: str, skills: List[str]):
+        super().__init__(agent_id, "worker")
+        self.skills = skills
+        self.current_task = None
+        self.busy = False
+    
+    async def process_message(self, message: Message):
+        if message.message_type == MessageType.REQUEST:
+            if not self.busy:
+                task = message.content.get("task")
+                if task and task.get("required_skill") in self.skills:
+                    await self.send_message(
+                        message.sender_id,
+                        MessageType.PROPOSE,
+                        {"task_id": task.get("id"), "estimated_time": "1 hour"}
+                    )
+    
+    async def run(self):
+        # Register capabilities with coordinator
+        if self.environment:
+            coordinator = self.find_coordinator()
+            if coordinator:
+                await self.send_message(
+                    coordinator,
+                    MessageType.INFORM,
+                    {"capabilities": {"skills": self.skills, "status": "available"}}
+                )
+        
+        while True:
+            if self.current_task:
+                await self.execute_task(self.current_task)
+            await asyncio.sleep(1)
+    
+    def find_coordinator(self) -> Optional[str]:
+        for agent_id, agent in self.environment.agents.items():
+            if agent.agent_type == "coordinator":
+                return agent_id
+        return None
+    
+    async def execute_task(self, task: Dict[str, Any]):
+        self.busy = True
+        print(f"Agent {self.agent_id} executing task: {task.get('description', 'Unknown')}")
+        
+        # Simulate task execution
+        await asyncio.sleep(random.uniform(1, 3))
+        
+        print(f"Agent {self.agent_id} completed task")
+        self.current_task = None
+        self.busy = False
+
+class MonitorAgent(MultiAgentBase):
+    def __init__(self, agent_id: str):
+        super().__init__(agent_id, "monitor")
+        self.system_metrics = {}
+    
+    async def process_message(self, message: Message):
+        # Monitor system health and performance
+        self.system_metrics[message.sender_id] = {
+            "last_message": message.timestamp,
+            "message_type": message.message_type.value
+        }
+    
+    async def run(self):
+        while True:
+            # Analyze system performance
+            active_agents = len(self.system_metrics)
+            print(f"Monitor: {active_agents} agents active")
+            
+            # Check for failed agents
+            current_time = asyncio.get_event_loop().time()
+            for agent_id, metrics in self.system_metrics.items():
+                if current_time - metrics["last_message"] > 10:
+                    print(f"Monitor: Agent {agent_id} appears to be unresponsive")
+            
+            await asyncio.sleep(10)
+
+# Example MAS Implementation
+async def run_multi_agent_system():
+    environment = MultiAgentEnvironment()
+    
+    # Create agents
+    coordinator = CoordinatorAgent("coordinator_1")
+    worker1 = WorkerAgent("worker_1", ["data_processing", "analysis"])
+    worker2 = WorkerAgent("worker_2", ["visualization", "reporting"])
+    worker3 = WorkerAgent("worker_3", ["data_processing", "machine_learning"])
+    monitor = MonitorAgent("monitor_1")
+    
+    # Add agents to environment
+    environment.add_agent(coordinator)
+    environment.add_agent(worker1)
+    environment.add_agent(worker2)
+    environment.add_agent(worker3)
+    environment.add_agent(monitor)
+    
+    # Create tasks
+    tasks = [
+        {"id": 1, "description": "Process sensor data", "required_skill": "data_processing"},
+        {"id": 2, "description": "Generate report", "required_skill": "reporting"},
+        {"id": 3, "description": "Train ML model", "required_skill": "machine_learning"}
+    ]
+    
+    # Assign tasks
+    for task in tasks:
+        await coordinator.assign_task(task)
+    
+    # Run the system
+    tasks = [
+        coordinator.run(),
+        worker1.run(),
+        worker2.run(),
+        worker3.run(),
+        monitor.run(),
+        environment.process_messages()
+    ]
+    
+    await asyncio.gather(*tasks)
+
+# Run the example
+if __name__ == "__main__":
+    asyncio.run(run_multi_agent_system())</code></pre>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center">
+                        <a href="topic-agent-architecture.html" class="flex items-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: Agent Architecture
+                        </a>
+                        <div class="flex space-x-2">
+                            <button onclick="markComplete('multi-agent')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                                <i class="fas fa-check mr-2"></i>Mark Complete
+                            </button>
+                            <a href="topic-langchain-framework.html" class="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                                Next: LangChain Framework
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Agentic AI Knowledge Hub</h3>
+                <p class="text-slate-400 mb-6">Master the future of artificial intelligence</p>
+                <p class="text-slate-500 text-sm">© 2024 Agentic AI Knowledge Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate progress bar
+            anime({
+                targets: '.progress-bar',
+                width: '85%',
+                duration: 2000,
+                easing: 'easeOutQuart'
+            });
+
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.card-hover');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            translateY: [30, 0],
+                            opacity: [0, 1],
+                            duration: 800,
+                            easing: 'easeOutQuart'
+                        });
+                    }
+                });
+            });
+
+            cards.forEach(card => observer.observe(card));
+        });
+
+        // Mark topic as complete
+        function markComplete(topicId) {
+            localStorage.setItem(`topic_${topicId}_complete`, 'true');
+            
+            // Show success message
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Completed!';
+            button.classList.remove('bg-green-600', 'hover:bg-green-700');
+            button.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-500');
+                button.classList.add('bg-green-600', 'hover:bg-green-700');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

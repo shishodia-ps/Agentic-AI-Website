@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI Knowledge Hub - Comprehensive Learning Platform</title>
+    <meta name="description" content="Master Agentic AI from basics to advanced concepts. Interactive learning platform with comprehensive topic coverage and content management.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    
+    <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --sage-deep: #2D5A3D;
+            --charcoal-warm: #3A3A3A;
+            --cream-soft: #F8F6F0;
+            --copper-accent: #B87333;
+            --teal-muted: #4A7C7E;
+            --lavender-soft: #B8A9C9;
+            --gray-warm: #8B8680;
+            --success-green: #6B8E5A;
+            --warning-amber: #D4A574;
+            --error-coral: #C67B5C;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream-soft);
+            color: var(--charcoal-warm);
+            overflow-x: hidden;
+        }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Background Pattern */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+        }
+        
+        /* Navigation */
+        .nav-glass {
+            background: rgba(248, 246, 240, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--copper-accent);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--copper-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero-bg {
+            background: linear-gradient(135deg, var(--sage-deep) 0%, var(--teal-muted) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        /* Topic Cards */
+        .topic-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(45, 90, 61, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--copper-accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .topic-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(45, 90, 61, 0.15);
+        }
+        
+        .topic-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--sage-deep), var(--teal-muted));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .difficulty-beginner {
+            background: rgba(107, 142, 90, 0.1);
+            color: var(--success-green);
+        }
+        
+        .difficulty-intermediate {
+            background: rgba(212, 165, 116, 0.1);
+            color: var(--warning-amber);
+        }
+        
+        .difficulty-advanced {
+            background: rgba(198, 123, 92, 0.1);
+            color: var(--error-coral);
+        }
+        
+        /* Search Interface */
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(45, 90, 61, 0.1);
+            border-radius: 50px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--copper-accent);
+            box-shadow: 0 0 0 4px rgba(184, 115, 51, 0.1);
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 10;
+            display: none;
+        }
+        
+        .search-result-item {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .search-result-item:hover {
+            background: rgba(184, 115, 51, 0.05);
+        }
+        
+        /* Progress Indicators */
+        .progress-ring {
+            width: 120px;
+            height: 120px;
+            position: relative;
+        }
+        
+        .progress-ring svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            fill: none;
+            stroke-width: 8;
+            stroke-linecap: round;
+        }
+        
+        .progress-ring-bg {
+            stroke: rgba(45, 90, 61, 0.1);
+        }
+        
+        .progress-ring-progress {
+            stroke: var(--copper-accent);
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 1s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--sage-deep);
+        }
+        
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 64px;
+            height: 64px;
+            background: var(--copper-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(184, 115, 51, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px rgba(184, 115, 51, 0.4);
+        }
+        
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .topic-card {
+                padding: 1.5rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .fade-in.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .stagger-item.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Pattern -->
+    <div class="bg-pattern" id="bgPattern"></div>
+    
+    <!-- Navigation -->
+    <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-xl font-bold text-sage-deep">Agentic AI Hub</h1>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="#" class="nav-link text-charcoal-warm hover:text-copper-accent">Home</a>
+                        <a href="topics.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Topics</a>
+                        <a href="manage.html" class="nav-link text-charcoal-warm hover:text-copper-accent">Manage</a>
+                        <a href="about.html" class="nav-link text-charcoal-warm hover:text-copper-accent">About</a>
+                    </div>
+                </div>
+                
+                <div class="search-container hidden md:block">
+                    <input type="text" class="search-input" placeholder="Search topics..." id="searchInput">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+                
+                <button class="md:hidden text-charcoal-warm" id="mobileMenuBtn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="hero-content max-w-7xl mx-auto px-6 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="hero-title text-white mb-6">
+                        <span id="typed-text"></span>
+                    </h1>
+                    <p class="hero-subtitle text-white mb-8">
+                        Master Agentic AI from fundamentals to advanced concepts. Explore comprehensive topics, 
+                        interactive learning paths, and cutting-edge frameworks in one unified platform.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-copper-accent hover:bg-opacity-90 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105" onclick="window.location.href='topics.html'">
+                            Explore Topics
+                        </button>
+                        <button class="border-2 border-white text-white hover:bg-white hover:text-sage-deep px-8 py-3 rounded-full font-semibold transition-all duration-300" onclick="window.location.href='manage.html'">
+                            Manage Content
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <img src="resources/hero-ai-network.jpg" alt="AI Network Visualization" class="w-full h-auto rounded-2xl shadow-2xl">
+                    <div class="absolute inset-0 bg-gradient-to-t from-sage-deep/20 to-transparent rounded-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Statistics Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div class="fade-in">
+                    <div class="progress-ring mx-auto mb-4">
+                        <svg>
+                            <circle class="progress-ring-circle progress-ring-bg" cx="60" cy="60" r="45"></circle>
+                            <circle class="progress-ring-circle progress-ring-progress" cx="60" cy="60" r="45" id="topicsProgress"></circle>
+                        </svg>
+                        <div class="progress-text" id="topicsCount">0</div>
+                    </div>
+                    <h3 class="text-lg font-semibold text-charcoal-warm mb-2">Total Topics</h3>
+                    <p class="text-gray-warm">Comprehensive AI concepts covered</p>
+                </div>
+                
+                <div class="fade-in">
+                    <div class="progress-ring mx-auto mb-4">
+                        <svg>
+                            <circle class="progress-ring-circle progress-ring-bg" cx="60" cy="60" r="45"></circle>
+                            <circle class="progress-ring-circle progress-ring-progress" cx="60" cy="60" r="45" id="categoriesProgress"></circle>
+                        </svg>
+                        <div class="progress-text" id="categoriesCount">0</div>
+                    </div>
+                    <h3 class="text-lg font-semibold text-charcoal-warm mb-2">Categories</h3>
+                    <p class="text-gray-warm">Organized learning paths</p>
+                </div>
+                
+                <div class="fade-in">
+                    <div class="progress-ring mx-auto mb-4">
+                        <svg>
+                            <circle class="progress-ring-circle progress-ring-bg" cx="60" cy="60" r="45"></circle>
+                            <circle class="progress-ring-circle progress-ring-progress" cx="60" cy="60" r="45" id="frameworksProgress"></circle>
+                        </svg>
+                        <div class="progress-text" id="frameworksCount">0</div>
+                    </div>
+                    <h3 class="text-lg font-semibold text-charcoal-warm mb-2">Frameworks</h3>
+                    <p class="text-gray-warm">Tools and platforms covered</p>
+                </div>
+                
+                <div class="fade-in">
+                    <div class="progress-ring mx-auto mb-4">
+                        <svg>
+                            <circle class="progress-ring-circle progress-ring-bg" cx="60" cy="60" r="45"></circle>
+                            <circle class="progress-ring-circle progress-ring-progress" cx="60" cy="60" r="45" id="advancedProgress"></circle>
+                        </svg>
+                        <div class="progress-text" id="advancedCount">0</div>
+                    </div>
+                    <h3 class="text-lg font-semibold text-charcoal-warm mb-2">Advanced</h3>
+                    <p class="text-gray-warm">Expert-level content</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Topic Categories -->
+    <section class="py-20 bg-cream-soft">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-charcoal-warm mb-4">Explore AI Topics</h2>
+                <p class="text-xl text-gray-warm max-w-3xl mx-auto">
+                    Dive into comprehensive coverage of Agentic AI concepts, from fundamental principles 
+                    to advanced implementation strategies and cutting-edge frameworks.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="topicGrid">
+                <!-- Topic cards will be dynamically generated -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Topics Carousel -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-charcoal-warm mb-4">Featured Topics</h2>
+                <p class="text-xl text-gray-warm">Essential concepts every AI practitioner should know</p>
+            </div>
+            
+            <div class="relative">
+                <div class="flex space-x-6 overflow-x-auto pb-4" id="featuredCarousel">
+                    <!-- Featured topic cards will be dynamically generated -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Getting Started -->
+    <section class="py-20 bg-sage-deep text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h2 class="text-4xl font-bold mb-6">Start Your AI Journey</h2>
+                    <p class="text-xl mb-8 opacity-90">
+                        Whether you're a beginner or an experienced developer, our structured learning 
+                        paths will guide you through the complex world of Agentic AI.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-copper-accent rounded-full flex items-center justify-center font-bold text-sage-deep">1</div>
+                            <div>
+                                <h3 class="font-semibold mb-2">Choose Your Path</h3>
+                                <p class="opacity-80">Select from beginner, intermediate, or advanced learning tracks</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-copper-accent rounded-full flex items-center justify-center font-bold text-sage-deep">2</div>
+                            <div>
+                                <h3 class="font-semibold mb-2">Explore Topics</h3>
+                                <p class="opacity-80">Dive deep into comprehensive AI concepts and frameworks</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-copper-accent rounded-full flex items-center justify-center font-bold text-sage-deep">3</div>
+                            <div>
+                                <h3 class="font-semibold mb-2">Apply Knowledge</h3>
+                                <p class="opacity-80">Build projects and contribute to the AI community</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="mt-8 bg-copper-accent hover:bg-opacity-90 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105" onclick="window.location.href='topics.html'">
+                        Begin Learning
+                    </button>
+                </div>
+                
+                <div class="fade-in">
+                    <img src="resources/agent-architecture.png" alt="AI Agent Architecture" class="w-full h-auto rounded-2xl shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Floating Action Button -->
+    <button class="fab" id="addTopicBtn" title="Add New Topic">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+    </button>
+    
+    <!-- Add Topic Modal -->
+    <div class="modal" id="addTopicModal">
+        <div class="modal-content">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-charcoal-warm">Add New Topic</h3>
+                <button class="text-gray-warm hover:text-charcoal-warm" id="closeModal">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <form id="addTopicForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-charcoal-warm mb-2">Topic Title</label>
+                    <input type="text" id="topicTitle" class="w-full p-3 border border-gray-200 rounded-lg focus:border-copper-accent focus:ring-2 focus:ring-copper-accent/20" placeholder="Enter topic title" required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-charcoal-warm mb-2">Category</label>
+                    <select id="topicCategory" class="w-full p-3 border border-gray-200 rounded-lg focus:border-copper-accent focus:ring-2 focus:ring-copper-accent/20" required>
+                        <option value="">Select Category</option>
+                        <option value="fundamentals">AI Fundamentals</option>
+                        <option value="architecture">Agent Architecture</option>
+                        <option value="frameworks">Frameworks & Tools</option>
+                        <option value="implementation">Implementation</option>
+                        <option value="advanced">Advanced Concepts</option>
+                        <option value="applications">Industry Applications</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-charcoal-warm mb-2">Difficulty Level</label>
+                    <select id="topicDifficulty" class="w-full p-3 border border-gray-200 rounded-lg focus:border-copper-accent focus:ring-2 focus:ring-copper-accent/20" required>
+                        <option value="">Select Difficulty</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-charcoal-warm mb-2">Description</label>
+                    <textarea id="topicDescription" rows="4" class="w-full p-3 border border-gray-200 rounded-lg focus:border-copper-accent focus:ring-2 focus:ring-copper-accent/20" placeholder="Brief description of the topic" required></textarea>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-charcoal-warm mb-2">Key Concepts (comma-separated)</label>
+                    <input type="text" id="topicConcepts" class="w-full p-3 border border-gray-200 rounded-lg focus:border-copper-accent focus:ring-2 focus:ring-copper-accent/20" placeholder="e.g., neural networks, machine learning, deep learning">
+                </div>
+                
+                <div class="flex space-x-4 pt-4">
+                    <button type="submit" class="flex-1 bg-copper-accent hover:bg-opacity-90 text-white py-3 rounded-lg font-semibold transition-all duration-300">
+                        Add Topic
+                    </button>
+                    <button type="button" class="flex-1 border border-gray-200 text-charcoal-warm hover:bg-gray-50 py-3 rounded-lg font-semibold transition-all duration-300" id="cancelAdd">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="main-fixed.js"></script>
+</body>
+</html>

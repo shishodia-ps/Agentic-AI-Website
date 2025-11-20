@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security & Privacy - Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            overflow-x: hidden;
+        }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        .hero-overlay { 
+            background: linear-gradient(135deg, rgba(220, 38, 127, 0.95) 0%, rgba(239, 68, 68, 0.95) 100%);
+        }
+        .topic-card { 
+            transition: all 0.3s ease; 
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .topic-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 10px;
+            height: 8px;
+            transition: width 0.3s ease;
+        }
+        .code-block {
+            background: #1a202c;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .security-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #dc2626;
+            transition: all 0.3s ease;
+        }
+        .security-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        .threat-level {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .level-critical { background: #fecaca; color: #dc2626; }
+        .level-high { background: #fed7aa; color: #ea580c; }
+        .level-medium { background: #fef3c7; color: #d97706; }
+        .level-low { background: #bbf7d0; color: #059669; }
+        .attack-vector {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid #f59e0b;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .privacy-principle {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border: 1px solid #3b82f6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            background-color: rgba(220, 38, 127, 0.1);
+            transform: translateX(4px);
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .security-checklist {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            border-left: 3px solid #10b981;
+        }
+        .checklist-item input[type="checkbox"] {
+            margin-right: 0.75rem;
+            transform: scale(1.2);
+        }
+        .compliance-framework {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid #e5e7eb;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-brain text-2xl text-indigo-600 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-900">Agentic AI Hub</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="topics.html" class="nav-link text-gray-700 hover:text-indigo-600">Topics</a>
+                    <a href="about.html" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
+                    <a href="manage.html" class="nav-link text-gray-700 hover:text-indigo-600">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative h-64 hero-overlay flex items-center justify-center">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="relative z-10 text-center text-white">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 stagger-item">Security & Privacy</h1>
+            <p class="text-xl md:text-2xl stagger-item">Protecting AI systems and user data</p>
+        </div>
+        <div class="floating-element absolute top-10 right-10 text-white opacity-20">
+            <i class="fas fa-shield-alt text-6xl"></i>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Introduction -->
+        <div class="mb-12 stagger-item">
+            <div class="highlight-box">
+                <h2 class="text-2xl font-bold mb-4">Why Security & Privacy Matter in AI</h2>
+                <p class="text-lg leading-relaxed">
+                    As AI systems become more powerful and handle increasingly sensitive data, ensuring their security 
+                    and protecting user privacy becomes paramount. AI systems face unique security challenges including 
+                    adversarial attacks, data poisoning, model inversion, and privacy breaches that require specialized 
+                    protection mechanisms.
+                </p>
+            </div>
+        </div>
+
+        <!-- Security Threats -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Common AI Security Threats</h2>
+            
+            <div class="security-grid">
+                <div class="security-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold">Adversarial Attacks</h3>
+                        <span class="threat-level level-critical">Critical</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Malicious inputs designed to fool AI models into making incorrect predictions or classifications.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Fast Gradient Sign Method (FGSM)</li>
+                        <li>• Projected Gradient Descent (PGD)</li>
+                        <li>• Carlini & Wagner attacks</li>
+                        <li>• Universal adversarial perturbations</li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                        <div class="text-red-800 text-sm font-semibold">Impact:</div>
+                        <div class="text-red-700 text-sm">Model manipulation, incorrect decisions, security bypass</div>
+                    </div>
+                </div>
+
+                <div class="security-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold">Data Poisoning</h3>
+                        <span class="threat-level level-high">High</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Injecting malicious or manipulated data into training datasets to corrupt model behavior.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Backdoor attacks</li>
+                        <li>• Label flipping attacks</li>
+                        <li>• Gradient descent attacks</li>
+                        <li>• Clean-label poisoning</li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                        <div class="text-orange-800 text-sm font-semibold">Impact:</div>
+                        <div class="text-orange-700 text-sm">Model corruption, biased predictions, backdoor triggers</div>
+                    </div>
+                </div>
+
+                <div class="security-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold">Model Inversion</h3>
+                        <span class="threat-level level-high">High</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Extracting sensitive training data from model outputs or parameters through reverse engineering.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Membership inference attacks</li>
+                        <li>• Model extraction attacks</li>
+                        <li>• Property inference attacks</li>
+                        <li>• Gradient leakage attacks</li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                        <div class="text-orange-800 text-sm font-semibold">Impact:</div>
+                        <div class="text-orange-700 text-sm">Data privacy breach, intellectual property theft</div>
+                    </div>
+                </div>
+
+                <div class="security-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold">Evasion Attacks</h3>
+                        <span class="threat-level level-medium">Medium</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Crafting inputs that are misclassified by the model while appearing normal to humans.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Physical adversarial examples</li>
+                        <li>• Semantic adversarial examples</li>
+                        <li>• Robustness to transformations</li>
+                        <li>• Stealthy adversarial attacks</li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <div class="text-yellow-800 text-sm font-semibold">Impact:</div>
+                        <div class="text-yellow-700 text-sm">System evasion, incorrect classifications</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attack Vectors -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Common Attack Vectors</h2>
+            
+            <div class="attack-vector">
+                <h3 class="text-xl font-bold mb-4 text-orange-800">
+                    <i class="fas fa-bug mr-2"></i>Input Manipulation Attacks
+                </h3>
+                <p class="text-gray-700 mb-4">
+                    Attackers manipulate input data to exploit vulnerabilities in AI models and systems.
+                </p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-red-800 mb-2">Attack Methods</h4>
+                        <ul class="text-red-700 text-sm space-y-1">
+                            <li>• Adding imperceptible noise</li>
+                            <li>• Modifying pixel values</li>
+                            <li>• Changing text semantics</li>
+                            <li>• Crafting malicious queries</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">Defense Strategies</h4>
+                        <ul class="text-green-700 text-sm space-y-1">
+                            <li>• Input validation and sanitization</li>
+                            <li>• Adversarial training</li>
+                            <li>• Defensive distillation</li>
+                            <li>• Randomized smoothing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="attack-vector">
+                <h3 class="text-xl font-bold mb-4 text-orange-800">
+                    <i class="fas fa-database mr-2"></i>Data Pipeline Attacks
+                </h3>
+                <p class="text-gray-700 mb-4">
+                    Compromising the data pipeline to inject malicious data or corrupt training processes.
+                </p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-red-800 mb-2">Attack Methods</h4>
+                        <ul class="text-red-700 text-sm space-y-1">
+                            <li>• Poisoning training data</li>
+                            <li>• Manipulating data labels</li>
+                            <li>• Injecting backdoor triggers</li>
+                            <li>• Compromising data sources</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">Defense Strategies</h4>
+                        <ul class="text-green-700 text-sm space-y-1">
+                            <li>• Data provenance tracking</li>
+                            <li>• Robust aggregation methods</li>
+                            <li>• Outlier detection algorithms</li>
+                            <li>• Secure data pipelines</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Principles -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Privacy Protection Principles</h2>
+            
+            <div class="privacy-principle">
+                <h3 class="text-xl font-bold mb-4 text-blue-800">
+                    <i class="fas fa-user-shield mr-2"></i>Privacy by Design
+                </h3>
+                <p class="text-gray-700 mb-4">
+                    Integrate privacy considerations into every stage of AI system development and deployment.
+                </p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-semibold text-blue-800 mb-3">Core Principles</h4>
+                        <ul class="text-blue-700 text-sm space-y-2">
+                            <li>• Proactive not reactive measures</li>
+                            <li>• Privacy as the default setting</li>
+                            <li>• Privacy embedded into design</li>
+                            <li>• Full functionality and positive-sum</li>
+                            <li>• End-to-end security lifecycle protection</li>
+                            <li>• Visibility and transparency</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-blue-800 mb-3">Implementation</h4>
+                        <ul class="text-blue-700 text-sm space-y-2">
+                            <li>• Data minimization</li>
+                            <li>• Purpose limitation</li>
+                            <li>• Consent management</li>
+                            <li>• Access controls</li>
+                            <li>• Encryption at rest and in transit</li>
+                            <li>• Regular privacy audits</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy-Preserving Techniques -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Privacy-Preserving Techniques</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-green-700">
+                        <i class="fas fa-lock mr-2"></i>Differential Privacy
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        Add carefully calibrated noise to query results to protect individual privacy while maintaining statistical utility.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-green-50 rounded-lg">
+                            <div class="font-semibold text-green-800 text-sm">Epsilon (ε) Parameter</div>
+                            <div class="text-green-700 text-xs">Controls privacy vs. utility trade-off</div>
+                        </div>
+                        <div class="p-3 bg-green-50 rounded-lg">
+                            <div class="font-semibold text-green-800 text-sm">Delta (δ) Parameter</div>
+                            <div class="text-green-700 text-xs">Probability of privacy breach</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-purple-700">
+                        <i class="fas fa-random mr-2"></i>Federated Learning
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        Train models across decentralized devices without centralizing sensitive data.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-purple-50 rounded-lg">
+                            <div class="font-semibold text-purple-800 text-sm">Local Training</div>
+                            <div class="text-purple-700 text-xs">Models trained on local data</div>
+                        </div>
+                        <div class="p-3 bg-purple-50 rounded-lg">
+                            <div class="font-semibold text-purple-800 text-sm">Gradient Aggregation</div>
+                            <div class="text-purple-700 text-xs">Only model updates shared</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-blue-700">
+                        <i class="fas fa-mask mr-2"></i>Homomorphic Encryption
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        Perform computations on encrypted data without decrypting it first.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-blue-50 rounded-lg">
+                            <div class="font-semibold text-blue-800 text-sm">Partially Homomorphic</div>
+                            <div class="text-blue-700 text-xs">Supports one operation type</div>
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded-lg">
+                            <div class="font-semibold text-blue-800 text-sm">Fully Homomorphic</div>
+                            <div class="text-blue-700 text-xs">Supports any computation</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="topic-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-orange-700">
+                        <i class="fas fa-user-secret mr-2"></i>Secure Multi-Party Computation
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        Multiple parties jointly compute a function over their inputs while keeping them private.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-orange-50 rounded-lg">
+                            <div class="font-semibold text-orange-800 text-sm">Secret Sharing</div>
+                            <div class="text-orange-700 text-xs">Data split among parties</div>
+                        </div>
+                        <div class="p-3 bg-orange-50 rounded-lg">
+                            <div class="font-semibold text-orange-800 text-sm">Oblivious Transfer</div>
+                            <div class="text-orange-700 text-xs">Secure information exchange</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Implementation Checklist -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">AI Security Implementation Checklist</h2>
+            
+            <div class="security-checklist">
+                <p class="text-gray-700 mb-6">Use this checklist to ensure your AI system meets security standards:</p>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-bold mb-3 text-red-700">Data Protection</h4>
+                        <div class="space-y-2">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="data1">
+                                <label for="data1" class="text-gray-800 text-sm">Encrypt data at rest and in transit</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="data2">
+                                <label for="data2" class="text-gray-800 text-sm">Implement access controls and authentication</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="data3">
+                                <label for="data3" class="text-gray-800 text-sm">Regular data backup and recovery procedures</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="data4">
+                                <label for="data4" class="text-gray-800 text-sm">Data minimization and retention policies</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-3 text-blue-700">Model Security</h4>
+                        <div class="space-y-2">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="model1">
+                                <label for="model1" class="text-gray-800 text-sm">Adversarial training implemented</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="model2">
+                                <label for="model2" class="text-gray-800 text-sm">Input validation and sanitization</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="model3">
+                                <label for="model3" class="text-gray-800 text-sm">Model versioning and integrity checks</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="model4">
+                                <label for="model4" class="text-gray-800 text-sm">Regular security audits and testing</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-3 text-green-700">Infrastructure</h4>
+                        <div class="space-y-2">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="infra1">
+                                <label for="infra1" class="text-gray-800 text-sm">Network segmentation and firewalls</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="infra2">
+                                <label for="infra2" class="text-gray-800 text-sm">Secure containerization and orchestration</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="infra3">
+                                <label for="infra3" class="text-gray-800 text-sm">Monitoring and logging systems</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="infra4">
+                                <label for="infra4" class="text-gray-800 text-sm">Incident response procedures</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-3 text-purple-700">Privacy</h4>
+                        <div class="space-y-2">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="privacy1">
+                                <label for="privacy1" class="text-gray-800 text-sm">Privacy impact assessments conducted</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="privacy2">
+                                <label for="privacy2" class="text-gray-800 text-sm">Consent mechanisms implemented</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="privacy3">
+                                <label for="privacy3" class="text-gray-800 text-sm">Anonymization and pseudonymization</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="privacy4">
+                                <label for="privacy4" class="text-gray-800 text-sm">Right to deletion and portability</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+                        <p class="text-blue-800 text-sm">
+                            <strong>Security Score:</strong> <span id="securityScore">0</span>/16 items completed
+                        </p>
+                    </div>
+                    <div class="mt-2 bg-blue-200 rounded-full h-2">
+                        <div id="securityProgress" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compliance Frameworks -->
+        <div class="mb-12 stagger-item">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Compliance & Regulatory Frameworks</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="compliance-framework">
+                    <h3 class="text-lg font-bold mb-3 text-blue-700">
+                        <i class="fas fa-globe mr-2"></i>Global Standards
+                    </h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li><strong>GDPR:</strong> General Data Protection Regulation (EU)</li>
+                        <li><strong>CCPA:</strong> California Consumer Privacy Act</li>
+                        <li><strong>PIPEDA:</strong> Personal Information Protection Act (Canada)</li>
+                        <li><strong>LGPD:</strong> Lei Geral de Proteção de Dados (Brazil)</li>
+                    </ul>
+                </div>
+                
+                <div class="compliance-framework">
+                    <h3 class="text-lg font-bold mb-3 text-green-700">
+                        <i class="fas fa-industry mr-2"></i>Industry Standards
+                    </h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li><strong>ISO 27001:</strong> Information Security Management</li>
+                        <li><strong>SOC 2:</strong> Service Organization Control 2</li>
+                        <li><strong>NIST AI RMF:</strong> AI Risk Management Framework</li>
+                        <li><strong>IEEE AI Ethics:</strong> AI Ethics Standards</li>
+                    </ul>
+                </div>
+                
+                <div class="compliance-framework">
+                    <h3 class="text-lg font-bold mb-3 text-purple-700">
+                        <i class="fas fa-shield-alt mr-2"></i>Security Standards
+                    </h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li><strong>OWASP AI:</strong> AI Security Top 10</li>
+                        <li><strong>MITRE ATLAS:</strong> Adversarial Threat Landscape</li>
+                        <li><strong>ENISA AI:</strong> EU Cybersecurity Guidelines</li>
+                        <li><strong>NIST Cybersecurity:</strong> Cybersecurity Framework</li>
+                    </ul>
+                </div>
+                
+                <div class="compliance-framework">
+                    <h3 class="text-lg font-bold mb-3 text-orange-700">
+                        <i class="fas fa-balance-scale mr-2"></i>Legal Requirements
+                    </h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li><strong>AI Act (EU):</strong> AI Regulation Framework</li>
+                        <li><strong>Algorithmic Accountability:</strong> Transparency requirements</li>
+                        <li><strong>Data Breach Notification:</strong> Incident reporting</li>
+                        <li><strong>Cross-border Transfers:</strong> Data localization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-12 stagger-item">
+            <a href="topic-scaling-performance.html" class="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Previous: Scaling & Performance
+            </a>
+            <div class="flex space-x-4">
+                <a href="topics.html" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    All Topics
+                </a>
+            </div>
+            <a href="topic-future-trends.html" class="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors">
+                Next: Future Trends
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 Agentic AI Knowledge Hub. Empowering the future of artificial intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize animations
+        anime({
+            targets: '.stagger-item',
+            opacity: [0, 1],
+            translateY: [30, 0],
+            delay: anime.stagger(100),
+            duration: 800,
+            easing: 'easeOutQuart'
+        });
+
+        // Security checklist functionality
+        const securityCheckboxes = document.querySelectorAll('.security-checklist input[type="checkbox"]');
+        const securityScore = document.getElementById('securityScore');
+        const securityProgress = document.getElementById('securityProgress');
+
+        function updateSecurityProgress() {
+            const checkedCount = document.querySelectorAll('.security-checklist input[type="checkbox"]:checked').length;
+            const total = securityCheckboxes.length;
+            const percentage = (checkedCount / total) * 100;
+            
+            securityScore.textContent = checkedCount;
+            securityProgress.style.width = percentage + '%';
+        }
+
+        securityCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateSecurityProgress);
+        });
+    </script>
+</body>
+</html>

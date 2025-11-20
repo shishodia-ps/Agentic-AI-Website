@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vector Databases - AI Engineering Knowledge Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'deep-blue': '#1e3a8a',
+                        'soft-gray': '#f8fafc',
+                        'accent-blue': '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .code-block { 
+            background: #1a1a1a; 
+            border-radius: 8px; 
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .code-header { 
+            background: #2d2d2d; 
+            padding: 0.75rem 1rem; 
+            display: flex; 
+            justify-content: between; 
+            align-items: center;
+            border-bottom: 1px solid #404040;
+        }
+        .copy-btn { 
+            background: #4a5568; 
+            color: white; 
+            border: none; 
+            padding: 0.25rem 0.75rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover { background: #718096; }
+        .progress-bar { 
+            width: 100%; 
+            height: 4px; 
+            background: #e2e8f0; 
+            border-radius: 2px; 
+            overflow: hidden;
+        }
+        .progress-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, #3b82f6, #1e40af); 
+            transition: width 0.3s ease;
+        }
+        .database-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .database-card:hover {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-soft-gray font-sans">
+    <div class="min-h-screen flex">
+        <!-- Sidebar Navigation -->
+        <div class="w-80 bg-white shadow-lg border-r border-gray-200 flex flex-col">
+            <!-- Sidebar Header -->
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-brain text-2xl text-deep-blue mr-3"></i>
+                    <h1 class="text-xl font-bold text-gray-800">AI Engineering Hub</h1>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="sidebarSearch" 
+                        placeholder="Search topics..." 
+                        class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-blue focus:border-transparent"
+                    >
+                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Navigation Content -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <!-- Modern AI-Engineering Stack Section -->
+                <div class="sidebar-section rounded-lg mb-4">
+                    <div class="section-header p-4 bg-blue-50 rounded-lg" onclick="toggleSection('modern-stack')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-layer-group text-deep-blue mr-3"></i>
+                                <span class="font-semibold text-gray-800">Modern AI-Engineering Stack</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500 transition-transform" id="modern-stack-icon"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-1 ml-6">Core architecture components</p>
+                    </div>
+                    <div class="section-content" id="modern-stack-content">
+                        <div class="p-2">
+                            <a href="topic-ai-stack-overview.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-sitemap text-blue-500 mr-2"></i>AI Engineering Stack Overview
+                            </a>
+                            <a href="topic-llm-foundations.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700">
+                                <i class="fas fa-brain text-green-500 mr-2"></i>LLM Foundations
+                            </a>
+                            <a href="topic-vector-databases.html" class="topic-item block p-3 rounded-lg text-sm text-gray-700 bg-blue-100 border-l-4 border-deep-blue">
+                                <i class="fas fa-database text-purple-500 mr-2"></i>Vector Databases
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto">
+            <!-- Header -->
+            <div class="bg-white shadow-sm border-b border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-800">Vector Databases</h1>
+                        <p class="text-gray-600 mt-2">Specialized databases for high-dimensional vector storage and retrieval</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-right">
+                            <div class="text-sm text-gray-500">Progress</div>
+                            <div class="text-lg font-semibold text-deep-blue">92%</div>
+                        </div>
+                        <div class="progress-bar w-32">
+                            <div class="progress-fill" style="width: 92%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Introduction -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                            <i class="fas fa-database text-deep-blue mr-3"></i>
+                            Understanding Vector Databases
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Vector databases are specialized database systems designed to efficiently store, manage, and retrieve 
+                            high-dimensional vector embeddings. These embeddings represent complex data such as text, images, 
+                            audio, and other modalities in a numerical format that machines can process and understand.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Unlike traditional databases that operate on structured data with exact matching, vector databases 
+                            excel at similarity search and nearest neighbor queries. This makes them essential components in 
+                            modern AI applications, particularly in retrieval-augmented generation (RAG), recommendation systems, 
+                            and semantic search implementations.
+                        </p>
+
+                        <!-- Vector Database Architecture -->
+                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Vector Database Architecture</h3>
+                            <div id="vector-architecture" style="height: 400px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Core Concepts -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-lightbulb text-deep-blue mr-3"></i>
+                            Core Concepts & Principles
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <!-- Vector Embeddings -->
+                            <div class="database-card bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-vector-square text-2xl text-blue-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Vector Embeddings</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Numerical representations of data in high-dimensional space where semantic similarity 
+                                    corresponds to geometric proximity.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>High-dimensional vectors (100-1536 dimensions)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Semantic meaning preservation</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Distance metrics (cosine, Euclidean)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Embedding models (BERT, CLIP)</li>
+                                </ul>
+                            </div>
+
+                            <!-- Similarity Search -->
+                            <div class="database-card bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-search text-2xl text-green-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Similarity Search</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Finding the most similar vectors to a query vector using various distance metrics 
+                                    and approximate nearest neighbor algorithms.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>k-Nearest Neighbors (k-NN)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Approximate Nearest Neighbor (ANN)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Cosine similarity</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Euclidean distance</li>
+                                </ul>
+                            </div>
+
+                            <!-- Indexing Strategies -->
+                            <div class="database-card bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-sitemap text-2xl text-purple-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Indexing Strategies</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Efficient data structures and algorithms for fast vector search, including 
+                                    tree-based, graph-based, and quantization methods.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>HNSW (Hierarchical Navigable Small World)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>IVF (Inverted File Index)</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Product Quantization</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>LSH (Locality-Sensitive Hashing)</li>
+                                </ul>
+                            </div>
+
+                            <!-- Scalability -->
+                            <div class="database-card bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-expand-arrows-alt text-2xl text-orange-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Scalability</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Handling billions of vectors efficiently through distributed computing, 
+                                    sharding, and horizontal scaling strategies.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Horizontal scaling</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Data sharding</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Load balancing</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Distributed search</li>
+                                </ul>
+                            </div>
+
+                            <!-- Real-time Updates -->
+                            <div class="database-card bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-clock text-2xl text-red-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Real-time Updates</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Dynamic insertion, deletion, and updating of vectors while maintaining 
+                                    search performance and index consistency.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Incremental indexing</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Online updates</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Concurrent operations</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Index rebuilding</li>
+                                </ul>
+                            </div>
+
+                            <!-- Metadata Filtering -->
+                            <div class="database-card bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-filter text-2xl text-gray-600 mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-gray-800">Metadata Filtering</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Combining vector similarity search with traditional metadata filters 
+                                    for more precise and context-aware retrieval.
+                                </p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Pre-filtering</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Post-filtering</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Hybrid search</li>
+                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Attribute-based filtering</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vector Database Comparison -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-balance-scale text-deep-blue mr-3"></i>
+                            Popular Vector Databases Comparison
+                        </h2>
+                        
+                        <div class="overflow-x-auto mb-6">
+                            <table class="w-full border-collapse border border-gray-300">
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Database</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Type</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Index Type</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Max Dimensions</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Deployment</th>
+                                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-800">Best For</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">Pinecone</td>
+                                        <td class="border border-gray-300 px-4 py-3">Managed Service</td>
+                                        <td class="border border-gray-300 px-4 py-3">HNSW</td>
+                                        <td class="border border-gray-300 px-4 py-3">20,000</td>
+                                        <td class="border border-gray-300 px-4 py-3">Cloud</td>
+                                        <td class="border border-gray-300 px-4 py-3">Enterprise RAG</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">Weaviate</td>
+                                        <td class="border border-gray-300 px-4 py-3">Open Source</td>
+                                        <td class="border border-gray-300 px-4 py-3">HNSW</td>
+                                        <td class="border border-gray-300 px-4 py-3">65,535</td>
+                                        <td class="border border-gray-300 px-4 py-3">Self-hosted/Cloud</td>
+                                        <td class="border border-gray-300 px-4 py-3">Graph-based search</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">Chroma</td>
+                                        <td class="border border-gray-300 px-4 py-3">Open Source</td>
+                                        <td class="border border-gray-300 px-4 py-3">HNSW</td>
+                                        <td class="border border-gray-300 px-4 py-3">Unlimited</td>
+                                        <td class="border border-gray-300 px-4 py-3">Local/Cloud</td>
+                                        <td class="border border-gray-300 px-4 py-3">Rapid prototyping</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">Milvus</td>
+                                        <td class="border border-gray-300 px-4 py-3">Open Source</td>
+                                        <td class="border border-gray-300 px-4 py-3">Multiple</td>
+                                        <td class="border border-gray-300 px-4 py-3">32,768</td>
+                                        <td class="border border-gray-300 px-4 py-3">Distributed</td>
+                                        <td class="border border-gray-300 px-4 py-3">Large-scale deployment</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">Qdrant</td>
+                                        <td class="border border-gray-300 px-4 py-3">Open Source</td>
+                                        <td class="border border-gray-300 px-4 py-3">HNSW</td>
+                                        <td class="border border-gray-300 px-4 py-3">Unlimited</td>
+                                        <td class="border border-gray-300 px-4 py-3">Self-hosted/Cloud</td>
+                                        <td class="border border-gray-300 px-4 py-3">Filtering & payload</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="border border-gray-300 px-4 py-3 font-medium">FAISS</td>
+                                        <td class="border border-gray-300 px-4 py-3">Library</td>
+                                        <td class="border border-gray-300 px-4 py-3">Multiple</td>
+                                        <td class="border border-gray-300 px-4 py-3">Unlimited</td>
+                                        <td class="border border-gray-300 px-4 py-3">Embedded</td>
+                                        <td class="border border-gray-300 px-4 py-3">Research & experimentation</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Performance Comparison Chart -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Vector Database Performance Comparison</h3>
+                            <div id="performance-comparison" style="height: 400px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Implementation Examples -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-code text-deep-blue mr-3"></i>
+                            Implementation Examples
+                        </h2>
+                        
+                        <!-- Pinecone Example -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Pinecone Integration</h3>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="text-gray-300 font-medium">pinecone_integration.py</span>
+                                    <button class="copy-btn" onclick="copyCode('pinecone-code')">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre id="pinecone-code" class="language-python"><code>import pinecone
+from typing import List, Dict, Any, Optional
+import numpy as np
+from dataclasses import dataclass
+
+@dataclass
+class VectorMetadata:
+    """Metadata associated with vector embeddings"""
+    text: str
+    source: str
+    timestamp: str
+    category: Optional[str] = None
+    tags: Optional[List[str]] = None
+
+class PineconeVectorDB:
+    """
+    Pinecone vector database integration for semantic search and retrieval
+    """
+    
+    def __init__(self, api_key: str, environment: str, index_name: str):
+        self.api_key = api_key
+        self.environment = environment
+        self.index_name = index_name
+        
+        # Initialize Pinecone
+        pinecone.init(api_key=api_key, environment=environment)
+        
+        # Get or create index
+        if index_name not in pinecone.list_indexes():
+            pinecone.create_index(
+                name=index_name,
+                dimension=1536,  # OpenAI embedding dimension
+                metric="cosine",
+                metadata_config={
+                    "indexed": ["source", "category", "timestamp"]
+                }
+            )
+        
+        self.index = pinecone.Index(index_name)
+    
+    async def upsert_vectors(
+        self, 
+        vectors: List[List[float]], 
+        metadata: List[VectorMetadata],
+        batch_size: int = 100
+    ) -> Dict[str, Any]:
+        """
+        Upsert vectors with metadata in batches
+        """
+        try:
+            # Prepare data for upsert
+            upsert_data = []
+            for i, (vector, meta) in enumerate(zip(vectors, metadata)):
+                vector_id = f"vec_{i}_{int(time.time())}"
+                upsert_data.append((
+                    vector_id,
+                    vector,
+                    {
+                        "text": meta.text,
+                        "source": meta.source,
+                        "timestamp": meta.timestamp,
+                        "category": meta.category,
+                        "tags": meta.tags if meta.tags else []
+                    }
+                ))
+            
+            # Upsert in batches
+            total_upserted = 0
+            for i in range(0, len(upsert_data), batch_size):
+                batch = upsert_data[i:i + batch_size]
+                self.index.upsert(vectors=batch)
+                total_upserted += len(batch)
+            
+            return {
+                "success": True,
+                "upserted_count": total_upserted,
+                "index_name": self.index_name
+            }
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e),
+                "upserted_count": 0
+            }
+    
+    async def search_similar(
+        self,
+        query_vector: List[float],
+        top_k: int = 10,
+        filter_dict: Optional[Dict] = None,
+        include_metadata: bool = True
+    ) -> List[Dict[str, Any]]:
+        """
+        Search for similar vectors with optional filtering
+        """
+        try:
+            # Prepare query
+            query_params = {
+                "vector": query_vector,
+                "top_k": top_k,
+                "include_metadata": include_metadata
+            }
+            
+            # Add filter if provided
+            if filter_dict:
+                query_params["filter"] = filter_dict
+            
+            # Execute search
+            results = self.index.query(**query_params)
+            
+            # Format results
+            formatted_results = []
+            for match in results.matches:
+                result = {
+                    "id": match.id,
+                    "score": match.score,
+                    "vector": match.values if hasattr(match, 'values') else None
+                }
+                
+                if include_metadata and match.metadata:
+                    result["metadata"] = match.metadata
+                
+                formatted_results.append(result)
+            
+            return formatted_results
+            
+        except Exception as e:
+            return [{"error": str(e)}]
+    
+    async def search_with_text_filter(
+        self,
+        query_vector: List[float],
+        text_query: str,
+        top_k: int = 10
+    ) -> List[Dict[str, Any]]:
+        """
+        Search with text-based filtering
+        """
+        filter_dict = {
+            "text": {"$contains": text_query}
+        }
+        
+        return await self.search_similar(
+            query_vector=query_vector,
+            top_k=top_k,
+            filter_dict=filter_dict
+        )
+    
+    async def delete_by_filter(self, filter_dict: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Delete vectors matching filter criteria
+        """
+        try:
+            self.index.delete(filter=filter_dict)
+            return {"success": True, "message": "Vectors deleted successfully"}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+    
+    def get_index_stats(self) -> Dict[str, Any]:
+        """
+        Get statistics about the index
+        """
+        try:
+            stats = self.index.describe_index_stats()
+            return {
+                "total_vectors": stats.total_vector_count,
+                "dimension": stats.dimension,
+                "index_fullness": stats.index_fullness,
+                "namespaces": stats.namespaces
+            }
+        except Exception as e:
+            return {"error": str(e)}
+    
+    async def update_metadata(
+        self, 
+        vector_ids: List[str], 
+        new_metadata: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """
+        Update metadata for existing vectors
+        """
+        try:
+            # Fetch existing vectors
+            fetch_results = self.index.fetch(ids=vector_ids)
+            
+            # Prepare updated vectors
+            updated_vectors = []
+            for vector_id in vector_ids:
+                if vector_id in fetch_results.vectors:
+                    vector_data = fetch_results.vectors[vector_id]
+                    updated_metadata = {**vector_data.metadata, **new_metadata}
+                    updated_vectors.append((
+                        vector_id,
+                        vector_data.values,
+                        updated_metadata
+                    ))
+            
+            # Upsert updated vectors
+            if updated_vectors:
+                self.index.upsert(vectors=updated_vectors)
+            
+            return {
+                "success": True,
+                "updated_count": len(updated_vectors)
+            }
+            
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+
+# Usage Example
+import time
+
+async def main():
+    # Initialize Pinecone vector database
+    vector_db = PineconeVectorDB(
+        api_key="your-pinecone-api-key",
+        environment="your-environment",
+        index_name="ai-engineering-docs"
+    )
+    
+    # Sample data
+    sample_vectors = [
+        [0.1] * 1536,  # Sample embedding 1
+        [0.2] * 1536,  # Sample embedding 2
+        [0.3] * 1536,  # Sample embedding 3
+    ]
+    
+    sample_metadata = [
+        VectorMetadata(
+            text="Introduction to AI Engineering",
+            source="ai_handbook.pdf",
+            timestamp="2024-01-15T10:30:00Z",
+            category="basics",
+            tags=["AI", "engineering", "introduction"]
+        ),
+        VectorMetadata(
+            text="Vector Database Best Practices",
+            source="vector_guide.pdf",
+            timestamp="2024-01-16T14:20:00Z",
+            category="advanced",
+            tags=["vector", "database", "best-practices"]
+        ),
+        VectorMetadata(
+            text="LLM Integration Patterns",
+            source="llm_patterns.pdf",
+            timestamp="2024-01-17T09:15:00Z",
+            category="advanced",
+            tags=["LLM", "patterns", "integration"]
+        )
+    ]
+    
+    # Upsert vectors
+    upsert_result = await vector_db.upsert_vectors(sample_vectors, sample_metadata)
+    print(f"Upsert result: {upsert_result}")
+    
+    # Search for similar vectors
+    query_vector = [0.15] * 1536  # Sample query vector
+    search_results = await vector_db.search_similar(
+        query_vector=query_vector,
+        top_k=5,
+        filter_dict={"category": "advanced"}
+    )
+    
+    print(f"\nSearch results:")
+    for result in search_results:
+        print(f"ID: {result['id']}, Score: {result['score']}")
+        if 'metadata' in result:
+            print(f"Text: {result['metadata']['text'][:100]}...")
+    
+    # Get index statistics
+    stats = vector_db.get_index_stats()
+    print(f"\nIndex stats: {stats}")
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Chroma Example -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Chroma DB Integration</h3>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="text-gray-300 font-medium">chroma_integration.py</span>
+                                    <button class="copy-btn" onclick="copyCode('chroma-code')">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre id="chroma-code" class="language-python"><code>import chromadb
+from chromadb.config import Settings
+from typing import List, Dict, Any, Optional
+import json
+from datetime import datetime
+
+class ChromaVectorDB:
+    """
+    Chroma vector database integration for local development and prototyping
+    """
+    
+    def __init__(self, 
+                 persist_directory: str = "./chroma_db",
+                 collection_name: str = "ai_engineering_docs"):
+        self.persist_directory = persist_directory
+        self.collection_name = collection_name
+        
+        # Initialize Chroma client with persistence
+        self.client = chromadb.PersistentClient(
+            path=persist_directory,
+            settings=Settings(
+                anonymized_telemetry=False,
+                allow_reset=True
+            )
+        )
+        
+        # Get or create collection
+        self.collection = self.client.get_or_create_collection(
+            name=collection_name,
+            metadata={"description": "AI Engineering Knowledge Base"}
+        )
+    
+    def add_documents(
+        self,
+        documents: List[str],
+        embeddings: Optional[List[List[float]]] = None,
+        metadatas: Optional[List[Dict[str, Any]]] = None,
+        ids: Optional[List[str]] = None
+    ) -> Dict[str, Any]:
+        """
+        Add documents with optional embeddings and metadata
+        """
+        try:
+            # Generate IDs if not provided
+            if ids is None:
+                timestamp = datetime.now().isoformat()
+                ids = [f"doc_{i}_{timestamp}" for i in range(len(documents))]
+            
+            # Add to collection
+            self.collection.add(
+                documents=documents,
+                embeddings=embeddings,
+                metadatas=metadatas,
+                ids=ids
+            )
+            
+            return {
+                "success": True,
+                "added_count": len(documents),
+                "collection_name": self.collection_name
+            }
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e),
+                "added_count": 0
+            }
+    
+    def query_similar(
+        self,
+        query_texts: Optional[List[str]] = None,
+        query_embeddings: Optional[List[List[float]]] = None,
+        n_results: int = 10,
+        where: Optional[Dict] = None,
+        where_document: Optional[Dict] = None
+    ) -> Dict[str, Any]:
+        """
+        Query for similar documents
+        """
+        try:
+            # Perform query
+            results = self.collection.query(
+                query_texts=query_texts,
+                query_embeddings=query_embeddings,
+                n_results=n_results,
+                where=where,
+                where_document=where_document
+            )
+            
+            # Format results
+            formatted_results = []
+            for i in range(len(results["ids"][0])):
+                result = {
+                    "id": results["ids"][0][i],
+                    "distance": results["distances"][0][i] if results["distances"] else None,
+                    "document": results["documents"][0][i] if results["documents"] else None,
+                    "metadata": results["metadatas"][0][i] if results["metadatas"] else None
+                }
+                formatted_results.append(result)
+            
+            return {
+                "success": True,
+                "results": formatted_results,
+                "count": len(formatted_results)
+            }
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e),
+                "results": []
+            }
+    
+    def update_documents(
+        self,
+        ids: List[str],
+        documents: Optional[List[str]] = None,
+        embeddings: Optional[List[List[float]]] = None,
+        metadatas: Optional[List[Dict[str, Any]]] = None
+    ) -> Dict[str, Any]:
+        """
+        Update existing documents
+        """
+        try:
+            self.collection.update(
+                ids=ids,
+                documents=documents,
+                embeddings=embeddings,
+                metadatas=metadatas
+            )
+            
+            return {
+                "success": True,
+                "updated_count": len(ids)
+            }
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e),
+                "updated_count": 0
+            }
+    
+    def delete_documents(self, ids: List[str]) -> Dict[str, Any]:
+        """
+        Delete documents by ID
+        """
+        try:
+            self.collection.delete(ids=ids)
+            return {
+                "success": True,
+                "deleted_count": len(ids)
+            }
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e),
+                "deleted_count": 0
+            }
+    
+    def get_collection_stats(self) -> Dict[str, Any]:
+        """
+        Get collection statistics
+        """
+        try:
+            count = self.collection.count()
+            return {
+                "total_documents": count,
+                "collection_name": self.collection_name,
+                "persist_directory": self.persist_directory
+            }
+        except Exception as e:
+            return {"error": str(e)}
+    
+    def create_index(self) -> Dict[str, Any]:
+        """
+        Create or rebuild the vector index
+        """
+        try:
+            # Chroma automatically manages indexing
+            return {
+                "success": True,
+                "message": "Index is automatically managed by Chroma"
+            }
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e)
+            }
+    
+    def export_collection(self, output_path: str) -> Dict[str, Any]:
+        """
+        Export collection data to JSON file
+        """
+        try:
+            # Get all documents
+            results = self.collection.get()
+            
+            export_data = {
+                "collection_name": self.collection_name,
+                "export_timestamp": datetime.now().isoformat(),
+                "documents": []
+            }
+            
+            for i in range(len(results["ids"])):
+                doc_data = {
+                    "id": results["ids"][i],
+                    "document": results["documents"][i] if results["documents"] else None,
+                    "metadata": results["metadatas"][i] if results["metadatas"] else None,
+                    "embedding": results["embeddings"][i] if results["embeddings"] else None
+                }
+                export_data["documents"].append(doc_data)
+            
+            # Save to file
+            with open(output_path, 'w', encoding='utf-8') as f:
+                json.dump(export_data, f, indent=2, ensure_ascii=False)
+            
+            return {
+                "success": True,
+                "export_path": output_path,
+                "exported_count": len(export_data["documents"])
+            }
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e)
+            }
+
+# Usage Example
+def main():
+    # Initialize Chroma vector database
+    chroma_db = ChromaVectorDB(
+        persist_directory="./ai_knowledge_base",
+        collection_name="engineering_docs"
+    )
+    
+    # Sample documents
+    documents = [
+        "Vector databases are specialized systems for storing and retrieving high-dimensional vectors.",
+        "Similarity search enables finding semantically similar content using vector embeddings.",
+        "HNSW (Hierarchical Navigable Small World) is a popular graph-based indexing algorithm.",
+        "RAG (Retrieval-Augmented Generation) combines vector search with language models.",
+        "Embedding models convert text into numerical vector representations."
+    ]
+    
+    # Sample metadata
+    metadatas = [
+        {"topic": "basics", "category": "vector_databases", "length": "short"},
+        {"topic": "search", "category": "algorithms", "length": "medium"},
+        {"topic": "indexing", "category": "algorithms", "length": "short"},
+        {"topic": "applications", "category": "rag", "length": "medium"},
+        {"topic": "embeddings", "category": "models", "length": "short"}
+    ]
+    
+    # Add documents
+    add_result = chroma_db.add_documents(
+        documents=documents,
+        metadatas=metadatas
+    )
+    print(f"Add result: {add_result}")
+    
+    # Query similar documents
+    query_result = chroma_db.query_similar(
+        query_texts=["How do vector databases work?"],
+        n_results=3,
+        where={"category": "vector_databases"}
+    )
+    
+    print(f"\nQuery results:")
+    for result in query_result["results"]:
+        print(f"ID: {result['id']}, Distance: {result['distance']}")
+        print(f"Document: {result['document'][:100]}...")
+        print(f"Metadata: {result['metadata']}\n")
+    
+    # Get collection statistics
+    stats = chroma_db.get_collection_stats()
+    print(f"Collection stats: {stats}")
+    
+    # Export collection
+    export_result = chroma_db.export_collection("./vector_db_export.json")
+    print(f"Export result: {export_result}")
+
+if __name__ == "__main__":
+    main()</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Best Practices -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-star text-deep-blue mr-3"></i>
+                            Vector Database Best Practices
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-6">
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                                    <h4 class="font-semibold text-blue-800 mb-2">
+                                        <i class="fas fa-chart-line mr-2"></i>
+                                        Index Optimization
+                                    </h4>
+                                    <p class="text-blue-700 text-sm">
+                                        Choose appropriate index types based on your use case. HNSW for high recall, 
+                                        IVF for memory efficiency, and quantization for large-scale deployments.
+                                    </p>
+                                </div>
+
+                                <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                                    <h4 class="font-semibold text-green-800 mb-2">
+                                        <i class="fas fa-layer-group mr-2"></i>
+                                        Embedding Quality
+                                    </h4>
+                                    <p class="text-green-700 text-sm">
+                                        Use high-quality embedding models appropriate for your domain. 
+                                        Consider fine-tuning embeddings for specific use cases to improve search quality.
+                                    </p>
+                                </div>
+
+                                <div class="bg-purple-50 border-l-4 border-purple-500 p-4">
+                                    <h4 class="font-semibold text-purple-800 mb-2">
+                                        <i class="fas fa-filter mr-2"></i>
+                                        Metadata Strategy
+                                    </h4>
+                                    <p class="text-purple-700 text-sm">
+                                        Design metadata schemas that support your filtering needs. 
+                                        Index frequently queried metadata fields for optimal performance.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="bg-orange-50 border-l-4 border-orange-500 p-4">
+                                    <h4 class="font-semibold text-orange-800 mb-2">
+                                        <i class="fas fa-expand-arrows-alt mr-2"></i>
+                                        Scaling Strategy
+                                    </h4>
+                                    <p class="text-orange-700 text-sm">
+                                        Plan for horizontal scaling early. Use sharding strategies based on 
+                                        data characteristics and query patterns to distribute load effectively.
+                                    </p>
+                                </div>
+
+                                <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                                    <h4 class="font-semibold text-red-800 mb-2">
+                                        <i class="fas fa-sync-alt mr-2"></i>
+                                        Update Strategy
+                                    </h4>
+                                    <p class="text-red-700 text-sm">
+                                        Implement efficient update strategies for dynamic data. 
+                                        Consider batch updates and incremental indexing for real-time applications.
+                                    </p>
+                                </div>
+
+                                <div class="bg-teal-50 border-l-4 border-teal-500 p-4">
+                                    <h4 class="font-semibold text-teal-800 mb-2">
+                                        <i class="fas fa-shield-alt mr-2"></i>
+                                        Security & Privacy
+                                    </h4>
+                                    <p class="text-teal-700 text-sm">
+                                        Implement access controls and encryption for sensitive vector data. 
+                                        Consider privacy implications of embedding sensitive information.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-between items-center bg-white rounded-lg shadow-lg p-6">
+                        <a href="topic-llm-foundations.html" class="text-gray-500 hover:text-deep-blue transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: LLM Foundations
+                        </a>
+                        <div class="flex space-x-4">
+                            <a href="topic-embedding-models.html" class="bg-deep-blue text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+                                Next: Embedding Models
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const icon = document.getElementById(sectionId + '-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('expanded');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const text = codeElement.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                // Show feedback
+                const btn = event.target.closest('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+
+        // Create vector database architecture diagram
+        function createVectorArchitecture() {
+            const data = [{
+                type: 'sankey',
+                node: {
+                    pad: 15,
+                    thickness: 20,
+                    line: { color: "black", width: 0.5 },
+                    label: [
+                        "Raw Data", "Embedding Model", "Vector Embeddings", "Vector Database",
+                        "Index Builder", "Search Engine", "Query Vector", "Similarity Search",
+                        "Metadata Filter", "Search Results", "Application"
+                    ],
+                    color: [
+                        "#3b82f6", "#60a5fa", "#93c5fd", "#dbeafe",
+                        "#10b981", "#34d399", "#6ee7b7", "#d1fae5",
+                        "#8b5cf6", "#a78bfa", "#f59e0b"
+                    ]
+                },
+                link: {
+                    source: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    target: [1, 2, 3, 4, 5, 9, 7, 9, 9, 10, 5],
+                    value: [10, 10, 8, 6, 8, 10, 8, 8, 6, 10, 8]
+                }
+            }];
+
+            const layout = {
+                title: "Vector Database Workflow",
+                font: { size: 12 },
+                margin: { l: 0, r: 0, t: 50, b: 0 }
+            };
+
+            Plotly.newPlot('vector-architecture', data, layout, {responsive: true});
+        }
+
+        // Create performance comparison chart
+        function createPerformanceComparison() {
+            const databases = ['Pinecone', 'Weaviate', 'Chroma', 'Milvus', 'Qdrant', 'FAISS'];
+            const search_speed = [85, 80, 75, 90, 85, 95];
+            const scalability = [95, 85, 70, 95, 80, 60];
+            const ease_of_use = [90, 75, 95, 70, 85, 80];
+            const features = [90, 85, 70, 90, 80, 60];
+
+            const data = [
+                {
+                    x: databases,
+                    y: search_speed,
+                    name: 'Search Speed',
+                    type: 'bar',
+                    marker: { color: '#3b82f6' }
+                },
+                {
+                    x: databases,
+                    y: scalability,
+                    name: 'Scalability',
+                    type: 'bar',
+                    marker: { color: '#10b981' }
+                },
+                {
+                    x: databases,
+                    y: ease_of_use,
+                    name: 'Ease of Use',
+                    type: 'bar',
+                    marker: { color: '#f59e0b' }
+                },
+                {
+                    x: databases,
+                    y: features,
+                    name: 'Features',
+                    type: 'bar',
+                    marker: { color: '#8b5cf6' }
+                }
+            ];
+
+            const layout = {
+                title: 'Vector Database Comparison (Score 0-100)',
+                xaxis: { title: 'Databases' },
+                yaxis: { title: 'Score' },
+                barmode: 'group',
+                margin: { l: 50, r: 50, t: 50, b: 50 }
+            };
+
+            Plotly.newPlot('performance-comparison', data, layout, {responsive: true});
+        }
+
+        // Initialize charts when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createVectorArchitecture();
+            createPerformanceComparison();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LangChain Framework | Agentic AI Knowledge Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .code-block { background: #1e293b; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+        .progress-bar { background: linear-gradient(90deg, #10b981 0%, #34d399 100%); }
+        .langchain-diagram { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-brain text-2xl gradient-text mr-3"></i>
+                    <h1 class="text-xl font-bold text-slate-900">Agentic AI Hub</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors">Home</a>
+                    <a href="topics.html" class="text-slate-600 hover:text-slate-900 transition-colors">Topics</a>
+                    <a href="about.html" class="text-slate-600 hover:text-slate-900 transition-colors">About</a>
+                    <a href="manage.html" class="text-slate-600 hover:text-slate-900 transition-colors">Manage</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    LangChain Framework
+                </h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Master the powerful framework for building applications with Large Language Models
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+                        <span class="text-white text-sm">Progress: </span>
+                        <div class="inline-block w-32 h-2 bg-white/20 rounded-full ml-2">
+                            <div class="progress-bar h-full rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Learning Path</h3>
+                    <nav class="space-y-2">
+                        <a href="topic-what-is-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>What is AI?
+                        </a>
+                        <a href="topic-types-of-ai.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Types of AI
+                        </a>
+                        <a href="topic-machine-learning-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Machine Learning
+                        </a>
+                        <a href="topic-deep-learning-concepts.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Deep Learning
+                        </a>
+                        <a href="topic-neural-networks-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Neural Networks
+                        </a>
+                        <a href="topic-nlp-basics.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>NLP Basics
+                        </a>
+                        <a href="topic-computer-vision-fundamentals.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Computer Vision
+                        </a>
+                        <a href="topic-agent-architecture.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Agent Architecture
+                        </a>
+                        <a href="topic-multi-agent-systems.html" class="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>Multi-Agent Systems
+                        </a>
+                        <a href="#" class="block px-3 py-2 text-sm bg-blue-50 text-blue-900 rounded-md font-medium">
+                            <i class="fas fa-play-circle text-blue-500 mr-2"></i>LangChain Framework
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Introduction -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">What is LangChain?</h2>
+                    <p class="text-lg text-slate-700 mb-6">
+                        LangChain is a powerful open-source framework designed to simplify the development of applications powered by Large Language Models (LLMs). It provides a comprehensive set of tools, components, and interfaces for building context-aware, reasoning applications that can interact with external data sources and APIs.
+                    </p>
+                    <div class="bg-gradient-to-r from-blue-50 to-green-50 border-l-4 border-blue-400 p-6 mb-6 rounded-r-lg">
+                        <p class="text-blue-800">
+                            <strong>Key Insight:</strong> LangChain bridges the gap between LLMs and real-world applications by providing abstractions for chaining components, managing memory, and integrating with external tools and data sources.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- LangChain Architecture -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">LangChain Architecture</h2>
+                    <div class="langchain-diagram p-8 rounded-lg mb-6">
+                        <div class="flex justify-center items-center">
+                            <svg width="800" height="500" viewBox="0 0 800 500" class="border border-slate-200 rounded-lg">
+                                <!-- Input Layer -->
+                                <rect x="50" y="50" width="700" height="400" fill="#f8fafc" stroke="#64748b" stroke-width="2" rx="10"/>
+                                <text x="400" y="35" text-anchor="middle" class="text-lg font-bold">LangChain Application</text>
+                                
+                                <!-- Components -->
+                                <rect x="100" y="100" width="120" height="60" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2" rx="5"/>
+                                <text x="160" y="130" text-anchor="middle" class="text-white text-sm font-bold">LLM</text>
+                                <text x="160" y="145" text-anchor="middle" class="text-white text-xs">Models</text>
+                                
+                                <rect x="250" y="100" width="120" height="60" fill="#10b981" stroke="#059669" stroke-width="2" rx="5"/>
+                                <text x="310" y="130" text-anchor="middle" class="text-white text-sm font-bold">Prompts</text>
+                                <text x="310" y="145" text-anchor="middle" class="text-white text-xs">Templates</text>
+                                
+                                <rect x="400" y="100" width="120" height="60" fill="#8b5cf6" stroke="#7c3aed" stroke-width="2" rx="5"/>
+                                <text x="460" y="130" text-anchor="middle" class="text-white text-sm font-bold">Chains</text>
+                                <text x="460" y="145" text-anchor="middle" class="text-white text-xs">Sequences</text>
+                                
+                                <rect x="550" y="100" width="120" height="60" fill="#f59e0b" stroke="#d97706" stroke-width="2" rx="5"/>
+                                <text x="610" y="130" text-anchor="middle" class="text-white text-sm font-bold">Memory</text>
+                                <text x="610" y="145" text-anchor="middle" class="text-white text-xs">Storage</text>
+                                
+                                <rect x="100" y="200" width="120" height="60" fill="#ef4444" stroke="#dc2626" stroke-width="2" rx="5"/>
+                                <text x="160" y="230" text-anchor="middle" class="text-white text-sm font-bold">Indexes</text>
+                                <text x="160" y="245" text-anchor="middle" class="text-white text-xs">Retrieval</text>
+                                
+                                <rect x="250" y="200" width="120" height="60" fill="#06b6d4" stroke="#0891b2" stroke-width="2" rx="5"/>
+                                <text x="310" y="230" text-anchor="middle" class="text-white text-sm font-bold">Agents</text>
+                                <text x="310" y="245" text-anchor="middle" class="text-white text-xs">Reasoning</text>
+                                
+                                <rect x="400" y="200" width="120" height="60" fill="#84cc16" stroke="#65a30d" stroke-width="2" rx="5"/>
+                                <text x="460" y="230" text-anchor="middle" class="text-white text-sm font-bold">Tools</text>
+                                <text x="460" y="245" text-anchor="middle" class="text-white text-xs">External APIs</text>
+                                
+                                <rect x="550" y="200" width="120" height="60" fill="#f97316" stroke="#ea580c" stroke-width="2" rx="5"/>
+                                <text x="610" y="230" text-anchor="middle" class="text-white text-sm font-bold">Callbacks</text>
+                                <text x="610" y="245" text-anchor="middle" class="text-white text-xs">Logging</text>
+                                
+                                <!-- Data Flow -->
+                                <path d="M 160 160 L 250 130" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 310 160 L 400 130" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 460 160 L 550 130" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 160 260 L 250 230" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 310 260 L 400 230" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                <path d="M 460 260 L 550 230" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                
+                                <!-- Central Integration -->
+                                <circle cx="400" cy="350" r="50" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+                                <text x="400" y="345" text-anchor="middle" class="text-sm font-bold">Application</text>
+                                <text x="400" y="360" text-anchor="middle" class="text-sm font-bold">Logic</text>
+                                
+                                <!-- Connections to Center -->
+                                <path d="M 160 260 Q 280 300 350 350" stroke="#374151" stroke-width="2" fill="none"/>
+                                <path d="M 310 260 Q 350 300 350 350" stroke="#374151" stroke-width="2" fill="none"/>
+                                <path d="M 460 260 Q 420 300 450 350" stroke="#374151" stroke-width="2" fill="none"/>
+                                <path d="M 610 260 Q 500 300 450 350" stroke="#374151" stroke-width="2" fill="none"/>
+                                
+                                <!-- Arrow marker definition -->
+                                <defs>
+                                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                        <polygon points="0 0, 10 3.5, 0 7" fill="#374151"/>
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-center text-slate-600 text-sm">LangChain components work together to create sophisticated LLM-powered applications</p>
+                </div>
+
+                <!-- Core Components -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Core LangChain Components</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-brain text-blue-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Models (LLMs)</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Integration with various LLM providers and local models for text generation and completion.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• OpenAI GPT models</li>
+                                <li>• Anthropic Claude</li>
+                                <li>• Hugging Face models</li>
+                                <li>• Custom local models</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-file-alt text-green-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Prompts</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Template-based prompt management with dynamic variable substitution and optimization.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Prompt templates</li>
+                                <li>• Few-shot examples</li>
+                                <li>• Dynamic prompting</li>
+                                <li>• Prompt optimization</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-link text-purple-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Chains</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Sequences of calls to LLMs and other tools, enabling complex reasoning workflows.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Sequential chains</li>
+                                <li>• Parallel execution</li>
+                                <li>• Conditional logic</li>
+                                <li>• Error handling</li>
+                            </ul>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-database text-orange-600 text-2xl mr-3"></i>
+                                <h3 class="text-xl font-semibold text-slate-900">Memory</h3>
+                            </div>
+                            <p class="text-slate-700 mb-3">Persistent storage of conversation history and context across interactions.</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• Conversation memory</li>
+                                <li>• Vector store memory</li>
+                                <li>• Entity memory</li>
+                                <li>• Custom memory types</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LangChain Features -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Key Features & Capabilities</h2>
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-slate-50 p-6 rounded-lg">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                    <i class="fas fa-search text-blue-600 mr-2"></i>
+                                    Retrieval-Augmented Generation (RAG)
+                                </h3>
+                                <p class="text-slate-700 text-sm mb-3">
+                                    Combine LLMs with external knowledge sources for more accurate and up-to-date responses.
+                                </p>
+                                <ul class="text-xs text-slate-600 space-y-1">
+                                    <li>• Document loaders (PDF, web, databases)</li>
+                                    <li>• Text splitting and chunking</li>
+                                    <li>• Vector store integrations</li>
+                                    <li>• Semantic search capabilities</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-50 p-6 rounded-lg">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                    <i class="fas fa-tools text-green-600 mr-2"></i>
+                                    Tool Integration
+                                </h3>
+                                <p class="text-slate-700 text-sm mb-3">
+                                    Connect LLMs with external APIs, databases, and services for extended functionality.
+                                </p>
+                                <ul class="text-xs text-slate-600 space-y-1">
+                                    <li>• API wrappers (Google, Wikipedia, etc.)</li>
+                                    <li>• Database connections</li>
+                                    <li>• File system operations</li>
+                                    <li>• Custom tool creation</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-slate-50 p-6 rounded-lg">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                    <i class="fas fa-robot text-purple-600 mr-2"></i>
+                                    Autonomous Agents
+                                </h3>
+                                <p class="text-slate-700 text-sm mb-3">
+                                    Create agents that can reason, plan, and execute complex tasks autonomously.
+                                </p>
+                                <ul class="text-xs text-slate-600 space-y-1">
+                                    <li>• ReAct (Reasoning + Acting)</li>
+                                    <li>• Plan-and-execute agents</li>
+                                    <li>• Conversational agents</li>
+                                    <li>• Custom agent architectures</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-50 p-6 rounded-lg">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                    <i class="fas fa-chart-bar text-orange-600 mr-2"></i>
+                                    Evaluation & Monitoring
+                                </h3>
+                                <p class="text-slate-700 text-sm mb-3">
+                                    Tools for evaluating LLM performance and monitoring application behavior.
+                                </p>
+                                <ul class="text-xs text-slate-600 space-y-1">
+                                    <li>• Performance metrics</li>
+                                    <li>• A/B testing frameworks</li>
+                                    <li>• Cost tracking</li>
+                                    <li>• Quality assessment</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LangChain Implementation Examples -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Implementation Examples</h2>
+                    
+                    <!-- Simple Chain Example -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-link text-blue-600 mr-3"></i>
+                            Simple LLM Chain
+                        </h3>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># Basic LangChain LLM Chain
+from langchain.llms import OpenAI
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+
+# Initialize LLM
+llm = OpenAI(temperature=0.7, model_name="gpt-3.5-turbo")
+
+# Create a prompt template
+template = """
+You are a helpful assistant specializing in {topic}.
+User Question: {question}
+Please provide a detailed and informative response:
+"""
+
+prompt = PromptTemplate(
+    input_variables=["topic", "question"],
+    template=template
+)
+
+# Create the chain
+chain = LLMChain(llm=llm, prompt=prompt)
+
+# Run the chain
+response = chain.run({
+    "topic": "artificial intelligence",
+    "question": "What are the key principles of machine learning?"
+})
+
+print(response)</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- RAG Example -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-search text-green-600 mr-3"></i>
+                            Retrieval-Augmented Generation (RAG)
+                        </h3>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># RAG Implementation with LangChain
+from langchain.document_loaders import WebBaseLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.vectorstores import Chroma
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.chains import RetrievalQA
+
+# Load documents
+loader = WebBaseLoader("https://example.com/docs")
+documents = loader.load()
+
+# Split documents into chunks
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200
+)
+texts = text_splitter.split_documents(documents)
+
+# Create vector store
+embeddings = OpenAIEmbeddings()
+vectorstore = Chroma.from_documents(texts, embeddings)
+
+# Create RAG chain
+qa_chain = RetrievalQA.from_chain_type(
+    llm=OpenAI(),
+    chain_type="stuff",
+    retriever=vectorstore.as_retriever()
+)
+
+# Query the system
+query = "What are the main features of this product?"
+result = qa_chain.run(query)
+print(result)</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Agent Example -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-robot text-purple-600 mr-3"></i>
+                            Autonomous Agent with Tools
+                        </h3>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># Autonomous Agent with Tool Integration
+from langchain.agents import initialize_agent, Tool
+from langchain.agents import AgentType
+from langchain.tools import tool
+from langchain.memory import ConversationBufferMemory
+
+# Define custom tools
+@tool
+def search_internet(query: str) -> str:
+    """Search the internet for information."""
+    # Implementation would connect to search API
+    return f"Search results for: {query}"
+
+@tool
+def calculate(expression: str) -> str:
+    """Perform mathematical calculations."""
+    try:
+        result = eval(expression)
+        return f"Result: {result}"
+    except:
+        return "Invalid expression"
+
+# Create tools list
+tools = [
+    Tool(
+        name="Search",
+        func=search_internet,
+        description="Useful for searching current information"
+    ),
+    Tool(
+        name="Calculator",
+        func=calculate,
+        description="Useful for mathematical calculations"
+    )
+]
+
+# Initialize memory
+memory = ConversationBufferMemory(memory_key="chat_history")
+
+# Create the agent
+agent = initialize_agent(
+    tools=tools,
+    llm=OpenAI(temperature=0),
+    agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION,
+    memory=memory,
+    verbose=True
+)
+
+# Interact with the agent
+response = agent.run("What's the weather like in Tokyo and what's 15% of 240?")
+print(response)</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Memory Example -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-center">
+                            <i class="fas fa-database text-orange-600 mr-3"></i>
+                            Conversational Memory
+                        </h3>
+                        <div class="code-block">
+                            <pre class="text-green-400 text-sm"><code># Conversational Memory Implementation
+from langchain.memory import ConversationBufferWindowMemory
+from langchain.chains import ConversationChain
+
+# Initialize memory with window size
+memory = ConversationBufferWindowMemory(k=3)  # Remember last 3 interactions
+
+# Create conversation chain
+conversation = ConversationChain(
+    llm=OpenAI(temperature=0.7),
+    memory=memory,
+    verbose=True
+)
+
+# Have a conversation
+print(conversation.predict(input="Hi, my name is Alice"))
+print(conversation.predict(input="What's the capital of France?"))
+print(conversation.predict(input="Remember my name?"))
+
+# Check memory contents
+print("\nMemory contents:")
+print(memory.load_memory_variables({}))
+
+# Alternative memory types
+from langchain.memory import (
+    ConversationSummaryMemory,
+    ConversationKGMemory,
+    VectorStoreRetrieverMemory
+)
+
+# Summary memory for long conversations
+summary_memory = ConversationSummaryMemory(llm=OpenAI())
+
+# Knowledge graph memory for entity relationships
+kg_memory = ConversationKGMemory(llm=OpenAI())</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LangChain Ecosystem -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">LangChain Ecosystem</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-slate-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                <i class="fas fa-code text-blue-600 mr-2"></i>
+                                LangChain Core
+                            </h3>
+                            <p class="text-slate-700 text-sm mb-3">The main Python library providing all core functionality and abstractions.</p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• Python SDK</li>
+                                <li>• TypeScript/JavaScript</li>
+                                <li>• Integration interfaces</li>
+                                <li>• Community contributions</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                <i class="fas fa-rocket text-green-600 mr-2"></i>
+                                LangServe
+                            </h3>
+                            <p class="text-slate-700 text-sm mb-3">Deploy LangChain chains as REST APIs with automatic documentation.</p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• FastAPI integration</li>
+                                <li>• Automatic API docs</li>
+                                <li>• Production deployment</li>
+                                <li>• Scalable architecture</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                                <i class="fas fa-tools text-purple-600 mr-2"></i>
+                                LangSmith
+                            </h3>
+                            <p class="text-slate-700 text-sm mb-3">Debugging, testing, and monitoring platform for LangChain applications.</p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• Performance monitoring</li>
+                                <li>• Debugging tools</li>
+                                <li>• A/B testing</li>
+                                <li>• Quality evaluation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Best Practices -->
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">LangChain Best Practices</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Design Principles</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-blue-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Modular Design</h4>
+                                    <p class="text-slate-700 text-sm">Build reusable components that can be easily combined and modified</p>
+                                </div>
+                                <div class="border-l-4 border-green-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Prompt Engineering</h4>
+                                    <p class="text-slate-700 text-sm">Design clear, specific prompts with proper context and examples</p>
+                                </div>
+                                <div class="border-l-4 border-purple-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Error Handling</h4>
+                                    <p class="text-slate-700 text-sm">Implement robust error handling and fallback mechanisms</p>
+                                </div>
+                                <div class="border-l-4 border-orange-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Performance Optimization</h4>
+                                    <p class="text-slate-700 text-sm">Optimize for cost, speed, and accuracy through efficient chain design</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-900 mb-4">Implementation Tips</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-red-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Memory Management</h4>
+                                    <p class="text-slate-700 text-sm">Choose appropriate memory types based on conversation complexity</p>
+                                </div>
+                                <div class="border-l-4 border-indigo-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Tool Selection</h4>
+                                    <p class="text-slate-700 text-sm">Select tools based on reliability, cost, and accuracy requirements</p>
+                                </div>
+                                <div class="border-l-4 border-pink-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Testing Strategy</h4>
+                                    <p class="text-slate-700 text-sm">Use LangSmith for comprehensive testing and evaluation</p>
+                                </div>
+                                <div class="border-l-4 border-teal-400 pl-4">
+                                    <h4 class="font-semibold text-slate-900">Monitoring</h4>
+                                    <p class="text-slate-700 text-sm">Monitor costs, performance, and quality metrics in production</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex justify-between items-center">
+                        <a href="topic-multi-agent-systems.html" class="flex items-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Previous: Multi-Agent Systems
+                        </a>
+                        <div class="flex space-x-2">
+                            <button onclick="markComplete('langchain')" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                                <i class="fas fa-check mr-2"></i>Mark Complete
+                            </button>
+                            <a href="topic-autogen-framework.html" class="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                                Next: AutoGen Framework
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Agentic AI Knowledge Hub</h3>
+                <p class="text-slate-400 mb-6">Master the future of artificial intelligence</p>
+                <p class="text-slate-500 text-sm">© 2024 Agentic AI Knowledge Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate progress bar
+            anime({
+                targets: '.progress-bar',
+                width: '95%',
+                duration: 2000,
+                easing: 'easeOutQuart'
+            });
+
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.card-hover');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            translateY: [30, 0],
+                            opacity: [0, 1],
+                            duration: 800,
+                            easing: 'easeOutQuart'
+                        });
+                    }
+                });
+            });
+
+            cards.forEach(card => observer.observe(card));
+        });
+
+        // Mark topic as complete
+        function markComplete(topicId) {
+            localStorage.setItem(`topic_${topicId}_complete`, 'true');
+            
+            // Show success message
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Completed!';
+            button.classList.remove('bg-green-600', 'hover:bg-green-700');
+            button.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-500');
+                button.classList.add('bg-green-600', 'hover:bg-green-700');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
